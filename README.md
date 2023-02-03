@@ -6,7 +6,7 @@
 ## Branch Structure & Pull Procedure
 
 ##### User Branches
-All changes and additions to the electrical repository __must originate in user
+All changes and additions to the EV repository __must originate in user
 branches.__ A new user branch should be created for each independent change. For example,
 if I wanted to update the PDM code, and the ATCC code, I would make two
 _separate user branches_ for each change (unless the change was
