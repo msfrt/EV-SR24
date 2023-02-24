@@ -1,0 +1,60 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: PCM1
+
+
+BO_ 2628391166 ExampleMulttFrame: 16 Vector__XXX
+ SG_ TotalTime : 48|32@1+ (0.05,0) [0|0] "hr" Vector__XXX
+ SG_ AverageLoadFactor : 40|8@1+ (0.4,0) [0|0] "%" Vector__XXX
+ SG_ TripAverageLoadFactor : 32|8@1+ (0.4,0) [0|0] "%" Vector__XXX
+ SG_ AverageEngSpeed : 16|16@1+ (0.125,0) [0|0] "rpm" Vector__XXX
+ SG_ MaxEngSpeed : 0|16@1+ (0.125,0) [0|0] "rpm" Vector__XXX
+ SG_ MoreData : 80|32@1+ (1,0) [0|0] "raw" Vector__XXX
+ SG_ EvenMoreData : 112|16@1+ (1,0) [0|0] "raw" Vector__XXX
+
+
+
+CM_ BO_ 2628391166 "Engine Speed/Load Factor Information";
+CM_ SG_ 2628391166 TotalTime "Total time.";
+CM_ SG_ 2628391166 AverageLoadFactor "Average engine load factor ";
+CM_ SG_ 2628391166 TripAverageLoadFactor "Average engine load factor for current trip.";
+CM_ SG_ 2628391166 AverageEngSpeed "Average speed of the engine since the last trip reset.";
+CM_ SG_ 2628391166 MaxEngSpeed "Maximum engine speed achieved since the last trip reset.";
+CM_ SG_ 2628391166 MoreData "Extra Data";
+CM_ SG_ 2628391166 EvenMoreData "Extra Data";
+BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","J1939PG";
+BA_DEF_DEF_  "VFrameFormat" "J1939PG";
+BA_ "VFrameFormat" BO_ 2628391166 2;

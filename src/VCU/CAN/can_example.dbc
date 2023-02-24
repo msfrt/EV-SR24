@@ -1,0 +1,45 @@
+VERSION "HIPBNYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY/4/%%%/4/'%**4YYY///"
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+
+BS_:
+BU_: PCM1
+
+BO_ 1911 ExampleMsgTx: 8 PCM1
+ SG_ Enable : 0|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ EngineSpeed : 15|16@0+ (0.1,0) [0|6500] "rpm" Vector__XXX
+ SG_ EngineTemperature : 31|16@0+ (0.01,-40) [-40|500] "degC" Vector__XXX
+
+BO_ 2147488308 ExampleMsgRx: 8 PCM1
+ SG_ CountUpByValue : 7|16@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147484425 ExampleMsgTxExtended: 8 PCM1
+ SG_ Enable : 0|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ EngineSpeed : 15|16@0+ (0.1,0) [0|6500] "rpm" Vector__XXX
+ SG_ EngineTemperature : 31|16@0+ (0.01,-40) [-40|500] "degC" Vector__XXX
+
+CM_ BO_ 1911 "Example message";
+CM_ SG_ 1911 EngineSpeed "";
+CM_ BO_ 2147488308 "Example message";
+CM_ BO_ 2147484425 "Example message";
+CM_ SG_ 2147484425 EngineSpeed "";
