@@ -10,7 +10,8 @@ mdlPath = fileparts(which(bdroot));
 addpath(mdlPath);
 addpath(genpath([mdlPath filesep 'CAN']));
 addpath(genpath([mdlPath filesep 'Images']));
-addpath(genpath([mdlPath filesep 'Libraries']));
+addpath(genpath([mdlPath filesep 'libraries']));
+addpath(genpath([mdlPath filesep 'subsystems']));
 
 clear mdlPath;
 
