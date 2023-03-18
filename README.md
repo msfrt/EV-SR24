@@ -36,7 +36,7 @@ _PLEASE COMPLETE BOTH THE MATLAB AND SIMULINK ONRAMP TO OBTAIN A GOOD UNDERSTAND
 This repo will host literally everything that makes sense (except for stuff that can't be implemented as per the rule book - _ehem, BMS_). What were originally standalone PCBs on the ICE car are now lumped into the VCU package.
 
 ##### Arduino IDE
-Our code is compiled in the [Arduino IDE](https://www.arduino.cc/en/Main/Software). If you're on Windows, look for the
+We also have code compiled in the [Arduino IDE](https://www.arduino.cc/en/Main/Software). If you're on Windows, look for the
 non-windows-app version.
 
 Because we are not savages, and we use Atom as our preferred text editor, we need to tell Arduino that the code is being updated elsewhere. That way, we don't have to close and reopen a program file every time we want to flash some new updates to a microcontroller. To do this, navigate to your settings page in Arduino, and check the box `Use external editor`.
