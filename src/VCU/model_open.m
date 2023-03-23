@@ -9,7 +9,7 @@ if isempty(bdroot) || strcmp(bdroot, 'simulink'), return; end
 mdlPath = fileparts(which(bdroot));
 addpath(mdlPath);
 addpath(genpath([mdlPath filesep 'CAN']));
-addpath(genpath([mdlPath filesep 'Images']));
+addpath(genpath([mdlPath filesep 'images']));
 addpath(genpath([mdlPath filesep 'libraries']));
 addpath(genpath([mdlPath filesep 'subsystems']));
 

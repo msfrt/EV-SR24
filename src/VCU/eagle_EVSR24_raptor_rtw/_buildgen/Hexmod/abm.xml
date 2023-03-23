@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONF xmlns="www.rbin.com/mds-1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="www.rbin.com/mds-1
+.\schemas\abm.xsd">
+<!-- This is the input to the abm dll -->
+	<HEXMOD>
+		<ABMMOD>
+			<!-- Here the addresses of ABM are mentioned -->
+			<PRIMARY START="0x8001FFE0"/>
+			<SECONDARY START="0x8003FFE0"/>
+			<EX_PRIMARY START="0x8080FFE0"/>
+			<EX_SECONDARY START="0x8088FFE0"/>
+		</ABMMOD>
+	</HEXMOD>
+</CONF>

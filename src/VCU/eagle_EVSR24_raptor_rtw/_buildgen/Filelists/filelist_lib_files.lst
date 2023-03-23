@@ -1,0 +1,4 @@
+object_files\core_lib.a
+object_files\libdnk_c.a
+object_files\os_kernel_ercosek_fast_stm.a
+object_files\xcp.a

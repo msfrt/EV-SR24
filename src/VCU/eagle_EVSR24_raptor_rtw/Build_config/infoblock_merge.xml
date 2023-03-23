@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONF xmlns="www.rbin.com/mds-1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="www.rbin.com/mds-1
+.\schemas\infoblock.xsd">
+<!-- This is the input to the infoblock dll -->
+	<HEXMOD>
+		<IBMOD>
+<IBBUILD>
+<BLKLINK START="0x80018000" NXTBLK="0x80014000"/>
+<BLKLINK START="0x80014000" NXTBLK="0x80000000"/>
+<BLKLINK START="0x80000000" NXTBLK="0x80020000"/>
+<BLKLINK START="0x80020000" NXTBLK="0x80800000"/>
+<BLKLINK START="0x80800000" NXTBLK="0x80980000"/>
+<BLKLINK START="0x80980000" NXTBLK="0x00"/>
+</IBBUILD>
+
+			<VALIDATE>
+				<CHECKSUM>
+				<!-- Here the function to be performed on the infoblock is mentioned -->
+					<WRITECKS FUNCTION="SET"></WRITECKS>
+<COMPATIBILITY FUNCTION="SET">
+<IB BLKADDR="0x80020000" BLKCKS="0" DEPBLKADDR="0x80000000" DEPCKS="0"/>
+<IB BLKADDR="0x80800000" BLKCKS="0" DEPBLKADDR="0x80020000" DEPCKS="0"/>
+<IB BLKADDR="0x80980000" BLKCKS="0" DEPBLKADDR="0x80800000" DEPCKS="0"/>
+</COMPATIBILITY>
+
+				</CHECKSUM>
+			</VALIDATE>
+
+		</IBMOD>
+	</HEXMOD>
+</CONF>

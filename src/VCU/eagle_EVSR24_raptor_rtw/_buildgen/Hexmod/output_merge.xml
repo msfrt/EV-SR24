@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONF xmlns="www.rbin.com/mds-1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="www.rbin.com/mds-1
+.\schemas\baseio.xsd">
+<!-- This is the input to the baseio dll -->
+	<HEXMOD>
+		<BASEIO>
+			<OUTPUT>
+			<!-- Here the file type and filename is mentioned with full path -->
+<FILEOUT TYPE="IHEX" NAME="_buildgen\Output\NewEagle_ME1735_810D0_8A13.hex" LYT="0x20">
+</FILEOUT>
+			</OUTPUT>
+		</BASEIO>
+	</HEXMOD>
+</CONF>
