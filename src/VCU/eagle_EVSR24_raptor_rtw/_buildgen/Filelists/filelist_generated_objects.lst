@@ -1,0 +1,11 @@
+.\_buildgen\Objects\can_can1.o
+.\_buildgen\Objects\can_general.o
+.\_buildgen\Objects\data.o
+.\_buildgen\Objects\eagle_evsr24.o
+.\_buildgen\Objects\eagle_evsr24_data.o
+.\_buildgen\Objects\hw_user.o
+.\_buildgen\Objects\raptorcrc.o
+.\_buildgen\Objects\raptor_delta_time.o
+.\_buildgen\Objects\time.o
+.\_buildgen\Objects\xcp_app.o
+.\_buildgen\Objects\xcp_protocol.o

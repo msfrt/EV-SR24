@@ -1,0 +1,1065 @@
+/*
+ **********************************************************************
+ *
+ * (C) All rights reserved by ROBERT BOSCH GMBH, STUTTGART
+ *
+ **********************************************************************
+ *
+ *    __   __   ___  ___
+ *   /_ / /  / /__  /    /__/
+ *  /__/ /__/ __ / /__  /  /
+ *
+ *  Linker command file for grouping input sections of object files and libraries
+ *
+ *  Linker symbols must be used with caution, as section sizes and offsets may change at
+ *  second link run! This is caused by compressing bit data and adding jump islands for long jumps.
+ *
+ *  Compiler default sections:
+ *    .bss          unitialized data
+ *    .sbss         unitialized data, small data addressing mode.
+ *    .zbss         unitialized data, absolute addressing mode.
+ *    .bbss         unitialized bit variables.
+ *
+ *    .data         initialized data
+ *    .sdata        initialized data, small data addressing mode.
+ *    .zdata        initialized data, absolute addressing mode.
+ *    .bdata        initialized bit variables.
+ *
+ *    .rodata       read-only data (const)
+ *    .sdata.rodata read-only data (const), small data addressing mode.
+ *    .zrodata      read-only data (const), absolute addressing mode. NOT for user defined sections
+ *
+ *    .text         code
+ *    .toc          compiler generated read-only data
+ *
+ *  Implementation hints:
+ *  - Compiler default sections must not be used as output section, to ensure safety with
+ *    internal bypass and customer delivered code.
+ *
+ *  - All sections are aligned to 0x10000. So, the max supported allignment is 0x10000
+ *    inside all sections. However, the user must ensure, that the sections are alligned correctly
+ *    in the second link run (locate.inv). This information is not forwarded by the linker!
+ *
+ *  - All input sections for uninitialized RAM have to start with .bss., .sbss. or .zbss..
+ *    Only in this case the compiler is able to generate warnings, when initialized data is located
+ *    unintentionally in uninitialized areas.
+ *
+ *  - alignment subsections are collected by macro MEMLAY_ALL_SUBSECTIONS for simplification
+ *    MEMLAY_ALL_SUBSECTIONS(<section>) is replaced by
+ *      *(<section>.a8)
+ *      *(<section>.a4)
+ *      *(<section>.a2)
+ *      *(<section>.a1)
+ *      *(<section>)
+ *
+ **********************************************************************
+ */
+
+#define LINK_RUN
+
+/* This number has to be changed, if there are memlay interface changes to be integrated */
+#define MEMLAY_GROUP_VERSION 1300
+
+#include "machine.h"
+#include "memlay_auto_conf.h"               /* Memlay config of ASW   */
+#include "memlay_auto_confpriv.h"           /* private Memlay config */
+
+OUTPUT_FORMAT("elf32-tricore", "elf32-tricore", "elf32-tricore")
+OUTPUT_ARCH(tricore)
+
+/* require linking of CSA */
+EXTERN(MemLay_CSA_as);
+/* require linking of starting infoblock */
+EXTERN(MemLay_PrologAsw0_cs);
+/* require Autosar RTA-OS interrupt table */
+EXTERN(Os_InterruptVectorTable);
+
+/*Variables must genarated */
+EXTERN(MemLay_adMpFuncAddress);
+EXTERN(MemLay_ctMpAccess);
+EXTERN(MemLay_stMpFunc);
+
+
+SECTIONS
+{
+/***********************************************************/
+/*                                                         */
+/*                         CODE                            */
+/*                                                         */
+/***********************************************************/
+
+/***********************************************************/
+/* Monitored ASW code (non cached)                         */
+/***********************************************************/
+/* Flash memory is visible both in cached and non cached address range.                     */
+/* Link/Execution is done in non cached memory. Load/hex-storage is done in cached memory.  */
+.text.Mo_CodeCyclicCheck ALIGN(0x10000) :
+{
+    *(.Mo_CodeCyclicCheckTable)             /* Monitoring Information Table (GS only) */
+    *(.text.Mo_CodeCyclicCheck)
+    *(.Mo_CodeCyclicCheck)
+    *(.Mo_ChCCode)                          /* old DS monitoring */
+    . = ALIGN(0x4);
+}
+
+.text.Mo_CodeNoCyclicCheck ALIGN(0x10000) :
+{
+    *(.text.Mo_CodeNoCyclicCheck)
+    *(.Mo_CodeNoCyclicCheck)
+    *(.Mo_Code)                             /* old DS monitoring */
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/* Code area for legal read access to mpram and OLDA       */
+/* for calibration tool measurement                        */
+/***********************************************************/
+.text.mpram_read ALIGN(0x10000) :
+{
+    *ccp_sample.o(.text*)
+    *distab_13.o(.text*)
+    *(.text.mpram_read)
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/* ASW code in scratch-pad RAM                             */
+/***********************************************************/
+.code_spram ALIGN(0x10000) :
+{
+    *(.text.spram)
+    *(.spram_fnc)           /* deprecated, will be removed */
+    *(.meee_flash_code)     /* deprecated, will be removed */
+    *(.asw_code_prg)        /* deprecated, will be removed */
+    *(.code_prg)            /* deprecated, will be removed */
+/* >>>>>>> Customer specific BEGIN  <<<<<<*/
+	*(.CDRV_codefast)
+/* >>>>>>> Customer specific END  <<<<<<*/
+    . = ALIGN(0x4);
+}
+
+
+/***********************************************************/
+/* Code in noncached Flash                                 */
+/***********************************************************/
+/* ATTENTION: address is outside hexfile */
+.asw_code_noncached ALIGN(0x10000) :
+{
+    *(.text.noncached)
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/* Code area of ABS 0                                      */
+/***********************************************************/
+.abs0_code ALIGN(0x10000) :
+{
+    *(.text.abs0)
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/* Code area of ASW 2                                      */
+/***********************************************************/
+.asw2_code ALIGN(0x10000) :
+{
+    *(.text.asw2)
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/* Code area of ASW 1                                      */
+/***********************************************************/
+.asw1_code ALIGN(0x10000) :
+{
+    *(.text.asw1)
+    *(.text1)               /* deprecated, will be removed */
+    . = ALIGN(0x4);
+}
+
+/* >>>>>>> Customer specific BEGIN (Powernet) <<<<<<*/
+.asw_version ALIGN(0x04) :
+{
+   *(.data.asw_version)
+}
+/* >>>>>>> Customer specific END (Powernet)  <<<<<<*/
+
+/***********************************************************/
+/* Code area of ASW 0 (default area)                       */
+/***********************************************************/
+.asw0_code ALIGN(0x10000) :
+{
+
+    *(.erc_fco) /* ERCOSEK */
+    *(.erc_coc) /* ERCOSEK > V4.3.5 */
+    *(.text.libhtc) /* Hightec compiler lib ( >= V3.4.5.2)  */
+    *(.text)
+    *(.text.asw0)
+/* >>>>>>> Customer specific BEGIN  <<<<<<*/
+	*(.CDRV_codenorm)
+	*(.CDRV_codeslow)
+/* >>>>>>> Customer specific END  <<<<<<*/
+    *(.asw_code0)           /* deprecated, will be removed */
+
+    . = ALIGN(0x4);
+}
+/* projectspecific for New Eagle projects (SW sharing) - start */
+.asw0_oem_code_Task ALIGN(0x10000) :
+{
+    *(.text.OEM_code_Task_ini)
+    *(.text.OEM_code_Task_r1ms)
+    *(.text.OEM_code_Task_r5ms)
+    *(.text.OEM_code_Task_r10ms)
+    *(.text.OEM_code_Task_r20ms)
+    *(.text.OEM_code_Task_r50ms)
+    *(.text.OEM_code_Task_r100ms)	
+    *(.text.OEM_code_Task_r200ms)
+	*(.text.OEM_code_Task_r1000ms)
+	*(.text.OEM_code_Task_rSync)
+	*(.text.OEM_code_Task_r1msSwOff)
+	*(.text.OEM_code_Task_r5msSwOff)
+	*(.text.OEM_code_Task_r10msSwOff)
+	*(.text.OEM_code_Task_r20msSwOff)
+	*(.text.OEM_code_Task_r100msSwOff)
+	*(.text.OEM_code_Task_r200msSwOff)
+	*(.text.OEM_code_Task_r1000msSwOff)
+	*(.text.fmodf)
+	*(.text.floorf)
+	*(.text.feraiseexcept)
+	*(.text.memset)
+	*(.text._FDint)
+	*(.text._FDscale)
+	*(.text._FDtest)
+	*(.text._FDunscale)
+	*(.text._Feraise)
+	*(.text._Geterrno)
+	*(.text._FDnorm)
+	*(.text._FSin)
+	*(.text._FPow)
+	*(.text._FExp)
+	*(.text.ceilf)
+	*(.text.memcpy)
+	*(.text.fmaxf)
+	*(.text.fminf)
+	*(.text.fabs)
+	*(.text.sinf)
+    *(.text.asinf)
+	*(.text.cosf)
+    *(.text.acosf)
+	*(.text.tanf)
+	*(.text.tanhf)
+	*(.text.powf)
+	*(.text.fabsf)
+	*(.text.expf)
+	*(.text.sqrtf)
+	*(.text.ldexp)
+	*(.text._Dint)
+	*(.text._FLog)
+	*(.text._FLogpoly)
+	*(.text.ldexpf)
+	*(.text.trunc)
+	*(.text._FQuad)
+	*(.text._FXp_setw)
+    *(.text._FXp_addh)
+    *(.text._FXp_mulh)
+	*(.text._FXp_movx)
+	*(.text._FXp_addx)
+	*(.text._FXp_subx)
+	*(.text._FXp_ldexpx)
+	*(.text._FXp_mulx)
+	*(.text._FXp_invx)
+	*(.text._FXp_sqrtx)
+	*(.text.get_acsize)
+	*(.text._FQuadph)
+	*(.text._FXp_getw)
+	*(.text._Dnorm)
+	*(.text._Dscale)
+	*(.text._Dtest)
+	*(.text._Dunscale) 
+	*(.text.roundf)
+	*(.text.truncf)
+	*(.text.atanf)
+	*(.text.atan2f)
+	*(.text._FAtan)
+    . = ALIGN(0x4);
+}
+
+ /* projectspecific for New Eagle projects (SW sharing) - end */
+/***********************************************************/
+/*                                                         */
+/*                      CONSTANTS                          */
+/*                                                         */
+/***********************************************************/
+
+/* 18-bit absolute addressing */
+.zrodata.default ALIGN(0x10000) :
+{
+    /* Both .zrodata and .zdata.rodata are required by the compiler */
+    *(.zrodata.a8 .zdata.rodata.a8)
+    *(.zrodata.a4 .zdata.rodata.a4)
+    *(.zrodata.a2 .zdata.rodata.a2)
+    *(.zrodata.a1 .zdata.rodata.a1)
+    *(.zrodata    .zdata.rodata)
+
+    . = ALIGN(0x4);
+}
+
+/* 16-bit register A1 relative addressing */
+.sdata.rodata.default ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.sdata.rodata)
+/* >>>>>>> Customer specific BEGIN  <<<<<<*/
+    *(.sdata.rodata.a8.CDRV_constfast)			/* specified in CDRV_SHARED 2.50 */
+    *(.sdata.rodata.a8.CDRV_constslow)			/* specified in CDRV_SHARED 2.50 */
+    *(.sdata.rodata.a4.CDRV_constfast)			/* specified in CDRV_SHARED 2.50 */
+    *(.sdata.rodata.a4.CDRV_constslow)			/* specified in CDRV_SHARED 2.50 */
+    *(.sdata.rodata.CDRV_constfast)				/* specified in CDRV_SHARED 2.50 */
+    *(.sdata.rodata.CDRV_constslow)				/* specified in CDRV_SHARED 2.50 */
+/* >>>>>>> Customer specific END  <<<<<<*/
+    . = ALIGN(0x4);
+
+/* >>>>>>> Customer specific BEGIN (Powernet) <<<<<<*/
+    *(.sdata.rodata.a2lname)    
+/* >>>>>>> Customer specific END (Powernet)  <<<<<<*/
+}
+
+/* 32-bit absolute addressing, not cached */
+/* ATTENTION: address is outside hexfile */
+.rodata.noncached ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.rodata.noncached)
+    . = ALIGN(0x4);
+}
+
+/* 32-bit absolute addressing */
+.rodata.default ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.rodata)
+    *(.rodata.erc_far_rom)  /* ERCOSEK > V4.3.5 */
+    *(.rodata.erc_rom)      /* ERCOSEK > V4.3.5 */
+
+    /* function pointers generated by compiler */
+    *(.toc)
+
+    . = ALIGN(0x4);
+}
+
+/* >>>>>>> Customer specific BEGIN (Powernet) <<<<<<*/
+.ds_version ALIGN(0x04) :
+{
+   *(.data.ds_version)
+   
+}
+/* >>>>>>> Customer specific END (Powernet)  <<<<<<*/
+
+/* projectspecific for NewEagle projects (SW sharing) - start */ 
+/* OEM Constants */
+.rodata.oem_ConstData.default ALIGN(0x10000) :
+{
+    *(.rodata.OEM_ConstData32.a4)    
+    *(.rodata.OEM_ConstData16.a2)    
+    *(.rodata.OEM_ConstData8.a1)    
+ . = ALIGN(0x4);
+}
+/* projectspecific for NewEagle projects (SW sharing) - end */
+
+
+/***********************************************************/
+/*                                                         */
+/*                      VARIABLES                          */
+/*                                                         */
+/***********************************************************/
+
+/***********************************************************/
+/* 18-bit absolute addressed ASW bit variables             */
+/***********************************************************/
+.bbss.ReIni ALIGN(0x10000) :
+{
+    *(.bbss.ReIni)
+    . = ALIGN(0x4);
+}
+.bbss.ram1 ALIGN(0x10000) :
+{
+    *(.bbss.ram1)
+    . = ALIGN(0x4);
+}
+.bbss.ram0 ALIGN(0x10000) :
+{
+    *(.bbss)
+    *(.bbss.asw)
+    *(.bbss.ram0)
+/* >>>>>>> Customer specific BEGIN  <<<<<<*/
+    *(.bbss.NoReIni)
+/* >>>>>>> Customer specific END  <<<<<<*/
+    *(.bbss.Mo_RamBit)
+    *(.bbss.MoF_DiaBitRam)
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/* 18-bit absolute addressed ASW variables                 */
+/***********************************************************/
+.zbss.ReIni ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.zbss.ReIni)
+    . = ALIGN(0x4);
+}
+
+/* Absolute addressing of SPRAM is only possible on TC.1.3.1 and later  */
+.zbss.spram ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.zbss.spram)
+    . = ALIGN(0x4);
+}
+
+.zbss.ram0 ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.zbss)
+    MEMLAY_ALL_SUBSECTIONS(.zbss.asw)
+    MEMLAY_ALL_SUBSECTIONS(.zbss.ram0)
+/* >>>>>>> Customer specific BEGIN  <<<<<<*/
+    MEMLAY_ALL_SUBSECTIONS(.zbss.asw.NoReIni)
+    MEMLAY_ALL_SUBSECTIONS(.zbss.NoReIni)
+/* >>>>>>> Customer specific END  <<<<<<*/
+
+    /* Workaround for buggy ERCOSEK 4.3.5: Variables in bss sections are addressed absolute 18bit */
+    *e_alloc.o(.bss.a8)
+    *e_alloc.o(.bss.a4)
+    *e_alloc.o(.bss.a2)
+    *e_alloc.o(.bss.a1)
+    *e_alloc.o(.bss)
+    . = ALIGN(0x4);
+}
+/* projectspecific for New Eagle projects (SW sharing) - start */
+
+.zbss.ram0_OEM ALIGN(0x10000) :
+{
+    
+    *(.zbss.OEM_zbss16_preemp.a2)
+    *(.zbss.OEM_zbss8_preemp.a1)
+    
+       
+    . = ALIGN(0x4);
+}
+ /* project specific for New Eagle projects (SW sharing) - end */ 
+
+/***********************************************************/
+/* 16-bit relative addressed ASW variables                 */
+/***********************************************************/
+.sbss.ReIni ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.sbss.ReIni)
+    . = ALIGN(0x4);
+}
+
+.sbss.spram ALIGN(0x10000) :
+{
+    . = ALIGN(0x4);
+}
+
+.sbss.var1 ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.sbss.var1)
+    . = ALIGN(0x4);
+}
+
+.sbss.var0 ALIGN(0x10000) :
+{
+    *(.scommon)
+    MEMLAY_ALL_SUBSECTIONS(.sbss)
+/* >>>>>>> Customer specific BEGIN  <<<<<<*/
+    MEMLAY_ALL_SUBSECTIONS(.sbss.NoReIni)
+/* >>>>>>> Customer specific END  <<<<<<*/
+    *(.sbss._osstack)   /* ERCOSEK > V4.3.5 */
+    *(.bss._osstack)   /* ERCOSEK > V4.3.6 */
+/* >>>>>> Customer specific BEGIN  <<<<<< */
+    *(.sbss.a4.CDRV_ramfast)					/* specified in CDRV_SHARED 2.50 */					
+    *(.sbss.a4.CDRV_ramslow)					/* specified in CDRV_SHARED 2.50 */
+    *(.sbss.a4.CDRV_ramfast.NoReIni)			/* specified in CDRV_SHARED 2.50 */					
+    *(.sbss.a4.CDRV_ramslow.NoReIni)			/* specified in CDRV_SHARED 2.50 */
+    *(.sbss.a2.CDRV_ramfast)					/* specified in CDRV_SHARED 2.50 */					
+    *(.sbss.a2.CDRV_ramslow)					/* specified in CDRV_SHARED 2.50 */
+    *(.sbss.a2.CDRV_ramfast.NoReIni)			/* specified in CDRV_SHARED 2.50 */					
+    *(.sbss.a2.CDRV_ramslow.NoReIni)			/* specified in CDRV_SHARED 2.50 */
+    *(.sbss.a1.CDRV_ramfast)					/* specified in CDRV_SHARED 2.50 */
+    *(.sbss.a1.CDRV_ramslow)					/* specified in CDRV_SHARED 2.50 */
+    *(.sbss.a1.CDRV_ramfast.NoReIni)			/* specified in CDRV_SHARED 2.50 */					
+    *(.sbss.a1.CDRV_ramslow.NoReIni)			/* specified in CDRV_SHARED 2.50 */
+    *(.sbss.CDRV_ramfast)						/* specified in CDRV_SHARED 2.50 */
+    *(.sbss.CDRV_ramslow)						/* specified in CDRV_SHARED 2.50 */
+    *(.sbss.CDRV_ramslow.NoReIni)				/* for BC : InjVvG / 10.21.0; 0 */
+    *(.sbss.CDRV_ramfast.NoReIni)				/* for BC : InjVvG / 10.21.0; 0 */ 
+/* >>>>>>> Customer specific END  <<<<<<*/
+    *(.sbss.OEM_sbss32_preemp.a4)
+	
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/* 32-bit absolute addressed ASW variables                 */
+/***********************************************************/
+.bss.ReIni ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.bss.ReIni)
+    . = ALIGN(0x4);
+}
+
+.bss.spram ALIGN(0x10000) :
+{
+    . = ALIGN(0x4);
+}
+
+.bss.ram2 ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.bss.ram2)
+    . = ALIGN(0x4);
+}
+
+.bss.ram1 ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.bss.ram1)
+	*(.bss.OEM_bss32_coop.a4)
+    . = ALIGN(0x4);
+}
+
+.bss.ram0 ALIGN(0x10000) :
+{
+    /* Workaround for buggy ERCOSEK 4.3.5: bytes must be aligned, as they are accessed with LD.W */
+    . = ALIGN(0x4);
+    *e_restoreregisters.o(.bss.a1)
+    . = ALIGN(0x4);
+
+    *(COMMON)
+    MEMLAY_ALL_SUBSECTIONS(.bss)
+    MEMLAY_ALL_SUBSECTIONS(.bss.asw)
+    MEMLAY_ALL_SUBSECTIONS(.bss.ram0)
+
+    /* Variables in Restricted Ram: Read protected for calibration and diagnosis */
+    . = ALIGN(0x4);
+    __RAM0_RESTRICTED_START = .;
+    MEMLAY_ALL_SUBSECTIONS(.bss.ram0.restricted)
+    . = ALIGN(0x4);
+    __RAM0_RESTRICTED_END = . - 1;
+
+    /* deprecated, will be removed */
+    *(.asw_var0)
+    *(.s_intRam)
+    *(.s_extRam)
+
+    . = ALIGN(0x4);
+}
+/* project specific for NewEagle projects (SW sharing) - start */
+.bss.ram0_OEM ALIGN(0x10000) :
+{
+    . = ALIGN(0x4);
+    *e_restoreregisters.o(.OEM_bss8_coop.a1)
+    . = ALIGN(0x4);      
+    *(.bss.OEM_bss16_coop.a2)      
+    *(.bss.OEM_bss8_coop.a1)
+    
+    . = ALIGN(0x4);
+}
+/* project specific for DFCV projects (SW sharing) - end */
+
+/***********************************************************/
+/* Protected ASW variables                                 */
+/***********************************************************/
+.zbss.protram ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.zbss.protram)
+    . = ALIGN(0x4);
+}
+
+.bss.protram0 ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.bss.protram0)
+    . = ALIGN(0x4);
+}
+
+.bss.protram1 ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.bss.protram1)
+    . = ALIGN(0x4);
+}
+
+.bss.protram ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.bss.protram)
+
+    *(.prot_ram)            /* deprecated, will be removed */
+
+    /* Variables in Restricted Protected Ram: Read protected for calibration and diagnosis */
+    . = ALIGN(0x4);
+    __PROTRAM_RESTRICTED_START = .;
+    MEMLAY_ALL_SUBSECTIONS(.bss.protram.restricted)
+    . = ALIGN(0x4);
+    __PROTRAM_RESTRICTED_END = . - 1;
+
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/* Variables in dual-ported RAM                            */
+/***********************************************************/
+.bss.dpram ALIGN(0x10000) :
+{
+    __DPRAM_A1024_START = .; *(.bss.dpram_a1024)     /* 1024 Byte aligned */
+    __DPRAM_A512_START = .;  *(.bss.dpram_a512)      /* 512 Byte aligned */
+    __DPRAM_A256_START = .;  *(.bss.dpram_a256)      /* 256 Byte aligned */
+    __DPRAM_A128_START = .;  *(.bss.dpram_a128)      /* 128 Byte aligned */
+    __DPRAM_A64_START = .;   *(.bss.dpram_a64)       /* 64 Byte aligned */
+    __DPRAM_A32_START = .;   *(.bss.dpram_a32)       /* 32 Byte aligned */
+    __DPRAM_A16_START = .;   *(.bss.dpram_a16)       /* 16 Byte aligned */
+    __DPRAM_A8_START = .;    *(.bss.dpram.a8)
+    *(.bss.dpram.a4)
+    *(.bss.dpram.a2)
+    *(.bss.dpram.a1)
+    *(.bss.dpram)
+    *(.dport_ram)           /* deprecated, will be removed */
+    . = ALIGN(0x4);
+}
+
+/* calculated required alignment for DPRAM */
+__DPRAM_ALIGN = (__DPRAM_A16_START   < __DPRAM_A8_START  ) ?   16 : 8;
+__DPRAM_ALIGN = (__DPRAM_A32_START   < __DPRAM_A16_START ) ?   32 : __DPRAM_ALIGN;
+__DPRAM_ALIGN = (__DPRAM_A64_START   < __DPRAM_A32_START ) ?   64 : __DPRAM_ALIGN;
+__DPRAM_ALIGN = (__DPRAM_A128_START  < __DPRAM_A64_START ) ?  128 : __DPRAM_ALIGN;
+__DPRAM_ALIGN = (__DPRAM_A256_START  < __DPRAM_A128_START) ?  256 : __DPRAM_ALIGN;
+__DPRAM_ALIGN = (__DPRAM_A512_START  < __DPRAM_A256_START) ?  512 : __DPRAM_ALIGN;
+__DPRAM_ALIGN = (__DPRAM_A1024_START < __DPRAM_A512_START) ? 1024 : __DPRAM_ALIGN;
+
+/***********************************************************/
+/* Initialized Variables in dual-ported RAM                */
+/***********************************************************/
+.data.dpram ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.data.dpram)
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/* Emulated non volatile RAM ("stand-by RAM")              */
+/***********************************************************/
+.bss.envram ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.bss.envram)
+    *(.envram)              /* deprecated, will be removed */
+    . = ALIGN(0x4);
+
+    /* Non volatile RAM for Monitoring */
+    __MO_NVRAM_START = . ;
+    *(.bss.Mo_NvRam)
+    *(.bss.MoF_NvRam)               /* deprecated, will be removed */
+    *(.MoF_NvRam)                   /* deprecated, will be removed */
+    *(.bss.Mo_RamNv)                /* deprecated, will be removed */
+    *(.Mo_RamNv)                    /* deprecated, will be removed */
+    . = ALIGN(0x4);
+    __MO_NVRAM_END = . - 1;
+
+    . = ALIGN(0x4);
+}
+/* Initialized ENVRAM */
+.data.envram ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.data.envram)
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/* Monitored ASW variables in user RAM                     */
+/***********************************************************/
+.bss.user_mon ALIGN(0x10000) :
+{
+    __MO_RAMCYCLICCHECK_START = . ;
+    __MO_RAMCYCCHK_START = . ;      /* DS monitoring (ECM00.2.7.x) */
+    __MOF_RAM_START      = . ;      /* DS monitoring (MoCMem >= 1.0.0) */
+    __MO_CHCRAM_START    = . ;      /* DS monitoring (MoCMem < 1.0.0)  */
+    MEMLAY_ALL_SUBSECTIONS(.bss.Mo_RamCyclicCheck)
+    *(.Mo_RamCyclicCheck)           /* deprecated, will be removed */
+    *(.bss.MoF_Ram)                 /* deprecated, will be removed */
+    *(.MoF_Ram)                     /* deprecated, will be removed */
+    . = ALIGN(0x4);
+    __MO_RAMCYCLICCHECK_END = . - 1;
+    __MO_RAMCYCCHK_END  = . - 1;    /* DS monitoring (ECM00.2.7.x) */
+    __MOF_RAM_END       = . - 1;    /* DS monitoring (MoCMem >= 1.0.0) */
+    __MO_CHCRAM_END     = . - 1;    /* DS monitoring (MoCMem < 1.0.0)  */
+
+    __MO_RAMNOCYCLICCHECK_START = . ;
+    MEMLAY_ALL_SUBSECTIONS(.bss.Mo_RamCpl)
+    *(.bss.MoF_CplRam)              /* deprecated, will be removed */
+    *(.MoF_CplRam)                  /* deprecated, will be removed */
+    *(.Mo_RamCpl)                   /* deprecated, will be removed */
+
+    MEMLAY_ALL_SUBSECTIONS(.bss.Mo_RamCom)
+    *(.bss.MoF_ComRam)              /* deprecated, will be removed */
+    *(.MoF_ComRam)                  /* deprecated, will be removed */
+
+    MEMLAY_ALL_SUBSECTIONS(.bss.Mo_RamIt)
+    *(.bss.MoI_Ram)                 /* deprecated, will be removed */
+    *(.MoI_Ram)                     /* deprecated, will be removed */
+
+    *(.MoF_DiaBitRam)               /* deprecated, will be removed */
+    . = ALIGN(0x4);
+    __MO_RAMNOCYCLICCHECK_END = . - 1;
+    __MO_RAMNOCYCCHK_END      = . - 1; /* DS monitoring (ECM00.2.7.x) */
+}
+
+/***********************************************************/
+/* Monitored ASW variables                                 */
+/***********************************************************/
+.bss.mon ALIGN(0x10000) :
+{
+    __MO_RAMTMP_START = . ;
+    MEMLAY_ALL_SUBSECTIONS(.bss.Mo_RamTmp)
+    *(.bss.Mo_RamTmp2)      /* deprecated, will be removed */
+    *(.MoF_TmpRam)          /* deprecated, will be removed */
+    *(.bss.MoF_TmpRam)      /* deprecated, will be removed */
+    . = ALIGN(0x4);
+    __MO_RAMTMP_END = . - 1;
+}
+
+/***********************************************************/
+/* Initialized ASW variables                               */
+/***********************************************************/
+.bdata.initvar0 ALIGN(0x10000) :
+{
+    *(.bdata)
+    . = ALIGN(0x4);
+}
+
+.zdata.initvar0 ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.zdata)
+}
+
+.sdata.initvar1 ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.sdata)
+    *(.sdata.erc_ram) /* ERCOSEK > V4.3.5 */
+/* >>>>>>> Customer specific BEGIN  <<<<<<*/
+    *(.sdata.a8.CDRV_ramfast)					/* Used by KnDet				 */
+    *(.sdata.a4.CDRV_ramfast)					/* specified in CDRV_SHARED 2.50 */
+    *(.sdata.a4.CDRV_ramslow)					/* specified in CDRV_SHARED 2.50 */
+    *(.sdata.a2.CDRV_ramfast)					/* specified in CDRV_SHARED 2.50 */
+    *(.sdata.a2.CDRV_ramslow)					/* specified in CDRV_SHARED 2.50 */
+    *(.sdata.a1.CDRV_ramfast)					/* specified in CDRV_SHARED 2.50 */
+    *(.sdata.a1.CDRV_ramslow)					/* specified in CDRV_SHARED 2.50 */
+    *(.sdata.CDRV_ramfast)						/* specified in CDRV_SHARED 2.50 */
+    *(.sdata.CDRV_ramslow)						/* specified in CDRV_SHARED 2.50 */
+/* >>>>>>> Customer specific END  <<<<<<*/
+}
+
+.data.initvar2 ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.data)
+}
+
+/***********************************************************/
+/* Nonzero reinitialized variables                         */
+/***********************************************************/
+.bdata.ReIni0 ALIGN(0x10000) :
+{
+    *(.bdata.ReIni)
+}
+
+.zdata.ReIni0 ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.zdata.ReIni)
+}
+
+.sdata.ReIni1 ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.sdata.ReIni)
+}
+
+.data.ReIni2 ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.data.ReIni)
+}
+
+/***********************************************************/
+/*                                                         */
+/*                    DAMOS SECTIONS                       */
+/*                                                         */
+/***********************************************************/
+
+.caldata_byptab ALIGN(0x10000) :
+{
+    /* Bypass vector/channel table as NOSERAP data */
+    __CALDATA_BYPTAB_START = .;
+    *(.caldata_byptab)
+    *(.caldataADS_noPTA_BypDrv)         /* standard codesyntax with component name  */
+    *(SORT(.caldataADS_noPTABypTab*))   /* bypass codesyntax: B_BYP.6.0.0 and later */
+    . = ALIGN(0x4);
+    __CALDATA_BYPTAB_NEXT  = .;
+}
+
+.caldata_svbbetas ALIGN(0x10000) :
+{
+    /* Use NOSERAP data for adaptive calibration values */
+    *(.caldata_svbbetas)
+    *(SORT(.caldataADS_noPTASvbbEtas*))
+    . = ALIGN(0x4);
+}
+
+/* project specific for NewEagle projects (SW sharing) - start */
+/* OEM specific like Bosch "caldata0" */
+.caldata.OEM_userData ALIGN(0x10000) :
+{   
+    
+    *(.caldata.OEM_userData8)
+    *(.caldata.OEM_userData16)
+    *(.caldata.OEM_userData32)    
+    *(.caldata0)
+    . = ALIGN(0x4);
+}
+/* project specific for NewEagle projects (SW sharing) - end */
+/***********************************************************/
+/* Non-PTA calibration data                                */
+/***********************************************************/
+#ifdef MEMLAY_DS1_START
+.caldata1 ALIGN(0x10000) :
+{
+    /* Locate NOSERAP data into DS1 if DS1 is present */
+    *(SORT(.caldata*))
+    . = ALIGN(0x4);
+}
+#endif
+
+.caldata0 ALIGN(0x10000) :
+{
+    /* Monitoring Information Table (GS only) */
+    *(.Mo_RomData1Table)
+    *(.Mo_RomData2Table)
+    *(.Mo_RomData3Table)
+    *(.Mo_DataCyclicCheckTable)
+
+    *(SORT(.caldata*))
+
+    /* deprecated, will be removed */
+    *(SORT(.s_caldata*))
+    *(.asw_data0)
+    *(.constdata)
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/* PTA calibration data                                    */
+/* Must have the same order as PTA vector table!           */
+/***********************************************************/
+.ptadata1 ALIGN(0x10000) :
+{
+    . = ALIGN(0x4);
+}
+.ptadata_noncached ALIGN(0x10000) :
+{
+    /* cyclic checked data for monitoring: must be located in DS0 for correct address calculation. */
+    __MO_DATACYCLICCHECK_START  = . ;
+    __PTA_DATAMOF_START         = . ;   /* DS monitoring (MoCMem >= 1.0.0) */
+    __MO_CHCROM_DATA_START      = . ;   /* DS monitoring (MoCMem < 1.0.0) */
+    *(SORT(.pta_data*Mo_DataCyclicCheck*))
+    *(SORT(.pta_dataMoF_*))
+    *(SORT(.pta_datadataMoF_*))
+    /* Workaround until dataset grouping is implemented in SWB */
+    *(SORT(.pta_data_mo_glbl))
+    *(SORT(.pta_data_moc*))
+    *(SORT(.pta_data_mof*))
+    . = ALIGN(0x4);
+    *(.ds0cs1_epilog)
+    __MO_DATACYCLICCHECK_END = . - 1;
+    __PTA_DATAMOF_END        = . - 1;   /* DS monitoring (MoCMem >= 1.0.0)*/
+    __MO_CHCROM_DATA_END     = . - 1;   /* DS monitoring (MoCMem < 1.0.0) */
+}
+.ptadata0 ALIGN(0x10000) :
+{
+    /* other data for monitoring */
+    *(SORT(.pta_data*Mo_DataNoCyclicCheck*))
+    *(SORT(.pta_dataMoI_*))
+
+    /* Bypass vector/channel table as DSERAP data */
+    __PTA_DATA_BYPTAB_START = .;
+    *(SORT(.pta_dataADS_PTABypTab*))
+    __PTA_DATA_BYPTAB_NEXT  = .;
+
+    /* Reserved SVBB data */
+    __DISTAB_RESERVED_SVBB_START = .;
+    *(SORT(.pta_dataADS_PTASvbbEtas*))
+    __DISTAB_RESERVED_SVBB_END = . - 1;
+
+    /* other calibration data */
+    *(SORT(.pta_data*))
+
+    . = ALIGN(0x4);
+}
+__DISTAB_RESERVED_SVBB_SIZE = __DISTAB_RESERVED_SVBB_END + 1 - __DISTAB_RESERVED_SVBB_START;
+
+
+/***********************************************************/
+/* PTA vector table                                        */
+/* Must have the same order as PTA calibration data!       */
+/***********************************************************/
+.sdata.ptavect1 ALIGN(0x10000) :
+{
+    . = ALIGN(0x4);
+}
+.sdata.ptavect0 ALIGN(0x10000) :
+{
+    /* cyclic checked data for monitoring */
+    *(SORT(.sdata.pta_vect*Mo_DataCyclicCheck*))
+    *(SORT(.sdata.pta_vectMoF_*))
+    *(SORT(.sdata.pta_vectdataMoF_*))
+    /* Workaround until dataset grouping is implemented in SWB */
+    *(SORT(.sdata.pta_vect_mo_glbl))
+    *(SORT(.sdata.pta_vect_moc*))
+    *(SORT(.sdata.pta_vect_mof*))
+
+    /* other data for monitoring */
+    *(SORT(.sdata.pta_vect*Mo_DataNoCyclicCheck*))
+    *(SORT(.sdata.pta_vectMoI_*))
+
+    /* Bypass vector/channel table */
+    *(SORT(.sdata.pta_vectADS_PTABypTab*))
+
+    /* Reserved SVBB data */
+    *(SORT(.sdata.pta_vectADS_PTASvbbEtas*))
+
+    /* other calibration data */
+    *(SORT(.sdata.pta_vect*))
+
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/* distab read data                                        */
+/***********************************************************/
+.data.distab_read ALIGN(0x10000) :
+{
+    *(.data.distab_read)
+    . = ALIGN(0x4);
+
+    __SVBB_RESWORKAREA_START = .;
+    /* SvbbEtas_ServicePointDescriptor_as must start at __SVBB_RESWORKAREA_START by definition. */
+    *(.data.SvbbSpDesc)
+    *(.data.distab_readSvbb)
+    . = ALIGN(0x4);
+    __SVBB_RESWORKAREA_END = . - 1;
+}
+/* Size can be calculated, as section doesn't contain elements which are changed in second link run */
+__SVBB_RESWORKAREA_SIZE = __SVBB_RESWORKAREA_END + 1 - __SVBB_RESWORKAREA_START;
+
+/***********************************************************/
+/* distab write data                                       */
+/***********************************************************/
+.bss.distab_write ALIGN(0x10000) :
+{
+    *(.bss.distab_write)
+    *(.bss.distab_write.a8)
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/* measurement points                                      */
+/***********************************************************/
+.sbss.mpram ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.sbss.mpram)
+    . = ALIGN(0x4);
+}
+
+.bss.mpram ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.bss.mpram)
+    . = ALIGN(0x4);
+}
+
+.bss.mpdisplay ALIGN(0x10000) :
+{
+    MEMLAY_ALL_SUBSECTIONS(.bss.mpdisplay)
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/*                                                         */
+/*                    PCP SECTIONS                         */
+/*                                                         */
+/***********************************************************/
+
+/***********************************************************/
+/* PCP code of ASW                                         */
+/***********************************************************/
+.pcpcode0 ALIGN(0x10000) :
+{
+    *(.pcptext)
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/* PCP data of ASW                                         */
+/***********************************************************/
+.pcpdata0 ALIGN(0x10000) :
+{
+    *(.pcpdata)
+    . = ALIGN(0x4);
+}
+
+/***********************************************************/
+/*                                                         */
+/*                   Special sections                      */
+/*                                                         */
+/***********************************************************/
+
+/***********************************************************/
+/* Interrupt vector table                                  */
+/***********************************************************/
+.inttab ALIGN(0x10000) :
+{
+    __INT_TABLE = . ;
+    *(.inttab)           /* ERCOSEK */
+    *(.inttab.osvectors) /* Autosar RTAOS */
+    . = ALIGN(0x4);
+}
+/* Size can be calculated, as section doesn't contain elements which are changed in second link run */
+__SIZE_INTTAB = SIZEOF(.inttab);
+
+/***********************************************************/
+/* ERCOS user stack                                        */
+/***********************************************************/
+.asw_stack ALIGN(0x10000) :
+{
+    __ASW_STACK_START = .;
+    *(.userStack)
+
+    /* according to information from ETAS this .sbss section is NOT register relative addressed */
+    *(.sbss._custack)   /* ERCOSEK > V4.3.5 */
+    *(.bss._custack)   /* ERCOSEK > V4.3.6 */
+    . = ALIGN(0x8);
+    __ASW_STACK_INIT = . - 8;
+    __ASW_STACK_END  = . - 1;
+}
+/* Size can be calculated, as section doesn't contain elements which are changed in second link run */
+__ASW_STACK_SIZE = SIZEOF(.asw_stack);
+
+/***********************************************************/
+/* CSA                                                     */
+/***********************************************************/
+.asw_csa ALIGN(0x10000) :
+{
+    __ASW_CSA_START = .;
+    /* section must be aligned to 64 byte at second link run */
+    *(.userCSA_a64)
+    __ASW_CSA_END = . - 1;
+}
+/* Size can be calculated, as section doesn't contain elements which are changed in second link run */
+__ASW_CSA_SIZE = SIZEOF(.asw_csa);
+
+/***********************************************************/
+/* DISCARD c++ sections automatically created              */
+/* by compiler but not really required                     */
+/***********************************************************/
+/DISCARD/ :
+{
+    *(.text.discard)
+    *(.eh_frame)
+}
+
+}
