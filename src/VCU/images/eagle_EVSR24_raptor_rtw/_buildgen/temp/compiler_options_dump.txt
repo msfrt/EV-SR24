@@ -1,0 +1,6 @@
+$compiler_options_dump = {
+                           'COMPILER_OPTIONS' => '-c -x c -DGNU=1 -fno-builtin -fno-common -fshort-double -maligned-access -mwarnprqa=off -maligned-data-sections -W -Wcast-align -Wcast-qual -Winline -Wmissing-noreturn -Wpointer-arith -Wstrict-prototypes -Wundef -Wno-implicit -D_ALLOW_KEYWORD_MACROS -I- -I_buildgen/headers -Os -pipe -mno-warn-smalldata-initializers -msmall-pid -gdwarf-2 -mcpu=TC13-FPU_ERR13X_ERR16 -msmall-data=0 -msmall-const=1024 -DSMALL_ADDRESSABLE_DATA=1 -DHIGH_BYTE_FIRST=0 -DSYSTEM_H=""system.h"" -DDFPMDEF_H=""dsm.h"" -DDSMDEF_H=""dsm.h"" -DPROJECT_H=SYSTEM_H -DPROGRAMBEZ=""ME1735_610D_81E04"" ',
+                           'ABSOLUTE_LINKER_OPTIONS' => '-nostdlib --cref --no-demangle --warn-once --relax-24rel --relax-bdata --extmap=a --warn-section-align --warn-orphan -LC:\\\\HighTec\\\\TriCore\\tricore\\lib\\tc1x-fpu\\ -ldnk_c -LC:\\\\HighTec\\\\TriCore\\lib\\gcc\\tricore\\3.4.5\\tc1x-fpu\\libgcc.a ',
+                           'RELOC_LINKER_OPTIONS' => '-mcpu=tc1x-fpu -Wl,-r -nostdlib -Wl,--cref -Wl,--no-demangle -Wl,--extmap=a -LC:\\\\HighTec\\\\TriCore\\lib\\gcc\\tricore\\3.4.5\\tc1x-fpu\\libgcc.a ',
+                           'COMPILER_PATH' => 'C:\\\\HighTec\\\\TriCore\\bin'
+                         };
