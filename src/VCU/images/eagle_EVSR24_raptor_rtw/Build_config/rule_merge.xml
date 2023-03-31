@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONF xmlns="www.rbin.com/mds-1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="www.rbin.com/mds-1
+.\schemas\rules.xsd">
+<!-- This is the input to the hexmod tool -->
+	<HEXMOD>
+		<ERRMOD>
+			<!-- Here the filename of Log File is mentioned with full path -->
+<LOG FILE="_log/swb/module/hexmod/hexmod17_merge.log"/>
+			<MSGLOG LVL="1"/>
+			<MSGCONSOLE LVL="2"/>
+		</ERRMOD>
+		<MAINMOD>
+<GENERAL>
+<DEF_RANGE START="0x80000000" LEN="0xFC78" FILLPATTERN="0x00"/>
+<DEF_RANGE START="0x8000FC78" LEN="0x8C" FILLPATTERN="0x00"/>
+<DEF_RANGE START="0x8000FD04" LEN="0x2FC" FILLPATTERN="0x00"/>
+<DEF_RANGE START="0x80010000" LEN="0x4000" FILLPATTERN="0x00"/>
+<DEF_RANGE START="0x80014000" LEN="0x3E74" FILLPATTERN="0x00"/>
+<DEF_RANGE START="0x80017E74" LEN="0x18C" FILLPATTERN="0x00"/>
+<DEF_RANGE START="0x80018000" LEN="0x7E74" FILLPATTERN="0x00"/>
+<DEF_RANGE START="0x8001FE74" LEN="0x18C" FILLPATTERN="0x00"/>
+<DEF_RANGE START="0x80020000" LEN="0x1DFF74" FILLPATTERN="0x00"/>
+<DEF_RANGE START="0x801FFF74" LEN="0x8C" FILLPATTERN="0x00"/>
+<DEF_RANGE START="0x80800000" LEN="0x17FF74" FILLPATTERN="0x00"/>
+<DEF_RANGE START="0x8097FF74" LEN="0x8C" FILLPATTERN="0x00"/>
+<DEF_RANGE START="0x80980000" LEN="0x7BF74" FILLPATTERN="0x00"/>
+<DEF_RANGE START="0x809FBF74" LEN="0x8C" FILLPATTERN="0x00"/>
+<DEF_RANGE START="0x809FC000" LEN="0x4000" FILLPATTERN="0x00"/>
+</GENERAL>
+			<LOADDLL>
+<DLL NAME="BaseIO" CFG="_gen/swb/module/hexmod/input_merge.xml"/>
+<DLL NAME="Infoblock" CFG="_gen/swb/module/hexmod/infoblock_merge.xml"/>
+<DLL NAME="ABM" CFG="_gen/swb/module/hexmod/abm.xml"/>
+<DLL NAME="BaseIO" CFG="_gen/swb/module/hexmod/output_merge.xml"/>
+			</LOADDLL>
+		</MAINMOD>
+	</HEXMOD>
+</CONF>
