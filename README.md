@@ -54,6 +54,8 @@ customizable, so you can change themes, plugins, and configurations to suit your
 
 ##### Adding to Path
 
+If you were to clone the entire SR24 library, make sure that the VCU folder (`EV-SR24/src/VCU`) file path is on your `C:` drive. There are built-in MATLAB scripts that handle adding folders within the VCU directory to the path. If for whatever reason that doesn't work (it should definitely work), then follow the steps below to manually add all of the folders to the path. 
+
 When developing with subsystem references and other pointers, Simulink really wants to know what it is looking at. So, you, the user, need to make sure Simulink has eyes on what you are working on. If Simulink does not know where it needs to look, you will have a `File Not Found` error or something of the sort for every reference in the model. Luckily, there are multiple ways to do this - some being more tedious than others.
 
 On startup, you will most likely need to add some files to Simulink's path. To do so, follow the steps below:
