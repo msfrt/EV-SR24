@@ -1,0 +1,76 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_:
+
+
+BO_ 3 New_Message_7: 8 Vector__XXX
+ SG_ New_Signal_9 : 65535|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2 New_Message_6: 8 Vector__XXX
+ SG_ New_Signal_8 : 7|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 1 New_Message_5: 8 Vector__XXX
+ SG_ New_Signal_7 : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 0 New_Message_4: 8 Vector__XXX
+ SG_ New_Signal_6 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 380 MM5_380: 8 Vector__XXX
+ SG_ MM5_Az : 32|16@1+ (-0.0001274,4.1745795) [0|0] "" Vector__XXX
+
+BO_ 376 MM5_376: 8 Vector__XXX
+ SG_ MM5_rollRate : 0|16@1+ (-0.005,163.9) [0|0] "" Vector__XXX
+ SG_ MM5_Ax : 32|16@1+ (-0.0001274,4.1745795) [0|0] "" Vector__XXX
+
+BO_ 372 MM5_372: 8 Vector__XXX
+ SG_ MM5_yawRate : 0|16@1+ (0.005,-163.9) [0|0] "" Vector__XXX
+ SG_ MM5_Ay : 32|16@1+ (-0.0001274,4.1745795) [0|0] "" Vector__XXX
+
+
+
+CM_ SG_ 380 MM5_Az "Acceleration Z Axis
+";
+CM_ SG_ 376 MM5_rollRate "Roll Rate";
+CM_ SG_ 376 MM5_Ax "Acceleration X Axis
+";
+CM_ SG_ 372 MM5_yawRate "Yaw Rate";
+CM_ SG_ 372 MM5_Ay "Acceleration Y Axis
+";
+BA_DEF_  "MultiplexExtEnabled" ENUM  "No","Yes";
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "MultiplexExtEnabled" "No";
+BA_DEF_DEF_  "BusType" "CAN";
+
