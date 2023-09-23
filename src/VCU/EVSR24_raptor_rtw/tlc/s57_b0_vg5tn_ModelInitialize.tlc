@@ -1,0 +1,200 @@
+%implements s57_b0_vg5tn_ModelInitialize "C"
+
+%function ModelInitialize(block, system) Output
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+%assign tlcStartFcnOfS57B4 = OpaqueTLCBlockFcn("Start", 57, 4, 2, 2, 0)
+%assign tlcStartFcnOfS57B5 = OpaqueTLCBlockFcn("Start", 57, 5, 2, 2, 1)
+%assign tlcStartFcnOfS57B6 = OpaqueTLCBlockFcn("Start", 57, 6, 2, 2, 2)
+%assign tlcStartFcnOfS57B7 = OpaqueTLCBlockFcn("Start", 57, 7, 2, 2, 3)
+%assign tlcStartFcnOfS57B9 = OpaqueTLCBlockFcn("Start", 57, 9, 2, 2, 4)
+%assign tlcStartFcnOfS57B10 = OpaqueTLCBlockFcn("Start", 57, 10, 2, 2, 5)
+%assign tlcStartFcnOfS57B11 = OpaqueTLCBlockFcn("Start", 57, 11, 2, 2, 6)
+%assign tlcStartFcnOfS57B12 = OpaqueTLCBlockFcn("Start", 57, 12, 2, 2, 7)
+%assign tlcStartFcnOfS57B13 = OpaqueTLCBlockFcn("Start", 57, 13, 2, 2, 8)
+%assign tlcStartFcnOfS57B14 = OpaqueTLCBlockFcn("Start", 57, 14, 2, 2, 9)
+%assign tlcStartFcnOfS57B15 = OpaqueTLCBlockFcn("Start", 57, 15, 2, 2, 10)
+%assign tlcStartFcnOfS57B16 = OpaqueTLCBlockFcn("Start", 57, 16, 2, 2, 11)
+%assign tlcStartFcnOfS57B17 = OpaqueTLCBlockFcn("Start", 57, 17, 2, 2, 12)
+%assign tlcStartFcnOfS57B0 = OpaqueTLCBlockFcn("Start", 57, 0, 2, 2, 13)
+%assign tlcSystemInitializeFcnOfS57B0 = OpaqueTLCBlockFcn("SystemInitialize", 57, 0, 2, 2, 14)
+%assign tlcStartFcnOfS57B2 = OpaqueTLCBlockFcn("Start", 57, 2, 2, 2, 15)
+%assign tlcSystemInitializeFcnOfS57B2 = OpaqueTLCBlockFcn("SystemInitialize", 57, 2, 2, 2, 16)
+%assign tlcEnableFcnOfS57B0 = OpaqueTLCBlockFcn("Enable", 57, 0, 2, 2, 17)
+%assign tlcEnableFcnOfS57B2 = OpaqueTLCBlockFcn("Enable", 57, 2, 2, 2, 18)
+%<SLibInsertAsyncTaskInitializeCode(system)>
+%<SLibWriteMachineInitialize()>
+%<SLibCGIRDumpSystemUserCode(57, "Start", "Header")>\
+%<SLibCGIRDumpSystemUserCode(57, "Start", "Body")>\
+%if !WHITE_SPACE(tlcStartFcnOfS57B4)
+/* Start for S-Function (raptor_sfun_data_def): '<S3>/BC_ID' */
+%<SLibCG_DumpSSCode("/*@[915ef*/",tlcStartFcnOfS57B4,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS57B5)
+/* Start for S-Function (raptor_sfun_data_def): '<S3>/RX_ID' */
+%<SLibCG_DumpSSCode("/*@[915f0*/",tlcStartFcnOfS57B5,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS57B6)
+/* Start for S-Function (raptor_sfun_data_def): '<S3>/TX_ID' */
+%<SLibCG_DumpSSCode("/*@[915f1*/",tlcStartFcnOfS57B6,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS57B7)
+/* Start for S-Function (raptor_sfun_xcp): '<S3>/raptor_xcp_update' */
+%<SLibCG_DumpSSCode("/*@[915f2*/",tlcStartFcnOfS57B7,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS57B9)
+/* Start for S-Function (raptor_sfun_appmonitor): '<Root>/raptor_appmonitor' */
+%<SLibCG_DumpSSCode("/*@[915f3*/",tlcStartFcnOfS57B9,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS57B10)
+/* Start for S-Function (raptor_sfun_can_def): '<Root>/raptor_can_def' */
+%<SLibCG_DumpSSCode("/*@[915f4*/",tlcStartFcnOfS57B10,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS57B11)
+/* Start for S-Function (raptor_sfun_can_def): '<Root>/raptor_can_def1' */
+%<SLibCG_DumpSSCode("/*@[915f5*/",tlcStartFcnOfS57B11,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS57B12)
+/* Start for S-Function (raptor_sfun_data_def): '<Root>/raptor_data_def' */
+%<SLibCG_DumpSSCode("/*@[915f6*/",tlcStartFcnOfS57B12,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS57B13)
+/* Start for S-Function (raptor_sfun_data_def): '<Root>/raptor_data_def1' */
+%<SLibCG_DumpSSCode("/*@[915f7*/",tlcStartFcnOfS57B13,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS57B14)
+/* Start for S-Function (raptor_sfun_data_def): '<Root>/raptor_data_def2' */
+%<SLibCG_DumpSSCode("/*@[915f8*/",tlcStartFcnOfS57B14,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS57B15)
+/* Start for S-Function (raptor_sfun_fault_manager): '<Root>/raptor_fault_manager' */
+%<SLibCG_DumpSSCode("/*@[915f9*/",tlcStartFcnOfS57B15,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS57B16)
+/* Start for S-Function (raptor_sfun_target_def): '<Root>/raptor_target_def' */
+%<SLibCG_DumpSSCode("/*@[915fa*/",tlcStartFcnOfS57B16,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS57B17)
+/* Start for S-Function (raptor_sfun_timed_trigger_config): '<Root>/raptor_timed_trigger_config' */
+%<SLibCG_DumpSSCode("/*@[915fb*/",tlcStartFcnOfS57B17,"/*@]*/")>\
+%endif
+%<SLibCGIRDumpSystemUserCode(57, "Start", "Trailer")>\
+EVSR24_PrevZCSigState.RaiseShutdownEvent_Trig_ZCE = ZERO_ZCSIG;
+EVSR24_PrevZCSigState.RaiseStartupEvent_Trig_ZCE = POS_ZCSIG;
+EVSR24_PrevZCSigState.StoreEEPROM_Trig_ZCE = ZERO_ZCSIG;
+%assign   SystemInitialize_open_raptor_timed_trigger_57_0 = ""
+%openfile SystemInitialize_open_raptor_timed_trigger_57_0
+
+/* SystemInitialize for S-Function (raptor_sfun_timed_trigger): '<Root>/raptor_timed_trigger' incorporates:
+ *  SubSystem: '<Root>/Foreground'
+ */
+%closefile SystemInitialize_open_raptor_timed_trigger_57_0
+
+%assign    SystemInitialize_body_raptor_timed_trigger_57_0 = ""
+%openfile  SystemInitialize_body_raptor_timed_trigger_57_0
+
+%if !SLibCGSysFcnIsEmptyForTid(CompiledModel.System[56], "SystemInitialize",0)
+%<SLibCG_DumpSSCode("/*@[91609*/",SLibCGIRGenReusableSysCall("EVSR24_Foreground_Init", [], 56, 0, 4, 0, 19, 57),"/*@]*/")>\
+%assign ss = ::CompiledModel.System[56]
+%if !LibSystemIsInlined(ss)
+;
+%else
+\
+%endif
+%endif
+%<SLibCG_DumpSSCode("/*@[915fe*/",tlcStartFcnOfS57B0,"/*@]*/")>\
+%<SLibCG_DumpSSCode("/*@[91600*/",tlcSystemInitializeFcnOfS57B0,"/*@]*/")>\
+%closefile SystemInitialize_body_raptor_timed_trigger_57_0
+
+%assign    SystemInitialize_close_raptor_timed_trigger_57_0 = ""
+%openfile  SystemInitialize_close_raptor_timed_trigger_57_0
+
+/* End of SystemInitialize for S-Function (raptor_sfun_timed_trigger): '<Root>/raptor_timed_trigger' */
+%closefile SystemInitialize_close_raptor_timed_trigger_57_0
+%<SLibCG_DumpSSCode(SystemInitialize_open_raptor_timed_trigger_57_0, SystemInitialize_body_raptor_timed_trigger_57_0, SystemInitialize_close_raptor_timed_trigger_57_0)>
+
+
+%assign   SystemInitialize_open_raptor_timed_trigger_c_57_2 = ""
+%openfile SystemInitialize_open_raptor_timed_trigger_c_57_2
+
+/* SystemInitialize for S-Function (raptor_sfun_timed_trigger): '<S2>/raptor_timed_trigger' incorporates:
+ *  SubSystem: '<S2>/Background'
+ */
+%closefile SystemInitialize_open_raptor_timed_trigger_c_57_2
+
+%assign    SystemInitialize_body_raptor_timed_trigger_c_57_2 = ""
+%openfile  SystemInitialize_body_raptor_timed_trigger_c_57_2
+
+%if !SLibCGSysFcnIsEmptyForTid(CompiledModel.System[7], "SystemInitialize",0)
+%<SLibCG_DumpSSCode("/*@[9160a*/",SLibCGIRGenReusableSysCall("EVSR24_Background_Init", [], 7, 0, 4, 0, 19, 57),"/*@]*/")>\
+%assign ss = ::CompiledModel.System[7]
+%if !LibSystemIsInlined(ss)
+;
+%else
+\
+%endif
+%endif
+%<SLibCG_DumpSSCode("/*@[91602*/",tlcStartFcnOfS57B2,"/*@]*/")>\
+%<SLibCG_DumpSSCode("/*@[91604*/",tlcSystemInitializeFcnOfS57B2,"/*@]*/")>\
+%closefile SystemInitialize_body_raptor_timed_trigger_c_57_2
+
+%assign    SystemInitialize_close_raptor_timed_trigger_c_57_2 = ""
+%openfile  SystemInitialize_close_raptor_timed_trigger_c_57_2
+
+/* End of SystemInitialize for S-Function (raptor_sfun_timed_trigger): '<S2>/raptor_timed_trigger' */
+%closefile SystemInitialize_close_raptor_timed_trigger_c_57_2
+%<SLibCG_DumpSSCode(SystemInitialize_open_raptor_timed_trigger_c_57_2, SystemInitialize_body_raptor_timed_trigger_c_57_2, SystemInitialize_close_raptor_timed_trigger_c_57_2)>
+
+
+%assign   Enable_open_raptor_timed_trigger_57_0 = ""
+%openfile Enable_open_raptor_timed_trigger_57_0
+
+/* Enable for S-Function (raptor_sfun_timed_trigger): '<Root>/raptor_timed_trigger' */
+%closefile Enable_open_raptor_timed_trigger_57_0
+
+%assign    Enable_body_raptor_timed_trigger_57_0 = ""
+%openfile  Enable_body_raptor_timed_trigger_57_0
+
+%<SLibCG_DumpSSCode("/*@[91606*/",tlcEnableFcnOfS57B0,"/*@]*/")>\
+%closefile Enable_body_raptor_timed_trigger_57_0
+
+%assign    Enable_close_raptor_timed_trigger_57_0 = ""
+%openfile  Enable_close_raptor_timed_trigger_57_0
+
+/* End of Enable for S-Function (raptor_sfun_timed_trigger): '<Root>/raptor_timed_trigger' */
+%closefile Enable_close_raptor_timed_trigger_57_0
+%<SLibCG_DumpSSCode(Enable_open_raptor_timed_trigger_57_0, Enable_body_raptor_timed_trigger_57_0, Enable_close_raptor_timed_trigger_57_0)>
+
+
+%assign   Enable_open_raptor_timed_trigger_c_57_2 = ""
+%openfile Enable_open_raptor_timed_trigger_c_57_2
+
+/* Enable for S-Function (raptor_sfun_timed_trigger): '<S2>/raptor_timed_trigger' */
+%closefile Enable_open_raptor_timed_trigger_c_57_2
+
+%assign    Enable_body_raptor_timed_trigger_c_57_2 = ""
+%openfile  Enable_body_raptor_timed_trigger_c_57_2
+
+%<SLibCG_DumpSSCode("/*@[91608*/",tlcEnableFcnOfS57B2,"/*@]*/")>\
+%closefile Enable_body_raptor_timed_trigger_c_57_2
+
+%assign    Enable_close_raptor_timed_trigger_c_57_2 = ""
+%openfile  Enable_close_raptor_timed_trigger_c_57_2
+
+/* End of Enable for S-Function (raptor_sfun_timed_trigger): '<S2>/raptor_timed_trigger' */
+%closefile Enable_close_raptor_timed_trigger_c_57_2
+%<SLibCG_DumpSSCode(Enable_open_raptor_timed_trigger_c_57_2, Enable_body_raptor_timed_trigger_c_57_2, Enable_close_raptor_timed_trigger_c_57_2)>
+
+%<SLibInsertInitPeriodicCStatesFcn(system)>
+%closefile cfgTxt
+%<cfgTxt>
+%endfunction
+%function ModelInitializeFcnProtoType(block, system) Output
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void ModelInitialize(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(2, 2, fcnProtoType)>
+%endfunction

@@ -1,0 +1,3367 @@
+%implements s57_b0_vg5tn_1_Outputs "C"
+
+%function Outputs(block, system) Output
+%<SLibCGIRAccessLocalVar(282, 0, "")> %% rtb_raptor_digital_in_c
+%<SLibCGIRAccessLocalVar(88, 0, "")> %% rtb_IN_frontLeftWheelSpeed_radiansPerSec
+%<SLibCGIRAccessLocalVar(20, 0, "")> %% rtb_raptor_table_interpolate_1d
+%<SLibCGIRAccessLocalVar(22, 0, "")> %% rtb_raptor_table_interpolate_1d_a
+%<SLibCGIRAccessLocalVar(24, 0, "")> %% rtb_raptor_table_interpolate_1d_h
+%<SLibCGIRAccessLocalVar(153, 0, "")> %% rtb_raptor_adjustment1_ab
+%<SLibCGIRAccessLocalVar(133, 0, "")> %% rtb_raptor_table_interpolate_1d_l
+%<SLibCGIRAccessLocalVar(68, 0, "")> %% rtb_raptor_table_interpolate_1d_n
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+%openfile localVarDecl
+
+real_T Integrator;
+real_T rtb_DataTypeConversion;
+real_T rtb_DataTypeConversion2;
+real_T rtb_DataTypeConversion2_d;
+real_T rtb_DataTypeConversion2_e;
+real_T rtb_DataTypeConversion2_i;
+real_T rtb_DerivativeGain;
+real_T rtb_IN_brakePos_pct;
+real_T rtb_IN_brakePos_pct_n;
+real_T rtb_IN_throttlePos_deg_h;
+real_T rtb_IN_throttlePos_pct;
+real_T rtb_IN_throttlePos_pct_d;
+real_T rtb_Product_d;
+real_T rtb_Subtract;
+real_T rtb_Sum;
+real_T rtb_Switch2_fj;
+real32_T rtb_DATA_maxMotorTorque_Nm;
+real32_T rtb_DataTypeConversion_b_tmp_tmp;
+real32_T rtb_DataTypeConversion_j;
+real32_T rtb_DataTypeConversion_kr_tmp_tmp;
+real32_T rtb_IN_frontLeftWheelSpeed_revolutionsPerMin;
+real32_T rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_o;
+real32_T rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_ou;
+real32_T rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_p;
+real32_T rtb_Switch_j;
+real32_T rtb_raptor_adjustment1_p;
+real32_T rtb_raptor_data_read_b;
+uint32_T qY;
+uint32_T qY_0;
+uint32_T qY_1;
+uint32_T qY_2;
+uint32_T qY_3;
+uint32_T rtb_Sum_f;
+uint32_T tractionControl_ELAPS_T;
+uint16_T rtb_IN_tireTemp_v;
+boolean_T rtb_IN_brakeVoltLow_bool;
+boolean_T rtb_IN_breakeVoltHigh_bool;
+boolean_T rtb_IN_breakeVoltHigh_bool_j;
+boolean_T rtb_IN_errorBrake_bool;
+boolean_T rtb_IN_errorThrottle_bool;
+boolean_T rtb_IN_errorThrottle_bool_p;
+boolean_T rtb_IN_frontLeftHallEffectHigh_bool;
+boolean_T rtb_IN_throttleVoltHigh_bool_i;
+boolean_T rtb_IN_throttleVoltLow_bool;
+boolean_T rtb_IN_throttleVoltLow_bool_f;
+boolean_T rtb_RelationalOperator_dp;
+boolean_T rtb_RelationalOperator_hd;
+boolean_T rtb_RelationalOperator_i;
+boolean_T rtb_RelationalOperator_lu;
+boolean_T rtb_RelationalOperator_mp;
+boolean_T rtb_RelationalOperator_p;
+%closefile localVarDecl
+%assign tlcOutputsFcnOfS56B0 = OpaqueTLCBlockFcn("Outputs", 56, 0, 1, 1, 0)
+%assign tlcOutputsFcnOfS56B1 = OpaqueTLCBlockFcn("Outputs", 56, 1, 1, 1, 1)
+%assign tlcOutputsFcnOfS56B2 = OpaqueTLCBlockFcn("Outputs", 56, 2, 1, 1, 2)
+%assign tlcOutputsFcnOfS56B3 = OpaqueTLCBlockFcn("Outputs", 56, 3, 1, 1, 3)
+%assign tlcOutputsFcnOfS8B0 = OpaqueTLCBlockFcn("Outputs", 8, 0, 1, 1, 4)
+%assign tlcOutputsFcnOfS8B1 = OpaqueTLCBlockFcn("Outputs", 8, 1, 1, 1, 5)
+%assign tlcOutputsFcnOfS56B6 = OpaqueTLCBlockFcn("Outputs", 56, 6, 1, 1, 6)
+%assign tlcBlockOutputsFcnOfS56B6PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 6, 0, 1, 1, 0)
+%assign tlcOutputsFcnOfS56B7 = OpaqueTLCBlockFcn("Outputs", 56, 7, 1, 1, 7)
+%assign tlcBlockOutputsFcnOfS56B7PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 7, 0, 1, 1, 1)
+%assign tlcOutputsFcnOfS56B8 = OpaqueTLCBlockFcn("Outputs", 56, 8, 1, 1, 8)
+%assign tlcBlockOutputsFcnOfS56B8PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 8, 0, 1, 1, 2)
+%assign tlcOutputsFcnOfS43B0 = OpaqueTLCBlockFcn("Outputs", 43, 0, 1, 1, 9)
+%assign tlcBlockOutputsFcnOfS43B0PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 43, 0, 0, 1, 1, 3)
+%assign tlcOutputsFcnOfS42B0 = OpaqueTLCBlockFcn("Outputs", 42, 0, 1, 1, 10)
+%assign tlcOutputsFcnOfS41B0 = OpaqueTLCBlockFcn("Outputs", 41, 0, 1, 1, 11)
+%assign tlcBlockOutputsFcnOfS41B0PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 41, 0, 0, 1, 1, 4)
+%assign tlcOutputsFcnOfS12B0 = OpaqueTLCBlockFcn("Outputs", 12, 0, 1, 1, 12)
+%assign tlcOutputsFcnOfS11B0 = OpaqueTLCBlockFcn("Outputs", 11, 0, 1, 1, 13)
+%assign tlcOutputsFcnOfS12B3 = OpaqueTLCBlockFcn("Outputs", 12, 3, 1, 1, 14)
+%assign tlcOutputsFcnOfS56B13 = OpaqueTLCBlockFcn("Outputs", 56, 13, 1, 1, 15)
+%assign tlcOutputsFcnOfS56B14 = OpaqueTLCBlockFcn("Outputs", 56, 14, 1, 1, 16)
+%assign tlcBlockOutputsFcnOfS56B14PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 14, 0, 1, 1, 5)
+%assign tlcOutputsFcnOfS56B15 = OpaqueTLCBlockFcn("Outputs", 56, 15, 1, 1, 17)
+%assign tlcBlockOutputsFcnOfS56B15PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 15, 0, 1, 1, 6)
+%assign tlcOutputsFcnOfS56B16 = OpaqueTLCBlockFcn("Outputs", 56, 16, 1, 1, 18)
+%assign tlcOutputsFcnOfS56B17 = OpaqueTLCBlockFcn("Outputs", 56, 17, 1, 1, 19)
+%assign tlcBlockOutputsFcnOfS56B17PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 17, 0, 1, 1, 7)
+%assign tlcOutputsFcnOfS56B18 = OpaqueTLCBlockFcn("Outputs", 56, 18, 1, 1, 20)
+%assign tlcBlockOutputsFcnOfS56B18PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 18, 0, 1, 1, 8)
+%assign tlcOutputsFcnOfS52B0 = OpaqueTLCBlockFcn("Outputs", 52, 0, 1, 1, 21)
+%assign tlcBlockOutputsFcnOfS52B0PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 52, 0, 0, 1, 1, 9)
+%assign tlcOutputsFcnOfS51B0 = OpaqueTLCBlockFcn("Outputs", 51, 0, 1, 1, 22)
+%assign tlcOutputsFcnOfS50B0 = OpaqueTLCBlockFcn("Outputs", 50, 0, 1, 1, 23)
+%assign tlcBlockOutputsFcnOfS50B0PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 50, 0, 0, 1, 1, 10)
+%assign tlcOutputsFcnOfS56B21 = OpaqueTLCBlockFcn("Outputs", 56, 21, 1, 1, 24)
+%assign tlcOutputsFcnOfS56B22 = OpaqueTLCBlockFcn("Outputs", 56, 22, 1, 1, 25)
+%assign tlcOutputsFcnOfS56B23 = OpaqueTLCBlockFcn("Outputs", 56, 23, 1, 1, 26)
+%assign tlcBlockOutputsFcnOfS56B23PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 23, 0, 1, 1, 11)
+%assign tlcOutputsFcnOfS56B24 = OpaqueTLCBlockFcn("Outputs", 56, 24, 1, 1, 27)
+%assign tlcBlockOutputsFcnOfS56B24PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 24, 0, 1, 1, 12)
+%assign tlcOutputsFcnOfS56B25 = OpaqueTLCBlockFcn("Outputs", 56, 25, 1, 1, 28)
+%assign tlcOutputsFcnOfS56B26 = OpaqueTLCBlockFcn("Outputs", 56, 26, 1, 1, 29)
+%assign tlcBlockOutputsFcnOfS56B26PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 26, 0, 1, 1, 13)
+%assign tlcOutputsFcnOfS56B27 = OpaqueTLCBlockFcn("Outputs", 56, 27, 1, 1, 30)
+%assign tlcBlockOutputsFcnOfS56B27PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 27, 0, 1, 1, 14)
+%assign tlcOutputsFcnOfS55B0 = OpaqueTLCBlockFcn("Outputs", 55, 0, 1, 1, 31)
+%assign tlcBlockOutputsFcnOfS55B0PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 55, 0, 0, 1, 1, 15)
+%assign tlcOutputsFcnOfS54B0 = OpaqueTLCBlockFcn("Outputs", 54, 0, 1, 1, 32)
+%assign tlcOutputsFcnOfS53B0 = OpaqueTLCBlockFcn("Outputs", 53, 0, 1, 1, 33)
+%assign tlcBlockOutputsFcnOfS53B0PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 53, 0, 0, 1, 1, 16)
+%assign tlcOutputsFcnOfS56B30 = OpaqueTLCBlockFcn("Outputs", 56, 30, 1, 1, 34)
+%assign tlcOutputsFcnOfS56B31 = OpaqueTLCBlockFcn("Outputs", 56, 31, 1, 1, 35)
+%assign tlcBlockOutputsFcnOfS56B31PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 31, 0, 1, 1, 17)
+%assign tlcOutputsFcnOfS56B32 = OpaqueTLCBlockFcn("Outputs", 56, 32, 1, 1, 36)
+%assign tlcBlockOutputsFcnOfS56B32PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 32, 0, 1, 1, 18)
+%assign tlcOutputsFcnOfS56B33 = OpaqueTLCBlockFcn("Outputs", 56, 33, 1, 1, 37)
+%assign tlcBlockOutputsFcnOfS56B33PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 33, 0, 1, 1, 19)
+%assign tlcOutputsFcnOfS46B0 = OpaqueTLCBlockFcn("Outputs", 46, 0, 1, 1, 38)
+%assign tlcBlockOutputsFcnOfS46B0PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 46, 0, 0, 1, 1, 20)
+%assign tlcOutputsFcnOfS45B0 = OpaqueTLCBlockFcn("Outputs", 45, 0, 1, 1, 39)
+%assign tlcOutputsFcnOfS44B0 = OpaqueTLCBlockFcn("Outputs", 44, 0, 1, 1, 40)
+%assign tlcBlockOutputsFcnOfS44B0PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 44, 0, 0, 1, 1, 21)
+%assign tlcOutputsFcnOfS56B36 = OpaqueTLCBlockFcn("Outputs", 56, 36, 1, 1, 41)
+%assign tlcOutputsFcnOfS56B37 = OpaqueTLCBlockFcn("Outputs", 56, 37, 1, 1, 42)
+%assign tlcOutputsFcnOfS56B38 = OpaqueTLCBlockFcn("Outputs", 56, 38, 1, 1, 43)
+%assign tlcBlockOutputsFcnOfS56B38PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 38, 0, 1, 1, 22)
+%assign tlcBlockOutputsFcnOfS56B36PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 36, 0, 1, 1, 23)
+%assign tlcOutputsFcnOfS56B39 = OpaqueTLCBlockFcn("Outputs", 56, 39, 1, 1, 44)
+%assign tlcOutputsFcnOfS56B40 = OpaqueTLCBlockFcn("Outputs", 56, 40, 1, 1, 45)
+%assign tlcOutputsFcnOfS56B41 = OpaqueTLCBlockFcn("Outputs", 56, 41, 1, 1, 46)
+%assign tlcBlockOutputsFcnOfS56B41PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 41, 0, 1, 1, 24)
+%assign tlcBlockOutputsFcnOfS56B39PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 39, 0, 1, 1, 25)
+%assign tlcOutputsFcnOfS36B0 = OpaqueTLCBlockFcn("Outputs", 36, 0, 1, 1, 47)
+%assign tlcOutputsFcnOfS56B44 = OpaqueTLCBlockFcn("Outputs", 56, 44, 1, 1, 48)
+%assign tlcOutputsFcnOfS56B45 = OpaqueTLCBlockFcn("Outputs", 56, 45, 1, 1, 49)
+%assign tlcOutputsFcnOfS56B46 = OpaqueTLCBlockFcn("Outputs", 56, 46, 1, 1, 50)
+%assign tlcBlockOutputsFcnOfS56B46PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 46, 0, 1, 1, 26)
+%assign tlcBlockOutputsFcnOfS56B44PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 44, 0, 1, 1, 27)
+%assign tlcOutputsFcnOfS56B47 = OpaqueTLCBlockFcn("Outputs", 56, 47, 1, 1, 51)
+%assign tlcOutputsFcnOfS56B48 = OpaqueTLCBlockFcn("Outputs", 56, 48, 1, 1, 52)
+%assign tlcOutputsFcnOfS56B49 = OpaqueTLCBlockFcn("Outputs", 56, 49, 1, 1, 53)
+%assign tlcBlockOutputsFcnOfS56B49PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 49, 0, 1, 1, 28)
+%assign tlcBlockOutputsFcnOfS56B47PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 47, 0, 1, 1, 29)
+%assign tlcOutputsFcnOfS34B0 = OpaqueTLCBlockFcn("Outputs", 34, 0, 1, 1, 54)
+%assign tlcOutputsFcnOfS39B0 = OpaqueTLCBlockFcn("Outputs", 39, 0, 1, 1, 55)
+%assign tlcOutputsFcnOfS39B1 = OpaqueTLCBlockFcn("Outputs", 39, 1, 1, 1, 56)
+%assign tlcBlockOutputsFcnOfS39B1PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 39, 1, 0, 1, 1, 30)
+%assign tlcOutputsFcnOfS39B3 = OpaqueTLCBlockFcn("Outputs", 39, 3, 1, 1, 57)
+%assign tlcOutputsFcnOfS26B0 = OpaqueTLCBlockFcn("Outputs", 26, 0, 1, 1, 58)
+%assign tlcBlockOutputsFcnOfS26B0PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 26, 0, 0, 1, 1, 31)
+%assign tlcOutputsFcnOfS56B56 = OpaqueTLCBlockFcn("Outputs", 56, 56, 1, 1, 59)
+%assign tlcOutputsFcnOfS56B57 = OpaqueTLCBlockFcn("Outputs", 56, 57, 1, 1, 60)
+%assign tlcOutputsFcnOfS56B58 = OpaqueTLCBlockFcn("Outputs", 56, 58, 1, 1, 61)
+%assign tlcOutputsFcnOfS56B59 = OpaqueTLCBlockFcn("Outputs", 56, 59, 1, 1, 62)
+%assign tlcOutputsFcnOfS24B0 = OpaqueTLCBlockFcn("Outputs", 24, 0, 1, 1, 63)
+%assign tlcBlockOutputsFcnOfS24B0PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 24, 0, 0, 1, 1, 32)
+%assign tlcOutputsFcnOfS22B0 = OpaqueTLCBlockFcn("Outputs", 22, 0, 1, 1, 64)
+%assign tlcOutputsFcnOfS24B2 = OpaqueTLCBlockFcn("Outputs", 24, 2, 1, 1, 65)
+%assign tlcOutputsFcnOfS24B3 = OpaqueTLCBlockFcn("Outputs", 24, 3, 1, 1, 66)
+%assign tlcOutputsFcnOfS24B4 = OpaqueTLCBlockFcn("Outputs", 24, 4, 1, 1, 67)
+%assign tlcOutputsFcnOfS24B5 = OpaqueTLCBlockFcn("Outputs", 24, 5, 1, 1, 68)
+%assign tlcOutputsFcnOfS24B7 = OpaqueTLCBlockFcn("Outputs", 24, 7, 1, 1, 69)
+%assign tlcOutputsFcnOfS24B8 = OpaqueTLCBlockFcn("Outputs", 24, 8, 1, 1, 70)
+%assign tlcOutputsFcnOfS24B10 = OpaqueTLCBlockFcn("Outputs", 24, 10, 1, 1, 71)
+%assign tlcOutputsFcnOfS24B11 = OpaqueTLCBlockFcn("Outputs", 24, 11, 1, 1, 72)
+%assign tlcBlockOutputsFcnOfS56B21PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 21, 0, 1, 1, 33)
+%assign tlcBlockOutputsFcnOfS56B30PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 30, 0, 1, 1, 34)
+%assign tlcOutputsFcnOfS17B0 = OpaqueTLCBlockFcn("Outputs", 17, 0, 1, 1, 73)
+%assign tlcOutputsFcnOfS17B1 = OpaqueTLCBlockFcn("Outputs", 17, 1, 1, 1, 74)
+%assign tlcOutputsFcnOfS17B3 = OpaqueTLCBlockFcn("Outputs", 17, 3, 1, 1, 75)
+%assign tlcOutputsFcnOfS14B0 = OpaqueTLCBlockFcn("Outputs", 14, 0, 1, 1, 76)
+%assign tlcBlockOutputsFcnOfS14B0PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 14, 0, 0, 1, 1, 35)
+%assign tlcOutputsFcnOfS18B2 = OpaqueTLCBlockFcn("Outputs", 18, 2, 1, 1, 77)
+%assign tlcOutputsFcnOfS18B3 = OpaqueTLCBlockFcn("Outputs", 18, 3, 1, 1, 78)
+%assign tlcOutputsFcnOfS56B64 = OpaqueTLCBlockFcn("Outputs", 56, 64, 1, 1, 79)
+%assign tlcOutputsFcnOfS56B65 = OpaqueTLCBlockFcn("Outputs", 56, 65, 1, 1, 80)
+%assign tlcOutputsFcnOfS56B66 = OpaqueTLCBlockFcn("Outputs", 56, 66, 1, 1, 81)
+%assign tlcOutputsFcnOfS56B67 = OpaqueTLCBlockFcn("Outputs", 56, 67, 1, 1, 82)
+%assign tlcBlockOutputsFcnOfS56B67PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 67, 0, 1, 1, 36)
+%assign tlcOutputsFcnOfS49B0 = OpaqueTLCBlockFcn("Outputs", 49, 0, 1, 1, 83)
+%assign tlcOutputsFcnOfS56B69 = OpaqueTLCBlockFcn("Outputs", 56, 69, 1, 1, 84)
+%assign tlcOutputsFcnOfS56B70 = OpaqueTLCBlockFcn("Outputs", 56, 70, 1, 1, 85)
+%assign tlcOutputsFcnOfS56B71 = OpaqueTLCBlockFcn("Outputs", 56, 71, 1, 1, 86)
+%assign tlcOutputsFcnOfS56B72 = OpaqueTLCBlockFcn("Outputs", 56, 72, 1, 1, 87)
+%assign tlcBlockOutputsFcnOfS56B72PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 72, 0, 1, 1, 37)
+%assign tlcOutputsFcnOfS47B0 = OpaqueTLCBlockFcn("Outputs", 47, 0, 1, 1, 88)
+%assign tlcOutputsFcnOfS56B74 = OpaqueTLCBlockFcn("Outputs", 56, 74, 1, 1, 89)
+%assign tlcOutputsFcnOfS56B75 = OpaqueTLCBlockFcn("Outputs", 56, 75, 1, 1, 90)
+%assign tlcOutputsFcnOfS56B76 = OpaqueTLCBlockFcn("Outputs", 56, 76, 1, 1, 91)
+%assign tlcOutputsFcnOfS56B77 = OpaqueTLCBlockFcn("Outputs", 56, 77, 1, 1, 92)
+%assign tlcBlockOutputsFcnOfS56B77PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 77, 0, 1, 1, 38)
+%assign tlcOutputsFcnOfS48B0 = OpaqueTLCBlockFcn("Outputs", 48, 0, 1, 1, 93)
+%assign tlcOutputsFcnOfS28B0 = OpaqueTLCBlockFcn("Outputs", 28, 0, 1, 1, 94)
+%assign tlcOutputsFcnOfS28B1 = OpaqueTLCBlockFcn("Outputs", 28, 1, 1, 1, 95)
+%assign tlcOutputsFcnOfS28B2 = OpaqueTLCBlockFcn("Outputs", 28, 2, 1, 1, 96)
+%assign tlcOutputsFcnOfS28B3 = OpaqueTLCBlockFcn("Outputs", 28, 3, 1, 1, 97)
+%assign tlcOutputsFcnOfS28B4 = OpaqueTLCBlockFcn("Outputs", 28, 4, 1, 1, 98)
+%assign tlcOutputsFcnOfS28B5 = OpaqueTLCBlockFcn("Outputs", 28, 5, 1, 1, 99)
+%assign tlcOutputsFcnOfS28B6 = OpaqueTLCBlockFcn("Outputs", 28, 6, 1, 1, 100)
+%assign tlcOutputsFcnOfS28B7 = OpaqueTLCBlockFcn("Outputs", 28, 7, 1, 1, 101)
+%assign tlcOutputsFcnOfS28B8 = OpaqueTLCBlockFcn("Outputs", 28, 8, 1, 1, 102)
+%assign tlcOutputsFcnOfS28B9 = OpaqueTLCBlockFcn("Outputs", 28, 9, 1, 1, 103)
+%assign tlcOutputsFcnOfS28B10 = OpaqueTLCBlockFcn("Outputs", 28, 10, 1, 1, 104)
+%assign tlcOutputsFcnOfS28B11 = OpaqueTLCBlockFcn("Outputs", 28, 11, 1, 1, 105)
+%assign tlcOutputsFcnOfS30B0 = OpaqueTLCBlockFcn("Outputs", 30, 0, 1, 1, 106)
+%assign tlcOutputsFcnOfS30B1 = OpaqueTLCBlockFcn("Outputs", 30, 1, 1, 1, 107)
+%assign tlcOutputsFcnOfS30B2 = OpaqueTLCBlockFcn("Outputs", 30, 2, 1, 1, 108)
+%assign tlcOutputsFcnOfS30B3 = OpaqueTLCBlockFcn("Outputs", 30, 3, 1, 1, 109)
+%assign tlcOutputsFcnOfS30B4 = OpaqueTLCBlockFcn("Outputs", 30, 4, 1, 1, 110)
+%assign tlcOutputsFcnOfS30B5 = OpaqueTLCBlockFcn("Outputs", 30, 5, 1, 1, 111)
+%assign tlcOutputsFcnOfS30B6 = OpaqueTLCBlockFcn("Outputs", 30, 6, 1, 1, 112)
+%assign tlcOutputsFcnOfS30B7 = OpaqueTLCBlockFcn("Outputs", 30, 7, 1, 1, 113)
+%assign tlcOutputsFcnOfS30B8 = OpaqueTLCBlockFcn("Outputs", 30, 8, 1, 1, 114)
+%assign tlcOutputsFcnOfS30B9 = OpaqueTLCBlockFcn("Outputs", 30, 9, 1, 1, 115)
+%assign tlcOutputsFcnOfS30B10 = OpaqueTLCBlockFcn("Outputs", 30, 10, 1, 1, 116)
+%assign tlcOutputsFcnOfS30B11 = OpaqueTLCBlockFcn("Outputs", 30, 11, 1, 1, 117)
+%assign tlcOutputsFcnOfS32B0 = OpaqueTLCBlockFcn("Outputs", 32, 0, 1, 1, 118)
+%assign tlcOutputsFcnOfS32B1 = OpaqueTLCBlockFcn("Outputs", 32, 1, 1, 1, 119)
+%assign tlcOutputsFcnOfS32B2 = OpaqueTLCBlockFcn("Outputs", 32, 2, 1, 1, 120)
+%assign tlcOutputsFcnOfS32B3 = OpaqueTLCBlockFcn("Outputs", 32, 3, 1, 1, 121)
+%assign tlcOutputsFcnOfS32B4 = OpaqueTLCBlockFcn("Outputs", 32, 4, 1, 1, 122)
+%assign tlcOutputsFcnOfS32B5 = OpaqueTLCBlockFcn("Outputs", 32, 5, 1, 1, 123)
+%assign tlcOutputsFcnOfS32B6 = OpaqueTLCBlockFcn("Outputs", 32, 6, 1, 1, 124)
+%assign tlcOutputsFcnOfS32B7 = OpaqueTLCBlockFcn("Outputs", 32, 7, 1, 1, 125)
+%assign tlcOutputsFcnOfS32B8 = OpaqueTLCBlockFcn("Outputs", 32, 8, 1, 1, 126)
+%assign tlcOutputsFcnOfS32B9 = OpaqueTLCBlockFcn("Outputs", 32, 9, 1, 1, 127)
+%assign tlcOutputsFcnOfS32B10 = OpaqueTLCBlockFcn("Outputs", 32, 10, 1, 1, 128)
+%assign tlcOutputsFcnOfS32B11 = OpaqueTLCBlockFcn("Outputs", 32, 11, 1, 1, 129)
+%assign tlcOutputsFcnOfS56B85 = OpaqueTLCBlockFcn("Outputs", 56, 85, 1, 1, 130)
+%assign tlcOutputsFcnOfS56B86 = OpaqueTLCBlockFcn("Outputs", 56, 86, 1, 1, 131)
+%assign tlcOutputsFcnOfS56B87 = OpaqueTLCBlockFcn("Outputs", 56, 87, 1, 1, 132)
+%assign tlcOutputsFcnOfS56B88 = OpaqueTLCBlockFcn("Outputs", 56, 88, 1, 1, 133)
+%assign tlcOutputsFcnOfS56B89 = OpaqueTLCBlockFcn("Outputs", 56, 89, 1, 1, 134)
+%assign tlcOutputsFcnOfS56B90 = OpaqueTLCBlockFcn("Outputs", 56, 90, 1, 1, 135)
+%assign tlcOutputsFcnOfS56B91 = OpaqueTLCBlockFcn("Outputs", 56, 91, 1, 1, 136)
+%assign tlcOutputsFcnOfS56B92 = OpaqueTLCBlockFcn("Outputs", 56, 92, 1, 1, 137)
+%assign tlcOutputsFcnOfS56B93 = OpaqueTLCBlockFcn("Outputs", 56, 93, 1, 1, 138)
+%assign tlcOutputsFcnOfS56B94 = OpaqueTLCBlockFcn("Outputs", 56, 94, 1, 1, 139)
+%assign tlcOutputsFcnOfS56B95 = OpaqueTLCBlockFcn("Outputs", 56, 95, 1, 1, 140)
+%assign tlcOutputsFcnOfS56B96 = OpaqueTLCBlockFcn("Outputs", 56, 96, 1, 1, 141)
+%assign tlcOutputsFcnOfS56B97 = OpaqueTLCBlockFcn("Outputs", 56, 97, 1, 1, 142)
+%assign tlcOutputsFcnOfS56B98 = OpaqueTLCBlockFcn("Outputs", 56, 98, 1, 1, 143)
+%assign tlcBlockOutputsFcnOfS56B95PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 95, 0, 1, 1, 39)
+%assign tlcBlockOutputsFcnOfS56B96PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 96, 0, 1, 1, 40)
+%assign tlcBlockOutputsFcnOfS56B97PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 97, 0, 1, 1, 41)
+%assign tlcBlockOutputsFcnOfS56B98PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 98, 0, 1, 1, 42)
+%assign tlcOutputsFcnOfS56B99 = OpaqueTLCBlockFcn("Outputs", 56, 99, 1, 1, 144)
+%assign tlcOutputsFcnOfS56B100 = OpaqueTLCBlockFcn("Outputs", 56, 100, 1, 1, 145)
+%assign tlcOutputsFcnOfS56B101 = OpaqueTLCBlockFcn("Outputs", 56, 101, 1, 1, 146)
+%assign tlcOutputsFcnOfS56B102 = OpaqueTLCBlockFcn("Outputs", 56, 102, 1, 1, 147)
+%assign tlcOutputsFcnOfS56B103 = OpaqueTLCBlockFcn("Outputs", 56, 103, 1, 1, 148)
+%assign tlcOutputsFcnOfS56B104 = OpaqueTLCBlockFcn("Outputs", 56, 104, 1, 1, 149)
+%assign tlcOutputsFcnOfS56B105 = OpaqueTLCBlockFcn("Outputs", 56, 105, 1, 1, 150)
+%assign tlcBlockOutputsFcnOfS56B102PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 102, 0, 1, 1, 43)
+%assign tlcBlockOutputsFcnOfS56B103PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 103, 0, 1, 1, 44)
+%assign tlcBlockOutputsFcnOfS56B104PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 104, 0, 1, 1, 45)
+%assign tlcBlockOutputsFcnOfS56B105PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 105, 0, 1, 1, 46)
+%assign tlcOutputsFcnOfS56B106 = OpaqueTLCBlockFcn("Outputs", 56, 106, 1, 1, 151)
+%assign tlcOutputsFcnOfS56B107 = OpaqueTLCBlockFcn("Outputs", 56, 107, 1, 1, 152)
+%assign tlcOutputsFcnOfS56B108 = OpaqueTLCBlockFcn("Outputs", 56, 108, 1, 1, 153)
+%assign tlcOutputsFcnOfS56B109 = OpaqueTLCBlockFcn("Outputs", 56, 109, 1, 1, 154)
+%assign tlcOutputsFcnOfS56B110 = OpaqueTLCBlockFcn("Outputs", 56, 110, 1, 1, 155)
+%assign tlcOutputsFcnOfS56B111 = OpaqueTLCBlockFcn("Outputs", 56, 111, 1, 1, 156)
+%assign tlcOutputsFcnOfS56B112 = OpaqueTLCBlockFcn("Outputs", 56, 112, 1, 1, 157)
+%assign tlcOutputsFcnOfS56B113 = OpaqueTLCBlockFcn("Outputs", 56, 113, 1, 1, 158)
+%assign tlcOutputsFcnOfS56B114 = OpaqueTLCBlockFcn("Outputs", 56, 114, 1, 1, 159)
+%assign tlcOutputsFcnOfS56B115 = OpaqueTLCBlockFcn("Outputs", 56, 115, 1, 1, 160)
+%assign tlcOutputsFcnOfS56B116 = OpaqueTLCBlockFcn("Outputs", 56, 116, 1, 1, 161)
+%assign tlcOutputsFcnOfS56B117 = OpaqueTLCBlockFcn("Outputs", 56, 117, 1, 1, 162)
+%assign tlcOutputsFcnOfS56B118 = OpaqueTLCBlockFcn("Outputs", 56, 118, 1, 1, 163)
+%assign tlcOutputsFcnOfS56B119 = OpaqueTLCBlockFcn("Outputs", 56, 119, 1, 1, 164)
+%assign tlcOutputsFcnOfS56B120 = OpaqueTLCBlockFcn("Outputs", 56, 120, 1, 1, 165)
+%assign tlcOutputsFcnOfS56B121 = OpaqueTLCBlockFcn("Outputs", 56, 121, 1, 1, 166)
+%assign tlcOutputsFcnOfS56B122 = OpaqueTLCBlockFcn("Outputs", 56, 122, 1, 1, 167)
+%assign tlcOutputsFcnOfS56B123 = OpaqueTLCBlockFcn("Outputs", 56, 123, 1, 1, 168)
+%assign tlcOutputsFcnOfS56B124 = OpaqueTLCBlockFcn("Outputs", 56, 124, 1, 1, 169)
+%assign tlcOutputsFcnOfS56B125 = OpaqueTLCBlockFcn("Outputs", 56, 125, 1, 1, 170)
+%assign tlcOutputsFcnOfS56B126 = OpaqueTLCBlockFcn("Outputs", 56, 126, 1, 1, 171)
+%assign tlcOutputsFcnOfS56B127 = OpaqueTLCBlockFcn("Outputs", 56, 127, 1, 1, 172)
+%assign tlcOutputsFcnOfS56B128 = OpaqueTLCBlockFcn("Outputs", 56, 128, 1, 1, 173)
+%assign tlcOutputsFcnOfS56B129 = OpaqueTLCBlockFcn("Outputs", 56, 129, 1, 1, 174)
+%assign tlcOutputsFcnOfS56B130 = OpaqueTLCBlockFcn("Outputs", 56, 130, 1, 1, 175)
+%assign tlcOutputsFcnOfS56B131 = OpaqueTLCBlockFcn("Outputs", 56, 131, 1, 1, 176)
+%assign tlcOutputsFcnOfS56B132 = OpaqueTLCBlockFcn("Outputs", 56, 132, 1, 1, 177)
+%assign tlcOutputsFcnOfS56B133 = OpaqueTLCBlockFcn("Outputs", 56, 133, 1, 1, 178)
+%assign tlcOutputsFcnOfS56B134 = OpaqueTLCBlockFcn("Outputs", 56, 134, 1, 1, 179)
+%assign tlcOutputsFcnOfS56B135 = OpaqueTLCBlockFcn("Outputs", 56, 135, 1, 1, 180)
+%assign tlcOutputsFcnOfS56B136 = OpaqueTLCBlockFcn("Outputs", 56, 136, 1, 1, 181)
+%assign tlcOutputsFcnOfS56B137 = OpaqueTLCBlockFcn("Outputs", 56, 137, 1, 1, 182)
+%assign tlcOutputsFcnOfS56B138 = OpaqueTLCBlockFcn("Outputs", 56, 138, 1, 1, 183)
+%assign tlcOutputsFcnOfS56B139 = OpaqueTLCBlockFcn("Outputs", 56, 139, 1, 1, 184)
+%assign tlcOutputsFcnOfS56B140 = OpaqueTLCBlockFcn("Outputs", 56, 140, 1, 1, 185)
+%assign tlcOutputsFcnOfS56B141 = OpaqueTLCBlockFcn("Outputs", 56, 141, 1, 1, 186)
+%assign tlcOutputsFcnOfS56B142 = OpaqueTLCBlockFcn("Outputs", 56, 142, 1, 1, 187)
+%assign tlcOutputsFcnOfS56B143 = OpaqueTLCBlockFcn("Outputs", 56, 143, 1, 1, 188)
+%assign tlcOutputsFcnOfS56B144 = OpaqueTLCBlockFcn("Outputs", 56, 144, 1, 1, 189)
+%assign tlcOutputsFcnOfS56B145 = OpaqueTLCBlockFcn("Outputs", 56, 145, 1, 1, 190)
+%assign tlcOutputsFcnOfS56B146 = OpaqueTLCBlockFcn("Outputs", 56, 146, 1, 1, 191)
+%assign tlcOutputsFcnOfS56B147 = OpaqueTLCBlockFcn("Outputs", 56, 147, 1, 1, 192)
+%assign tlcOutputsFcnOfS56B148 = OpaqueTLCBlockFcn("Outputs", 56, 148, 1, 1, 193)
+%assign tlcOutputsFcnOfS56B149 = OpaqueTLCBlockFcn("Outputs", 56, 149, 1, 1, 194)
+%assign tlcOutputsFcnOfS56B150 = OpaqueTLCBlockFcn("Outputs", 56, 150, 1, 1, 195)
+%assign tlcOutputsFcnOfS56B151 = OpaqueTLCBlockFcn("Outputs", 56, 151, 1, 1, 196)
+%assign tlcOutputsFcnOfS56B152 = OpaqueTLCBlockFcn("Outputs", 56, 152, 1, 1, 197)
+%assign tlcOutputsFcnOfS56B153 = OpaqueTLCBlockFcn("Outputs", 56, 153, 1, 1, 198)
+%assign tlcOutputsFcnOfS56B154 = OpaqueTLCBlockFcn("Outputs", 56, 154, 1, 1, 199)
+%assign tlcOutputsFcnOfS56B155 = OpaqueTLCBlockFcn("Outputs", 56, 155, 1, 1, 200)
+%assign tlcOutputsFcnOfS56B156 = OpaqueTLCBlockFcn("Outputs", 56, 156, 1, 1, 201)
+%assign tlcOutputsFcnOfS56B157 = OpaqueTLCBlockFcn("Outputs", 56, 157, 1, 1, 202)
+%assign tlcOutputsFcnOfS56B158 = OpaqueTLCBlockFcn("Outputs", 56, 158, 1, 1, 203)
+%assign tlcOutputsFcnOfS56B159 = OpaqueTLCBlockFcn("Outputs", 56, 159, 1, 1, 204)
+%assign tlcOutputsFcnOfS56B160 = OpaqueTLCBlockFcn("Outputs", 56, 160, 1, 1, 205)
+%assign tlcOutputsFcnOfS56B161 = OpaqueTLCBlockFcn("Outputs", 56, 161, 1, 1, 206)
+%assign tlcOutputsFcnOfS56B162 = OpaqueTLCBlockFcn("Outputs", 56, 162, 1, 1, 207)
+%assign tlcOutputsFcnOfS56B163 = OpaqueTLCBlockFcn("Outputs", 56, 163, 1, 1, 208)
+%assign tlcOutputsFcnOfS56B164 = OpaqueTLCBlockFcn("Outputs", 56, 164, 1, 1, 209)
+%assign tlcOutputsFcnOfS56B165 = OpaqueTLCBlockFcn("Outputs", 56, 165, 1, 1, 210)
+%assign tlcOutputsFcnOfS56B166 = OpaqueTLCBlockFcn("Outputs", 56, 166, 1, 1, 211)
+%assign tlcOutputsFcnOfS56B167 = OpaqueTLCBlockFcn("Outputs", 56, 167, 1, 1, 212)
+%assign tlcOutputsFcnOfS56B168 = OpaqueTLCBlockFcn("Outputs", 56, 168, 1, 1, 213)
+%assign tlcOutputsFcnOfS56B169 = OpaqueTLCBlockFcn("Outputs", 56, 169, 1, 1, 214)
+%assign tlcOutputsFcnOfS56B170 = OpaqueTLCBlockFcn("Outputs", 56, 170, 1, 1, 215)
+%assign tlcOutputsFcnOfS56B171 = OpaqueTLCBlockFcn("Outputs", 56, 171, 1, 1, 216)
+%assign tlcOutputsFcnOfS56B172 = OpaqueTLCBlockFcn("Outputs", 56, 172, 1, 1, 217)
+%assign tlcOutputsFcnOfS56B173 = OpaqueTLCBlockFcn("Outputs", 56, 173, 1, 1, 218)
+%assign tlcOutputsFcnOfS56B174 = OpaqueTLCBlockFcn("Outputs", 56, 174, 1, 1, 219)
+%assign tlcOutputsFcnOfS56B175 = OpaqueTLCBlockFcn("Outputs", 56, 175, 1, 1, 220)
+%assign tlcOutputsFcnOfS56B176 = OpaqueTLCBlockFcn("Outputs", 56, 176, 1, 1, 221)
+%assign tlcOutputsFcnOfS56B177 = OpaqueTLCBlockFcn("Outputs", 56, 177, 1, 1, 222)
+%assign tlcOutputsFcnOfS56B178 = OpaqueTLCBlockFcn("Outputs", 56, 178, 1, 1, 223)
+%assign tlcOutputsFcnOfS56B179 = OpaqueTLCBlockFcn("Outputs", 56, 179, 1, 1, 224)
+%assign tlcOutputsFcnOfS56B180 = OpaqueTLCBlockFcn("Outputs", 56, 180, 1, 1, 225)
+%assign tlcOutputsFcnOfS56B181 = OpaqueTLCBlockFcn("Outputs", 56, 181, 1, 1, 226)
+%assign tlcOutputsFcnOfS56B182 = OpaqueTLCBlockFcn("Outputs", 56, 182, 1, 1, 227)
+%assign tlcOutputsFcnOfS56B183 = OpaqueTLCBlockFcn("Outputs", 56, 183, 1, 1, 228)
+%assign tlcOutputsFcnOfS56B184 = OpaqueTLCBlockFcn("Outputs", 56, 184, 1, 1, 229)
+%assign tlcOutputsFcnOfS56B185 = OpaqueTLCBlockFcn("Outputs", 56, 185, 1, 1, 230)
+%assign tlcOutputsFcnOfS56B186 = OpaqueTLCBlockFcn("Outputs", 56, 186, 1, 1, 231)
+%assign tlcOutputsFcnOfS56B187 = OpaqueTLCBlockFcn("Outputs", 56, 187, 1, 1, 232)
+%assign tlcOutputsFcnOfS56B188 = OpaqueTLCBlockFcn("Outputs", 56, 188, 1, 1, 233)
+%assign tlcOutputsFcnOfS56B189 = OpaqueTLCBlockFcn("Outputs", 56, 189, 1, 1, 234)
+%assign tlcOutputsFcnOfS56B190 = OpaqueTLCBlockFcn("Outputs", 56, 190, 1, 1, 235)
+%assign tlcOutputsFcnOfS56B191 = OpaqueTLCBlockFcn("Outputs", 56, 191, 1, 1, 236)
+%assign tlcOutputsFcnOfS56B192 = OpaqueTLCBlockFcn("Outputs", 56, 192, 1, 1, 237)
+%assign tlcOutputsFcnOfS56B193 = OpaqueTLCBlockFcn("Outputs", 56, 193, 1, 1, 238)
+%assign tlcOutputsFcnOfS56B194 = OpaqueTLCBlockFcn("Outputs", 56, 194, 1, 1, 239)
+%assign tlcOutputsFcnOfS56B195 = OpaqueTLCBlockFcn("Outputs", 56, 195, 1, 1, 240)
+%assign tlcOutputsFcnOfS56B196 = OpaqueTLCBlockFcn("Outputs", 56, 196, 1, 1, 241)
+%assign tlcOutputsFcnOfS56B197 = OpaqueTLCBlockFcn("Outputs", 56, 197, 1, 1, 242)
+%assign tlcOutputsFcnOfS56B198 = OpaqueTLCBlockFcn("Outputs", 56, 198, 1, 1, 243)
+%assign tlcOutputsFcnOfS56B199 = OpaqueTLCBlockFcn("Outputs", 56, 199, 1, 1, 244)
+%assign tlcOutputsFcnOfS56B200 = OpaqueTLCBlockFcn("Outputs", 56, 200, 1, 1, 245)
+%assign tlcOutputsFcnOfS56B201 = OpaqueTLCBlockFcn("Outputs", 56, 201, 1, 1, 246)
+%assign tlcOutputsFcnOfS56B202 = OpaqueTLCBlockFcn("Outputs", 56, 202, 1, 1, 247)
+%assign tlcOutputsFcnOfS56B203 = OpaqueTLCBlockFcn("Outputs", 56, 203, 1, 1, 248)
+%assign tlcOutputsFcnOfS56B204 = OpaqueTLCBlockFcn("Outputs", 56, 204, 1, 1, 249)
+%assign tlcOutputsFcnOfS56B205 = OpaqueTLCBlockFcn("Outputs", 56, 205, 1, 1, 250)
+%assign tlcOutputsFcnOfS56B206 = OpaqueTLCBlockFcn("Outputs", 56, 206, 1, 1, 251)
+%assign tlcOutputsFcnOfS56B207 = OpaqueTLCBlockFcn("Outputs", 56, 207, 1, 1, 252)
+%assign tlcOutputsFcnOfS56B208 = OpaqueTLCBlockFcn("Outputs", 56, 208, 1, 1, 253)
+%assign tlcOutputsFcnOfS56B209 = OpaqueTLCBlockFcn("Outputs", 56, 209, 1, 1, 254)
+%assign tlcOutputsFcnOfS56B210 = OpaqueTLCBlockFcn("Outputs", 56, 210, 1, 1, 255)
+%assign tlcOutputsFcnOfS56B211 = OpaqueTLCBlockFcn("Outputs", 56, 211, 1, 1, 256)
+%assign tlcOutputsFcnOfS56B212 = OpaqueTLCBlockFcn("Outputs", 56, 212, 1, 1, 257)
+%assign tlcOutputsFcnOfS56B213 = OpaqueTLCBlockFcn("Outputs", 56, 213, 1, 1, 258)
+%assign tlcOutputsFcnOfS56B214 = OpaqueTLCBlockFcn("Outputs", 56, 214, 1, 1, 259)
+%assign tlcOutputsFcnOfS56B215 = OpaqueTLCBlockFcn("Outputs", 56, 215, 1, 1, 260)
+%assign tlcOutputsFcnOfS56B216 = OpaqueTLCBlockFcn("Outputs", 56, 216, 1, 1, 261)
+%assign tlcOutputsFcnOfS56B217 = OpaqueTLCBlockFcn("Outputs", 56, 217, 1, 1, 262)
+%assign tlcOutputsFcnOfS56B218 = OpaqueTLCBlockFcn("Outputs", 56, 218, 1, 1, 263)
+%assign tlcOutputsFcnOfS56B219 = OpaqueTLCBlockFcn("Outputs", 56, 219, 1, 1, 264)
+%assign tlcOutputsFcnOfS56B220 = OpaqueTLCBlockFcn("Outputs", 56, 220, 1, 1, 265)
+%assign tlcOutputsFcnOfS56B221 = OpaqueTLCBlockFcn("Outputs", 56, 221, 1, 1, 266)
+%assign tlcOutputsFcnOfS56B222 = OpaqueTLCBlockFcn("Outputs", 56, 222, 1, 1, 267)
+%assign tlcOutputsFcnOfS56B223 = OpaqueTLCBlockFcn("Outputs", 56, 223, 1, 1, 268)
+%assign tlcOutputsFcnOfS56B224 = OpaqueTLCBlockFcn("Outputs", 56, 224, 1, 1, 269)
+%assign tlcOutputsFcnOfS56B225 = OpaqueTLCBlockFcn("Outputs", 56, 225, 1, 1, 270)
+%assign tlcOutputsFcnOfS56B226 = OpaqueTLCBlockFcn("Outputs", 56, 226, 1, 1, 271)
+%assign tlcOutputsFcnOfS56B227 = OpaqueTLCBlockFcn("Outputs", 56, 227, 1, 1, 272)
+%assign tlcOutputsFcnOfS56B228 = OpaqueTLCBlockFcn("Outputs", 56, 228, 1, 1, 273)
+%assign tlcOutputsFcnOfS56B229 = OpaqueTLCBlockFcn("Outputs", 56, 229, 1, 1, 274)
+%assign tlcOutputsFcnOfS56B230 = OpaqueTLCBlockFcn("Outputs", 56, 230, 1, 1, 275)
+%assign tlcOutputsFcnOfS56B231 = OpaqueTLCBlockFcn("Outputs", 56, 231, 1, 1, 276)
+%assign tlcOutputsFcnOfS56B232 = OpaqueTLCBlockFcn("Outputs", 56, 232, 1, 1, 277)
+%assign tlcOutputsFcnOfS56B233 = OpaqueTLCBlockFcn("Outputs", 56, 233, 1, 1, 278)
+%assign tlcOutputsFcnOfS56B234 = OpaqueTLCBlockFcn("Outputs", 56, 234, 1, 1, 279)
+%assign tlcOutputsFcnOfS56B235 = OpaqueTLCBlockFcn("Outputs", 56, 235, 1, 1, 280)
+%assign tlcOutputsFcnOfS56B236 = OpaqueTLCBlockFcn("Outputs", 56, 236, 1, 1, 281)
+%assign tlcOutputsFcnOfS56B237 = OpaqueTLCBlockFcn("Outputs", 56, 237, 1, 1, 282)
+%assign tlcOutputsFcnOfS56B238 = OpaqueTLCBlockFcn("Outputs", 56, 238, 1, 1, 283)
+%assign tlcOutputsFcnOfS56B239 = OpaqueTLCBlockFcn("Outputs", 56, 239, 1, 1, 284)
+%assign tlcOutputsFcnOfS56B240 = OpaqueTLCBlockFcn("Outputs", 56, 240, 1, 1, 285)
+%assign tlcOutputsFcnOfS56B241 = OpaqueTLCBlockFcn("Outputs", 56, 241, 1, 1, 286)
+%assign tlcOutputsFcnOfS56B242 = OpaqueTLCBlockFcn("Outputs", 56, 242, 1, 1, 287)
+%assign tlcOutputsFcnOfS56B243 = OpaqueTLCBlockFcn("Outputs", 56, 243, 1, 1, 288)
+%assign tlcOutputsFcnOfS56B244 = OpaqueTLCBlockFcn("Outputs", 56, 244, 1, 1, 289)
+%assign tlcOutputsFcnOfS56B245 = OpaqueTLCBlockFcn("Outputs", 56, 245, 1, 1, 290)
+%assign tlcOutputsFcnOfS56B246 = OpaqueTLCBlockFcn("Outputs", 56, 246, 1, 1, 291)
+%assign tlcOutputsFcnOfS56B247 = OpaqueTLCBlockFcn("Outputs", 56, 247, 1, 1, 292)
+%assign tlcOutputsFcnOfS56B248 = OpaqueTLCBlockFcn("Outputs", 56, 248, 1, 1, 293)
+%assign tlcOutputsFcnOfS56B249 = OpaqueTLCBlockFcn("Outputs", 56, 249, 1, 1, 294)
+%assign tlcOutputsFcnOfS56B250 = OpaqueTLCBlockFcn("Outputs", 56, 250, 1, 1, 295)
+%assign tlcOutputsFcnOfS56B251 = OpaqueTLCBlockFcn("Outputs", 56, 251, 1, 1, 296)
+%assign tlcOutputsFcnOfS56B252 = OpaqueTLCBlockFcn("Outputs", 56, 252, 1, 1, 297)
+%assign tlcOutputsFcnOfS56B253 = OpaqueTLCBlockFcn("Outputs", 56, 253, 1, 1, 298)
+%assign tlcOutputsFcnOfS56B254 = OpaqueTLCBlockFcn("Outputs", 56, 254, 1, 1, 299)
+%assign tlcOutputsFcnOfS56B255 = OpaqueTLCBlockFcn("Outputs", 56, 255, 1, 1, 300)
+%assign tlcOutputsFcnOfS56B256 = OpaqueTLCBlockFcn("Outputs", 56, 256, 1, 1, 301)
+%assign tlcOutputsFcnOfS56B257 = OpaqueTLCBlockFcn("Outputs", 56, 257, 1, 1, 302)
+%assign tlcOutputsFcnOfS56B258 = OpaqueTLCBlockFcn("Outputs", 56, 258, 1, 1, 303)
+%assign tlcOutputsFcnOfS56B259 = OpaqueTLCBlockFcn("Outputs", 56, 259, 1, 1, 304)
+%assign tlcOutputsFcnOfS56B260 = OpaqueTLCBlockFcn("Outputs", 56, 260, 1, 1, 305)
+%assign tlcOutputsFcnOfS56B261 = OpaqueTLCBlockFcn("Outputs", 56, 261, 1, 1, 306)
+%assign tlcOutputsFcnOfS56B262 = OpaqueTLCBlockFcn("Outputs", 56, 262, 1, 1, 307)
+%assign tlcOutputsFcnOfS56B263 = OpaqueTLCBlockFcn("Outputs", 56, 263, 1, 1, 308)
+%assign tlcOutputsFcnOfS56B264 = OpaqueTLCBlockFcn("Outputs", 56, 264, 1, 1, 309)
+%assign tlcOutputsFcnOfS56B265 = OpaqueTLCBlockFcn("Outputs", 56, 265, 1, 1, 310)
+%assign tlcOutputsFcnOfS56B266 = OpaqueTLCBlockFcn("Outputs", 56, 266, 1, 1, 311)
+%assign tlcOutputsFcnOfS56B267 = OpaqueTLCBlockFcn("Outputs", 56, 267, 1, 1, 312)
+%assign tlcOutputsFcnOfS56B268 = OpaqueTLCBlockFcn("Outputs", 56, 268, 1, 1, 313)
+%assign tlcOutputsFcnOfS56B269 = OpaqueTLCBlockFcn("Outputs", 56, 269, 1, 1, 314)
+%assign tlcOutputsFcnOfS56B270 = OpaqueTLCBlockFcn("Outputs", 56, 270, 1, 1, 315)
+%assign tlcOutputsFcnOfS56B271 = OpaqueTLCBlockFcn("Outputs", 56, 271, 1, 1, 316)
+%assign tlcOutputsFcnOfS56B272 = OpaqueTLCBlockFcn("Outputs", 56, 272, 1, 1, 317)
+%assign tlcOutputsFcnOfS56B273 = OpaqueTLCBlockFcn("Outputs", 56, 273, 1, 1, 318)
+%assign tlcOutputsFcnOfS56B274 = OpaqueTLCBlockFcn("Outputs", 56, 274, 1, 1, 319)
+%assign tlcOutputsFcnOfS56B275 = OpaqueTLCBlockFcn("Outputs", 56, 275, 1, 1, 320)
+%assign tlcOutputsFcnOfS56B276 = OpaqueTLCBlockFcn("Outputs", 56, 276, 1, 1, 321)
+%assign tlcOutputsFcnOfS56B277 = OpaqueTLCBlockFcn("Outputs", 56, 277, 1, 1, 322)
+%assign tlcOutputsFcnOfS56B278 = OpaqueTLCBlockFcn("Outputs", 56, 278, 1, 1, 323)
+%assign tlcOutputsFcnOfS56B279 = OpaqueTLCBlockFcn("Outputs", 56, 279, 1, 1, 324)
+%assign tlcOutputsFcnOfS56B280 = OpaqueTLCBlockFcn("Outputs", 56, 280, 1, 1, 325)
+%assign tlcOutputsFcnOfS56B281 = OpaqueTLCBlockFcn("Outputs", 56, 281, 1, 1, 326)
+%assign tlcOutputsFcnOfS56B282 = OpaqueTLCBlockFcn("Outputs", 56, 282, 1, 1, 327)
+%assign tlcOutputsFcnOfS56B283 = OpaqueTLCBlockFcn("Outputs", 56, 283, 1, 1, 328)
+%assign tlcOutputsFcnOfS56B284 = OpaqueTLCBlockFcn("Outputs", 56, 284, 1, 1, 329)
+%assign tlcOutputsFcnOfS56B285 = OpaqueTLCBlockFcn("Outputs", 56, 285, 1, 1, 330)
+%assign tlcOutputsFcnOfS56B286 = OpaqueTLCBlockFcn("Outputs", 56, 286, 1, 1, 331)
+%assign tlcOutputsFcnOfS56B287 = OpaqueTLCBlockFcn("Outputs", 56, 287, 1, 1, 332)
+%assign tlcOutputsFcnOfS56B288 = OpaqueTLCBlockFcn("Outputs", 56, 288, 1, 1, 333)
+%assign tlcOutputsFcnOfS56B289 = OpaqueTLCBlockFcn("Outputs", 56, 289, 1, 1, 334)
+%assign tlcOutputsFcnOfS56B290 = OpaqueTLCBlockFcn("Outputs", 56, 290, 1, 1, 335)
+%assign tlcOutputsFcnOfS56B291 = OpaqueTLCBlockFcn("Outputs", 56, 291, 1, 1, 336)
+%assign tlcOutputsFcnOfS56B292 = OpaqueTLCBlockFcn("Outputs", 56, 292, 1, 1, 337)
+%assign tlcOutputsFcnOfS56B293 = OpaqueTLCBlockFcn("Outputs", 56, 293, 1, 1, 338)
+%assign tlcBlockOutputsFcnOfS56B293PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 293, 0, 1, 1, 47)
+%assign tlcOutputsFcnOfS56B294 = OpaqueTLCBlockFcn("Outputs", 56, 294, 1, 1, 339)
+%assign tlcOutputsFcnOfS56B295 = OpaqueTLCBlockFcn("Outputs", 56, 295, 1, 1, 340)
+%assign tlcBlockOutputsFcnOfS56B295PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 295, 0, 1, 1, 48)
+%assign tlcOutputsFcnOfS56B296 = OpaqueTLCBlockFcn("Outputs", 56, 296, 1, 1, 341)
+%assign tlcOutputsFcnOfS56B297 = OpaqueTLCBlockFcn("Outputs", 56, 297, 1, 1, 342)
+%assign tlcOutputsFcnOfS56B298 = OpaqueTLCBlockFcn("Outputs", 56, 298, 1, 1, 343)
+%assign tlcOutputsFcnOfS56B299 = OpaqueTLCBlockFcn("Outputs", 56, 299, 1, 1, 344)
+%assign tlcOutputsFcnOfS56B300 = OpaqueTLCBlockFcn("Outputs", 56, 300, 1, 1, 345)
+%assign tlcOutputsFcnOfS56B301 = OpaqueTLCBlockFcn("Outputs", 56, 301, 1, 1, 346)
+%assign tlcOutputsFcnOfS56B302 = OpaqueTLCBlockFcn("Outputs", 56, 302, 1, 1, 347)
+%assign tlcBlockOutputsFcnOfS56B302PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 302, 0, 1, 1, 49)
+%assign tlcOutputsFcnOfS56B303 = OpaqueTLCBlockFcn("Outputs", 56, 303, 1, 1, 348)
+%assign tlcOutputsFcnOfS56B304 = OpaqueTLCBlockFcn("Outputs", 56, 304, 1, 1, 349)
+%assign tlcBlockOutputsFcnOfS56B304PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 304, 0, 1, 1, 50)
+%assign tlcOutputsFcnOfS56B305 = OpaqueTLCBlockFcn("Outputs", 56, 305, 1, 1, 350)
+%assign tlcOutputsFcnOfS56B306 = OpaqueTLCBlockFcn("Outputs", 56, 306, 1, 1, 351)
+%assign tlcOutputsFcnOfS56B307 = OpaqueTLCBlockFcn("Outputs", 56, 307, 1, 1, 352)
+%assign tlcOutputsFcnOfS56B308 = OpaqueTLCBlockFcn("Outputs", 56, 308, 1, 1, 353)
+%assign tlcOutputsFcnOfS56B309 = OpaqueTLCBlockFcn("Outputs", 56, 309, 1, 1, 354)
+%assign tlcOutputsFcnOfS56B310 = OpaqueTLCBlockFcn("Outputs", 56, 310, 1, 1, 355)
+%assign tlcOutputsFcnOfS56B311 = OpaqueTLCBlockFcn("Outputs", 56, 311, 1, 1, 356)
+%assign tlcBlockOutputsFcnOfS56B311PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 311, 0, 1, 1, 51)
+%assign tlcOutputsFcnOfS56B312 = OpaqueTLCBlockFcn("Outputs", 56, 312, 1, 1, 357)
+%assign tlcOutputsFcnOfS56B313 = OpaqueTLCBlockFcn("Outputs", 56, 313, 1, 1, 358)
+%assign tlcBlockOutputsFcnOfS56B313PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 313, 0, 1, 1, 52)
+%assign tlcOutputsFcnOfS56B314 = OpaqueTLCBlockFcn("Outputs", 56, 314, 1, 1, 359)
+%assign tlcOutputsFcnOfS56B315 = OpaqueTLCBlockFcn("Outputs", 56, 315, 1, 1, 360)
+%assign tlcOutputsFcnOfS56B316 = OpaqueTLCBlockFcn("Outputs", 56, 316, 1, 1, 361)
+%assign tlcOutputsFcnOfS56B317 = OpaqueTLCBlockFcn("Outputs", 56, 317, 1, 1, 362)
+%assign tlcOutputsFcnOfS56B318 = OpaqueTLCBlockFcn("Outputs", 56, 318, 1, 1, 363)
+%assign tlcOutputsFcnOfS56B319 = OpaqueTLCBlockFcn("Outputs", 56, 319, 1, 1, 364)
+%assign tlcOutputsFcnOfS56B320 = OpaqueTLCBlockFcn("Outputs", 56, 320, 1, 1, 365)
+%assign tlcBlockOutputsFcnOfS56B320PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 320, 0, 1, 1, 53)
+%assign tlcOutputsFcnOfS56B321 = OpaqueTLCBlockFcn("Outputs", 56, 321, 1, 1, 366)
+%assign tlcOutputsFcnOfS56B322 = OpaqueTLCBlockFcn("Outputs", 56, 322, 1, 1, 367)
+%assign tlcBlockOutputsFcnOfS56B322PortIdx0 = SLibCGExprOutputFcn("BlockOutputs", 56, 322, 0, 1, 1, 54)
+%assign tlcOutputsFcnOfS56B323 = OpaqueTLCBlockFcn("Outputs", 56, 323, 1, 1, 368)
+%assign tlcOutputsFcnOfS56B324 = OpaqueTLCBlockFcn("Outputs", 56, 324, 1, 1, 369)
+%assign tlcOutputsFcnOfS56B325 = OpaqueTLCBlockFcn("Outputs", 56, 325, 1, 1, 370)
+%assign tlcOutputsFcnOfS56B326 = OpaqueTLCBlockFcn("Outputs", 56, 326, 1, 1, 371)
+%assign tlcOutputsFcnOfS56B327 = OpaqueTLCBlockFcn("Outputs", 56, 327, 1, 1, 372)
+%assign tlcOutputsFcnOfS56B328 = OpaqueTLCBlockFcn("Outputs", 56, 328, 1, 1, 373)
+%assign tlcOutputsFcnOfS56B329 = OpaqueTLCBlockFcn("Outputs", 56, 329, 1, 1, 374)
+%assign tlcOutputsFcnOfS56B330 = OpaqueTLCBlockFcn("Outputs", 56, 330, 1, 1, 375)
+%assign tlcOutputsFcnOfS56B331 = OpaqueTLCBlockFcn("Outputs", 56, 331, 1, 1, 376)
+%assign tlcOutputsFcnOfS56B332 = OpaqueTLCBlockFcn("Outputs", 56, 332, 1, 1, 377)
+%assign tlcOutputsFcnOfS56B333 = OpaqueTLCBlockFcn("Outputs", 56, 333, 1, 1, 378)
+%assign tlcOutputsFcnOfS56B334 = OpaqueTLCBlockFcn("Outputs", 56, 334, 1, 1, 379)
+%assign tlcOutputsFcnOfS56B335 = OpaqueTLCBlockFcn("Outputs", 56, 335, 1, 1, 380)
+%assign tlcOutputsFcnOfS56B336 = OpaqueTLCBlockFcn("Outputs", 56, 336, 1, 1, 381)
+%assign tlcOutputsFcnOfS56B337 = OpaqueTLCBlockFcn("Outputs", 56, 337, 1, 1, 382)
+%assign tlcOutputsFcnOfS56B338 = OpaqueTLCBlockFcn("Outputs", 56, 338, 1, 1, 383)
+%assign tlcOutputsFcnOfS56B339 = OpaqueTLCBlockFcn("Outputs", 56, 339, 1, 1, 384)
+%assign tlcOutputsFcnOfS56B340 = OpaqueTLCBlockFcn("Outputs", 56, 340, 1, 1, 385)
+%assign tlcOutputsFcnOfS56B341 = OpaqueTLCBlockFcn("Outputs", 56, 341, 1, 1, 386)
+%assign tlcOutputsFcnOfS56B342 = OpaqueTLCBlockFcn("Outputs", 56, 342, 1, 1, 387)
+%assign tlcOutputsFcnOfS56B343 = OpaqueTLCBlockFcn("Outputs", 56, 343, 1, 1, 388)
+%assign tlcOutputsFcnOfS56B344 = OpaqueTLCBlockFcn("Outputs", 56, 344, 1, 1, 389)
+%assign tlcOutputsFcnOfS56B345 = OpaqueTLCBlockFcn("Outputs", 56, 345, 1, 1, 390)
+%assign tlcOutputsFcnOfS56B346 = OpaqueTLCBlockFcn("Outputs", 56, 346, 1, 1, 391)
+%assign tlcOutputsFcnOfS56B347 = OpaqueTLCBlockFcn("Outputs", 56, 347, 1, 1, 392)
+%assign tlcOutputsFcnOfS56B348 = OpaqueTLCBlockFcn("Outputs", 56, 348, 1, 1, 393)
+%assign tlcOutputsFcnOfS56B349 = OpaqueTLCBlockFcn("Outputs", 56, 349, 1, 1, 394)
+%assign tlcOutputsFcnOfS56B350 = OpaqueTLCBlockFcn("Outputs", 56, 350, 1, 1, 395)
+%assign tlcOutputsFcnOfS56B351 = OpaqueTLCBlockFcn("Outputs", 56, 351, 1, 1, 396)
+%assign tlcOutputsFcnOfS56B352 = OpaqueTLCBlockFcn("Outputs", 56, 352, 1, 1, 397)
+%assign tlcOutputsFcnOfS56B353 = OpaqueTLCBlockFcn("Outputs", 56, 353, 1, 1, 398)
+%assign tlcOutputsFcnOfS56B354 = OpaqueTLCBlockFcn("Outputs", 56, 354, 1, 1, 399)
+/* {S!d1014}Sum: '<S16>/Sum' incorporates:
+ *  UnitDelay: '<S16>/Unit Delay'
+ */
+/*@>5aa6e*/rtb_Sum_f/*@>51534*/ = /*@>70159*/EVSR24_DWork./*@>8c798*/UnitDelay_DSTATE_i/*@>51531*/ + /*@>52e34*/1U;
+/*@>51543*/if (/*@>7015f*/EVSR24_DWork./*@>8c79b*/UnitDelay_DSTATE_i/*@>58721*/ + /*@>58724*/1U/*@>5153c*/ < /*@>52e36*/1U) {
+    /*@>5aa6d*/rtb_Sum_f/*@>51541*/ = /*@>5153e*/MAX_uint32_T;
+}
+/* {E!d1014}End of Sum: '<S16>/Sum' */
+
+/* {S!d1016}RelationalOperator: '<S16>/Relational Operator' */
+/*@>4f58e*/rtb_RelationalOperator_hd/*@>2015a*/ = (/*@>6fe91*/EVSR24_ConstB./*@>8c777*/DataTypeConversion/*@>20159*/ <= /*@>4f58a*/rtb_Sum_f);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B0)
+/* {S!d1018}S-Function (raptor_sfun_analog_in): '<S138>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[75523*/",tlcOutputsFcnOfS56B0,"/*@]*/")>\
+%endif
+/* {S!d1020}DataTypeConversion: '<S138>/Data Type Conversion' */
+/*@>4f59e*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_p/*@>2015e*/ = /*@>4f59c*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B1)
+/* {S!d1022}S-Function (raptor_sfun_adjustment): '<S138>/raptor_adjustment4' */
+%<SLibCG_DumpSSCode("/*@[75525*/",tlcOutputsFcnOfS56B1,"/*@]*/")>\
+%endif
+/* {S!d1024}Product: '<S138>/Product' incorporates:
+ *  DataTypeConversion: '<S138>/Data Type Conversion'
+ */
+/*@>4f5ae*/rtb_Product_d/*@>20166*/ = /*@>54a52*/(real_T)/*@>51050*/rtb_IN_tireTemp_v/*@>51526*/ * /*@>4f5ac*/rtb_IN_throttlePos_deg_h;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B2)
+/* {S!d1026}S-Function (raptor_sfun_analog_in): '<S139>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[75527*/",tlcOutputsFcnOfS56B2,"/*@]*/")>\
+%endif
+/* {S!d1028}DataTypeConversion: '<S139>/Data Type Conversion' */
+/*@>4f5be*/rtb_DataTypeConversion_j/*@>2016a*/ = /*@>4f5bc*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B3)
+/* {S!d1030}S-Function (raptor_sfun_adjustment): '<S139>/raptor_adjustment4' */
+%<SLibCG_DumpSSCode("/*@[75529*/",tlcOutputsFcnOfS56B3,"/*@]*/")>\
+%endif
+/* {S!d1032}Product: '<S139>/Product' incorporates:
+ *  DataTypeConversion: '<S139>/Data Type Conversion'
+ */
+/*@>4f5ce*/rtb_DataTypeConversion/*@>20172*/ = /*@>54a59*/(real_T)/*@>51052*/rtb_IN_tireTemp_v/*@>51522*/ * /*@>4f5cc*/rtb_IN_throttlePos_deg_h;
+/* {S!d967}Outputs for Enabled SubSystem: '<S16>/Enabled Subsystem' incorporates:
+ *  EnablePort: '<S18>/Enable'
+ */
+/*@>206ea*/if (/*@>508d5*/rtb_RelationalOperator_hd) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS8B0)
+    /* {S!d968}S-Function (fcgen): '<S18>/Function-Call Generator' incorporates:
+ *  SubSystem: '<S8>/brakeBias'
+ */
+    /* {S!d1034}S-Function (raptor_sfun_adjustment): '<S15>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7552b*/",tlcOutputsFcnOfS8B0,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS8B1)
+    /* {S!d1036}S-Function (raptor_sfun_adjustment): '<S15>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[7552d*/",tlcOutputsFcnOfS8B1,"/*@]*/")>\
+    /* {E!d968}End of Outputs for S-Function (fcgen): '<S18>/Function-Call Generator' */
+
+%endif
+    /* {S!d1038}Update for UnitDelay: '<S16>/Unit Delay' incorporates:
+ *  Constant: '<S16>/Constant2'
+ *  MultiPortSwitch: '<S16>/Multiport Switch'
+ */
+    /*@>70171*/EVSR24_DWork./*@>8c7a4*/UnitDelay_DSTATE_i/*@>20177*/ = /*@>511cb*/0U;
+} else {
+    /* {S!d1040}Update for UnitDelay: '<S16>/Unit Delay' incorporates:
+ *  MultiPortSwitch: '<S16>/Multiport Switch'
+ */
+    /*@>70165*/EVSR24_DWork./*@>8c79e*/UnitDelay_DSTATE_i/*@>20179*/ = /*@>4f5d0*/rtb_Sum_f;
+}
+/* {E!d967}End of Outputs for SubSystem: '<S16>/Enabled Subsystem' */
+
+/* {S!d1042}UnitDelay: '<S20>/Unit Delay' */
+/*@>508f4*/rtb_Sum_f/*@>21b1d*/ = /*@>7016b*/EVSR24_DWork./*@>8c7a1*/UnitDelay_DSTATE_p;
+/* {S!d1044}Sum: '<S20>/Sum' */
+/*@>5150a*/qY_3/*@>5150c*/ = /*@>4f5d2*/rtb_Sum_f/*@>51509*/ + /*@>52e3c*/1U;
+/*@>5151b*/if (/*@>58729*/rtb_Sum_f/*@>58727*/ + /*@>5872a*/1U/*@>51514*/ < /*@>52e3e*/1U) {
+    /*@>51517*/qY_3/*@>51519*/ = /*@>51516*/MAX_uint32_T;
+}
+/* {S!d1046}RelationalOperator: '<S20>/Relational Operator' incorporates:
+ *  Sum: '<S20>/Sum'
+ */
+/*@>4f5d8*/rtb_RelationalOperator_hd/*@>20183*/ = (/*@>6fe97*/EVSR24_ConstB./*@>8c77a*/DataTypeConversion_f/*@>20182*/ <= /*@>586fd*/qY_3);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B6)
+/* {S!d1048}S-Function (raptor_sfun_adjustment): '<S138>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[7552f*/",tlcOutputsFcnOfS56B6,"/*@]*/")>\
+%endif
+/* {S!d1050}RelationalOperator: '<S138>/GreaterThan1' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S138>/raptor_adjustment1'
+ */
+/*@>4f5e8*/rtb_IN_breakeVoltHigh_bool/*@>20188*/ = (/*@>4f5e6*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_p/*@>20187*/ > %<SLibCG_DumpSSCode("/*@[75531*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B6PortIdx0)),"/*@]*/")>);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B7)
+/* {S!d1052}S-Function (raptor_sfun_adjustment): '<S138>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75535*/",tlcOutputsFcnOfS56B7,"/*@]*/")>\
+%endif
+/* {S!d1054}RelationalOperator: '<S138>/Less Than1' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S138>/raptor_adjustment'
+ */
+/*@>4f5f8*/rtb_IN_brakeVoltLow_bool/*@>2018d*/ = (/*@>4f5f6*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_p/*@>2018c*/ < %<SLibCG_DumpSSCode("/*@[75537*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B7PortIdx0)),"/*@]*/")>);
+/* {S!d1056}Logic: '<S138>/OR' */
+/*@>4f5fe*/rtb_IN_errorBrake_bool/*@>20193*/ = (/*@>4f5fa*/rtb_IN_breakeVoltHigh_bool/*@>20192*/ || /*@>4f5fc*/rtb_IN_brakeVoltLow_bool);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B8)
+/* {S!d1058}S-Function (raptor_sfun_adjustment): '<S138>/raptor_adjustment5' */
+%<SLibCG_DumpSSCode("/*@[7553b*/",tlcOutputsFcnOfS56B8,"/*@]*/")>\
+%endif
+/* {S!d1060}Product: '<S138>/Product1' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S138>/raptor_adjustment5'
+ */
+/*@>4f60e*/rtb_IN_brakePos_pct/*@>2019b*/ = /*@>4f60c*/rtb_Product_d/*@>514fe*/ * %<SLibCG_DumpSSCode("/*@[7553d*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B8PortIdx0)),"/*@]*/")>;
+/* {S!d1070}Switch: '<S138>/Switch1' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S138>/raptor_adjustment3'
+ */
+/*@>21b39*/if (/*@>508f6*/rtb_IN_errorBrake_bool) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS41B0)
+    /* {S!d1062}S-Function (raptor_sfun_adjustment): '<S138>/raptor_adjustment3' */
+%<SLibCG_DumpSSCode("/*@[7554a*/",tlcOutputsFcnOfS41B0,"/*@]*/")>\
+%endif
+    /*@>508f8*/rtb_IN_brakePos_pct/*@>21b31*/ = %<SLibCG_DumpSSCode("/*@[7554c*/",(SLibCG_SE(tlcBlockOutputsFcnOfS41B0PortIdx0)),"/*@]*/")>;
+} else {
+%if !WHITE_SPACE(tlcOutputsFcnOfS43B0)
+    /* {S!d1064}S-Function (raptor_sfun_adjustment): '<S138>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[75541*/",tlcOutputsFcnOfS43B0,"/*@]*/")>\
+%endif
+    /* {S!d1068}Switch: '<S138>/Switch2' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S138>/raptor_adjustment2'
+ */
+    /*@>21f9f*/if (%<SLibCG_DumpSSCode("/*@[75543*/",tlcBlockOutputsFcnOfS43B0PortIdx0,"/*@]*/")>) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS42B0)
+        /* {S!d1066}S-Function (raptor_sfun_override): '<S138>/raptor_override' */
+%<SLibCG_DumpSSCode("/*@[75548*/",tlcOutputsFcnOfS42B0,"/*@]*/")>\
+%endif
+        /*@>5118a*/rtb_IN_brakePos_pct/*@>21f9a*/ = /*@>6fb54*/EVSR24_B./*@>8c72c*/raptor_override_h;
+    }
+    /* {E!d1068}End of Switch: '<S138>/Switch2' */
+}
+/* {E!d1070}End of Switch: '<S138>/Switch1' */
+
+/* {S!d971}Outputs for Enabled SubSystem: '<S20>/Enabled Subsystem' incorporates:
+ *  EnablePort: '<S22>/Enable'
+ */
+/*@>206ee*/if (/*@>508d7*/rtb_RelationalOperator_hd) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS12B0)
+    /* {S!d972}S-Function (fcgen): '<S22>/Function-Call Generator' incorporates:
+ *  SubSystem: '<S9>/brakelight'
+ */
+    /* {S!d1072}S-Function (raptor_sfun_adjustment): '<S19>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75550*/",tlcOutputsFcnOfS12B0,"/*@]*/")>\
+%endif
+    /* {S!d1076}Switch: '<S21>/Switch2' incorporates:
+ *  RelationalOperator: '<S21>/LowerRelop1'
+ *  RelationalOperator: '<S21>/UpperRelop'
+ *  Switch: '<S21>/Switch'
+ */
+    /*@>5a207*/if (/*@>51054*/rtb_IN_brakePos_pct/*@>514fb*/ > /*@>51056*/rtb_Switch_j) {
+        /*@>5a20b*/rtb_Switch2_fj/*@>5a20a*/ = /*@>50d47*/rtb_Switch_j;
+    } else /*@>5a257*/if (/*@>510a2*/rtb_IN_brakePos_pct/*@>514f7*/ < /*@>52e42*/0.0) {
+        /* {S!d1074}Switch: '<S21>/Switch' incorporates:
+ *  Constant: '<S19>/Constant2'
+ */
+        /*@>5a25b*/rtb_Switch2_fj/*@>5a25a*/ = /*@>51229*/0.0;
+    } else {
+        /*@>50d49*/rtb_Switch2_fj/*@>2254e*/ = /*@>51058*/rtb_IN_brakePos_pct;
+    }
+    /* {E!d1076}End of Switch: '<S21>/Switch2' */
+
+    /* {S!d1080}Switch: '<S19>/Switch' */
+    /*@>22571*/if (/*@>50d4d*/rtb_Switch2_fj/*@>22563*/ > /*@>511cf*/5.0) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS11B0)
+        /* {S!d1078}S-Function (raptor_sfun_adjustment): '<S19>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75552*/",tlcOutputsFcnOfS11B0,"/*@]*/")>\
+%endif
+        /*@>50d51*/rtb_Switch_j/*@>2256c*/ = /*@>50d4f*/rtb_raptor_adjustment1_ab;
+    } else {
+        /*@>50d53*/rtb_Switch_j/*@>2256f*/ = /*@>511d0*/0.0F;
+    }
+    /* {E!d1080}End of Switch: '<S19>/Switch' */
+%if !WHITE_SPACE(tlcOutputsFcnOfS12B3)
+
+    /* {S!d1082}S-Function (raptor_sfun_override): '<S19>/raptor_override' */
+%<SLibCG_DumpSSCode("/*@[75555*/",tlcOutputsFcnOfS12B3,"/*@]*/")>\
+    /* {E!d972}End of Outputs for S-Function (fcgen): '<S22>/Function-Call Generator' */
+
+%endif
+    /* {S!d1084}Update for UnitDelay: '<S20>/Unit Delay' incorporates:
+ *  Constant: '<S20>/Constant2'
+ *  MultiPortSwitch: '<S20>/Multiport Switch'
+ */
+    /*@>7017d*/EVSR24_DWork./*@>8c7aa*/UnitDelay_DSTATE_p/*@>201a1*/ = /*@>511cd*/0U;
+} else {
+    /* {S!d1086}Update for UnitDelay: '<S20>/Unit Delay' incorporates:
+ *  MultiPortSwitch: '<S20>/Multiport Switch'
+ *  Sum: '<S20>/Sum'
+ */
+    /*@>70177*/EVSR24_DWork./*@>8c7a7*/UnitDelay_DSTATE_p/*@>201a3*/ = /*@>586ff*/qY_3;
+}
+/* {E!d971}End of Outputs for SubSystem: '<S20>/Enabled Subsystem' */
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B13)
+
+/* {S!d1088}S-Function (raptor_sfun_analog_in): '<S157>/raptor_analog_in' */
+%<SLibCG_DumpSSCode("/*@[75557*/",tlcOutputsFcnOfS56B13,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B14)
+/* {S!d1090}S-Function (raptor_sfun_adjustment): '<S157>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75559*/",tlcOutputsFcnOfS56B14,"/*@]*/")>\
+%endif
+/* {S!d1092}RelationalOperator: '<S157>/GreaterThan' incorporates:
+ *  DataTypeConversion: '<S157>/Data Type Conversion'
+ *  S-Function (raptor_sfun_adjustment): '<S157>/raptor_adjustment1'
+ */
+/*@>4f62a*/rtb_RelationalOperator_hd/*@>201ac*/ = (/*@>5105a*/rtb_IN_tireTemp_v/*@>201ab*/ > %<SLibCG_DumpSSCode("/*@[7555b*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B14PortIdx0)),"/*@]*/")>);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B15)
+/* {S!d1094}S-Function (raptor_sfun_adjustment): '<S157>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7555f*/",tlcOutputsFcnOfS56B15,"/*@]*/")>\
+%endif
+/* {S!d1096}RelationalOperator: '<S157>/Less Than' incorporates:
+ *  DataTypeConversion: '<S157>/Data Type Conversion'
+ *  S-Function (raptor_sfun_adjustment): '<S157>/raptor_adjustment'
+ */
+/*@>4f638*/rtb_IN_throttleVoltLow_bool/*@>201b1*/ = (/*@>5105c*/rtb_IN_tireTemp_v/*@>201b0*/ < %<SLibCG_DumpSSCode("/*@[75561*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B15PortIdx0)),"/*@]*/")>);
+/* {S!d1098}Logic: '<S157>/OR' */
+/*@>4f63e*/rtb_IN_errorThrottle_bool/*@>201b7*/ = (/*@>4f63a*/rtb_RelationalOperator_hd/*@>201b6*/ || /*@>4f63c*/rtb_IN_throttleVoltLow_bool);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B16)
+/* {S!d1100}S-Function (raptor_sfun_adjustment): '<S157>/raptor_adjustment5' */
+%<SLibCG_DumpSSCode("/*@[75565*/",tlcOutputsFcnOfS56B16,"/*@]*/")>\
+%endif
+/* {S!d1102}Product: '<S157>/Product' incorporates:
+ *  DataTypeConversion: '<S157>/Data Type Conversion'
+ */
+/*@>4f64e*/rtb_Switch2_fj/*@>201bf*/ = /*@>54aa6*/(real_T)/*@>5105e*/rtb_IN_tireTemp_v/*@>514f2*/ * /*@>4f64c*/rtb_IN_throttlePos_deg_h;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B17)
+/* {S!d1104}S-Function (raptor_sfun_adjustment): '<S157>/raptor_adjustment4' */
+%<SLibCG_DumpSSCode("/*@[75567*/",tlcOutputsFcnOfS56B17,"/*@]*/")>\
+%endif
+/* {S!d1106}Sum: '<S157>/Sum' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S157>/raptor_adjustment4'
+ */
+/*@>50e0d*/rtb_IN_throttlePos_deg_h/*@>23612*/ = /*@>4f65c*/rtb_Switch2_fj/*@>2360f*/ + %<SLibCG_DumpSSCode("/*@[75569*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B17PortIdx0)),"/*@]*/")>;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B18)
+/* {S!d1108}S-Function (raptor_sfun_adjustment): '<S157>/raptor_adjustment6' */
+%<SLibCG_DumpSSCode("/*@[7556d*/",tlcOutputsFcnOfS56B18,"/*@]*/")>\
+%endif
+/* {S!d1110}Product: '<S157>/Product1' incorporates:
+ *  Gain: '<S157>/pctPerDeg'
+ *  S-Function (raptor_sfun_adjustment): '<S157>/raptor_adjustment6'
+ */
+/*@>4f66a*/rtb_IN_throttlePos_pct/*@>201d5*/ = /*@>511d1*/1.6666666666666667/*@>514ee*/ * /*@>51060*/rtb_IN_throttlePos_deg_h/*@>514ea*/ * %<SLibCG_DumpSSCode("/*@[7556f*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B18PortIdx0)),"/*@]*/")>;
+/* {S!d1120}Switch: '<S157>/Switch1' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S157>/raptor_adjustment3'
+ */
+/*@>21b5e*/if (/*@>508fa*/rtb_IN_errorThrottle_bool) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS50B0)
+    /* {S!d1112}S-Function (raptor_sfun_adjustment): '<S157>/raptor_adjustment3' */
+%<SLibCG_DumpSSCode("/*@[7557c*/",tlcOutputsFcnOfS50B0,"/*@]*/")>\
+%endif
+    /*@>508fc*/rtb_IN_throttlePos_pct/*@>21b56*/ = %<SLibCG_DumpSSCode("/*@[7557e*/",(SLibCG_SE(tlcBlockOutputsFcnOfS50B0PortIdx0)),"/*@]*/")>;
+} else {
+%if !WHITE_SPACE(tlcOutputsFcnOfS52B0)
+    /* {S!d1114}S-Function (raptor_sfun_adjustment): '<S157>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[75573*/",tlcOutputsFcnOfS52B0,"/*@]*/")>\
+%endif
+    /* {S!d1118}Switch: '<S157>/Switch' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S157>/raptor_adjustment2'
+ */
+    /*@>21fc1*/if (%<SLibCG_DumpSSCode("/*@[75575*/",tlcBlockOutputsFcnOfS52B0PortIdx0,"/*@]*/")>) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS51B0)
+        /* {S!d1116}S-Function (raptor_sfun_override): '<S157>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[7557a*/",tlcOutputsFcnOfS51B0,"/*@]*/")>\
+%endif
+        /*@>5118c*/rtb_IN_throttlePos_pct/*@>21fbc*/ = /*@>6fb66*/EVSR24_B./*@>8c72f*/raptor_override1_l;
+    }
+    /* {E!d1118}End of Switch: '<S157>/Switch' */
+}
+/* {E!d1120}End of Switch: '<S157>/Switch1' */
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B21)
+
+/* {S!d1122}S-Function (raptor_sfun_adjustment): '<S23>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75582*/",tlcOutputsFcnOfS56B21,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B22)
+/* {S!d1124}S-Function (raptor_sfun_analog_in): '<S158>/raptor_analog_in' */
+%<SLibCG_DumpSSCode("/*@[75584*/",tlcOutputsFcnOfS56B22,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B23)
+/* {S!d1126}S-Function (raptor_sfun_adjustment): '<S158>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75586*/",tlcOutputsFcnOfS56B23,"/*@]*/")>\
+%endif
+/* {S!d1128}RelationalOperator: '<S158>/GreaterThan' incorporates:
+ *  DataTypeConversion: '<S158>/Data Type Conversion'
+ *  S-Function (raptor_sfun_adjustment): '<S158>/raptor_adjustment1'
+ */
+/*@>4f690*/rtb_IN_throttleVoltHigh_bool_i/*@>201e4*/ = (/*@>51062*/rtb_IN_tireTemp_v/*@>201e3*/ > %<SLibCG_DumpSSCode("/*@[75588*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B23PortIdx0)),"/*@]*/")>);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B24)
+/* {S!d1130}S-Function (raptor_sfun_adjustment): '<S158>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7558c*/",tlcOutputsFcnOfS56B24,"/*@]*/")>\
+%endif
+/* {S!d1132}RelationalOperator: '<S158>/Less Than' incorporates:
+ *  DataTypeConversion: '<S158>/Data Type Conversion'
+ *  S-Function (raptor_sfun_adjustment): '<S158>/raptor_adjustment'
+ */
+/*@>4f69e*/rtb_IN_throttleVoltLow_bool_f/*@>201e9*/ = (/*@>51064*/rtb_IN_tireTemp_v/*@>201e8*/ < %<SLibCG_DumpSSCode("/*@[7558e*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B24PortIdx0)),"/*@]*/")>);
+/* {S!d1134}Logic: '<S158>/OR' */
+/*@>4f6a4*/rtb_IN_errorThrottle_bool_p/*@>201ef*/ = (/*@>4f6a0*/rtb_IN_throttleVoltHigh_bool_i/*@>201ee*/ || /*@>4f6a2*/rtb_IN_throttleVoltLow_bool_f);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B25)
+/* {S!d1136}S-Function (raptor_sfun_adjustment): '<S158>/raptor_adjustment5' */
+%<SLibCG_DumpSSCode("/*@[75592*/",tlcOutputsFcnOfS56B25,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B26)
+/* {S!d1138}S-Function (raptor_sfun_adjustment): '<S158>/raptor_adjustment4' */
+%<SLibCG_DumpSSCode("/*@[75594*/",tlcOutputsFcnOfS56B26,"/*@]*/")>\
+%endif
+/* {S!d1140}Sum: '<S158>/Sum' incorporates:
+ *  DataTypeConversion: '<S158>/Data Type Conversion'
+ *  Product: '<S158>/Product'
+ *  S-Function (raptor_sfun_adjustment): '<S158>/raptor_adjustment4'
+ */
+/*@>50e0f*/rtb_Switch2_fj/*@>23618*/ = /*@>54ac1*/(real_T)/*@>510a4*/rtb_IN_tireTemp_v/*@>514e6*/ * /*@>51066*/rtb_Switch2_fj/*@>23615*/ + %<SLibCG_DumpSSCode("/*@[75596*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B26PortIdx0)),"/*@]*/")>;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B27)
+/* {S!d1142}S-Function (raptor_sfun_adjustment): '<S158>/raptor_adjustment6' */
+%<SLibCG_DumpSSCode("/*@[7559a*/",tlcOutputsFcnOfS56B27,"/*@]*/")>\
+%endif
+/* {S!d1144}Product: '<S158>/Product1' incorporates:
+ *  Gain: '<S158>/pctPerDeg'
+ *  S-Function (raptor_sfun_adjustment): '<S158>/raptor_adjustment6'
+ */
+/*@>4f6ca*/rtb_IN_throttlePos_pct_d/*@>2020d*/ = /*@>511d2*/1.6666666666666667/*@>514e2*/ * /*@>51068*/rtb_Switch2_fj/*@>514de*/ * %<SLibCG_DumpSSCode("/*@[7559c*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B27PortIdx0)),"/*@]*/")>;
+/* {S!d1154}Switch: '<S158>/Switch1' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S158>/raptor_adjustment3'
+ */
+/*@>21b79*/if (/*@>508fe*/rtb_IN_errorThrottle_bool_p) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS53B0)
+    /* {S!d1146}S-Function (raptor_sfun_adjustment): '<S158>/raptor_adjustment3' */
+%<SLibCG_DumpSSCode("/*@[755a9*/",tlcOutputsFcnOfS53B0,"/*@]*/")>\
+%endif
+    /*@>50900*/rtb_IN_throttlePos_pct_d/*@>21b71*/ = %<SLibCG_DumpSSCode("/*@[755ab*/",(SLibCG_SE(tlcBlockOutputsFcnOfS53B0PortIdx0)),"/*@]*/")>;
+} else {
+%if !WHITE_SPACE(tlcOutputsFcnOfS55B0)
+    /* {S!d1148}S-Function (raptor_sfun_adjustment): '<S158>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[755a0*/",tlcOutputsFcnOfS55B0,"/*@]*/")>\
+%endif
+    /* {S!d1152}Switch: '<S158>/Switch' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S158>/raptor_adjustment2'
+ */
+    /*@>21fd9*/if (%<SLibCG_DumpSSCode("/*@[755a2*/",tlcBlockOutputsFcnOfS55B0PortIdx0,"/*@]*/")>) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS54B0)
+        /* {S!d1150}S-Function (raptor_sfun_override): '<S158>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[755a7*/",tlcOutputsFcnOfS54B0,"/*@]*/")>\
+%endif
+        /*@>5118e*/rtb_IN_throttlePos_pct_d/*@>21fd4*/ = /*@>6fb72*/EVSR24_B./*@>8c732*/raptor_override1_p;
+    }
+    /* {E!d1152}End of Switch: '<S158>/Switch' */
+}
+/* {E!d1154}End of Switch: '<S158>/Switch1' */
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B30)
+
+/* {S!d1156}S-Function (raptor_sfun_adjustment): '<S23>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[755af*/",tlcOutputsFcnOfS56B30,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B31)
+/* {S!d1158}S-Function (raptor_sfun_adjustment): '<S139>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[755b1*/",tlcOutputsFcnOfS56B31,"/*@]*/")>\
+%endif
+/* {S!d1160}RelationalOperator: '<S139>/GreaterThan1' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S139>/raptor_adjustment1'
+ */
+/*@>4f6e6*/rtb_IN_breakeVoltHigh_bool_j/*@>20222*/ = (/*@>4f6e4*/rtb_DataTypeConversion_j/*@>20221*/ > %<SLibCG_DumpSSCode("/*@[755b3*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B31PortIdx0)),"/*@]*/")>);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B32)
+/* {S!d1162}S-Function (raptor_sfun_adjustment): '<S139>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[755b7*/",tlcOutputsFcnOfS56B32,"/*@]*/")>\
+%endif
+/* {S!d1164}RelationalOperator: '<S139>/Less Than1' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S139>/raptor_adjustment'
+ */
+/*@>4f6f6*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20227*/ = (/*@>4f6f4*/rtb_DataTypeConversion_j/*@>20226*/ < %<SLibCG_DumpSSCode("/*@[755b9*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B32PortIdx0)),"/*@]*/")>);
+/* {S!d1166}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  Logic: '<S139>/OR'
+ */
+/*@>4f6fc*/rtb_raptor_digital_in_c/*@>2022d*/ = (/*@>4f6f8*/rtb_IN_breakeVoltHigh_bool_j/*@>2022c*/ || /*@>4f6fa*/rtb_IN_frontLeftHallEffectHigh_bool);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B33)
+/* {S!d1168}S-Function (raptor_sfun_adjustment): '<S139>/raptor_adjustment5' */
+%<SLibCG_DumpSSCode("/*@[755bd*/",tlcOutputsFcnOfS56B33,"/*@]*/")>\
+%endif
+/* {S!d1170}Product: '<S139>/Product1' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S139>/raptor_adjustment5'
+ */
+/*@>4f70c*/rtb_IN_brakePos_pct_n/*@>20235*/ = /*@>4f70a*/rtb_DataTypeConversion/*@>514da*/ * %<SLibCG_DumpSSCode("/*@[755bf*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B33PortIdx0)),"/*@]*/")>;
+/* {S!d1180}Switch: '<S139>/Switch1' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S139>/raptor_adjustment3'
+ */
+/*@>21b95*/if (/*@>50902*/rtb_raptor_digital_in_c) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS44B0)
+    /* {S!d1172}S-Function (raptor_sfun_adjustment): '<S139>/raptor_adjustment3' */
+%<SLibCG_DumpSSCode("/*@[755cc*/",tlcOutputsFcnOfS44B0,"/*@]*/")>\
+%endif
+    /*@>50904*/rtb_IN_brakePos_pct_n/*@>21b8d*/ = %<SLibCG_DumpSSCode("/*@[755ce*/",(SLibCG_SE(tlcBlockOutputsFcnOfS44B0PortIdx0)),"/*@]*/")>;
+} else {
+%if !WHITE_SPACE(tlcOutputsFcnOfS46B0)
+    /* {S!d1174}S-Function (raptor_sfun_adjustment): '<S139>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[755c3*/",tlcOutputsFcnOfS46B0,"/*@]*/")>\
+%endif
+    /* {S!d1178}Switch: '<S139>/Switch2' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S139>/raptor_adjustment2'
+ */
+    /*@>21ff1*/if (%<SLibCG_DumpSSCode("/*@[755c5*/",tlcBlockOutputsFcnOfS46B0PortIdx0,"/*@]*/")>) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS45B0)
+        /* {S!d1176}S-Function (raptor_sfun_override): '<S139>/raptor_override' */
+%<SLibCG_DumpSSCode("/*@[755ca*/",tlcOutputsFcnOfS45B0,"/*@]*/")>\
+%endif
+        /*@>51190*/rtb_IN_brakePos_pct_n/*@>21fec*/ = /*@>6fb7e*/EVSR24_B./*@>8c735*/raptor_override;
+    }
+    /* {E!d1178}End of Switch: '<S139>/Switch2' */
+}
+/* {E!d1180}End of Switch: '<S139>/Switch1' */
+
+/* {S!d1182}UnitDelay: '<S24>/Unit Delay' */
+/*@>50908*/rtb_Sum_f/*@>21ba1*/ = /*@>70183*/EVSR24_DWork./*@>8c7ad*/UnitDelay_DSTATE_n;
+/* {S!d1184}Sum: '<S24>/Sum' */
+/*@>514c2*/qY_3/*@>514c4*/ = /*@>4f70e*/rtb_Sum_f/*@>514c1*/ + /*@>52e48*/1U;
+/*@>514d3*/if (/*@>5872f*/rtb_Sum_f/*@>5872d*/ + /*@>58730*/1U/*@>514cc*/ < /*@>52e4a*/1U) {
+    /*@>514cf*/qY_3/*@>514d1*/ = /*@>514ce*/MAX_uint32_T;
+}
+/* {S!d1186}UnitDelay: '<S30>/Unit Delay' */
+/*@>5090c*/rtb_Sum_f/*@>21bad*/ = /*@>70189*/EVSR24_DWork./*@>8c7b0*/UnitDelay_DSTATE_p3;
+/* {S!d1188}Sum: '<S30>/Sum' */
+/*@>514a2*/qY_2/*@>514a4*/ = /*@>4f716*/rtb_Sum_f/*@>514a1*/ + /*@>52e4c*/1U;
+/*@>514b3*/if (/*@>58735*/rtb_Sum_f/*@>58733*/ + /*@>58736*/1U/*@>514ac*/ < /*@>52e4e*/1U) {
+    /*@>514af*/qY_2/*@>514b1*/ = /*@>514ae*/MAX_uint32_T;
+}
+/* {S!d1190}RelationalOperator: '<S30>/Relational Operator' incorporates:
+ *  Sum: '<S30>/Sum'
+ */
+/*@>4f71c*/rtb_RelationalOperator_p/*@>2025a*/ = (/*@>6fe9d*/EVSR24_ConstB./*@>8c77d*/DataTypeConversion_h/*@>20259*/ <= /*@>58703*/qY_2);
+/* {S!d1192}UnitDelay: '<S120>/Unit Delay' */
+/*@>50910*/rtb_Sum_f/*@>21bb9*/ = /*@>7018f*/EVSR24_DWork./*@>8c7b3*/UnitDelay_DSTATE_o;
+/* {S!d1194}Sum: '<S120>/Sum' */
+/*@>51482*/qY_1/*@>51484*/ = /*@>4f71e*/rtb_Sum_f/*@>51481*/ + /*@>52e50*/1U;
+/*@>51493*/if (/*@>5873b*/rtb_Sum_f/*@>58739*/ + /*@>5873c*/1U/*@>5148c*/ < /*@>52e52*/1U) {
+    /*@>5148f*/qY_1/*@>51491*/ = /*@>5148e*/MAX_uint32_T;
+}
+/* {S!d1196}RelationalOperator: '<S120>/Relational Operator' incorporates:
+ *  Sum: '<S120>/Sum'
+ */
+/*@>4f724*/rtb_RelationalOperator_i/*@>20264*/ = (/*@>6fea3*/EVSR24_ConstB./*@>8c780*/DataTypeConversion_c/*@>20263*/ <= /*@>58705*/qY_1);
+/* {S!d1198}UnitDelay: '<S119>/Unit Delay' */
+/*@>50914*/rtb_Sum_f/*@>21bc5*/ = /*@>70195*/EVSR24_DWork./*@>8c7b6*/UnitDelay_DSTATE_k;
+/* {S!d1200}Sum: '<S119>/Sum' */
+/*@>51462*/qY_0/*@>51464*/ = /*@>4f726*/rtb_Sum_f/*@>51461*/ + /*@>52e54*/1U;
+/*@>51473*/if (/*@>58741*/rtb_Sum_f/*@>5873f*/ + /*@>58742*/1U/*@>5146c*/ < /*@>52e56*/1U) {
+    /*@>5146f*/qY_0/*@>51471*/ = /*@>5146e*/MAX_uint32_T;
+}
+/* {S!d1202}RelationalOperator: '<S119>/Relational Operator' incorporates:
+ *  Sum: '<S119>/Sum'
+ */
+/*@>4f72c*/rtb_RelationalOperator_lu/*@>2026e*/ = (/*@>6fea9*/EVSR24_ConstB./*@>8c783*/DataTypeConversion_i/*@>2026d*/ <= /*@>58707*/qY_0);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B36)
+/* {S!d1204}S-Function (raptor_sfun_data_read): '<S184>/raptor_data_read2' */
+%<SLibCG_DumpSSCode("/*@[755d2*/",tlcOutputsFcnOfS56B36,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B37)
+/* {S!d1206}S-Function (raptor_sfun_freq_in): '<S184>/raptor_freq_in2' */
+%<SLibCG_DumpSSCode("/*@[755d4*/",tlcOutputsFcnOfS56B37,"/*@]*/")>\
+%endif
+/* {S!d1208}DataTypeConversion: '<S184>/Data Type Conversion' */
+/*@>63f65*/rtb_DataTypeConversion_j/*@>63f67*/ = /*@>2027a*/(real32_T)/*@>4f746*/rtb_Sum_f;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B38)
+/* {S!d1210}S-Function (raptor_sfun_data_read): '<S184>/raptor_data_read1' */
+%<SLibCG_DumpSSCode("/*@[755d6*/",tlcOutputsFcnOfS56B38,"/*@]*/")>\
+%endif
+/* {S!d1212}Product: '<S184>/Divide' incorporates:
+ *  DataTypeConversion: '<S184>/Data Type Conversion'
+ *  S-Function (raptor_sfun_data_read): '<S184>/raptor_data_read1'
+ */
+/*@>4f756*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_p/*@>20283*/ = /*@>64c45*/(real32_T)/*@>64c47*/rtb_Sum_f/*@>51456*/ / %<SLibCG_DumpSSCode("/*@[755d8*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B38PortIdx0)),"/*@]*/")>;
+/* {S!d1214}DataTypeConversion: '<S184>/Data Type Conversion2' incorporates:
+ *  Gain: '<S184>/Gain1'
+ *  Gain: '<S184>/metersPerMinToMilesPerHour'
+ *  Product: '<S184>/Product2'
+ *  S-Function (raptor_sfun_data_read): '<S184>/raptor_data_read2'
+ */
+/*@>4f758*/rtb_DataTypeConversion2/*@>20295*/ = /*@>511d8*/6.28318548F/*@>51452*/ * %<SLibCG_DumpSSCode("/*@[755dc*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B36PortIdx0)),"/*@]*/")>/*@>5144e*/ * /*@>510b3*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_p/*@>5144a*/ * /*@>511d7*/0.03728F;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B39)
+/* {S!d1216}S-Function (raptor_sfun_data_read): '<S183>/raptor_data_read2' */
+%<SLibCG_DumpSSCode("/*@[755e0*/",tlcOutputsFcnOfS56B39,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B40)
+/* {S!d1218}S-Function (raptor_sfun_freq_in): '<S183>/raptor_freq_in2' */
+%<SLibCG_DumpSSCode("/*@[755e2*/",tlcOutputsFcnOfS56B40,"/*@]*/")>\
+%endif
+/* {S!d1220}DataTypeConversion: '<S183>/Data Type Conversion' */
+/*@>4f774*/rtb_Switch_j/*@>202a2*/ = /*@>64c4c*/(real32_T)/*@>64c4e*/rtb_Sum_f;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B41)
+/* {S!d1222}S-Function (raptor_sfun_data_read): '<S183>/raptor_data_read1' */
+%<SLibCG_DumpSSCode("/*@[755e4*/",tlcOutputsFcnOfS56B41,"/*@]*/")>\
+%endif
+/* {S!d1224}Product: '<S183>/Divide' incorporates:
+ *  DataTypeConversion: '<S183>/Data Type Conversion'
+ *  S-Function (raptor_sfun_data_read): '<S183>/raptor_data_read1'
+ */
+/*@>4f782*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin/*@>202aa*/ = /*@>64c56*/(real32_T)/*@>64c58*/rtb_Sum_f/*@>51446*/ / %<SLibCG_DumpSSCode("/*@[755e6*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B41PortIdx0)),"/*@]*/")>;
+/* {S!d1226}DataTypeConversion: '<S183>/Data Type Conversion2' incorporates:
+ *  Gain: '<S183>/Gain1'
+ *  Gain: '<S183>/metersPerMinToMilesPerHour'
+ *  Product: '<S183>/Product2'
+ *  S-Function (raptor_sfun_data_read): '<S183>/raptor_data_read2'
+ */
+/*@>4f784*/rtb_DataTypeConversion2_e/*@>202bc*/ = /*@>511da*/6.28318548F/*@>51442*/ * %<SLibCG_DumpSSCode("/*@[755ea*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B39PortIdx0)),"/*@]*/")>/*@>5143e*/ * /*@>510c2*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin/*@>5143a*/ * /*@>511d9*/0.03728F;
+/* {S!d975}Outputs for Enabled SubSystem: '<S119>/Enabled Subsystem' incorporates:
+ *  EnablePort: '<S123>/Enable'
+ */
+/*@>206f2*/if (/*@>508d9*/rtb_RelationalOperator_lu) {
+    /* {S!d976}S-Function (fcgen): '<S123>/Function-Call Generator' incorporates:
+ *  SubSystem: '<S14>/groundSpeed'
+ */
+    /* {S!d1232}MinMax: '<S117>/Min' */
+    /*@>5a20c*/if ((/*@>5874c*/rtb_DataTypeConversion2/*@>5522c*/ <= /*@>5874f*/rtb_DataTypeConversion2_e)/*@>5522f*/ || /*@>68dfb*/rtIsNaN(/*@>58752*/rtb_DataTypeConversion2_e)) {
+        /* {S!d1228}MinMax: '<S117>/Min' */
+        /*@>6fb8a*/EVSR24_B./*@>8c73b*/CTRL_groundSpeed_mph/*@>5a20f*/ = /*@>58755*/rtb_DataTypeConversion2;
+    } else {
+        /* {S!d1230}MinMax: '<S117>/Min' */
+        /*@>6fb84*/EVSR24_B./*@>8c738*/CTRL_groundSpeed_mph/*@>55235*/ = /*@>58758*/rtb_DataTypeConversion2_e;
+    }
+    /* {E!d1232}End of MinMax: '<S117>/Min' */
+%if !WHITE_SPACE(tlcOutputsFcnOfS36B0)
+
+    /* {S!d1234}S-Function (raptor_sfun_measurement): '<S117>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[755ee*/",tlcOutputsFcnOfS36B0,"/*@]*/")>\
+    /* {E!d976}End of Outputs for S-Function (fcgen): '<S123>/Function-Call Generator' */
+%endif
+}
+/* {E!d975}End of Outputs for SubSystem: '<S119>/Enabled Subsystem' */
+
+/* {S!d1236}UnitDelay: '<S118>/Unit Delay' */
+/*@>50918*/rtb_Sum_f/*@>21bdb*/ = /*@>7019b*/EVSR24_DWork./*@>8c7b9*/UnitDelay_DSTATE_ip;
+/* {S!d1238}Sum: '<S118>/Sum' */
+/*@>51422*/qY/*@>51424*/ = /*@>4f786*/rtb_Sum_f/*@>51421*/ + /*@>52e58*/1U;
+/*@>51433*/if (/*@>5875d*/rtb_Sum_f/*@>5875b*/ + /*@>5875e*/1U/*@>5142c*/ < /*@>52e5a*/1U) {
+    /*@>5142f*/qY/*@>51431*/ = /*@>5142e*/MAX_uint32_T;
+}
+/* {S!d1240}RelationalOperator: '<S118>/Relational Operator' incorporates:
+ *  Sum: '<S118>/Sum'
+ */
+/*@>4f78c*/rtb_RelationalOperator_mp/*@>202c6*/ = (/*@>6feaf*/EVSR24_ConstB./*@>8c786*/DataTypeConversion_de/*@>202c5*/ <= /*@>58709*/qY);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B44)
+/* {S!d1242}S-Function (raptor_sfun_data_read): '<S186>/raptor_data_read2' */
+%<SLibCG_DumpSSCode("/*@[755f0*/",tlcOutputsFcnOfS56B44,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B45)
+/* {S!d1244}S-Function (raptor_sfun_freq_in): '<S186>/raptor_freq_in2' */
+%<SLibCG_DumpSSCode("/*@[755f2*/",tlcOutputsFcnOfS56B45,"/*@]*/")>\
+%endif
+/* {S!d1246}DataTypeConversion: '<S186>/Data Type Conversion' */
+/*@>63f85*/rtb_DataTypeConversion_b_tmp_tmp/*@>63f87*/ = /*@>202d2*/(real32_T)/*@>4f7a6*/rtb_Sum_f;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B46)
+/* {S!d1248}S-Function (raptor_sfun_data_read): '<S186>/raptor_data_read1' */
+%<SLibCG_DumpSSCode("/*@[755f4*/",tlcOutputsFcnOfS56B46,"/*@]*/")>\
+%endif
+/* {S!d1250}Product: '<S186>/Divide' incorporates:
+ *  DataTypeConversion: '<S186>/Data Type Conversion'
+ *  S-Function (raptor_sfun_data_read): '<S186>/raptor_data_read1'
+ */
+/*@>4f7b6*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_ou/*@>202db*/ = /*@>64c69*/(real32_T)/*@>64c6b*/rtb_Sum_f/*@>51416*/ / %<SLibCG_DumpSSCode("/*@[755f6*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B46PortIdx0)),"/*@]*/")>;
+/* {S!d1252}DataTypeConversion: '<S186>/Data Type Conversion2' incorporates:
+ *  Gain: '<S186>/Gain1'
+ *  Gain: '<S186>/metersPerMinToMilesPerHour'
+ *  Product: '<S186>/Product2'
+ *  S-Function (raptor_sfun_data_read): '<S186>/raptor_data_read2'
+ */
+/*@>4f7b8*/rtb_DataTypeConversion2_d/*@>202ed*/ = /*@>511dd*/6.28318548F/*@>51412*/ * %<SLibCG_DumpSSCode("/*@[755fa*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B44PortIdx0)),"/*@]*/")>/*@>5140e*/ * /*@>510d1*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_ou/*@>5140a*/ * /*@>511dc*/0.03728F;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B47)
+/* {S!d1254}S-Function (raptor_sfun_data_read): '<S185>/raptor_data_read2' */
+%<SLibCG_DumpSSCode("/*@[755fe*/",tlcOutputsFcnOfS56B47,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B48)
+/* {S!d1256}S-Function (raptor_sfun_freq_in): '<S185>/raptor_freq_in2' */
+%<SLibCG_DumpSSCode("/*@[75600*/",tlcOutputsFcnOfS56B48,"/*@]*/")>\
+%endif
+/* {S!d1258}DataTypeConversion: '<S185>/Data Type Conversion' */
+/*@>63f95*/rtb_DataTypeConversion_kr_tmp_tmp/*@>63f97*/ = /*@>202f9*/(real32_T)/*@>4f7d2*/rtb_Sum_f;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B49)
+/* {S!d1260}S-Function (raptor_sfun_data_read): '<S185>/raptor_data_read1' */
+%<SLibCG_DumpSSCode("/*@[75602*/",tlcOutputsFcnOfS56B49,"/*@]*/")>\
+%endif
+/* {S!d1262}Product: '<S185>/Divide' incorporates:
+ *  DataTypeConversion: '<S185>/Data Type Conversion'
+ *  S-Function (raptor_sfun_data_read): '<S185>/raptor_data_read1'
+ */
+/*@>4f7e2*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_o/*@>20302*/ = /*@>64c7a*/(real32_T)/*@>64c7c*/rtb_Sum_f/*@>51406*/ / %<SLibCG_DumpSSCode("/*@[75604*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B49PortIdx0)),"/*@]*/")>;
+/* {S!d1264}Gain: '<S185>/metersPerMinToMilesPerHour' incorporates:
+ *  Gain: '<S185>/Gain1'
+ *  Product: '<S185>/Product2'
+ *  S-Function (raptor_sfun_data_read): '<S185>/raptor_data_read2'
+ */
+/*@>4f7e4*/rtb_raptor_data_read_b/*@>20311*/ = /*@>511df*/6.28318548F/*@>51402*/ * %<SLibCG_DumpSSCode("/*@[75608*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B47PortIdx0)),"/*@]*/")>/*@>513fe*/ * /*@>51072*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_o/*@>513fa*/ * /*@>511de*/0.03728F;
+/* {S!d1266}DataTypeConversion: '<S185>/Data Type Conversion2' */
+/*@>4f7e8*/rtb_DataTypeConversion2_i/*@>20314*/ = /*@>4f7e6*/rtb_raptor_data_read_b;
+/* {S!d979}Outputs for Enabled SubSystem: '<S118>/Enabled Subsystem' incorporates:
+ *  EnablePort: '<S122>/Enable'
+ */
+/*@>206f6*/if (/*@>508db*/rtb_RelationalOperator_mp) {
+    /* {S!d980}S-Function (fcgen): '<S122>/Function-Call Generator' incorporates:
+ *  SubSystem: '<S14>/driveSpeed'
+ */
+    /* {S!d1272}MinMax: '<S116>/Max' */
+    /*@>5a211*/if ((/*@>58768*/rtb_DataTypeConversion2_d/*@>55266*/ >= /*@>5876b*/rtb_DataTypeConversion2_i)/*@>55269*/ || /*@>68e13*/rtIsNaN(/*@>5876e*/rtb_DataTypeConversion2_i)) {
+        /* {S!d1268}MinMax: '<S116>/Max' */
+        /*@>6fb9c*/EVSR24_B./*@>8c741*/CTRL_driveSpeed_mph/*@>5a214*/ = /*@>58771*/rtb_DataTypeConversion2_d;
+    } else {
+        /* {S!d1270}MinMax: '<S116>/Max' */
+        /*@>6fb96*/EVSR24_B./*@>8c73e*/CTRL_driveSpeed_mph/*@>5526f*/ = /*@>58774*/rtb_DataTypeConversion2_i;
+    }
+    /* {E!d1272}End of MinMax: '<S116>/Max' */
+%if !WHITE_SPACE(tlcOutputsFcnOfS34B0)
+
+    /* {S!d1274}S-Function (raptor_sfun_measurement): '<S116>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[7560c*/",tlcOutputsFcnOfS34B0,"/*@]*/")>\
+    /* {E!d980}End of Outputs for S-Function (fcgen): '<S122>/Function-Call Generator' */
+%endif
+}
+/* {E!d979}End of Outputs for SubSystem: '<S118>/Enabled Subsystem' */
+
+/* {S!d983}Outputs for Enabled SubSystem: '<S120>/Enabled Subsystem' incorporates:
+ *  EnablePort: '<S124>/Enable'
+ */
+/*@>206fa*/if (/*@>508dd*/rtb_RelationalOperator_i) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS39B0)
+    /* {S!d984}S-Function (fcgen): '<S124>/Function-Call Generator' incorporates:
+ *  SubSystem: '<S14>/slipRatio'
+ */
+    /* {S!d1276}S-Function (raptor_sfun_adjustment): '<S121>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[7560e*/",tlcOutputsFcnOfS39B0,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS39B1)
+    /* {S!d1278}S-Function (raptor_sfun_adjustment): '<S121>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75610*/",tlcOutputsFcnOfS39B1,"/*@]*/")>\
+%endif
+    /* {S!d1280}Saturate: '<S121>/preventZeroDivision' */
+    /*@>5a274*/if (/*@>6fba8*/EVSR24_B./*@>8c744*/CTRL_driveSpeed_mph/*@>58779*/ <= /*@>5877c*/0.0001) {
+        /*@>5a278*/rtb_Subtract/*@>5a277*/ = /*@>5877d*/0.0001;
+    } else {
+        /*@>5a26d*/rtb_Subtract/*@>5a26f*/ = /*@>6fbae*/EVSR24_B./*@>8c747*/CTRL_driveSpeed_mph;
+    }
+    /* {S!d1282}Sum: '<S121>/Subtract' incorporates:
+ *  Product: '<S121>/Divide'
+ *  S-Function (raptor_sfun_adjustment): '<S121>/raptor_adjustment'
+ *  Saturate: '<S121>/preventZeroDivision'
+ */
+    /*@>50e23*/rtb_Subtract/*@>23683*/ = %<SLibCG_DumpSSCode("/*@[75612*/",(SLibCG_SE(tlcBlockOutputsFcnOfS39B1PortIdx0)),"/*@]*/")>/*@>23680*/ - /*@>6fbb4*/EVSR24_B./*@>8c74a*/CTRL_groundSpeed_mph/*@>513f6*/ / /*@>5a271*/rtb_Subtract;
+    /* {S!d1286}Switch: '<S125>/Switch2' incorporates:
+ *  RelationalOperator: '<S125>/LowerRelop1'
+ *  RelationalOperator: '<S125>/UpperRelop'
+ *  Switch: '<S125>/Switch'
+ */
+    /*@>22604*/if (/*@>51076*/rtb_Subtract/*@>513f3*/ > /*@>51078*/rtb_raptor_adjustment1_p) {
+        /*@>50d88*/rtb_Subtract/*@>225fc*/ = /*@>50d86*/rtb_raptor_adjustment1_p;
+    } else /*@>47630*/if (/*@>510e4*/rtb_Subtract/*@>513ef*/ < /*@>52e5c*/0.0) {
+        /* {S!d1284}Switch: '<S125>/Switch' incorporates:
+ *  Constant: '<S121>/Constant'
+ */
+        /*@>51203*/rtb_Subtract/*@>47633*/ = /*@>5122a*/0.0;
+    }
+    /* {E!d1286}End of Switch: '<S125>/Switch2' */
+
+    /* {S!d1288}Gain: '<S121>/Gain' */
+    /*@>6fbc6*/EVSR24_B./*@>8c753*/CTRL_slipRatio/*@>2214b*/ = /*@>511e4*/100.0/*@>513ea*/ * /*@>50a44*/rtb_Subtract;
+%if !WHITE_SPACE(tlcOutputsFcnOfS39B3)
+    /* {S!d1290}S-Function (raptor_sfun_measurement): '<S121>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[75616*/",tlcOutputsFcnOfS39B3,"/*@]*/")>\
+    /* {E!d984}End of Outputs for S-Function (fcgen): '<S124>/Function-Call Generator' */
+%endif
+}
+/* {E!d983}End of Outputs for SubSystem: '<S120>/Enabled Subsystem' */
+
+/* {S!d1292}UnitDelay: '<S31>/Unit Delay' */
+/*@>5091c*/rtb_Sum_f/*@>21bfb*/ = /*@>701a1*/EVSR24_DWork./*@>8c7bc*/UnitDelay_DSTATE_e;
+/* {S!d1294}Sum: '<S31>/Sum' */
+/*@>513d2*/tractionControl_ELAPS_T/*@>513d4*/ = /*@>4f7ea*/rtb_Sum_f/*@>513d1*/ + /*@>52e5e*/1U;
+/*@>513e3*/if (/*@>58784*/rtb_Sum_f/*@>58782*/ + /*@>58785*/1U/*@>513dc*/ < /*@>52e60*/1U) {
+    /*@>513df*/tractionControl_ELAPS_T/*@>513e1*/ = /*@>513de*/MAX_uint32_T;
+}
+/*@>50e1b*/rtb_Sum_f/*@>23636*/ = /*@>513e5*/tractionControl_ELAPS_T;
+/* {E!d1294}End of Sum: '<S31>/Sum' */
+
+/* {S!d1296}RelationalOperator: '<S31>/Relational Operator' */
+/*@>4f7f0*/rtb_RelationalOperator_dp/*@>2031e*/ = (/*@>6feb5*/EVSR24_ConstB./*@>8c789*/DataTypeConversion_m/*@>2031d*/ <= /*@>4f7ec*/rtb_Sum_f);
+/* {S!d987}Outputs for Enabled SubSystem: '<S31>/Enabled Subsystem' incorporates:
+ *  EnablePort: '<S34>/Enable'
+ */
+/*@>206fe*/if (/*@>508df*/rtb_RelationalOperator_dp) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS26B0)
+    /* {S!d988}S-Function (fcgen): '<S34>/Function-Call Generator' incorporates:
+ *  SubSystem: '<S12>/muEstimator'
+ */
+    /* {S!d1298}S-Function (raptor_sfun_adjustment): '<S29>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75618*/",tlcOutputsFcnOfS26B0,"/*@]*/")>\
+%endif
+    /* {S!d1300}RelationalOperator: '<S29>/GreaterThanOrEqual' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S29>/raptor_adjustment'
+ */
+    /*@>6fbba*/EVSR24_B./*@>8c74d*/GreaterThanOrEqual/*@>22195*/ = (/*@>6fbc0*/EVSR24_B./*@>8c750*/CTRL_slipRatio/*@>22194*/ >= %<SLibCG_DumpSSCode("/*@[7561a*/",(SLibCG_SE(tlcBlockOutputsFcnOfS26B0PortIdx0)),"/*@]*/")>);
+    /* {E!d988}End of Outputs for S-Function (fcgen): '<S34>/Function-Call Generator' */
+}
+/* {E!d987}End of Outputs for SubSystem: '<S31>/Enabled Subsystem' */
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B56)
+
+/* {S!d1302}S-Function (raptor_sfun_can_rxmsg): '<S187>/raptor_can_rxmsg1' */
+%<SLibCG_DumpSSCode("/*@[75620*/",tlcOutputsFcnOfS56B56,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B57)
+/* {S!d1304}S-Function (raptor_sfun_analog_in): '<S136>/raptor_analog_in' */
+%<SLibCG_DumpSSCode("/*@[75622*/",tlcOutputsFcnOfS56B57,"/*@]*/")>\
+%endif
+/* {S!d1306}DataTypeConversion: '<S136>/Data Type Conversion' */
+/*@>4f810*/rtb_raptor_data_read_b/*@>20323*/ = /*@>4f80e*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B58)
+/* {S!d1308}S-Function (raptor_sfun_table_axis): '<S137>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[75625*/",tlcOutputsFcnOfS56B58,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B59)
+/* {S!d1310}S-Function (raptor_sfun_table_interpolate_1d): '<S137>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[75628*/",tlcOutputsFcnOfS56B59,"/*@]*/")>\
+%endif
+/* {S!d991}Outputs for Enabled SubSystem: '<S30>/Enabled Subsystem' incorporates:
+ *  EnablePort: '<S33>/Enable'
+ */
+/*@>20702*/if (/*@>508e1*/rtb_RelationalOperator_p) {
+    /*@>20706*/if (!/*@<20705*//*@>701ad*/EVSR24_DWork./*@>8c7c2*/EnabledSubsystem_MODE) {
+        /* {S!d992}Enable for S-Function (fcgen): '<S33>/Function-Call Generator' incorporates:
+ *  SubSystem: '<S12>/tractionControl'
+ */
+        /*@>701b3*/EVSR24_DWork./*@>8c7c5*/tractionControl_RESET_ELAPS_T/*@>22022*/ = /*@>509cd*/true;
+        /* {S!d1312}Enable for DiscreteIntegrator: '<S72>/Integrator' */
+        /*@>701bf*/EVSR24_DWork./*@>8c7cb*/Integrator_SYSTEM_ENABLE/*@>221ad*/ = /*@>8bb5b*/1U;
+        /* {E!d992}End of Enable for S-Function (fcgen): '<S33>/Function-Call Generator' */
+        /*@>701d1*/EVSR24_DWork./*@>8c7d4*/EnabledSubsystem_MODE/*@>20709*/ = /*@>508e7*/true;
+    }
+    /* {S!d994}S-Function (fcgen): '<S33>/Function-Call Generator' incorporates:
+ *  SubSystem: '<S12>/tractionControl'
+ */
+    /*@>22032*/if (/*@>701b9*/EVSR24_DWork./*@>8c7c8*/tractionControl_RESET_ELAPS_T) {
+        /*@>509d2*/tractionControl_ELAPS_T/*@>22035*/ = /*@>51047*/0U;
+    } else {
+        /*@>509d6*/tractionControl_ELAPS_T/*@>22038*/ = %<SLibCG_DumpSSCode("/*@[75629*/",(SLibCG_SE(LibGetClockTick(0))),"/*@]*/")>/*@>22037*/ - /*@>701cb*/EVSR24_DWork./*@>8c7d1*/tractionControl_PREV_T;
+    }
+    /*@>701d7*/EVSR24_DWork./*@>8c7d7*/tractionControl_PREV_T/*@>2203a*/ = %<SLibCG_DumpSSCode("/*@[7562c*/",(SLibCG_SE(LibGetClockTick(0))),"/*@]*/")>;
+    /*@>701e9*/EVSR24_DWork./*@>8c7e0*/tractionControl_RESET_ELAPS_T/*@>2203b*/ = /*@>509de*/false;
+%if !WHITE_SPACE(tlcOutputsFcnOfS24B0)
+    /* {S!d1314}S-Function (raptor_sfun_adjustment): '<S32>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75630*/",tlcOutputsFcnOfS24B0,"/*@]*/")>\
+%endif
+    /* {S!d1318}Switch: '<S32>/Switch1' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S32>/raptor_adjustment'
+ */
+    /*@>2263a*/if (%<SLibCG_DumpSSCode("/*@[75632*/",(SLibCG_SE(tlcBlockOutputsFcnOfS24B0PortIdx0)),"/*@]*/")>/*@>2262c*/ > /*@>511e7*/0.0F) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS22B0)
+        /* {S!d1316}S-Function (raptor_sfun_override): '<S32>/raptor_override' */
+%<SLibCG_DumpSSCode("/*@[75637*/",tlcOutputsFcnOfS22B0,"/*@]*/")>\
+%endif
+        /*@>50d92*/rtb_raptor_adjustment1_p/*@>22635*/ = /*@>6fc02*/EVSR24_B./*@>8c75c*/raptor_override_j;
+    } else {
+        /*@>50d94*/rtb_raptor_adjustment1_p/*@>22638*/ = /*@>50d90*/rtb_raptor_table_interpolate_1d_l;
+    }
+    /* {E!d1318}End of Switch: '<S32>/Switch1' */
+%if !WHITE_SPACE(tlcOutputsFcnOfS24B2)
+
+    /* {S!d1320}S-Function (raptor_sfun_table_axis): '<S38>/raptor_table_axis_y' */
+%<SLibCG_DumpSSCode("/*@[7563a*/",tlcOutputsFcnOfS24B2,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS24B3)
+    /* {S!d1322}S-Function (raptor_sfun_table_axis): '<S38>/raptor_table_axis_x' */
+%<SLibCG_DumpSSCode("/*@[7563d*/",tlcOutputsFcnOfS24B3,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS24B4)
+    /* {S!d1324}S-Function (raptor_sfun_table_interpolate_2d): '<S38>/raptor_table_interpolate_2d' */
+%<SLibCG_DumpSSCode("/*@[75641*/",tlcOutputsFcnOfS24B4,"/*@]*/")>\
+%endif
+    /* {S!d1326}Product: '<S32>/Product' */
+    /*@>50ac3*/rtb_DerivativeGain/*@>8bb6d*/ *= /*@>50abf*/rtb_raptor_adjustment1_p;
+%if !WHITE_SPACE(tlcOutputsFcnOfS24B5)
+    /* {S!d1328}S-Function (raptor_sfun_measurement): '<S32>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[75643*/",tlcOutputsFcnOfS24B5,"/*@]*/")>\
+%endif
+    /* {S!d1330}Switch: '<S32>/Switch' incorporates:
+ *  Constant: '<S32>/Constant3'
+ *  Sum: '<S32>/Subtract'
+ */
+    /*@>5a22a*/if (/*@>6fc26*/EVSR24_B./*@>8c75f*/GreaterThanOrEqual) {
+        /*@>5a22e*/rtb_DerivativeGain/*@>8bb6e*/ -= /*@>6fc32*/EVSR24_B./*@>8c762*/CTRL_slipRatio;
+    } else {
+        /*@>50d98*/rtb_DerivativeGain/*@>2264e*/ = /*@>5122d*/0.0;
+    }
+    /* {E!d1330}End of Switch: '<S32>/Switch' */
+%if !WHITE_SPACE(tlcOutputsFcnOfS24B7)
+
+    /* {S!d1332}S-Function (raptor_sfun_measurement): '<S32>/raptor_measurement1' */
+%<SLibCG_DumpSSCode("/*@[75645*/",tlcOutputsFcnOfS24B7,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS24B8)
+    /* {S!d1334}S-Function (raptor_sfun_adjustment): '<S32>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[75647*/",tlcOutputsFcnOfS24B8,"/*@]*/")>\
+%endif
+    /* {S!d1338}Switch: '<S37>/Switch2' incorporates:
+ *  RelationalOperator: '<S37>/LowerRelop1'
+ *  RelationalOperator: '<S37>/UpperRelop'
+ *  Switch: '<S37>/Switch'
+ */
+    /*@>5a22f*/if (/*@>51080*/rtb_DerivativeGain/*@>513c3*/ > /*@>51082*/rtb_raptor_adjustment1_p) {
+        /*@>5a233*/rtb_Subtract/*@>5a232*/ = /*@>50d9c*/rtb_raptor_adjustment1_p;
+    } else /*@>5a261*/if (/*@>510e6*/rtb_DerivativeGain/*@>513bf*/ < /*@>52e62*/0.0) {
+        /* {S!d1336}Switch: '<S37>/Switch' incorporates:
+ *  Constant: '<S32>/Constant2'
+ */
+        /*@>5a265*/rtb_Subtract/*@>5a264*/ = /*@>5122e*/0.0;
+    } else {
+        /*@>50d9e*/rtb_Subtract/*@>22664*/ = /*@>51084*/rtb_DerivativeGain;
+    }
+    /* {E!d1338}End of Switch: '<S37>/Switch2' */
+
+    /* {S!d1344}DiscreteIntegrator: '<S72>/Integrator' */
+    /*@>5a234*/if (/*@>7020d*/EVSR24_DWork./*@>8c7f2*/Integrator_SYSTEM_ENABLE/*@>513bb*/ != /*@>513b9*/0) {
+        /* {S!d1340}DiscreteIntegrator: '<S72>/Integrator' */
+        /*@>5a238*/Integrator/*@>5a237*/ = /*@>7021f*/EVSR24_DWork./*@>8c7fb*/Integrator_DSTATE;
+    } else {
+        /* {S!d1342}DiscreteIntegrator: '<S72>/Integrator' */
+        /*@>51209*/Integrator/*@>47642*/ = /*@>511ed*/0.01/*@>513b3*/ * /*@>54be6*/(real_T)/*@>50af3*/tractionControl_ELAPS_T/*@>513af*/ * /*@>70213*/EVSR24_DWork./*@>8c7f5*/Integrator_PREV_U/*@>22208*/ + /*@>70219*/EVSR24_DWork./*@>8c7f8*/Integrator_DSTATE;
+    }
+    /* {E!d1344}End of DiscreteIntegrator: '<S72>/Integrator' */
+
+    /* {S!d1346}Gain: '<S64>/Derivative Gain' */
+    /*@>50af9*/rtb_DerivativeGain/*@>22212*/ = /*@>511ee*/10.0/*@>513ab*/ * /*@>50af7*/rtb_Subtract;
+    /* {S!d1348}SampleTimeMath: '<S67>/Tsamp'
+ *
+ * About '<S67>/Tsamp':
+ *  y = u * K where K = 1 / ( w * Ts )
+ */
+    /*@>50afd*/rtb_DerivativeGain/*@>8bb6f*/ /= /*@>54bf4*/(real_T)/*@>51086*/tractionControl_ELAPS_T/*@>513a4*/ * /*@>51088*/0.01;
+    /* {S!d1350}Sum: '<S81>/Sum' incorporates:
+ *  Delay: '<S65>/UD'
+ *  Gain: '<S77>/Proportional Gain'
+ *  Sum: '<S65>/Diff'
+ */
+    /*@>50e25*/rtb_Sum/*@>2368e*/ = (/*@>511ef*/10.0/*@>5139c*/ * /*@>51089*/rtb_Subtract/*@>2368a*/ + /*@>50aff*/Integrator)/*@>2368b*/ + (/*@>5108b*/rtb_DerivativeGain/*@>37853*/ - /*@>70225*/EVSR24_DWork./*@>8c7fe*/UD_DSTATE);
+%if !WHITE_SPACE(tlcOutputsFcnOfS24B10)
+    /* {S!d1352}S-Function (raptor_sfun_measurement): '<S32>/raptor_measurement2' */
+%<SLibCG_DumpSSCode("/*@[75649*/",tlcOutputsFcnOfS24B10,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS24B11)
+    /* {S!d1354}S-Function (raptor_sfun_adjustment): '<S32>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[7564b*/",tlcOutputsFcnOfS24B11,"/*@]*/")>\
+%endif
+    /* {S!d1362}Switch: '<S36>/Switch2' incorporates:
+ *  RelationalOperator: '<S36>/LowerRelop1'
+ *  RelationalOperator: '<S36>/UpperRelop'
+ *  Switch: '<S36>/Switch'
+ */
+    /*@>5a239*/if (/*@>5108f*/rtb_Sum/*@>51399*/ > /*@>51091*/rtb_raptor_adjustment1_p) {
+        /* {S!d1356}Switch: '<S36>/Switch2' */
+        /*@>6fc68*/EVSR24_B./*@>8c76b*/Switch2/*@>5a23c*/ = /*@>50da2*/rtb_raptor_adjustment1_p;
+    } else /*@>5a266*/if (/*@>510e8*/rtb_Sum/*@>51395*/ < /*@>52e64*/0.0) {
+        /* {S!d1358}Switch: '<S36>/Switch' incorporates:
+ *  Constant: '<S32>/Constant1'
+ *  Switch: '<S36>/Switch2'
+ */
+        /*@>6fc7a*/EVSR24_B./*@>8c771*/Switch2/*@>5a269*/ = /*@>5122f*/0.0;
+    } else {
+        /* {S!d1360}Switch: '<S36>/Switch2' incorporates:
+ *  Switch: '<S36>/Switch'
+ */
+        /*@>6fc74*/EVSR24_B./*@>8c76e*/Switch2/*@>22689*/ = /*@>51093*/rtb_Sum;
+    }
+    /* {E!d1362}End of Switch: '<S36>/Switch2' */
+
+    /* {S!d1364}Update for DiscreteIntegrator: '<S72>/Integrator' */
+    /*@>7022b*/EVSR24_DWork./*@>8c801*/Integrator_SYSTEM_ENABLE/*@>222e7*/ = /*@>8bb5e*/0U;
+    /*@>70231*/EVSR24_DWork./*@>8c804*/Integrator_DSTATE/*@>222e9*/ = /*@>50b1d*/Integrator;
+    /*@>70237*/EVSR24_DWork./*@>8c807*/Integrator_PREV_U/*@>222eb*/ = /*@>50b21*/rtb_Subtract;
+    /* {S!d1366}Update for Delay: '<S65>/UD' */
+    /*@>7023d*/EVSR24_DWork./*@>8c80a*/UD_DSTATE/*@>2269d*/ = /*@>50da8*/rtb_DerivativeGain;
+    /* {E!d994}End of Outputs for S-Function (fcgen): '<S33>/Function-Call Generator' */
+} else {
+    /*@>701a7*/EVSR24_DWork./*@>8c7bf*/EnabledSubsystem_MODE/*@>2070e*/ = /*@>51046*/false;
+}
+/* {E!d991}End of Outputs for SubSystem: '<S30>/Enabled Subsystem' */
+
+/* {S!d997}Outputs for Enabled SubSystem: '<S24>/Enabled Subsystem' incorporates:
+ *  EnablePort: '<S26>/Enable'
+ */
+/* {S!d1396}RelationalOperator: '<S24>/Relational Operator' incorporates:
+ *  Sum: '<S24>/Sum'
+ */
+/*@>20710*/if (/*@>6febb*/EVSR24_ConstB./*@>8c78c*/DataTypeConversion_p/*@>5878b*/ <= /*@>5878f*/qY_3) {
+%if !WHITE_SPACE(tlcBlockOutputsFcnOfS56B21PortIdx0)
+    /* {S!d1368}S-Function (raptor_sfun_adjustment): '<S23>/raptor_adjustment1' */
+    /*@>511be*/rtb_DerivativeGain/*@>3ddbe*/ = %<SLibCG_DumpSSCode("/*@[7564d*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B21PortIdx0)),"/*@]*/")>;
+%endif
+%if !WHITE_SPACE(tlcBlockOutputsFcnOfS56B30PortIdx0)
+    /* {S!d1370}S-Function (raptor_sfun_adjustment): '<S23>/raptor_adjustment' */
+    /*@>511c2*/rtb_Subtract/*@>3ddce*/ = %<SLibCG_DumpSSCode("/*@[75651*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B30PortIdx0)),"/*@]*/")>;
+%endif
+    /* {S!d998}S-Function (fcgen): '<S26>/Function-Call Generator' incorporates:
+ *  SubSystem: '<S11>/torqueCommand'
+ */
+    /* {S!d1386}Switch: '<S25>/Switch1' incorporates:
+ *  Logic: '<S23>/AND'
+ *  Logic: '<S23>/OR'
+ *  Logic: '<S23>/OR1'
+ *  Product: '<S25>/Product'
+ *  RelationalOperator: '<S23>/GreaterThan'
+ *  RelationalOperator: '<S23>/GreaterThan1'
+ *  RelationalOperator: '<S23>/GreaterThan2'
+ *  RelationalOperator: '<S23>/GreaterThan3'
+ *  S-Function (raptor_sfun_adjustment): '<S23>/raptor_adjustment'
+ *  S-Function (raptor_sfun_adjustment): '<S23>/raptor_adjustment1'
+ *  S-Function (raptor_sfun_adjustment): '<S25>/raptor_adjustment'
+ */
+    /*@>2261f*/if (((/*@>510ea*/rtb_IN_throttlePos_pct/*@>37d1c*/ > /*@>511c0*/rtb_DerivativeGain)/*@>37d1b*/ || (/*@>510f9*/rtb_IN_throttlePos_pct_d/*@>37d2d*/ > rtb_DerivativeGain))/*@>37872*/ && ((/*@>510fb*/rtb_IN_brakePos_pct/*@>37d3f*/ > /*@>511c4*/rtb_Subtract)/*@>37d3e*/ || (/*@>5110a*/rtb_IN_brakePos_pct_n/*@>37d50*/ > rtb_Subtract))) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS14B0)
+        /* {S!d1372}S-Function (raptor_sfun_adjustment): '<S25>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7565d*/",tlcOutputsFcnOfS14B0,"/*@]*/")>\
+%endif
+        /*@>50d8a*/rtb_IN_brakePos_pct_n/*@>22617*/ = %<SLibCG_DumpSSCode("/*@[7565f*/",(SLibCG_SE(tlcBlockOutputsFcnOfS14B0PortIdx0)),"/*@]*/")>;
+    } else {
+%if !WHITE_SPACE(tlcOutputsFcnOfS17B0)
+        /* {S!d1374}S-Function (raptor_sfun_table_axis): '<S28>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[75656*/",tlcOutputsFcnOfS17B0,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS17B1)
+        /* {S!d1376}S-Function (raptor_sfun_table_interpolate_1d): '<S28>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[75659*/",tlcOutputsFcnOfS17B1,"/*@]*/")>\
+%endif
+        /* {S!d1378}Switch: '<S25>/Switch' incorporates:
+ *  Constant: '<S25>/Constant'
+ *  Gain: '<S25>/Gain'
+ */
+        /*@>5a220*/if (/*@>6fbea*/EVSR24_B./*@>8c756*/GreaterThanOrEqual) {
+            /*@>5a224*/rtb_IN_brakePos_pct_n/*@>5a223*/ = /*@>511e8*/0.01/*@>51390*/ * /*@>6fbf0*/EVSR24_B./*@>8c759*/Switch2;
+        } else {
+            /*@>50dff*/rtb_IN_brakePos_pct_n/*@>22818*/ = /*@>5122b*/1.0;
+        }
+        /* {E!d1378}End of Switch: '<S25>/Switch' */
+%if !WHITE_SPACE(tlcOutputsFcnOfS17B3)
+
+        /* {S!d1380}S-Function (raptor_sfun_data_read): '<S25>/raptor_data_read' */
+%<SLibCG_DumpSSCode("/*@[7565b*/",tlcOutputsFcnOfS17B3,"/*@]*/")>\
+%endif
+        /* {S!d1384}Switch: '<S27>/Switch2' incorporates:
+ *  RelationalOperator: '<S27>/LowerRelop1'
+ *  RelationalOperator: '<S27>/UpperRelop'
+ *  Switch: '<S27>/Switch'
+ */
+        /*@>5a225*/if (/*@>51097*/rtb_raptor_table_interpolate_1d_n/*@>5138d*/ > /*@>51099*/rtb_DATA_maxMotorTorque_Nm) {
+            /*@>5a229*/rtb_IN_brakePos_pct/*@>5a228*/ = /*@>50e03*/rtb_DATA_maxMotorTorque_Nm;
+        } else /*@>5a25c*/if (/*@>5110c*/rtb_raptor_table_interpolate_1d_n/*@>51389*/ < /*@>52e68*/0.0) {
+            /* {S!d1382}Switch: '<S27>/Switch' incorporates:
+ *  Constant: '<S25>/Constant1'
+ */
+            /*@>5a260*/rtb_IN_brakePos_pct/*@>5a25f*/ = /*@>5122c*/0.0;
+        } else {
+            /*@>50e05*/rtb_IN_brakePos_pct/*@>2282e*/ = /*@>5109b*/rtb_raptor_table_interpolate_1d_n;
+        }
+        /* {E!d1384}End of Switch: '<S27>/Switch2' */
+        /*@>50d8c*/rtb_IN_brakePos_pct_n/*@>8bb70*/ *= /*@>5109d*/rtb_IN_brakePos_pct;
+    }
+    /* {E!d1386}End of Switch: '<S25>/Switch1' */
+%if !WHITE_SPACE(tlcOutputsFcnOfS18B2)
+
+    /* {S!d1388}S-Function (raptor_sfun_override): '<S25>/raptor_override' */
+%<SLibCG_DumpSSCode("/*@[75664*/",tlcOutputsFcnOfS18B2,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS18B3)
+    /* {S!d1390}S-Function (raptor_sfun_adjustment): '<S25>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75666*/",tlcOutputsFcnOfS18B3,"/*@]*/")>\
+    /* {E!d998}End of Outputs for S-Function (fcgen): '<S26>/Function-Call Generator' */
+
+%endif
+    /* {S!d1392}Update for UnitDelay: '<S24>/Unit Delay' incorporates:
+ *  Constant: '<S24>/Constant2'
+ *  MultiPortSwitch: '<S24>/Multiport Switch'
+ */
+    /*@>70201*/EVSR24_DWork./*@>8c7ec*/UnitDelay_DSTATE_n/*@>2032a*/ = /*@>511e5*/0U;
+} else {
+    /* {S!d1394}Update for UnitDelay: '<S24>/Unit Delay' incorporates:
+ *  MultiPortSwitch: '<S24>/Multiport Switch'
+ */
+    /*@>701c5*/EVSR24_DWork./*@>8c7ce*/UnitDelay_DSTATE_n/*@>2032c*/ = /*@>5870b*/qY_3;
+}
+/* {E!d1396}End of RelationalOperator: '<S24>/Relational Operator' */
+/* {E!d997}End of Outputs for SubSystem: '<S24>/Enabled Subsystem' */
+
+/* {S!d1402}MultiPortSwitch: '<S30>/Multiport Switch' */
+/*@>5a216*/if (!/*@<47841*//*@>51219*/rtb_RelationalOperator_p) {
+    /* {S!d1398}Update for UnitDelay: '<S30>/Unit Delay' incorporates:
+ *  Sum: '<S30>/Sum'
+ */
+    /*@>701e3*/EVSR24_DWork./*@>8c7dd*/UnitDelay_DSTATE_p3/*@>5a219*/ = /*@>5870d*/qY_2;
+} else {
+    /* {S!d1400}Update for UnitDelay: '<S30>/Unit Delay' incorporates:
+ *  Constant: '<S30>/Constant2'
+ */
+    /*@>701dd*/EVSR24_DWork./*@>8c7da*/UnitDelay_DSTATE_p3/*@>20333*/ = /*@>511e6*/0U;
+}
+/* {E!d1402}End of MultiPortSwitch: '<S30>/Multiport Switch' */
+
+/* {S!d1408}MultiPortSwitch: '<S31>/Multiport Switch' */
+/*@>5a21b*/if (!/*@<47847*//*@>5121b*/rtb_RelationalOperator_dp) {
+    /* {S!d1404}Update for UnitDelay: '<S31>/Unit Delay' */
+    /*@>701f5*/EVSR24_DWork./*@>8c7e6*/UnitDelay_DSTATE_e/*@>5a21e*/ = /*@>4f834*/rtb_Sum_f;
+} else {
+    /* {S!d1406}Update for UnitDelay: '<S31>/Unit Delay' incorporates:
+ *  Constant: '<S31>/Constant2'
+ */
+    /*@>701ef*/EVSR24_DWork./*@>8c7e3*/UnitDelay_DSTATE_e/*@>2033a*/ = /*@>511e9*/0U;
+}
+/* {E!d1408}End of MultiPortSwitch: '<S31>/Multiport Switch' */
+
+/* {S!d1410}Sum: '<S91>/Sum' incorporates:
+ *  UnitDelay: '<S91>/Unit Delay'
+ */
+/*@>5136c*/qY_3/*@>5136e*/ = /*@>701fb*/EVSR24_DWork./*@>8c7e9*/UnitDelay_DSTATE_g/*@>5136b*/ + /*@>52e6c*/1U;
+/*@>5137d*/if (/*@>70207*/EVSR24_DWork./*@>8c7ef*/UnitDelay_DSTATE_g/*@>58796*/ + /*@>58799*/1U/*@>51376*/ < /*@>52e6e*/1U) {
+    /*@>51379*/qY_3/*@>5137b*/ = /*@>51378*/MAX_uint32_T;
+}
+/* {S!d1412}RelationalOperator: '<S91>/Relational Operator' incorporates:
+ *  Sum: '<S91>/Sum'
+ */
+/*@>4f83a*/rtb_RelationalOperator_dp/*@>20344*/ = (/*@>6fec1*/EVSR24_ConstB./*@>8c78f*/DataTypeConversion_d/*@>20343*/ <= /*@>5870f*/qY_3);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B64)
+/* {S!d1414}S-Function (raptor_sfun_analog_in): '<S144>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[75668*/",tlcOutputsFcnOfS56B64,"/*@]*/")>\
+%endif
+/* {S!d1416}DataTypeConversion: '<S144>/Data Type Conversion1' */
+/*@>4f84a*/rtb_IN_brakePos_pct_n/*@>20348*/ = /*@>4f848*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B65)
+/* {S!d1418}S-Function (raptor_sfun_table_axis): '<S147>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[7566b*/",tlcOutputsFcnOfS56B65,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B66)
+/* {S!d1420}S-Function (raptor_sfun_table_interpolate_1d): '<S147>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[7566e*/",tlcOutputsFcnOfS56B66,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B67)
+/* {S!d1422}S-Function (raptor_sfun_adjustment): '<S144>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[75670*/",tlcOutputsFcnOfS56B67,"/*@]*/")>\
+%endif
+/* {S!d1426}Switch: '<S144>/Switch' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S144>/raptor_adjustment2'
+ */
+/*@>21c47*/if (%<SLibCG_DumpSSCode("/*@[75672*/",tlcBlockOutputsFcnOfS56B67PortIdx0,"/*@]*/")>) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS49B0)
+    /* {S!d1424}S-Function (raptor_sfun_override): '<S144>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[75677*/",tlcOutputsFcnOfS49B0,"/*@]*/")>\
+%endif
+    /*@>50922*/rtb_IN_brakePos_pct/*@>21c42*/ = /*@>6fc44*/EVSR24_B./*@>8c765*/raptor_override1_o;
+} else {
+    /*@>50924*/rtb_IN_brakePos_pct/*@>21c45*/ = /*@>50920*/rtb_raptor_table_interpolate_1d;
+}
+/* {E!d1426}End of Switch: '<S144>/Switch' */
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B69)
+
+/* {S!d1428}S-Function (raptor_sfun_analog_in): '<S142>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[75679*/",tlcOutputsFcnOfS56B69,"/*@]*/")>\
+%endif
+/* {S!d1430}DataTypeConversion: '<S142>/Data Type Conversion1' */
+/*@>4f884*/rtb_DerivativeGain/*@>20350*/ = /*@>4f882*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B70)
+/* {S!d1432}S-Function (raptor_sfun_table_axis): '<S145>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[7567c*/",tlcOutputsFcnOfS56B70,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B71)
+/* {S!d1434}S-Function (raptor_sfun_table_interpolate_1d): '<S145>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[7567f*/",tlcOutputsFcnOfS56B71,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B72)
+/* {S!d1436}S-Function (raptor_sfun_adjustment): '<S142>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[75681*/",tlcOutputsFcnOfS56B72,"/*@]*/")>\
+%endif
+/* {S!d1440}Switch: '<S142>/Switch' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S142>/raptor_adjustment2'
+ */
+/*@>21c5f*/if (%<SLibCG_DumpSSCode("/*@[75683*/",tlcBlockOutputsFcnOfS56B72PortIdx0,"/*@]*/")>) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS47B0)
+    /* {S!d1438}S-Function (raptor_sfun_override): '<S142>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[75688*/",tlcOutputsFcnOfS47B0,"/*@]*/")>\
+%endif
+    /*@>5092a*/rtb_Subtract/*@>21c5a*/ = /*@>6fc5c*/EVSR24_B./*@>8c768*/raptor_override1_jd;
+} else {
+    /*@>5092c*/rtb_Subtract/*@>21c5d*/ = /*@>50928*/rtb_raptor_table_interpolate_1d_a;
+}
+/* {E!d1440}End of Switch: '<S142>/Switch' */
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B74)
+
+/* {S!d1442}S-Function (raptor_sfun_analog_in): '<S143>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[7568a*/",tlcOutputsFcnOfS56B74,"/*@]*/")>\
+%endif
+/* {S!d1444}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S143>/Data Type Conversion1'
+ */
+/*@>4f8be*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>20358*/ = /*@>4f8bc*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B75)
+/* {S!d1446}S-Function (raptor_sfun_table_axis): '<S146>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[7568d*/",tlcOutputsFcnOfS56B75,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B76)
+/* {S!d1448}S-Function (raptor_sfun_table_interpolate_1d): '<S146>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[75690*/",tlcOutputsFcnOfS56B76,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B77)
+/* {S!d1450}S-Function (raptor_sfun_adjustment): '<S143>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[75692*/",tlcOutputsFcnOfS56B77,"/*@]*/")>\
+%endif
+/* {S!d1454}Switch: '<S143>/Switch' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S143>/raptor_adjustment2'
+ */
+/*@>21c77*/if (%<SLibCG_DumpSSCode("/*@[75694*/",tlcBlockOutputsFcnOfS56B77PortIdx0,"/*@]*/")>) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS48B0)
+    /* {S!d1452}S-Function (raptor_sfun_override): '<S143>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[75699*/",tlcOutputsFcnOfS48B0,"/*@]*/")>\
+%endif
+    /*@>50932*/Integrator/*@>21c72*/ = /*@>6fc86*/EVSR24_B./*@>8c774*/raptor_override1_cn;
+} else {
+    /*@>50934*/Integrator/*@>21c75*/ = /*@>50930*/rtb_raptor_table_interpolate_1d_h;
+}
+/* {E!d1454}End of Switch: '<S143>/Switch' */
+
+/* {S!d1001}Outputs for Enabled SubSystem: '<S91>/Enabled Subsystem' incorporates:
+ *  EnablePort: '<S107>/Enable'
+ */
+/*@>20714*/if (/*@>508ec*/rtb_RelationalOperator_dp) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS28B0)
+    /* {S!d1002}S-Function (fcgen): '<S107>/Function-Call Generator' incorporates:
+ *  SubSystem: '<S13>/fanDutyLeft'
+ */
+    /* {S!d1456}S-Function (raptor_sfun_adjustment): '<S89>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[7569b*/",tlcOutputsFcnOfS28B0,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS28B1)
+    /* {S!d1458}S-Function (raptor_sfun_adjustment): '<S89>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[7569d*/",tlcOutputsFcnOfS28B1,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS28B2)
+    /* {S!d1460}S-Function (raptor_sfun_adjustment): '<S89>/raptor_adjustment3' */
+%<SLibCG_DumpSSCode("/*@[7569f*/",tlcOutputsFcnOfS28B2,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS28B3)
+    /* {S!d1462}S-Function (raptor_sfun_table_axis): '<S98>/raptor_table_axis_x' */
+%<SLibCG_DumpSSCode("/*@[756a2*/",tlcOutputsFcnOfS28B3,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS28B4)
+    /* {S!d1464}S-Function (raptor_sfun_table_axis): '<S98>/raptor_table_axis_y' */
+%<SLibCG_DumpSSCode("/*@[756a5*/",tlcOutputsFcnOfS28B4,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS28B5)
+    /* {S!d1466}S-Function (raptor_sfun_table_interpolate_2d): '<S98>/raptor_table_interpolate_2d' */
+%<SLibCG_DumpSSCode("/*@[756a9*/",tlcOutputsFcnOfS28B5,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS28B6)
+    /* {S!d1468}S-Function (raptor_sfun_table_axis): '<S99>/raptor_table_axis_x' */
+%<SLibCG_DumpSSCode("/*@[756ac*/",tlcOutputsFcnOfS28B6,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS28B7)
+    /* {S!d1470}S-Function (raptor_sfun_table_axis): '<S99>/raptor_table_axis_y' */
+%<SLibCG_DumpSSCode("/*@[756af*/",tlcOutputsFcnOfS28B7,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS28B8)
+    /* {S!d1472}S-Function (raptor_sfun_table_interpolate_2d): '<S99>/raptor_table_interpolate_2d' */
+%<SLibCG_DumpSSCode("/*@[756b3*/",tlcOutputsFcnOfS28B8,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS28B9)
+    /* {S!d1474}S-Function (raptor_sfun_table_axis): '<S100>/raptor_table_axis_x' */
+%<SLibCG_DumpSSCode("/*@[756b6*/",tlcOutputsFcnOfS28B9,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS28B10)
+    /* {S!d1476}S-Function (raptor_sfun_table_axis): '<S100>/raptor_table_axis_y' */
+%<SLibCG_DumpSSCode("/*@[756b9*/",tlcOutputsFcnOfS28B10,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS28B11)
+    /* {S!d1478}S-Function (raptor_sfun_table_interpolate_2d): '<S100>/raptor_table_interpolate_2d' */
+%<SLibCG_DumpSSCode("/*@[756bd*/",tlcOutputsFcnOfS28B11,"/*@]*/")>\
+    /* {E!d1002}End of Outputs for S-Function (fcgen): '<S107>/Function-Call Generator' */
+%endif
+}
+/* {E!d1001}End of Outputs for SubSystem: '<S91>/Enabled Subsystem' */
+
+/* {S!d1480}Sum: '<S92>/Sum' incorporates:
+ *  UnitDelay: '<S92>/Unit Delay'
+ */
+/*@>5aa70*/rtb_Sum_f/*@>5134e*/ = /*@>70243*/EVSR24_DWork./*@>8c80d*/UnitDelay_DSTATE_d/*@>5134b*/ + /*@>52e70*/1U;
+/*@>5135d*/if (/*@>70249*/EVSR24_DWork./*@>8c810*/UnitDelay_DSTATE_d/*@>5879e*/ + /*@>587a1*/1U/*@>51356*/ < /*@>52e72*/1U) {
+    /*@>5aa6f*/rtb_Sum_f/*@>5135b*/ = /*@>51358*/MAX_uint32_T;
+}
+/* {E!d1480}End of Sum: '<S92>/Sum' */
+
+/* {S!d1482}RelationalOperator: '<S92>/Relational Operator' */
+/*@>4f8ee*/rtb_RelationalOperator_p/*@>20366*/ = (/*@>6fec7*/EVSR24_ConstB./*@>8c792*/DataTypeConversion_h1/*@>20365*/ <= /*@>4f8ea*/rtb_Sum_f);
+/* {S!d1005}Outputs for Enabled SubSystem: '<S92>/Enabled Subsystem' incorporates:
+ *  EnablePort: '<S108>/Enable'
+ */
+/*@>20718*/if (/*@>508ee*/rtb_RelationalOperator_p) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS30B0)
+    /* {S!d1006}S-Function (fcgen): '<S108>/Function-Call Generator' incorporates:
+ *  SubSystem: '<S13>/fanDutyRight'
+ */
+    /* {S!d1484}S-Function (raptor_sfun_adjustment): '<S90>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[756bf*/",tlcOutputsFcnOfS30B0,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS30B1)
+    /* {S!d1486}S-Function (raptor_sfun_adjustment): '<S90>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[756c1*/",tlcOutputsFcnOfS30B1,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS30B2)
+    /* {S!d1488}S-Function (raptor_sfun_adjustment): '<S90>/raptor_adjustment3' */
+%<SLibCG_DumpSSCode("/*@[756c3*/",tlcOutputsFcnOfS30B2,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS30B3)
+    /* {S!d1490}S-Function (raptor_sfun_table_axis): '<S104>/raptor_table_axis_x' */
+%<SLibCG_DumpSSCode("/*@[756c6*/",tlcOutputsFcnOfS30B3,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS30B4)
+    /* {S!d1492}S-Function (raptor_sfun_table_axis): '<S104>/raptor_table_axis_y' */
+%<SLibCG_DumpSSCode("/*@[756c9*/",tlcOutputsFcnOfS30B4,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS30B5)
+    /* {S!d1494}S-Function (raptor_sfun_table_interpolate_2d): '<S104>/raptor_table_interpolate_2d' */
+%<SLibCG_DumpSSCode("/*@[756cd*/",tlcOutputsFcnOfS30B5,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS30B6)
+    /* {S!d1496}S-Function (raptor_sfun_table_axis): '<S105>/raptor_table_axis_x' */
+%<SLibCG_DumpSSCode("/*@[756d0*/",tlcOutputsFcnOfS30B6,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS30B7)
+    /* {S!d1498}S-Function (raptor_sfun_table_axis): '<S105>/raptor_table_axis_y' */
+%<SLibCG_DumpSSCode("/*@[756d3*/",tlcOutputsFcnOfS30B7,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS30B8)
+    /* {S!d1500}S-Function (raptor_sfun_table_interpolate_2d): '<S105>/raptor_table_interpolate_2d' */
+%<SLibCG_DumpSSCode("/*@[756d7*/",tlcOutputsFcnOfS30B8,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS30B9)
+    /* {S!d1502}S-Function (raptor_sfun_table_axis): '<S106>/raptor_table_axis_x' */
+%<SLibCG_DumpSSCode("/*@[756da*/",tlcOutputsFcnOfS30B9,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS30B10)
+    /* {S!d1504}S-Function (raptor_sfun_table_axis): '<S106>/raptor_table_axis_y' */
+%<SLibCG_DumpSSCode("/*@[756dd*/",tlcOutputsFcnOfS30B10,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS30B11)
+    /* {S!d1506}S-Function (raptor_sfun_table_interpolate_2d): '<S106>/raptor_table_interpolate_2d' */
+%<SLibCG_DumpSSCode("/*@[756e1*/",tlcOutputsFcnOfS30B11,"/*@]*/")>\
+    /* {E!d1006}End of Outputs for S-Function (fcgen): '<S108>/Function-Call Generator' */
+%endif
+}
+/* {E!d1005}End of Outputs for SubSystem: '<S92>/Enabled Subsystem' */
+
+/* {S!d1512}MultiPortSwitch: '<S91>/Multiport Switch' */
+/*@>5a23e*/if (!/*@<47857*//*@>5121d*/rtb_RelationalOperator_dp) {
+    /* {S!d1508}Update for UnitDelay: '<S91>/Unit Delay' incorporates:
+ *  Sum: '<S91>/Sum'
+ */
+    /*@>70255*/EVSR24_DWork./*@>8c816*/UnitDelay_DSTATE_g/*@>5a241*/ = /*@>58711*/qY_3;
+} else {
+    /* {S!d1510}Update for UnitDelay: '<S91>/Unit Delay' incorporates:
+ *  Constant: '<S91>/Constant2'
+ */
+    /*@>7024f*/EVSR24_DWork./*@>8c813*/UnitDelay_DSTATE_g/*@>2036d*/ = /*@>511f2*/0U;
+}
+/* {E!d1512}End of MultiPortSwitch: '<S91>/Multiport Switch' */
+
+/* {S!d1518}MultiPortSwitch: '<S92>/Multiport Switch' */
+/*@>5a243*/if (!/*@<4785d*//*@>5121f*/rtb_RelationalOperator_p) {
+    /* {S!d1514}Update for UnitDelay: '<S92>/Unit Delay' */
+    /*@>70261*/EVSR24_DWork./*@>8c81c*/UnitDelay_DSTATE_d/*@>5a246*/ = /*@>4f8f2*/rtb_Sum_f;
+} else {
+    /* {S!d1516}Update for UnitDelay: '<S92>/Unit Delay' incorporates:
+ *  Constant: '<S92>/Constant2'
+ */
+    /*@>7025b*/EVSR24_DWork./*@>8c819*/UnitDelay_DSTATE_d/*@>20374*/ = /*@>511f3*/0U;
+}
+/* {E!d1518}End of MultiPortSwitch: '<S92>/Multiport Switch' */
+
+/* {S!d1520}Sum: '<S93>/Sum' incorporates:
+ *  UnitDelay: '<S93>/Unit Delay'
+ */
+/*@>5132c*/qY_3/*@>5132e*/ = /*@>70267*/EVSR24_DWork./*@>8c81f*/UnitDelay_DSTATE_j/*@>5132b*/ + /*@>52e74*/1U;
+/*@>5133d*/if (/*@>7026d*/EVSR24_DWork./*@>8c822*/UnitDelay_DSTATE_j/*@>587aa*/ + /*@>587ad*/1U/*@>51336*/ < /*@>52e76*/1U) {
+    /*@>51339*/qY_3/*@>5133b*/ = /*@>51338*/MAX_uint32_T;
+}
+/* {S!d1009}Outputs for Enabled SubSystem: '<S93>/Enabled Subsystem' incorporates:
+ *  EnablePort: '<S109>/Enable'
+ */
+/* {S!d1550}RelationalOperator: '<S93>/Relational Operator' incorporates:
+ *  Sum: '<S93>/Sum'
+ */
+/*@>2071c*/if (/*@>6fecd*/EVSR24_ConstB./*@>8c795*/DataTypeConversion_g/*@>587af*/ <= /*@>587b3*/qY_3) {
+%if !WHITE_SPACE(tlcOutputsFcnOfS32B0)
+    /* {S!d1010}S-Function (fcgen): '<S109>/Function-Call Generator' incorporates:
+ *  SubSystem: '<S13>/wpDuty'
+ */
+    /* {S!d1522}S-Function (raptor_sfun_adjustment): '<S94>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[756e3*/",tlcOutputsFcnOfS32B0,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS32B1)
+    /* {S!d1524}S-Function (raptor_sfun_adjustment): '<S94>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[756e5*/",tlcOutputsFcnOfS32B1,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS32B2)
+    /* {S!d1526}S-Function (raptor_sfun_adjustment): '<S94>/raptor_adjustment3' */
+%<SLibCG_DumpSSCode("/*@[756e7*/",tlcOutputsFcnOfS32B2,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS32B3)
+    /* {S!d1528}S-Function (raptor_sfun_table_axis): '<S113>/raptor_table_axis_x' */
+%<SLibCG_DumpSSCode("/*@[756ea*/",tlcOutputsFcnOfS32B3,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS32B4)
+    /* {S!d1530}S-Function (raptor_sfun_table_axis): '<S113>/raptor_table_axis_y' */
+%<SLibCG_DumpSSCode("/*@[756ed*/",tlcOutputsFcnOfS32B4,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS32B5)
+    /* {S!d1532}S-Function (raptor_sfun_table_interpolate_2d): '<S113>/raptor_table_interpolate_2d' */
+%<SLibCG_DumpSSCode("/*@[756f1*/",tlcOutputsFcnOfS32B5,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS32B6)
+    /* {S!d1534}S-Function (raptor_sfun_table_axis): '<S114>/raptor_table_axis_x' */
+%<SLibCG_DumpSSCode("/*@[756f4*/",tlcOutputsFcnOfS32B6,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS32B7)
+    /* {S!d1536}S-Function (raptor_sfun_table_axis): '<S114>/raptor_table_axis_y' */
+%<SLibCG_DumpSSCode("/*@[756f7*/",tlcOutputsFcnOfS32B7,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS32B8)
+    /* {S!d1538}S-Function (raptor_sfun_table_interpolate_2d): '<S114>/raptor_table_interpolate_2d' */
+%<SLibCG_DumpSSCode("/*@[756fb*/",tlcOutputsFcnOfS32B8,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS32B9)
+    /* {S!d1540}S-Function (raptor_sfun_table_axis): '<S115>/raptor_table_axis_x' */
+%<SLibCG_DumpSSCode("/*@[756fe*/",tlcOutputsFcnOfS32B9,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS32B10)
+    /* {S!d1542}S-Function (raptor_sfun_table_axis): '<S115>/raptor_table_axis_y' */
+%<SLibCG_DumpSSCode("/*@[75701*/",tlcOutputsFcnOfS32B10,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS32B11)
+    /* {S!d1544}S-Function (raptor_sfun_table_interpolate_2d): '<S115>/raptor_table_interpolate_2d' */
+%<SLibCG_DumpSSCode("/*@[75705*/",tlcOutputsFcnOfS32B11,"/*@]*/")>\
+    /* {E!d1010}End of Outputs for S-Function (fcgen): '<S109>/Function-Call Generator' */
+
+%endif
+    /* {S!d1546}Update for UnitDelay: '<S93>/Unit Delay' incorporates:
+ *  Constant: '<S93>/Constant2'
+ *  MultiPortSwitch: '<S93>/Multiport Switch'
+ */
+    /*@>7029d*/EVSR24_DWork./*@>8c83a*/UnitDelay_DSTATE_j/*@>20383*/ = /*@>511f5*/0U;
+} else {
+    /* {S!d1548}Update for UnitDelay: '<S93>/Unit Delay' incorporates:
+ *  MultiPortSwitch: '<S93>/Multiport Switch'
+ */
+    /*@>70273*/EVSR24_DWork./*@>8c825*/UnitDelay_DSTATE_j/*@>20385*/ = /*@>58715*/qY_3;
+}
+/* {E!d1550}End of RelationalOperator: '<S93>/Relational Operator' */
+/* {E!d1009}End of Outputs for SubSystem: '<S93>/Enabled Subsystem' */
+
+/* {S!d1556}MultiPortSwitch: '<S118>/Multiport Switch' */
+/*@>5a248*/if (!/*@<4786e*//*@>51223*/rtb_RelationalOperator_mp) {
+    /* {S!d1552}Update for UnitDelay: '<S118>/Unit Delay' incorporates:
+ *  Sum: '<S118>/Sum'
+ */
+    /*@>7027f*/EVSR24_DWork./*@>8c82b*/UnitDelay_DSTATE_ip/*@>5a24b*/ = /*@>58717*/qY;
+} else {
+    /* {S!d1554}Update for UnitDelay: '<S118>/Unit Delay' incorporates:
+ *  Constant: '<S118>/Constant2'
+ */
+    /*@>70279*/EVSR24_DWork./*@>8c828*/UnitDelay_DSTATE_ip/*@>2038c*/ = /*@>511f6*/0U;
+}
+/* {E!d1556}End of MultiPortSwitch: '<S118>/Multiport Switch' */
+
+/* {S!d1562}MultiPortSwitch: '<S119>/Multiport Switch' */
+/*@>5a24d*/if (!/*@<47874*//*@>51225*/rtb_RelationalOperator_lu) {
+    /* {S!d1558}Update for UnitDelay: '<S119>/Unit Delay' incorporates:
+ *  Sum: '<S119>/Sum'
+ */
+    /*@>7028b*/EVSR24_DWork./*@>8c831*/UnitDelay_DSTATE_k/*@>5a250*/ = /*@>58719*/qY_0;
+} else {
+    /* {S!d1560}Update for UnitDelay: '<S119>/Unit Delay' incorporates:
+ *  Constant: '<S119>/Constant2'
+ */
+    /*@>70285*/EVSR24_DWork./*@>8c82e*/UnitDelay_DSTATE_k/*@>20393*/ = /*@>511f7*/0U;
+}
+/* {E!d1562}End of MultiPortSwitch: '<S119>/Multiport Switch' */
+
+/* {S!d1568}MultiPortSwitch: '<S120>/Multiport Switch' */
+/*@>5a252*/if (!/*@<4787a*//*@>51227*/rtb_RelationalOperator_i) {
+    /* {S!d1564}Update for UnitDelay: '<S120>/Unit Delay' incorporates:
+ *  Sum: '<S120>/Sum'
+ */
+    /*@>70297*/EVSR24_DWork./*@>8c837*/UnitDelay_DSTATE_o/*@>5a255*/ = /*@>5871b*/qY_1;
+} else {
+    /* {S!d1566}Update for UnitDelay: '<S120>/Unit Delay' incorporates:
+ *  Constant: '<S120>/Constant2'
+ */
+    /*@>70291*/EVSR24_DWork./*@>8c834*/UnitDelay_DSTATE_o/*@>2039a*/ = /*@>511f8*/0U;
+}
+/* {E!d1568}End of MultiPortSwitch: '<S120>/Multiport Switch' */
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B85)
+
+/* {S!d1570}S-Function (raptor_sfun_measurement): '<S136>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[75707*/",tlcOutputsFcnOfS56B85,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B86)
+/* {S!d1572}S-Function (raptor_sfun_fault_def): '<S138>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[75709*/",tlcOutputsFcnOfS56B86,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B87)
+/* {S!d1574}S-Function (raptor_sfun_fault_def): '<S138>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[7570b*/",tlcOutputsFcnOfS56B87,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B88)
+/* {S!d1576}S-Function (raptor_sfun_fault_def): '<S138>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[7570d*/",tlcOutputsFcnOfS56B88,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B89)
+/* {S!d1578}S-Function (raptor_sfun_measurement): '<S138>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[7570f*/",tlcOutputsFcnOfS56B89,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B90)
+/* {S!d1580}S-Function (raptor_sfun_fault_def): '<S139>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[75711*/",tlcOutputsFcnOfS56B90,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B91)
+/* {S!d1582}S-Function (raptor_sfun_fault_def): '<S139>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[75713*/",tlcOutputsFcnOfS56B91,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B92)
+/* {S!d1584}S-Function (raptor_sfun_fault_def): '<S139>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[75715*/",tlcOutputsFcnOfS56B92,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B93)
+/* {S!d1586}S-Function (raptor_sfun_measurement): '<S139>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[75717*/",tlcOutputsFcnOfS56B93,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B94)
+/* {S!d1588}S-Function (raptor_sfun_analog_in): '<S140>/raptor_analog_in' */
+%<SLibCG_DumpSSCode("/*@[75719*/",tlcOutputsFcnOfS56B94,"/*@]*/")>\
+%endif
+/* {S!d1590}DataTypeConversion: '<S140>/Data Type Conversion' */
+/*@>4f985*/rtb_DataTypeConversion/*@>203a7*/ = /*@>4f983*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B95)
+/* {S!d1592}S-Function (raptor_sfun_adjustment): '<S140>/raptor_adjustment3' */
+%<SLibCG_DumpSSCode("/*@[7571b*/",tlcOutputsFcnOfS56B95,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B96)
+/* {S!d1594}S-Function (raptor_sfun_adjustment): '<S140>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[7571d*/",tlcOutputsFcnOfS56B96,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B97)
+/* {S!d1596}S-Function (raptor_sfun_adjustment): '<S140>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7571f*/",tlcOutputsFcnOfS56B97,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B98)
+/* {S!d1598}S-Function (raptor_sfun_adjustment): '<S140>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75721*/",tlcOutputsFcnOfS56B98,"/*@]*/")>\
+%endif
+/* {S!d1600}Logic: '<S140>/AND2' incorporates:
+ *  Logic: '<S140>/AND'
+ *  Logic: '<S140>/AND1'
+ *  Logic: '<S140>/NOT'
+ *  RelationalOperator: '<S140>/GreaterThanOrEqual'
+ *  RelationalOperator: '<S140>/GreaterThanOrEqual1'
+ *  RelationalOperator: '<S140>/LessThanOrEqual'
+ *  RelationalOperator: '<S140>/LessThanOrEqual1'
+ *  S-Function (raptor_sfun_adjustment): '<S140>/raptor_adjustment'
+ *  S-Function (raptor_sfun_adjustment): '<S140>/raptor_adjustment1'
+ *  S-Function (raptor_sfun_adjustment): '<S140>/raptor_adjustment2'
+ *  S-Function (raptor_sfun_adjustment): '<S140>/raptor_adjustment3'
+ */
+/*@>4f9b7*/rtb_IN_breakeVoltHigh_bool/*@>203d1*/ = ((/*@>5110e*/rtb_DataTypeConversion/*@>37d8a*/ <= %<SLibCG_DumpSSCode("/*@[75723*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B95PortIdx0)),"/*@]*/")>)/*@>37907*/ && (/*@>5111d*/rtb_DataTypeConversion/*@>37d9b*/ >= %<SLibCG_DumpSSCode("/*@[75727*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B96PortIdx0)),"/*@]*/")>)/*@>203d0*/ && ((!/*@<3863f*/(/*@>5112c*/rtb_DataTypeConversion/*@>37dad*/ >= %<SLibCG_DumpSSCode("/*@[7572b*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B97PortIdx0)),"/*@]*/")>))/*@>38641*/ || (!/*@<38640*/(/*@>5113b*/rtb_DataTypeConversion/*@>37dbe*/ <= %<SLibCG_DumpSSCode("/*@[7572f*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B98PortIdx0)),"/*@]*/")>))));
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B99)
+/* {S!d1602}S-Function (raptor_sfun_fault_def): '<S140>/raptor_fault_def7' */
+%<SLibCG_DumpSSCode("/*@[75733*/",tlcOutputsFcnOfS56B99,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B100)
+/* {S!d1604}S-Function (raptor_sfun_measurement): '<S140>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[75735*/",tlcOutputsFcnOfS56B100,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B101)
+/* {S!d1606}S-Function (raptor_sfun_analog_in): '<S141>/raptor_analog_in' */
+%<SLibCG_DumpSSCode("/*@[75737*/",tlcOutputsFcnOfS56B101,"/*@]*/")>\
+%endif
+/* {S!d1608}DataTypeConversion: '<S141>/Data Type Conversion' */
+/*@>4f9e1*/rtb_DataTypeConversion/*@>203d7*/ = /*@>4f9df*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B102)
+/* {S!d1610}S-Function (raptor_sfun_adjustment): '<S141>/raptor_adjustment3' */
+%<SLibCG_DumpSSCode("/*@[75739*/",tlcOutputsFcnOfS56B102,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B103)
+/* {S!d1612}S-Function (raptor_sfun_adjustment): '<S141>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[7573b*/",tlcOutputsFcnOfS56B103,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B104)
+/* {S!d1614}S-Function (raptor_sfun_adjustment): '<S141>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7573d*/",tlcOutputsFcnOfS56B104,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B105)
+/* {S!d1616}S-Function (raptor_sfun_adjustment): '<S141>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[7573f*/",tlcOutputsFcnOfS56B105,"/*@]*/")>\
+%endif
+/* {S!d1618}Logic: '<S141>/AND2' incorporates:
+ *  Logic: '<S141>/AND'
+ *  Logic: '<S141>/AND1'
+ *  Logic: '<S141>/NOT'
+ *  RelationalOperator: '<S141>/GreaterThanOrEqual'
+ *  RelationalOperator: '<S141>/GreaterThanOrEqual1'
+ *  RelationalOperator: '<S141>/LessThanOrEqual'
+ *  RelationalOperator: '<S141>/LessThanOrEqual1'
+ *  S-Function (raptor_sfun_adjustment): '<S141>/raptor_adjustment'
+ *  S-Function (raptor_sfun_adjustment): '<S141>/raptor_adjustment1'
+ *  S-Function (raptor_sfun_adjustment): '<S141>/raptor_adjustment2'
+ *  S-Function (raptor_sfun_adjustment): '<S141>/raptor_adjustment3'
+ */
+/*@>4fa13*/rtb_IN_breakeVoltHigh_bool/*@>20401*/ = ((/*@>5114a*/rtb_DataTypeConversion/*@>37dd0*/ <= %<SLibCG_DumpSSCode("/*@[75741*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B102PortIdx0)),"/*@]*/")>)/*@>3795c*/ && (/*@>51159*/rtb_DataTypeConversion/*@>37de1*/ >= %<SLibCG_DumpSSCode("/*@[75745*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B103PortIdx0)),"/*@]*/")>)/*@>20400*/ && ((!/*@<38686*/(/*@>51168*/rtb_DataTypeConversion/*@>37df3*/ >= %<SLibCG_DumpSSCode("/*@[75749*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B104PortIdx0)),"/*@]*/")>))/*@>38688*/ || (!/*@<38687*/(/*@>51177*/rtb_DataTypeConversion/*@>37e04*/ <= %<SLibCG_DumpSSCode("/*@[7574d*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B105PortIdx0)),"/*@]*/")>))));
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B106)
+/* {S!d1620}S-Function (raptor_sfun_fault_def): '<S141>/raptor_fault_def7' */
+%<SLibCG_DumpSSCode("/*@[75751*/",tlcOutputsFcnOfS56B106,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B107)
+/* {S!d1622}S-Function (raptor_sfun_measurement): '<S141>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[75753*/",tlcOutputsFcnOfS56B107,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B108)
+/* {S!d1624}S-Function (raptor_sfun_adjustment): '<S142>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75755*/",tlcOutputsFcnOfS56B108,"/*@]*/")>\
+%endif
+/* {S!d1626}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S142>/Less Than'
+ */
+/*@>4fa3f*/rtb_raptor_digital_in_c/*@>20408*/ = (/*@>4fa3d*/rtb_DerivativeGain/*@>51321*/ < /*@>4fa3b*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B109)
+/* {S!d1628}S-Function (raptor_sfun_fault_def): '<S142>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[75757*/",tlcOutputsFcnOfS56B109,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B110)
+/* {S!d1630}S-Function (raptor_sfun_adjustment): '<S142>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75759*/",tlcOutputsFcnOfS56B110,"/*@]*/")>\
+%endif
+/* {S!d1632}RelationalOperator: '<S142>/GreaterThan' */
+/*@>4fa5e*/rtb_IN_frontLeftHallEffectHigh_bool/*@>2040e*/ = (/*@>4fa5c*/rtb_DerivativeGain/*@>5131d*/ > /*@>4fa5a*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B111)
+/* {S!d1634}S-Function (raptor_sfun_fault_def): '<S142>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[7575b*/",tlcOutputsFcnOfS56B111,"/*@]*/")>\
+%endif
+/* {S!d1636}Logic: '<S142>/OR' */
+/*@>4fa71*/rtb_IN_breakeVoltHigh_bool/*@>20415*/ = (/*@>4fa6d*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20414*/ || /*@>4fa6f*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B112)
+/* {S!d1638}S-Function (raptor_sfun_fault_def): '<S142>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[7575d*/",tlcOutputsFcnOfS56B112,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B113)
+/* {S!d1640}S-Function (raptor_sfun_adjustment): '<S143>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7575f*/",tlcOutputsFcnOfS56B113,"/*@]*/")>\
+%endif
+/* {S!d1642}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S143>/Less Than'
+ */
+/*@>4fa90*/rtb_raptor_digital_in_c/*@>2041b*/ = (/*@>4fa8e*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>51319*/ < /*@>4fa8c*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B114)
+/* {S!d1644}S-Function (raptor_sfun_fault_def): '<S143>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[75761*/",tlcOutputsFcnOfS56B114,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B115)
+/* {S!d1646}S-Function (raptor_sfun_adjustment): '<S143>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75763*/",tlcOutputsFcnOfS56B115,"/*@]*/")>\
+%endif
+/* {S!d1648}RelationalOperator: '<S143>/GreaterThan' */
+/*@>4faaf*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20421*/ = (/*@>4faad*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>51315*/ > /*@>4faab*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B116)
+/* {S!d1650}S-Function (raptor_sfun_fault_def): '<S143>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[75765*/",tlcOutputsFcnOfS56B116,"/*@]*/")>\
+%endif
+/* {S!d1652}Logic: '<S143>/OR' */
+/*@>4fac2*/rtb_IN_breakeVoltHigh_bool/*@>20428*/ = (/*@>4fabe*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20427*/ || /*@>4fac0*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B117)
+/* {S!d1654}S-Function (raptor_sfun_fault_def): '<S143>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[75767*/",tlcOutputsFcnOfS56B117,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B118)
+/* {S!d1656}S-Function (raptor_sfun_adjustment): '<S144>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75769*/",tlcOutputsFcnOfS56B118,"/*@]*/")>\
+%endif
+/* {S!d1658}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S144>/Less Than'
+ */
+/*@>4fae1*/rtb_raptor_digital_in_c/*@>2042e*/ = (/*@>4fadf*/rtb_IN_brakePos_pct_n/*@>51311*/ < /*@>4fadd*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B119)
+/* {S!d1660}S-Function (raptor_sfun_fault_def): '<S144>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[7576b*/",tlcOutputsFcnOfS56B119,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B120)
+/* {S!d1662}S-Function (raptor_sfun_adjustment): '<S144>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[7576d*/",tlcOutputsFcnOfS56B120,"/*@]*/")>\
+%endif
+/* {S!d1664}RelationalOperator: '<S144>/GreaterThan' */
+/*@>4fb00*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20434*/ = (/*@>4fafe*/rtb_IN_brakePos_pct_n/*@>5130d*/ > /*@>4fafc*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B121)
+/* {S!d1666}S-Function (raptor_sfun_fault_def): '<S144>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[7576f*/",tlcOutputsFcnOfS56B121,"/*@]*/")>\
+%endif
+/* {S!d1668}Logic: '<S144>/OR' */
+/*@>4fb13*/rtb_IN_breakeVoltHigh_bool/*@>2043b*/ = (/*@>4fb0f*/rtb_IN_frontLeftHallEffectHigh_bool/*@>2043a*/ || /*@>4fb11*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B122)
+/* {S!d1670}S-Function (raptor_sfun_fault_def): '<S144>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[75771*/",tlcOutputsFcnOfS56B122,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B123)
+/* {S!d1672}S-Function (raptor_sfun_analog_in): '<S148>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[75773*/",tlcOutputsFcnOfS56B123,"/*@]*/")>\
+%endif
+/* {S!d1674}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S148>/Data Type Conversion1'
+ */
+/*@>4fb30*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>20440*/ = /*@>4fb2e*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B124)
+/* {S!d1676}S-Function (raptor_sfun_adjustment): '<S148>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75775*/",tlcOutputsFcnOfS56B124,"/*@]*/")>\
+%endif
+/* {S!d1678}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S148>/Less Than'
+ */
+/*@>4fb42*/rtb_raptor_digital_in_c/*@>20445*/ = (/*@>4fb40*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>51309*/ < /*@>4fb3e*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B125)
+/* {S!d1680}S-Function (raptor_sfun_fault_def): '<S148>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[75777*/",tlcOutputsFcnOfS56B125,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B126)
+/* {S!d1682}S-Function (raptor_sfun_adjustment): '<S148>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75779*/",tlcOutputsFcnOfS56B126,"/*@]*/")>\
+%endif
+/* {S!d1684}RelationalOperator: '<S148>/GreaterThan' */
+/*@>4fb61*/rtb_IN_frontLeftHallEffectHigh_bool/*@>2044b*/ = (/*@>4fb5f*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>51305*/ > /*@>4fb5d*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B127)
+/* {S!d1686}S-Function (raptor_sfun_fault_def): '<S148>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[7577b*/",tlcOutputsFcnOfS56B127,"/*@]*/")>\
+%endif
+/* {S!d1688}Logic: '<S148>/OR' */
+/*@>4fb74*/rtb_IN_breakeVoltHigh_bool/*@>20452*/ = (/*@>4fb70*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20451*/ || /*@>4fb72*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B128)
+/* {S!d1690}S-Function (raptor_sfun_fault_def): '<S148>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[7577d*/",tlcOutputsFcnOfS56B128,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B129)
+/* {S!d1692}S-Function (raptor_sfun_table_axis): '<S152>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[75780*/",tlcOutputsFcnOfS56B129,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B130)
+/* {S!d1694}S-Function (raptor_sfun_table_interpolate_1d): '<S152>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[75783*/",tlcOutputsFcnOfS56B130,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B131)
+/* {S!d1696}S-Function (raptor_sfun_override): '<S148>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[75786*/",tlcOutputsFcnOfS56B131,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B132)
+/* {S!d1698}S-Function (raptor_sfun_adjustment): '<S148>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[75788*/",tlcOutputsFcnOfS56B132,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B133)
+/* {S!d1700}S-Function (raptor_sfun_analog_in): '<S149>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[7578a*/",tlcOutputsFcnOfS56B133,"/*@]*/")>\
+%endif
+/* {S!d1702}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S149>/Data Type Conversion1'
+ */
+/*@>4fbca*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>2045b*/ = /*@>4fbc8*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B134)
+/* {S!d1704}S-Function (raptor_sfun_adjustment): '<S149>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7578c*/",tlcOutputsFcnOfS56B134,"/*@]*/")>\
+%endif
+/* {S!d1706}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S149>/Less Than'
+ */
+/*@>4fbdc*/rtb_raptor_digital_in_c/*@>20460*/ = (/*@>4fbda*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>51301*/ < /*@>4fbd8*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B135)
+/* {S!d1708}S-Function (raptor_sfun_fault_def): '<S149>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[7578e*/",tlcOutputsFcnOfS56B135,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B136)
+/* {S!d1710}S-Function (raptor_sfun_adjustment): '<S149>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75790*/",tlcOutputsFcnOfS56B136,"/*@]*/")>\
+%endif
+/* {S!d1712}RelationalOperator: '<S149>/GreaterThan' */
+/*@>4fbfb*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20466*/ = (/*@>4fbf9*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512fd*/ > /*@>4fbf7*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B137)
+/* {S!d1714}S-Function (raptor_sfun_fault_def): '<S149>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[75792*/",tlcOutputsFcnOfS56B137,"/*@]*/")>\
+%endif
+/* {S!d1716}Logic: '<S149>/OR' */
+/*@>4fc0e*/rtb_IN_breakeVoltHigh_bool/*@>2046d*/ = (/*@>4fc0a*/rtb_IN_frontLeftHallEffectHigh_bool/*@>2046c*/ || /*@>4fc0c*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B138)
+/* {S!d1718}S-Function (raptor_sfun_fault_def): '<S149>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[75794*/",tlcOutputsFcnOfS56B138,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B139)
+/* {S!d1720}S-Function (raptor_sfun_table_axis): '<S153>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[75797*/",tlcOutputsFcnOfS56B139,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B140)
+/* {S!d1722}S-Function (raptor_sfun_table_interpolate_1d): '<S153>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[7579a*/",tlcOutputsFcnOfS56B140,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B141)
+/* {S!d1724}S-Function (raptor_sfun_override): '<S149>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[7579d*/",tlcOutputsFcnOfS56B141,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B142)
+/* {S!d1726}S-Function (raptor_sfun_adjustment): '<S149>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[7579f*/",tlcOutputsFcnOfS56B142,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B143)
+/* {S!d1728}S-Function (raptor_sfun_analog_in): '<S150>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[757a1*/",tlcOutputsFcnOfS56B143,"/*@]*/")>\
+%endif
+/* {S!d1730}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S150>/Data Type Conversion1'
+ */
+/*@>4fc64*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>20476*/ = /*@>4fc62*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B144)
+/* {S!d1732}S-Function (raptor_sfun_adjustment): '<S150>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[757a3*/",tlcOutputsFcnOfS56B144,"/*@]*/")>\
+%endif
+/* {S!d1734}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S150>/Less Than'
+ */
+/*@>4fc76*/rtb_raptor_digital_in_c/*@>2047b*/ = (/*@>4fc74*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512f9*/ < /*@>4fc72*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B145)
+/* {S!d1736}S-Function (raptor_sfun_fault_def): '<S150>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[757a5*/",tlcOutputsFcnOfS56B145,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B146)
+/* {S!d1738}S-Function (raptor_sfun_adjustment): '<S150>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[757a7*/",tlcOutputsFcnOfS56B146,"/*@]*/")>\
+%endif
+/* {S!d1740}RelationalOperator: '<S150>/GreaterThan' */
+/*@>4fc95*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20481*/ = (/*@>4fc93*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512f5*/ > /*@>4fc91*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B147)
+/* {S!d1742}S-Function (raptor_sfun_fault_def): '<S150>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[757a9*/",tlcOutputsFcnOfS56B147,"/*@]*/")>\
+%endif
+/* {S!d1744}Logic: '<S150>/OR' */
+/*@>4fca8*/rtb_IN_breakeVoltHigh_bool/*@>20488*/ = (/*@>4fca4*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20487*/ || /*@>4fca6*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B148)
+/* {S!d1746}S-Function (raptor_sfun_fault_def): '<S150>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[757ab*/",tlcOutputsFcnOfS56B148,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B149)
+/* {S!d1748}S-Function (raptor_sfun_table_axis): '<S154>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[757ae*/",tlcOutputsFcnOfS56B149,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B150)
+/* {S!d1750}S-Function (raptor_sfun_table_interpolate_1d): '<S154>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[757b1*/",tlcOutputsFcnOfS56B150,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B151)
+/* {S!d1752}S-Function (raptor_sfun_override): '<S150>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[757b4*/",tlcOutputsFcnOfS56B151,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B152)
+/* {S!d1754}S-Function (raptor_sfun_adjustment): '<S150>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[757b6*/",tlcOutputsFcnOfS56B152,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B153)
+/* {S!d1756}S-Function (raptor_sfun_analog_in): '<S151>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[757b8*/",tlcOutputsFcnOfS56B153,"/*@]*/")>\
+%endif
+/* {S!d1758}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S151>/Data Type Conversion1'
+ */
+/*@>4fcfe*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>20491*/ = /*@>4fcfc*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B154)
+/* {S!d1760}S-Function (raptor_sfun_adjustment): '<S151>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[757ba*/",tlcOutputsFcnOfS56B154,"/*@]*/")>\
+%endif
+/* {S!d1762}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S151>/Less Than'
+ */
+/*@>4fd10*/rtb_raptor_digital_in_c/*@>20496*/ = (/*@>4fd0e*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512f1*/ < /*@>4fd0c*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B155)
+/* {S!d1764}S-Function (raptor_sfun_fault_def): '<S151>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[757bc*/",tlcOutputsFcnOfS56B155,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B156)
+/* {S!d1766}S-Function (raptor_sfun_adjustment): '<S151>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[757be*/",tlcOutputsFcnOfS56B156,"/*@]*/")>\
+%endif
+/* {S!d1768}RelationalOperator: '<S151>/GreaterThan' */
+/*@>4fd2f*/rtb_IN_frontLeftHallEffectHigh_bool/*@>2049c*/ = (/*@>4fd2d*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512ed*/ > /*@>4fd2b*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B157)
+/* {S!d1770}S-Function (raptor_sfun_fault_def): '<S151>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[757c0*/",tlcOutputsFcnOfS56B157,"/*@]*/")>\
+%endif
+/* {S!d1772}Logic: '<S151>/OR' */
+/*@>4fd42*/rtb_IN_breakeVoltHigh_bool/*@>204a3*/ = (/*@>4fd3e*/rtb_IN_frontLeftHallEffectHigh_bool/*@>204a2*/ || /*@>4fd40*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B158)
+/* {S!d1774}S-Function (raptor_sfun_fault_def): '<S151>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[757c2*/",tlcOutputsFcnOfS56B158,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B159)
+/* {S!d1776}S-Function (raptor_sfun_table_axis): '<S155>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[757c5*/",tlcOutputsFcnOfS56B159,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B160)
+/* {S!d1778}S-Function (raptor_sfun_table_interpolate_1d): '<S155>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[757c8*/",tlcOutputsFcnOfS56B160,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B161)
+/* {S!d1780}S-Function (raptor_sfun_override): '<S151>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[757cb*/",tlcOutputsFcnOfS56B161,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B162)
+/* {S!d1782}S-Function (raptor_sfun_adjustment): '<S151>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[757cd*/",tlcOutputsFcnOfS56B162,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B163)
+/* {S!d1784}S-Function (raptor_sfun_adjustment): '<S156>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[757cf*/",tlcOutputsFcnOfS56B163,"/*@]*/")>\
+%endif
+/* {S!d1786}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  Abs: '<S156>/Abs'
+ *  RelationalOperator: '<S156>/GreaterThan'
+ *  Sum: '<S156>/Subtract'
+ */
+/*@>4fd98*/rtb_raptor_digital_in_c/*@>204b6*/ = (/*@>68f71*/fabsf(/*@>5e579*/(real32_T)(/*@>51186*/rtb_IN_throttlePos_pct/*@>37e16*/ - /*@>51188*/rtb_IN_throttlePos_pct_d))/*@>512e9*/ > /*@>4fd96*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B164)
+/* {S!d1788}S-Function (raptor_sfun_fault_def): '<S156>/raptor_fault_def2' */
+%<SLibCG_DumpSSCode("/*@[757d1*/",tlcOutputsFcnOfS56B164,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B165)
+/* {S!d1790}S-Function (raptor_sfun_fault_def): '<S157>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[757d3*/",tlcOutputsFcnOfS56B165,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B166)
+/* {S!d1792}S-Function (raptor_sfun_fault_def): '<S157>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[757d5*/",tlcOutputsFcnOfS56B166,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B167)
+/* {S!d1794}S-Function (raptor_sfun_fault_def): '<S157>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[757d7*/",tlcOutputsFcnOfS56B167,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B168)
+/* {S!d1796}S-Function (raptor_sfun_measurement): '<S157>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[757d9*/",tlcOutputsFcnOfS56B168,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B169)
+/* {S!d1798}S-Function (raptor_sfun_fault_def): '<S158>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[757db*/",tlcOutputsFcnOfS56B169,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B170)
+/* {S!d1800}S-Function (raptor_sfun_fault_def): '<S158>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[757dd*/",tlcOutputsFcnOfS56B170,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B171)
+/* {S!d1802}S-Function (raptor_sfun_fault_def): '<S158>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[757df*/",tlcOutputsFcnOfS56B171,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B172)
+/* {S!d1804}S-Function (raptor_sfun_measurement): '<S158>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[757e1*/",tlcOutputsFcnOfS56B172,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B173)
+/* {S!d1806}S-Function (raptor_sfun_analog_in): '<S159>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[757e3*/",tlcOutputsFcnOfS56B173,"/*@]*/")>\
+%endif
+/* {S!d1808}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S159>/Data Type Conversion1'
+ */
+/*@>4fe1d*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>204c3*/ = /*@>4fe1b*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B174)
+/* {S!d1810}S-Function (raptor_sfun_adjustment): '<S159>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[757e5*/",tlcOutputsFcnOfS56B174,"/*@]*/")>\
+%endif
+/* {S!d1812}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S159>/Less Than'
+ */
+/*@>4fe2f*/rtb_raptor_digital_in_c/*@>204c8*/ = (/*@>4fe2d*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512e5*/ < /*@>4fe2b*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B175)
+/* {S!d1814}S-Function (raptor_sfun_fault_def): '<S159>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[757e7*/",tlcOutputsFcnOfS56B175,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B176)
+/* {S!d1816}S-Function (raptor_sfun_adjustment): '<S159>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[757e9*/",tlcOutputsFcnOfS56B176,"/*@]*/")>\
+%endif
+/* {S!d1818}RelationalOperator: '<S159>/GreaterThan' */
+/*@>4fe4e*/rtb_IN_frontLeftHallEffectHigh_bool/*@>204ce*/ = (/*@>4fe4c*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512e1*/ > /*@>4fe4a*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B177)
+/* {S!d1820}S-Function (raptor_sfun_fault_def): '<S159>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[757eb*/",tlcOutputsFcnOfS56B177,"/*@]*/")>\
+%endif
+/* {S!d1822}Logic: '<S159>/OR' */
+/*@>4fe61*/rtb_RelationalOperator_hd/*@>204d5*/ = (/*@>4fe5d*/rtb_IN_frontLeftHallEffectHigh_bool/*@>204d4*/ || /*@>4fe5f*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B178)
+/* {S!d1824}S-Function (raptor_sfun_fault_def): '<S159>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[757ed*/",tlcOutputsFcnOfS56B178,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B179)
+/* {S!d1826}S-Function (raptor_sfun_table_axis): '<S171>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[757f0*/",tlcOutputsFcnOfS56B179,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B180)
+/* {S!d1828}S-Function (raptor_sfun_table_interpolate_1d): '<S171>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[757f3*/",tlcOutputsFcnOfS56B180,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B181)
+/* {S!d1830}S-Function (raptor_sfun_override): '<S159>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[757f6*/",tlcOutputsFcnOfS56B181,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B182)
+/* {S!d1832}S-Function (raptor_sfun_adjustment): '<S159>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[757f8*/",tlcOutputsFcnOfS56B182,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B183)
+/* {S!d1834}S-Function (raptor_sfun_analog_in): '<S160>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[757fa*/",tlcOutputsFcnOfS56B183,"/*@]*/")>\
+%endif
+/* {S!d1836}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S160>/Data Type Conversion1'
+ */
+/*@>4feb7*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>204de*/ = /*@>4feb5*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B184)
+/* {S!d1838}S-Function (raptor_sfun_adjustment): '<S160>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[757fc*/",tlcOutputsFcnOfS56B184,"/*@]*/")>\
+%endif
+/* {S!d1840}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S160>/Less Than'
+ */
+/*@>4fec9*/rtb_raptor_digital_in_c/*@>204e3*/ = (/*@>4fec7*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512dd*/ < /*@>4fec5*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B185)
+/* {S!d1842}S-Function (raptor_sfun_fault_def): '<S160>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[757fe*/",tlcOutputsFcnOfS56B185,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B186)
+/* {S!d1844}S-Function (raptor_sfun_adjustment): '<S160>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75800*/",tlcOutputsFcnOfS56B186,"/*@]*/")>\
+%endif
+/* {S!d1846}RelationalOperator: '<S160>/GreaterThan' */
+/*@>4fee8*/rtb_IN_frontLeftHallEffectHigh_bool/*@>204e9*/ = (/*@>4fee6*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512d9*/ > /*@>4fee4*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B187)
+/* {S!d1848}S-Function (raptor_sfun_fault_def): '<S160>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[75802*/",tlcOutputsFcnOfS56B187,"/*@]*/")>\
+%endif
+/* {S!d1850}Logic: '<S160>/OR' */
+/*@>4fefb*/rtb_RelationalOperator_hd/*@>204f0*/ = (/*@>4fef7*/rtb_IN_frontLeftHallEffectHigh_bool/*@>204ef*/ || /*@>4fef9*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B188)
+/* {S!d1852}S-Function (raptor_sfun_fault_def): '<S160>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[75804*/",tlcOutputsFcnOfS56B188,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B189)
+/* {S!d1854}S-Function (raptor_sfun_table_axis): '<S172>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[75807*/",tlcOutputsFcnOfS56B189,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B190)
+/* {S!d1856}S-Function (raptor_sfun_table_interpolate_1d): '<S172>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[7580a*/",tlcOutputsFcnOfS56B190,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B191)
+/* {S!d1858}S-Function (raptor_sfun_override): '<S160>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[7580d*/",tlcOutputsFcnOfS56B191,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B192)
+/* {S!d1860}S-Function (raptor_sfun_adjustment): '<S160>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[7580f*/",tlcOutputsFcnOfS56B192,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B193)
+/* {S!d1862}S-Function (raptor_sfun_analog_in): '<S161>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[75811*/",tlcOutputsFcnOfS56B193,"/*@]*/")>\
+%endif
+/* {S!d1864}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S161>/Data Type Conversion1'
+ */
+/*@>4ff51*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>204f9*/ = /*@>4ff4f*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B194)
+/* {S!d1866}S-Function (raptor_sfun_adjustment): '<S161>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75813*/",tlcOutputsFcnOfS56B194,"/*@]*/")>\
+%endif
+/* {S!d1868}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S161>/Less Than'
+ */
+/*@>4ff63*/rtb_raptor_digital_in_c/*@>204fe*/ = (/*@>4ff61*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512d5*/ < /*@>4ff5f*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B195)
+/* {S!d1870}S-Function (raptor_sfun_fault_def): '<S161>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[75815*/",tlcOutputsFcnOfS56B195,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B196)
+/* {S!d1872}S-Function (raptor_sfun_adjustment): '<S161>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75817*/",tlcOutputsFcnOfS56B196,"/*@]*/")>\
+%endif
+/* {S!d1874}RelationalOperator: '<S161>/GreaterThan' */
+/*@>4ff82*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20504*/ = (/*@>4ff80*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512d1*/ > /*@>4ff7e*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B197)
+/* {S!d1876}S-Function (raptor_sfun_fault_def): '<S161>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[75819*/",tlcOutputsFcnOfS56B197,"/*@]*/")>\
+%endif
+/* {S!d1878}Logic: '<S161>/OR' */
+/*@>4ff95*/rtb_RelationalOperator_hd/*@>2050b*/ = (/*@>4ff91*/rtb_IN_frontLeftHallEffectHigh_bool/*@>2050a*/ || /*@>4ff93*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B198)
+/* {S!d1880}S-Function (raptor_sfun_fault_def): '<S161>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[7581b*/",tlcOutputsFcnOfS56B198,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B199)
+/* {S!d1882}S-Function (raptor_sfun_table_axis): '<S173>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[7581e*/",tlcOutputsFcnOfS56B199,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B200)
+/* {S!d1884}S-Function (raptor_sfun_table_interpolate_1d): '<S173>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[75821*/",tlcOutputsFcnOfS56B200,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B201)
+/* {S!d1886}S-Function (raptor_sfun_override): '<S161>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[75824*/",tlcOutputsFcnOfS56B201,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B202)
+/* {S!d1888}S-Function (raptor_sfun_adjustment): '<S161>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[75826*/",tlcOutputsFcnOfS56B202,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B203)
+/* {S!d1890}S-Function (raptor_sfun_analog_in): '<S162>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[75828*/",tlcOutputsFcnOfS56B203,"/*@]*/")>\
+%endif
+/* {S!d1892}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S162>/Data Type Conversion1'
+ */
+/*@>4ffeb*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>20514*/ = /*@>4ffe9*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B204)
+/* {S!d1894}S-Function (raptor_sfun_adjustment): '<S162>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7582a*/",tlcOutputsFcnOfS56B204,"/*@]*/")>\
+%endif
+/* {S!d1896}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S162>/Less Than'
+ */
+/*@>4fffd*/rtb_raptor_digital_in_c/*@>20519*/ = (/*@>4fffb*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512cd*/ < /*@>4fff9*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B205)
+/* {S!d1898}S-Function (raptor_sfun_fault_def): '<S162>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[7582c*/",tlcOutputsFcnOfS56B205,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B206)
+/* {S!d1900}S-Function (raptor_sfun_adjustment): '<S162>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[7582e*/",tlcOutputsFcnOfS56B206,"/*@]*/")>\
+%endif
+/* {S!d1902}RelationalOperator: '<S162>/GreaterThan' */
+/*@>5001c*/rtb_IN_frontLeftHallEffectHigh_bool/*@>2051f*/ = (/*@>5001a*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512c9*/ > /*@>50018*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B207)
+/* {S!d1904}S-Function (raptor_sfun_fault_def): '<S162>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[75830*/",tlcOutputsFcnOfS56B207,"/*@]*/")>\
+%endif
+/* {S!d1906}Logic: '<S162>/OR' */
+/*@>5002f*/rtb_RelationalOperator_hd/*@>20526*/ = (/*@>5002b*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20525*/ || /*@>5002d*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B208)
+/* {S!d1908}S-Function (raptor_sfun_fault_def): '<S162>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[75832*/",tlcOutputsFcnOfS56B208,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B209)
+/* {S!d1910}S-Function (raptor_sfun_table_axis): '<S174>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[75835*/",tlcOutputsFcnOfS56B209,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B210)
+/* {S!d1912}S-Function (raptor_sfun_table_interpolate_1d): '<S174>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[75838*/",tlcOutputsFcnOfS56B210,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B211)
+/* {S!d1914}S-Function (raptor_sfun_override): '<S162>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[7583b*/",tlcOutputsFcnOfS56B211,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B212)
+/* {S!d1916}S-Function (raptor_sfun_adjustment): '<S162>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[7583d*/",tlcOutputsFcnOfS56B212,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B213)
+/* {S!d1918}S-Function (raptor_sfun_analog_in): '<S163>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[7583f*/",tlcOutputsFcnOfS56B213,"/*@]*/")>\
+%endif
+/* {S!d1920}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S163>/Data Type Conversion1'
+ */
+/*@>50085*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>2052f*/ = /*@>50083*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B214)
+/* {S!d1922}S-Function (raptor_sfun_adjustment): '<S163>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75841*/",tlcOutputsFcnOfS56B214,"/*@]*/")>\
+%endif
+/* {S!d1924}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S163>/Less Than'
+ */
+/*@>50097*/rtb_raptor_digital_in_c/*@>20534*/ = (/*@>50095*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512c5*/ < /*@>50093*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B215)
+/* {S!d1926}S-Function (raptor_sfun_fault_def): '<S163>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[75843*/",tlcOutputsFcnOfS56B215,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B216)
+/* {S!d1928}S-Function (raptor_sfun_adjustment): '<S163>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75845*/",tlcOutputsFcnOfS56B216,"/*@]*/")>\
+%endif
+/* {S!d1930}RelationalOperator: '<S163>/GreaterThan' */
+/*@>500b6*/rtb_IN_frontLeftHallEffectHigh_bool/*@>2053a*/ = (/*@>500b4*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512c1*/ > /*@>500b2*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B217)
+/* {S!d1932}S-Function (raptor_sfun_fault_def): '<S163>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[75847*/",tlcOutputsFcnOfS56B217,"/*@]*/")>\
+%endif
+/* {S!d1934}Logic: '<S163>/OR' */
+/*@>500c9*/rtb_RelationalOperator_hd/*@>20541*/ = (/*@>500c5*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20540*/ || /*@>500c7*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B218)
+/* {S!d1936}S-Function (raptor_sfun_fault_def): '<S163>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[75849*/",tlcOutputsFcnOfS56B218,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B219)
+/* {S!d1938}S-Function (raptor_sfun_table_axis): '<S175>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[7584c*/",tlcOutputsFcnOfS56B219,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B220)
+/* {S!d1940}S-Function (raptor_sfun_table_interpolate_1d): '<S175>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[7584f*/",tlcOutputsFcnOfS56B220,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B221)
+/* {S!d1942}S-Function (raptor_sfun_override): '<S163>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[75852*/",tlcOutputsFcnOfS56B221,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B222)
+/* {S!d1944}S-Function (raptor_sfun_adjustment): '<S163>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[75854*/",tlcOutputsFcnOfS56B222,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B223)
+/* {S!d1946}S-Function (raptor_sfun_analog_in): '<S164>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[75856*/",tlcOutputsFcnOfS56B223,"/*@]*/")>\
+%endif
+/* {S!d1948}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S164>/Data Type Conversion1'
+ */
+/*@>5011f*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>2054a*/ = /*@>5011d*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B224)
+/* {S!d1950}S-Function (raptor_sfun_adjustment): '<S164>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75858*/",tlcOutputsFcnOfS56B224,"/*@]*/")>\
+%endif
+/* {S!d1952}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S164>/Less Than'
+ */
+/*@>50131*/rtb_raptor_digital_in_c/*@>2054f*/ = (/*@>5012f*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512bd*/ < /*@>5012d*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B225)
+/* {S!d1954}S-Function (raptor_sfun_fault_def): '<S164>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[7585a*/",tlcOutputsFcnOfS56B225,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B226)
+/* {S!d1956}S-Function (raptor_sfun_adjustment): '<S164>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[7585c*/",tlcOutputsFcnOfS56B226,"/*@]*/")>\
+%endif
+/* {S!d1958}RelationalOperator: '<S164>/GreaterThan' */
+/*@>50150*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20555*/ = (/*@>5014e*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512b9*/ > /*@>5014c*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B227)
+/* {S!d1960}S-Function (raptor_sfun_fault_def): '<S164>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[7585e*/",tlcOutputsFcnOfS56B227,"/*@]*/")>\
+%endif
+/* {S!d1962}Logic: '<S164>/OR' */
+/*@>50163*/rtb_RelationalOperator_hd/*@>2055c*/ = (/*@>5015f*/rtb_IN_frontLeftHallEffectHigh_bool/*@>2055b*/ || /*@>50161*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B228)
+/* {S!d1964}S-Function (raptor_sfun_fault_def): '<S164>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[75860*/",tlcOutputsFcnOfS56B228,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B229)
+/* {S!d1966}S-Function (raptor_sfun_table_axis): '<S176>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[75863*/",tlcOutputsFcnOfS56B229,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B230)
+/* {S!d1968}S-Function (raptor_sfun_table_interpolate_1d): '<S176>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[75866*/",tlcOutputsFcnOfS56B230,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B231)
+/* {S!d1970}S-Function (raptor_sfun_override): '<S164>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[75869*/",tlcOutputsFcnOfS56B231,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B232)
+/* {S!d1972}S-Function (raptor_sfun_adjustment): '<S164>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[7586b*/",tlcOutputsFcnOfS56B232,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B233)
+/* {S!d1974}S-Function (raptor_sfun_analog_in): '<S165>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[7586d*/",tlcOutputsFcnOfS56B233,"/*@]*/")>\
+%endif
+/* {S!d1976}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S165>/Data Type Conversion1'
+ */
+/*@>501b9*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>20565*/ = /*@>501b7*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B234)
+/* {S!d1978}S-Function (raptor_sfun_adjustment): '<S165>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7586f*/",tlcOutputsFcnOfS56B234,"/*@]*/")>\
+%endif
+/* {S!d1980}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S165>/Less Than'
+ */
+/*@>501cb*/rtb_raptor_digital_in_c/*@>2056a*/ = (/*@>501c9*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512b5*/ < /*@>501c7*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B235)
+/* {S!d1982}S-Function (raptor_sfun_fault_def): '<S165>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[75871*/",tlcOutputsFcnOfS56B235,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B236)
+/* {S!d1984}S-Function (raptor_sfun_adjustment): '<S165>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75873*/",tlcOutputsFcnOfS56B236,"/*@]*/")>\
+%endif
+/* {S!d1986}RelationalOperator: '<S165>/GreaterThan' */
+/*@>501ea*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20570*/ = (/*@>501e8*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512b1*/ > /*@>501e6*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B237)
+/* {S!d1988}S-Function (raptor_sfun_fault_def): '<S165>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[75875*/",tlcOutputsFcnOfS56B237,"/*@]*/")>\
+%endif
+/* {S!d1990}Logic: '<S165>/OR' */
+/*@>501fd*/rtb_RelationalOperator_hd/*@>20577*/ = (/*@>501f9*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20576*/ || /*@>501fb*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B238)
+/* {S!d1992}S-Function (raptor_sfun_fault_def): '<S165>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[75877*/",tlcOutputsFcnOfS56B238,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B239)
+/* {S!d1994}S-Function (raptor_sfun_table_axis): '<S177>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[7587a*/",tlcOutputsFcnOfS56B239,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B240)
+/* {S!d1996}S-Function (raptor_sfun_table_interpolate_1d): '<S177>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[7587d*/",tlcOutputsFcnOfS56B240,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B241)
+/* {S!d1998}S-Function (raptor_sfun_override): '<S165>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[75880*/",tlcOutputsFcnOfS56B241,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B242)
+/* {S!d2000}S-Function (raptor_sfun_adjustment): '<S165>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[75882*/",tlcOutputsFcnOfS56B242,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B243)
+/* {S!d2002}S-Function (raptor_sfun_analog_in): '<S166>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[75884*/",tlcOutputsFcnOfS56B243,"/*@]*/")>\
+%endif
+/* {S!d2004}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S166>/Data Type Conversion1'
+ */
+/*@>50253*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>20580*/ = /*@>50251*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B244)
+/* {S!d2006}S-Function (raptor_sfun_adjustment): '<S166>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75886*/",tlcOutputsFcnOfS56B244,"/*@]*/")>\
+%endif
+/* {S!d2008}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S166>/Less Than'
+ */
+/*@>50265*/rtb_raptor_digital_in_c/*@>20585*/ = (/*@>50263*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512ad*/ < /*@>50261*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B245)
+/* {S!d2010}S-Function (raptor_sfun_fault_def): '<S166>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[75888*/",tlcOutputsFcnOfS56B245,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B246)
+/* {S!d2012}S-Function (raptor_sfun_adjustment): '<S166>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[7588a*/",tlcOutputsFcnOfS56B246,"/*@]*/")>\
+%endif
+/* {S!d2014}RelationalOperator: '<S166>/GreaterThan' */
+/*@>50284*/rtb_IN_frontLeftHallEffectHigh_bool/*@>2058b*/ = (/*@>50282*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512a9*/ > /*@>50280*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B247)
+/* {S!d2016}S-Function (raptor_sfun_fault_def): '<S166>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[7588c*/",tlcOutputsFcnOfS56B247,"/*@]*/")>\
+%endif
+/* {S!d2018}Logic: '<S166>/OR' */
+/*@>50297*/rtb_RelationalOperator_hd/*@>20592*/ = (/*@>50293*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20591*/ || /*@>50295*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B248)
+/* {S!d2020}S-Function (raptor_sfun_fault_def): '<S166>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[7588e*/",tlcOutputsFcnOfS56B248,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B249)
+/* {S!d2022}S-Function (raptor_sfun_table_axis): '<S178>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[75891*/",tlcOutputsFcnOfS56B249,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B250)
+/* {S!d2024}S-Function (raptor_sfun_table_interpolate_1d): '<S178>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[75894*/",tlcOutputsFcnOfS56B250,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B251)
+/* {S!d2026}S-Function (raptor_sfun_override): '<S166>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[75897*/",tlcOutputsFcnOfS56B251,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B252)
+/* {S!d2028}S-Function (raptor_sfun_adjustment): '<S166>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[75899*/",tlcOutputsFcnOfS56B252,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B253)
+/* {S!d2030}S-Function (raptor_sfun_analog_in): '<S167>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[7589b*/",tlcOutputsFcnOfS56B253,"/*@]*/")>\
+%endif
+/* {S!d2032}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S167>/Data Type Conversion1'
+ */
+/*@>502ed*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>2059b*/ = /*@>502eb*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B254)
+/* {S!d2034}S-Function (raptor_sfun_adjustment): '<S167>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7589d*/",tlcOutputsFcnOfS56B254,"/*@]*/")>\
+%endif
+/* {S!d2036}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S167>/Less Than'
+ */
+/*@>502ff*/rtb_raptor_digital_in_c/*@>205a0*/ = (/*@>502fd*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512a5*/ < /*@>502fb*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B255)
+/* {S!d2038}S-Function (raptor_sfun_fault_def): '<S167>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[7589f*/",tlcOutputsFcnOfS56B255,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B256)
+/* {S!d2040}S-Function (raptor_sfun_adjustment): '<S167>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[758a1*/",tlcOutputsFcnOfS56B256,"/*@]*/")>\
+%endif
+/* {S!d2042}RelationalOperator: '<S167>/GreaterThan' */
+/*@>5031e*/rtb_IN_frontLeftHallEffectHigh_bool/*@>205a6*/ = (/*@>5031c*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>512a1*/ > /*@>5031a*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B257)
+/* {S!d2044}S-Function (raptor_sfun_fault_def): '<S167>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[758a3*/",tlcOutputsFcnOfS56B257,"/*@]*/")>\
+%endif
+/* {S!d2046}Logic: '<S167>/OR' */
+/*@>50331*/rtb_RelationalOperator_hd/*@>205ad*/ = (/*@>5032d*/rtb_IN_frontLeftHallEffectHigh_bool/*@>205ac*/ || /*@>5032f*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B258)
+/* {S!d2048}S-Function (raptor_sfun_fault_def): '<S167>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[758a5*/",tlcOutputsFcnOfS56B258,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B259)
+/* {S!d2050}S-Function (raptor_sfun_table_axis): '<S179>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[758a8*/",tlcOutputsFcnOfS56B259,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B260)
+/* {S!d2052}S-Function (raptor_sfun_table_interpolate_1d): '<S179>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[758ab*/",tlcOutputsFcnOfS56B260,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B261)
+/* {S!d2054}S-Function (raptor_sfun_override): '<S167>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[758ae*/",tlcOutputsFcnOfS56B261,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B262)
+/* {S!d2056}S-Function (raptor_sfun_adjustment): '<S167>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[758b0*/",tlcOutputsFcnOfS56B262,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B263)
+/* {S!d2058}S-Function (raptor_sfun_analog_in): '<S168>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[758b2*/",tlcOutputsFcnOfS56B263,"/*@]*/")>\
+%endif
+/* {S!d2060}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S168>/Data Type Conversion1'
+ */
+/*@>50387*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>205b6*/ = /*@>50385*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B264)
+/* {S!d2062}S-Function (raptor_sfun_adjustment): '<S168>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[758b4*/",tlcOutputsFcnOfS56B264,"/*@]*/")>\
+%endif
+/* {S!d2064}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S168>/Less Than'
+ */
+/*@>50399*/rtb_raptor_digital_in_c/*@>205bb*/ = (/*@>50397*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>5129d*/ < /*@>50395*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B265)
+/* {S!d2066}S-Function (raptor_sfun_fault_def): '<S168>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[758b6*/",tlcOutputsFcnOfS56B265,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B266)
+/* {S!d2068}S-Function (raptor_sfun_adjustment): '<S168>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[758b8*/",tlcOutputsFcnOfS56B266,"/*@]*/")>\
+%endif
+/* {S!d2070}RelationalOperator: '<S168>/GreaterThan' */
+/*@>503b8*/rtb_IN_frontLeftHallEffectHigh_bool/*@>205c1*/ = (/*@>503b6*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>51299*/ > /*@>503b4*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B267)
+/* {S!d2072}S-Function (raptor_sfun_fault_def): '<S168>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[758ba*/",tlcOutputsFcnOfS56B267,"/*@]*/")>\
+%endif
+/* {S!d2074}Logic: '<S168>/OR' */
+/*@>503cb*/rtb_RelationalOperator_hd/*@>205c8*/ = (/*@>503c7*/rtb_IN_frontLeftHallEffectHigh_bool/*@>205c7*/ || /*@>503c9*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B268)
+/* {S!d2076}S-Function (raptor_sfun_fault_def): '<S168>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[758bc*/",tlcOutputsFcnOfS56B268,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B269)
+/* {S!d2078}S-Function (raptor_sfun_table_axis): '<S180>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[758bf*/",tlcOutputsFcnOfS56B269,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B270)
+/* {S!d2080}S-Function (raptor_sfun_table_interpolate_1d): '<S180>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[758c2*/",tlcOutputsFcnOfS56B270,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B271)
+/* {S!d2082}S-Function (raptor_sfun_override): '<S168>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[758c5*/",tlcOutputsFcnOfS56B271,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B272)
+/* {S!d2084}S-Function (raptor_sfun_adjustment): '<S168>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[758c7*/",tlcOutputsFcnOfS56B272,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B273)
+/* {S!d2086}S-Function (raptor_sfun_analog_in): '<S169>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[758c9*/",tlcOutputsFcnOfS56B273,"/*@]*/")>\
+%endif
+/* {S!d2088}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S169>/Data Type Conversion1'
+ */
+/*@>50421*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>205d1*/ = /*@>5041f*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B274)
+/* {S!d2090}S-Function (raptor_sfun_adjustment): '<S169>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[758cb*/",tlcOutputsFcnOfS56B274,"/*@]*/")>\
+%endif
+/* {S!d2092}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S169>/Less Than'
+ */
+/*@>50433*/rtb_raptor_digital_in_c/*@>205d6*/ = (/*@>50431*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>51295*/ < /*@>5042f*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B275)
+/* {S!d2094}S-Function (raptor_sfun_fault_def): '<S169>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[758cd*/",tlcOutputsFcnOfS56B275,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B276)
+/* {S!d2096}S-Function (raptor_sfun_adjustment): '<S169>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[758cf*/",tlcOutputsFcnOfS56B276,"/*@]*/")>\
+%endif
+/* {S!d2098}RelationalOperator: '<S169>/GreaterThan' */
+/*@>50452*/rtb_IN_frontLeftHallEffectHigh_bool/*@>205dc*/ = (/*@>50450*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>51291*/ > /*@>5044e*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B277)
+/* {S!d2100}S-Function (raptor_sfun_fault_def): '<S169>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[758d1*/",tlcOutputsFcnOfS56B277,"/*@]*/")>\
+%endif
+/* {S!d2102}Logic: '<S169>/OR' */
+/*@>50465*/rtb_RelationalOperator_hd/*@>205e3*/ = (/*@>50461*/rtb_IN_frontLeftHallEffectHigh_bool/*@>205e2*/ || /*@>50463*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B278)
+/* {S!d2104}S-Function (raptor_sfun_fault_def): '<S169>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[758d3*/",tlcOutputsFcnOfS56B278,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B279)
+/* {S!d2106}S-Function (raptor_sfun_table_axis): '<S181>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[758d6*/",tlcOutputsFcnOfS56B279,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B280)
+/* {S!d2108}S-Function (raptor_sfun_table_interpolate_1d): '<S181>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[758d9*/",tlcOutputsFcnOfS56B280,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B281)
+/* {S!d2110}S-Function (raptor_sfun_override): '<S169>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[758dc*/",tlcOutputsFcnOfS56B281,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B282)
+/* {S!d2112}S-Function (raptor_sfun_adjustment): '<S169>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[758de*/",tlcOutputsFcnOfS56B282,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B283)
+/* {S!d2114}S-Function (raptor_sfun_analog_in): '<S170>/raptor_analog_in1' */
+%<SLibCG_DumpSSCode("/*@[758e0*/",tlcOutputsFcnOfS56B283,"/*@]*/")>\
+%endif
+/* {S!d2116}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S170>/Data Type Conversion1'
+ */
+/*@>504bb*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>205ec*/ = /*@>504b9*/rtb_IN_tireTemp_v;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B284)
+/* {S!d2118}S-Function (raptor_sfun_adjustment): '<S170>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[758e2*/",tlcOutputsFcnOfS56B284,"/*@]*/")>\
+%endif
+/* {S!d2120}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S170>/Less Than'
+ */
+/*@>504cd*/rtb_raptor_digital_in_c/*@>205f1*/ = (/*@>504cb*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>5128d*/ < /*@>504c9*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B285)
+/* {S!d2122}S-Function (raptor_sfun_fault_def): '<S170>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[758e4*/",tlcOutputsFcnOfS56B285,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B286)
+/* {S!d2124}S-Function (raptor_sfun_adjustment): '<S170>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[758e6*/",tlcOutputsFcnOfS56B286,"/*@]*/")>\
+%endif
+/* {S!d2126}RelationalOperator: '<S170>/GreaterThan' */
+/*@>504ec*/rtb_IN_frontLeftHallEffectHigh_bool/*@>205f7*/ = (/*@>504ea*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>51289*/ > /*@>504e8*/rtb_raptor_data_read_b);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B287)
+/* {S!d2128}S-Function (raptor_sfun_fault_def): '<S170>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[758e8*/",tlcOutputsFcnOfS56B287,"/*@]*/")>\
+%endif
+/* {S!d2130}Logic: '<S170>/OR' */
+/*@>504ff*/rtb_RelationalOperator_hd/*@>205fe*/ = (/*@>504fb*/rtb_IN_frontLeftHallEffectHigh_bool/*@>205fd*/ || /*@>504fd*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B288)
+/* {S!d2132}S-Function (raptor_sfun_fault_def): '<S170>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[758ea*/",tlcOutputsFcnOfS56B288,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B289)
+/* {S!d2134}S-Function (raptor_sfun_table_axis): '<S182>/raptor_table_axis' */
+%<SLibCG_DumpSSCode("/*@[758ed*/",tlcOutputsFcnOfS56B289,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B290)
+/* {S!d2136}S-Function (raptor_sfun_table_interpolate_1d): '<S182>/raptor_table_interpolate_1d' */
+%<SLibCG_DumpSSCode("/*@[758f0*/",tlcOutputsFcnOfS56B290,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B291)
+/* {S!d2138}S-Function (raptor_sfun_override): '<S170>/raptor_override1' */
+%<SLibCG_DumpSSCode("/*@[758f3*/",tlcOutputsFcnOfS56B291,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B292)
+/* {S!d2140}S-Function (raptor_sfun_adjustment): '<S170>/raptor_adjustment2' */
+%<SLibCG_DumpSSCode("/*@[758f5*/",tlcOutputsFcnOfS56B292,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B293)
+/* {S!d2142}S-Function (raptor_sfun_adjustment): '<S183>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[758f7*/",tlcOutputsFcnOfS56B293,"/*@]*/")>\
+%endif
+/* {S!d2144}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  RelationalOperator: '<S183>/Less Than1'
+ *  S-Function (raptor_sfun_adjustment): '<S183>/raptor_adjustment'
+ */
+/*@>50555*/rtb_raptor_digital_in_c/*@>20608*/ = (/*@>50553*/rtb_Switch_j/*@>20607*/ < %<SLibCG_DumpSSCode("/*@[758f9*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B293PortIdx0)),"/*@]*/")>);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B294)
+/* {S!d2146}S-Function (raptor_sfun_fault_def): '<S183>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[758fd*/",tlcOutputsFcnOfS56B294,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B295)
+/* {S!d2148}S-Function (raptor_sfun_adjustment): '<S183>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[758ff*/",tlcOutputsFcnOfS56B295,"/*@]*/")>\
+%endif
+/* {S!d2150}RelationalOperator: '<S183>/GreaterThan1' incorporates:
+ *  S-Function (raptor_sfun_adjustment): '<S183>/raptor_adjustment1'
+ */
+/*@>50572*/rtb_IN_frontLeftHallEffectHigh_bool/*@>2060e*/ = (/*@>50570*/rtb_Switch_j/*@>2060d*/ > %<SLibCG_DumpSSCode("/*@[75901*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B295PortIdx0)),"/*@]*/")>);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B296)
+/* {S!d2152}S-Function (raptor_sfun_fault_def): '<S183>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[75905*/",tlcOutputsFcnOfS56B296,"/*@]*/")>\
+%endif
+/* {S!d2154}Logic: '<S183>/OR' */
+/*@>50585*/rtb_RelationalOperator_hd/*@>20615*/ = (/*@>50581*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20614*/ || /*@>50583*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B297)
+/* {S!d2156}S-Function (raptor_sfun_fault_def): '<S183>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[75907*/",tlcOutputsFcnOfS56B297,"/*@]*/")>\
+%endif
+/* {S!d2158}Gain: '<S183>/Gain' */
+/*@>50596*/rtb_raptor_data_read_b/*@>2061e*/ = /*@>511f9*/0.0166666675F/*@>51284*/ * /*@>50594*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin;
+/* {S!d2160}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S183>/Data Type Conversion1'
+ */
+/*@>5059a*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>20621*/ = /*@>50598*/rtb_raptor_data_read_b;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B298)
+/* {S!d2162}S-Function (raptor_sfun_measurement): '<S183>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[75909*/",tlcOutputsFcnOfS56B298,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B299)
+/* {S!d2164}S-Function (raptor_sfun_data_read): '<S183>/raptor_data_read' */
+%<SLibCG_DumpSSCode("/*@[7590b*/",tlcOutputsFcnOfS56B299,"/*@]*/")>\
+%endif
+/* {S!d2166}Product: '<S186>/Product' incorporates:
+ *  Constant: '<S183>/Constant'
+ *  Product: '<S183>/Product'
+ */
+/*@>505b7*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>2062a*/ = /*@>505b5*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin/*@>51280*/ * /*@>511fa*/6.2831853071795862;
+/* {S!d2168}Product: '<S183>/Product1' */
+/*@>505bd*/rtb_DerivativeGain/*@>20631*/ = /*@>505b9*/rtb_raptor_data_read_b/*@>5127c*/ * /*@>505bb*/rtb_IN_frontLeftWheelSpeed_radiansPerSec;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B300)
+/* {S!d2170}S-Function (raptor_sfun_measurement): '<S183>/raptor_measurement1' */
+%<SLibCG_DumpSSCode("/*@[7590d*/",tlcOutputsFcnOfS56B300,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B301)
+/* {S!d2172}S-Function (raptor_sfun_measurement): '<S183>/raptor_measurement2' */
+%<SLibCG_DumpSSCode("/*@[7590f*/",tlcOutputsFcnOfS56B301,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B302)
+/* {S!d2174}S-Function (raptor_sfun_adjustment): '<S184>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75911*/",tlcOutputsFcnOfS56B302,"/*@]*/")>\
+%endif
+/* {S!d2176}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  DataTypeConversion: '<S184>/Data Type Conversion'
+ *  RelationalOperator: '<S184>/Less Than1'
+ *  S-Function (raptor_sfun_adjustment): '<S184>/raptor_adjustment'
+ */
+/*@>505e7*/rtb_raptor_digital_in_c/*@>20638*/ = (/*@>64c2b*/rtb_DataTypeConversion_j/*@>20637*/ < %<SLibCG_DumpSSCode("/*@[75913*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B302PortIdx0)),"/*@]*/")>);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B303)
+/* {S!d2178}S-Function (raptor_sfun_fault_def): '<S184>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[75917*/",tlcOutputsFcnOfS56B303,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B304)
+/* {S!d2180}S-Function (raptor_sfun_adjustment): '<S184>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75919*/",tlcOutputsFcnOfS56B304,"/*@]*/")>\
+%endif
+/* {S!d2182}RelationalOperator: '<S184>/GreaterThan1' incorporates:
+ *  DataTypeConversion: '<S184>/Data Type Conversion'
+ *  S-Function (raptor_sfun_adjustment): '<S184>/raptor_adjustment1'
+ */
+/*@>50604*/rtb_IN_frontLeftHallEffectHigh_bool/*@>2063e*/ = (/*@>64c2d*/rtb_DataTypeConversion_j/*@>2063d*/ > %<SLibCG_DumpSSCode("/*@[7591b*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B304PortIdx0)),"/*@]*/")>);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B305)
+/* {S!d2184}S-Function (raptor_sfun_fault_def): '<S184>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[7591f*/",tlcOutputsFcnOfS56B305,"/*@]*/")>\
+%endif
+/* {S!d2186}Logic: '<S184>/OR' */
+/*@>50617*/rtb_RelationalOperator_hd/*@>20645*/ = (/*@>50613*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20644*/ || /*@>50615*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B306)
+/* {S!d2188}S-Function (raptor_sfun_fault_def): '<S184>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[75921*/",tlcOutputsFcnOfS56B306,"/*@]*/")>\
+%endif
+/* {S!d2190}Gain: '<S184>/Gain' */
+/*@>50628*/rtb_raptor_data_read_b/*@>2064e*/ = /*@>511fb*/0.0166666675F/*@>51278*/ * /*@>50626*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_p;
+/* {S!d2192}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S184>/Data Type Conversion1'
+ */
+/*@>5062c*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>20651*/ = /*@>5062a*/rtb_raptor_data_read_b;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B307)
+/* {S!d2194}S-Function (raptor_sfun_measurement): '<S184>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[75923*/",tlcOutputsFcnOfS56B307,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B308)
+/* {S!d2196}S-Function (raptor_sfun_data_read): '<S184>/raptor_data_read' */
+%<SLibCG_DumpSSCode("/*@[75925*/",tlcOutputsFcnOfS56B308,"/*@]*/")>\
+%endif
+/* {S!d2198}Product: '<S186>/Product' incorporates:
+ *  Constant: '<S184>/Constant'
+ *  Product: '<S184>/Product'
+ */
+/*@>50649*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>2065a*/ = /*@>50647*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_p/*@>51274*/ * /*@>511fc*/6.2831853071795862;
+/* {S!d2200}Product: '<S184>/Product1' */
+/*@>5064f*/rtb_DerivativeGain/*@>20661*/ = /*@>5064b*/rtb_raptor_data_read_b/*@>51270*/ * /*@>5064d*/rtb_IN_frontLeftWheelSpeed_radiansPerSec;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B309)
+/* {S!d2202}S-Function (raptor_sfun_measurement): '<S184>/raptor_measurement1' */
+%<SLibCG_DumpSSCode("/*@[75927*/",tlcOutputsFcnOfS56B309,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B310)
+/* {S!d2204}S-Function (raptor_sfun_measurement): '<S184>/raptor_measurement2' */
+%<SLibCG_DumpSSCode("/*@[75929*/",tlcOutputsFcnOfS56B310,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B311)
+/* {S!d2206}S-Function (raptor_sfun_adjustment): '<S185>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7592b*/",tlcOutputsFcnOfS56B311,"/*@]*/")>\
+%endif
+/* {S!d2208}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  DataTypeConversion: '<S185>/Data Type Conversion'
+ *  RelationalOperator: '<S185>/Less Than1'
+ *  S-Function (raptor_sfun_adjustment): '<S185>/raptor_adjustment'
+ */
+/*@>50679*/rtb_raptor_digital_in_c/*@>20668*/ = (/*@>64c2f*/rtb_DataTypeConversion_kr_tmp_tmp/*@>20667*/ < %<SLibCG_DumpSSCode("/*@[7592d*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B311PortIdx0)),"/*@]*/")>);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B312)
+/* {S!d2210}S-Function (raptor_sfun_fault_def): '<S185>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[75931*/",tlcOutputsFcnOfS56B312,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B313)
+/* {S!d2212}S-Function (raptor_sfun_adjustment): '<S185>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[75933*/",tlcOutputsFcnOfS56B313,"/*@]*/")>\
+%endif
+/* {S!d2214}RelationalOperator: '<S185>/GreaterThan1' incorporates:
+ *  DataTypeConversion: '<S185>/Data Type Conversion'
+ *  S-Function (raptor_sfun_adjustment): '<S185>/raptor_adjustment1'
+ */
+/*@>50696*/rtb_IN_frontLeftHallEffectHigh_bool/*@>2066e*/ = (/*@>64c31*/rtb_DataTypeConversion_kr_tmp_tmp/*@>2066d*/ > %<SLibCG_DumpSSCode("/*@[75935*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B313PortIdx0)),"/*@]*/")>);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B314)
+/* {S!d2216}S-Function (raptor_sfun_fault_def): '<S185>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[75939*/",tlcOutputsFcnOfS56B314,"/*@]*/")>\
+%endif
+/* {S!d2218}Logic: '<S185>/OR' */
+/*@>506a9*/rtb_RelationalOperator_hd/*@>20675*/ = (/*@>506a5*/rtb_IN_frontLeftHallEffectHigh_bool/*@>20674*/ || /*@>506a7*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B315)
+/* {S!d2220}S-Function (raptor_sfun_fault_def): '<S185>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[7593b*/",tlcOutputsFcnOfS56B315,"/*@]*/")>\
+%endif
+/* {S!d2222}Gain: '<S185>/Gain' */
+/*@>506ba*/rtb_raptor_data_read_b/*@>2067e*/ = /*@>511fd*/0.0166666675F/*@>5126c*/ * /*@>506b8*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_o;
+/* {S!d2224}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S185>/Data Type Conversion1'
+ */
+/*@>506be*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>20681*/ = /*@>506bc*/rtb_raptor_data_read_b;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B316)
+/* {S!d2226}S-Function (raptor_sfun_measurement): '<S185>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[7593d*/",tlcOutputsFcnOfS56B316,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B317)
+/* {S!d2228}S-Function (raptor_sfun_data_read): '<S185>/raptor_data_read' */
+%<SLibCG_DumpSSCode("/*@[7593f*/",tlcOutputsFcnOfS56B317,"/*@]*/")>\
+%endif
+/* {S!d2230}Product: '<S186>/Product' incorporates:
+ *  Constant: '<S185>/Constant'
+ *  Product: '<S185>/Product'
+ */
+/*@>506db*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>2068a*/ = /*@>506d9*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_o/*@>51268*/ * /*@>511fe*/6.2831853071795862;
+/* {S!d2232}Product: '<S185>/Product1' */
+/*@>506e1*/rtb_DerivativeGain/*@>20691*/ = /*@>506dd*/rtb_raptor_data_read_b/*@>51264*/ * /*@>506df*/rtb_IN_frontLeftWheelSpeed_radiansPerSec;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B318)
+/* {S!d2234}S-Function (raptor_sfun_measurement): '<S185>/raptor_measurement1' */
+%<SLibCG_DumpSSCode("/*@[75941*/",tlcOutputsFcnOfS56B318,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B319)
+/* {S!d2236}S-Function (raptor_sfun_measurement): '<S185>/raptor_measurement2' */
+%<SLibCG_DumpSSCode("/*@[75943*/",tlcOutputsFcnOfS56B319,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B320)
+/* {S!d2238}S-Function (raptor_sfun_adjustment): '<S186>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75945*/",tlcOutputsFcnOfS56B320,"/*@]*/")>\
+%endif
+/* {S!d2240}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' incorporates:
+ *  DataTypeConversion: '<S186>/Data Type Conversion'
+ *  RelationalOperator: '<S186>/Less Than1'
+ *  S-Function (raptor_sfun_adjustment): '<S186>/raptor_adjustment'
+ */
+/*@>5070b*/rtb_raptor_digital_in_c/*@>20698*/ = (/*@>64c33*/rtb_DataTypeConversion_b_tmp_tmp/*@>20697*/ < %<SLibCG_DumpSSCode("/*@[75947*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B320PortIdx0)),"/*@]*/")>);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B321)
+/* {S!d2242}S-Function (raptor_sfun_fault_def): '<S186>/raptor_fault_def' */
+%<SLibCG_DumpSSCode("/*@[7594b*/",tlcOutputsFcnOfS56B321,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B322)
+/* {S!d2244}S-Function (raptor_sfun_adjustment): '<S186>/raptor_adjustment1' */
+%<SLibCG_DumpSSCode("/*@[7594d*/",tlcOutputsFcnOfS56B322,"/*@]*/")>\
+%endif
+/* {S!d2246}RelationalOperator: '<S186>/GreaterThan1' incorporates:
+ *  DataTypeConversion: '<S186>/Data Type Conversion'
+ *  S-Function (raptor_sfun_adjustment): '<S186>/raptor_adjustment1'
+ */
+/*@>50728*/rtb_IN_frontLeftHallEffectHigh_bool/*@>2069e*/ = (/*@>64c35*/rtb_DataTypeConversion_b_tmp_tmp/*@>2069d*/ > %<SLibCG_DumpSSCode("/*@[7594f*/",(SLibCG_SE(tlcBlockOutputsFcnOfS56B322PortIdx0)),"/*@]*/")>);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B323)
+/* {S!d2248}S-Function (raptor_sfun_fault_def): '<S186>/raptor_fault_def1' */
+%<SLibCG_DumpSSCode("/*@[75953*/",tlcOutputsFcnOfS56B323,"/*@]*/")>\
+%endif
+/* {S!d2250}Logic: '<S186>/OR' */
+/*@>5073b*/rtb_RelationalOperator_hd/*@>206a5*/ = (/*@>50737*/rtb_IN_frontLeftHallEffectHigh_bool/*@>206a4*/ || /*@>50739*/rtb_raptor_digital_in_c);
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B324)
+/* {S!d2252}S-Function (raptor_sfun_fault_def): '<S186>/raptor_fault_def3' */
+%<SLibCG_DumpSSCode("/*@[75955*/",tlcOutputsFcnOfS56B324,"/*@]*/")>\
+%endif
+/* {S!d2254}Gain: '<S186>/Gain' */
+/*@>5074c*/rtb_raptor_data_read_b/*@>206ae*/ = /*@>511ff*/0.0166666675F/*@>51260*/ * /*@>5074a*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_ou;
+/* {S!d2256}Product: '<S186>/Product' incorporates:
+ *  DataTypeConversion: '<S186>/Data Type Conversion1'
+ */
+/*@>50750*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>206b1*/ = /*@>5074e*/rtb_raptor_data_read_b;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B325)
+/* {S!d2258}S-Function (raptor_sfun_measurement): '<S186>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[75957*/",tlcOutputsFcnOfS56B325,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B326)
+/* {S!d2260}S-Function (raptor_sfun_data_read): '<S186>/raptor_data_read' */
+%<SLibCG_DumpSSCode("/*@[75959*/",tlcOutputsFcnOfS56B326,"/*@]*/")>\
+%endif
+/* {S!d2262}Product: '<S186>/Product' incorporates:
+ *  Constant: '<S186>/Constant'
+ */
+/*@>5076d*/rtb_IN_frontLeftWheelSpeed_radiansPerSec/*@>206ba*/ = /*@>5076b*/rtb_IN_frontLeftWheelSpeed_revolutionsPerMin_ou/*@>5125c*/ * /*@>51200*/6.2831853071795862;
+/* {S!d2264}Product: '<S186>/Product1' */
+/*@>50773*/rtb_DerivativeGain/*@>206c1*/ = /*@>5076f*/rtb_raptor_data_read_b/*@>51258*/ * /*@>50771*/rtb_IN_frontLeftWheelSpeed_radiansPerSec;
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B327)
+/* {S!d2266}S-Function (raptor_sfun_measurement): '<S186>/raptor_measurement1' */
+%<SLibCG_DumpSSCode("/*@[7595b*/",tlcOutputsFcnOfS56B327,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B328)
+/* {S!d2268}S-Function (raptor_sfun_measurement): '<S186>/raptor_measurement2' */
+%<SLibCG_DumpSSCode("/*@[7595d*/",tlcOutputsFcnOfS56B328,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B329)
+/* {S!d2270}S-Function (raptor_sfun_can_rxmsg): '<S187>/raptor_can_rxmsg' */
+%<SLibCG_DumpSSCode("/*@[75961*/",tlcOutputsFcnOfS56B329,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B330)
+/* {S!d2272}S-Function (raptor_sfun_can_rxmsg): '<S187>/raptor_can_rxmsg2' */
+%<SLibCG_DumpSSCode("/*@[75964*/",tlcOutputsFcnOfS56B330,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B331)
+/* {S!d2274}S-Function (raptor_sfun_adjustment): '<S189>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75966*/",tlcOutputsFcnOfS56B331,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B332)
+/* {S!d2276}S-Function (raptor_sfun_digital_in): '<S189>/raptor_digital_in' */
+%<SLibCG_DumpSSCode("/*@[75968*/",tlcOutputsFcnOfS56B332,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B333)
+/* {S!d2278}S-Function (raptor_sfun_measurement): '<S189>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[7596a*/",tlcOutputsFcnOfS56B333,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B334)
+/* {S!d2280}S-Function (raptor_sfun_adjustment): '<S190>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7596c*/",tlcOutputsFcnOfS56B334,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B335)
+/* {S!d2282}S-Function (raptor_sfun_digital_in): '<S190>/raptor_digital_in' */
+%<SLibCG_DumpSSCode("/*@[7596e*/",tlcOutputsFcnOfS56B335,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B336)
+/* {S!d2284}S-Function (raptor_sfun_measurement): '<S190>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[75970*/",tlcOutputsFcnOfS56B336,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B337)
+/* {S!d2286}S-Function (raptor_sfun_adjustment): '<S191>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75972*/",tlcOutputsFcnOfS56B337,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B338)
+/* {S!d2288}S-Function (raptor_sfun_digital_in): '<S191>/raptor_digital_in' */
+%<SLibCG_DumpSSCode("/*@[75974*/",tlcOutputsFcnOfS56B338,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B339)
+/* {S!d2290}S-Function (raptor_sfun_measurement): '<S191>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[75976*/",tlcOutputsFcnOfS56B339,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B340)
+/* {S!d2292}S-Function (raptor_sfun_adjustment): '<S192>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75978*/",tlcOutputsFcnOfS56B340,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B341)
+/* {S!d2294}S-Function (raptor_sfun_digital_in): '<S192>/raptor_digital_in' */
+%<SLibCG_DumpSSCode("/*@[7597a*/",tlcOutputsFcnOfS56B341,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B342)
+/* {S!d2296}S-Function (raptor_sfun_measurement): '<S192>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[7597c*/",tlcOutputsFcnOfS56B342,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B343)
+/* {S!d2298}S-Function (raptor_sfun_adjustment): '<S193>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7597e*/",tlcOutputsFcnOfS56B343,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B344)
+/* {S!d2300}S-Function (raptor_sfun_digital_in): '<S193>/raptor_digital_in' */
+%<SLibCG_DumpSSCode("/*@[75980*/",tlcOutputsFcnOfS56B344,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B345)
+/* {S!d2302}S-Function (raptor_sfun_measurement): '<S193>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[75982*/",tlcOutputsFcnOfS56B345,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B346)
+/* {S!d2304}S-Function (raptor_sfun_adjustment): '<S194>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75984*/",tlcOutputsFcnOfS56B346,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B347)
+/* {S!d2306}S-Function (raptor_sfun_digital_in): '<S194>/raptor_digital_in' */
+%<SLibCG_DumpSSCode("/*@[75986*/",tlcOutputsFcnOfS56B347,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B348)
+/* {S!d2308}S-Function (raptor_sfun_measurement): '<S194>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[75988*/",tlcOutputsFcnOfS56B348,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B349)
+/* {S!d2310}S-Function (raptor_sfun_adjustment): '<S195>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[7598a*/",tlcOutputsFcnOfS56B349,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B350)
+/* {S!d2312}S-Function (raptor_sfun_digital_in): '<S195>/raptor_digital_in' */
+%<SLibCG_DumpSSCode("/*@[7598c*/",tlcOutputsFcnOfS56B350,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B351)
+/* {S!d2314}S-Function (raptor_sfun_measurement): '<S195>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[7598e*/",tlcOutputsFcnOfS56B351,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B352)
+/* {S!d2316}S-Function (raptor_sfun_adjustment): '<S196>/raptor_adjustment' */
+%<SLibCG_DumpSSCode("/*@[75990*/",tlcOutputsFcnOfS56B352,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B353)
+/* {S!d2318}S-Function (raptor_sfun_digital_in): '<S196>/raptor_digital_in' */
+%<SLibCG_DumpSSCode("/*@[75992*/",tlcOutputsFcnOfS56B353,"/*@]*/")>\
+%endif
+%if !WHITE_SPACE(tlcOutputsFcnOfS56B354)
+/* {S!d2320}S-Function (raptor_sfun_measurement): '<S196>/raptor_measurement' */
+%<SLibCG_DumpSSCode("/*@[75994*/",tlcOutputsFcnOfS56B354,"/*@]*/")>\
+%endif
+%closefile cfgTxt
+%<cfgTxt>
+%<LibSetSystemField(system, "CachedOutputLocalVars", localVarDecl)>
+%endfunction
+%function OutputsFcnProtoType(block, system) Output
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void EVSR24_Foreground(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(1, 1, fcnProtoType)>
+%endfunction
