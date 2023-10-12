@@ -1,0 +1,237 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: VCU PM MM5 CMD BMS
+
+
+BO_ 252 CMD_252: 8 Vector__XXX
+ SG_ CMD_driverMessageChar7 : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ CMD_driverMessageChar6 : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ CMD_driverMessageChar5 : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ CMD_driverMessageChar4 : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ CMD_driverMessageChar3 : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ CMD_driverMessageChar2 : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ CMD_driverMessageChar1 : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ CMD_driverMessageChar0 : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 251 CMD_251: 8 Vector__XXX
+ SG_ CMD_driverNotificationLightR : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ CMD_driverNotificationLightG : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ CMD_driverNotificationLightB : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 250 CMD_250: 8 Vector__XXX
+ SG_ CMD_wpOverride : 16|8@1- (1,0) [0|100] "%" Vector__XXX
+ SG_ CMD_fanRightOverride : 8|8@1- (1,0) [0|100] "%" Vector__XXX
+ SG_ CMD_fanLeftOverride : 0|8@1- (1,0) [0|100] "%" Vector__XXX
+ SG_ CMD_brakeLightOverride : 24|8@1- (1,0) [0|100] "%" Vector__XXX
+
+BO_ 195 VCU_195: 8 VCU
+ SG_ VCU_counterMsg195 : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ VCU_accFan6Pct : 48|8@1- (0.1,0) [0|100] "%" Vector__XXX
+ SG_ VCU_accFan5Pct : 40|8@1- (0.1,0) [0|100] "%" Vector__XXX
+ SG_ VCU_accFan4Pct : 32|8@1- (0.1,0) [0|100] "%" Vector__XXX
+ SG_ VCU_accFan3Pct : 24|8@1- (0.1,0) [0|100] "%" Vector__XXX
+ SG_ VCU_accFan2Pct : 16|8@1- (0.1,0) [0|100] "%" Vector__XXX
+ SG_ VCU_accFan1Pct : 8|8@1- (0.1,0) [0|100] "%" Vector__XXX
+
+BO_ 194 VCU_194: 8 VCU
+ SG_ VCU_wpPct : 24|8@1- (0.1,0) [0|100] "%" Vector__XXX
+ SG_ VCU_radFanRightPct : 16|8@1- (0.1,0) [0|100] "%" Vector__XXX
+ SG_ VCU_radFanLeftPct : 8|8@1- (0.1,0) [0|100] "%" Vector__XXX
+ SG_ VCU_counterMsg194 : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ VCU_brakeLight : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 193 VCU_193: 8 VCU
+ SG_ VCU_glvPower : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ VCU_dataPower : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ VCU_counterMsg193 : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 192 VCU_192: 8 VCU
+ SG_ VCU_torqueLimitCommand : 48|16@1- (0.1,0) [-3276.8|3276.7] "Nm" Vector__XXX
+ SG_ VCU_torqueCommand : 0|16@1- (0.1,0) [-3276.8|3276.7] "Nm" Vector__XXX
+ SG_ VCU_speedModeEnable : 42|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ VCU_speedCommand : 16|16@1- (1,0) [-32768|32767] "rpm" Vector__XXX
+ SG_ VCU_counterMsg192 : 44|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ VCU_inverterEnable : 40|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ VCU_inverterDischarge : 41|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ VCU_directionCommand : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 380 MM5_380: 8 MM5
+ SG_ MM5_az : 32|16@1+ (-0.0001274,4.1745795) [-100|100] "" Vector__XXX
+
+BO_ 376 MM5_376: 8 MM5
+ SG_ MM5_rollRate : 0|16@1+ (-0.005,163.9) [-100|100] "" Vector__XXX
+ SG_ MM5_ax : 32|16@1+ (-0.0001274,4.1745795) [-100|100] "" Vector__XXX
+
+BO_ 372 MM5_372: 8 MM5
+ SG_ MM5_yawRate : 0|16@1+ (0.005,-163.9) [-100|100] "" Vector__XXX
+ SG_ MM5_ay : 32|16@1+ (-0.0001274,4.1745795) [-100|100] "" Vector__XXX
+
+BO_ 216 BMS_216: 8 BMS
+ SG_ BMS_rollingCounter216 : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ BMS_j1772PlugState : 8|8@1+ (1,0) [0|4] "" Vector__XXX
+ SG_ BMS_j1772ACVolt : 48|16@1- (1,0) [-3276.8|3276.7] "V AC" Vector__XXX
+ SG_ BMS_j1772ACPwrLim : 32|16@1- (1,0) [-32768|32767] "Watt AC" Vector__XXX
+ SG_ BMS_j1772ACCurrLim : 16|16@1- (1,0) [-32768|32767] "Amp AC" Vector__XXX
+
+BO_ 170 PM_170: 8 PM
+ SG_ PM_vsmState : 0|8@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ PM_startModeActive : 54|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_relayStatus6 : 29|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_relayStatus5 : 28|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_relayStatus4 : 27|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_relayStatus3 : 26|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_relayStatus2 : 25|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_relayStatus1 : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_pwmFrequency : 8|8@1+ (1,0) [0|255] "kHz" Vector__XXX
+ SG_ PM_maxSpeedLimiting : 59|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_lowSpeedLimiting : 61|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_inverterState : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ PM_inverterRunMode : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_inverterEnableState : 48|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_inverterEnableLockout : 55|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_inverterDischargeMode : 37|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ PM_inverterCommandMode : 40|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_directionCommand : 56|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_counterMsg170 : 44|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ PM_bmsTorqueLimiting : 58|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PM_bmsActive : 57|1@1+ (1,0) [0|1] "" Vector__XXX
+
+
+
+CM_ SG_ 195 VCU_counterMsg195 "Counter Message 195
+";
+CM_ SG_ 195 VCU_accFan6Pct "Accumulator fan 6 percent
+";
+CM_ SG_ 195 VCU_accFan5Pct "Accumulator fan 5 percent
+";
+CM_ SG_ 195 VCU_accFan4Pct "Accumulator fan 4 percent
+";
+CM_ SG_ 195 VCU_accFan3Pct "Accumulator fan 3 percent
+";
+CM_ SG_ 195 VCU_accFan2Pct "Accumulator fan 2 percent
+";
+CM_ SG_ 195 VCU_accFan1Pct "Accumulator fan 1 percent
+";
+CM_ SG_ 194 VCU_wpPct "Water pump percent
+";
+CM_ SG_ 194 VCU_radFanRightPct "Right radiator fan percent
+";
+CM_ SG_ 194 VCU_radFanLeftPct "Left radiator fan percent
+";
+CM_ SG_ 194 VCU_counterMsg194 "Counter Message 194
+";
+CM_ SG_ 194 VCU_brakeLight "Signal to actuate brake light
+";
+CM_ SG_ 193 VCU_glvPower "Grounded Low Voltage (GLV) power, 0 = Disable, 1 = Enable
+";
+CM_ SG_ 193 VCU_dataPower "Datalog power, 0 = Disable, 1 = Enable
+";
+CM_ SG_ 193 VCU_counterMsg193 "Counter Message 193
+";
+CM_ SG_ 192 VCU_torqueLimitCommand "Torque Limit - set to 0 to keep default
+";
+CM_ SG_ 192 VCU_torqueCommand "Torque Command in Torque Mode
+";
+CM_ SG_ 192 VCU_speedModeEnable "0 = No Change Mode, 1 = Change to Speed Mode from Torque Mode
+";
+CM_ SG_ 192 VCU_speedCommand "Speed Command when used in Speed Mode
+";
+CM_ SG_ 192 VCU_counterMsg192 "Counter Message 192
+";
+CM_ SG_ 192 VCU_inverterEnable "0 = Inverter OFF, 1 = Inverter ON
+";
+CM_ SG_ 192 VCU_inverterDischarge "0 = Discharge Disable, 1 = Discharge Enable
+";
+CM_ SG_ 192 VCU_directionCommand "0 = CW, 1 = CCW, viewed from the shaft end of the motor
+";
+CM_ SG_ 380 MM5_az "Acceleration Z Axis
+";
+CM_ SG_ 376 MM5_rollRate "Roll Rate
+";
+CM_ SG_ 376 MM5_ax "Acceleration X Axis
+";
+CM_ SG_ 372 MM5_yawRate "Yaw Rate
+";
+CM_ SG_ 372 MM5_ay "Acceleration Y Axis
+";
+CM_ SG_ 216 BMS_rollingCounter216 "Increments once every 100ms (max value is 255 and rolls over). Can be used to ensure data is updating
+";
+CM_ SG_ 216 BMS_j1772PlugState "This represents the current status (state) of the J1772 inlet on the vehicle. Look at utility manual
+";
+CM_ SG_ 216 BMS_j1772ACVolt "This is the AC voltage that the BMS is using for internal calculations. This can be provided to the BMS by the charger if it supports this functionality (must be CANBUS enabled and able to transmit the AC voltage)
+";
+CM_ SG_ 216 BMS_j1772ACPwrLim "This is the calculated AC power limit (expressed in watts) that the charger is allowed to consume
+";
+CM_ SG_ 216 BMS_j1772ACCurrLim "This is the raw AC current limit being published by the J1772 compatible charging station
+";
+CM_ SG_ 170 PM_vsmState "Different states for the vehicle state machine";
+CM_ SG_ 170 PM_startModeActive "If in Key Switch Mode 1, indicates status of Start input being applied. 0 = Not Active, 1 = Active
+";
+CM_ SG_ 170 PM_relayStatus6 "0 = OFF, 1 = ON";
+CM_ SG_ 170 PM_relayStatus5 "0 = OFF, 1 = ON";
+CM_ SG_ 170 PM_relayStatus4 "0 = OFF, 1 = ON";
+CM_ SG_ 170 PM_relayStatus3 "0 = OFF, 1 = ON";
+CM_ SG_ 170 PM_relayStatus2 "0 = OFF, 1 = ON";
+CM_ SG_ 170 PM_relayStatus1 "0 = OFF, 1 = ON";
+CM_ SG_ 170 PM_pwmFrequency "The inverter PWM frequency";
+CM_ SG_ 170 PM_maxSpeedLimiting "0 = Not Limiting, 1 = Torque Limiting due to Maximum Speed
+";
+CM_ SG_ 170 PM_lowSpeedLimiting "0 = Not Limiting, 1 = Current Limiting due to Low Motor Speed
+";
+CM_ SG_ 170 PM_inverterState "Different states for the inverter machine state";
+CM_ SG_ 170 PM_inverterRunMode "0 = Torque Mode, 1 = Speed Mode
+";
+CM_ SG_ 170 PM_inverterEnableState "0 = Inverter Disabled, 1 = Inverter Enabled
+";
+CM_ SG_ 170 PM_inverterEnableLockout "0 = Lockout Disabled, 1 = Lockout Enabled
+";
+CM_ SG_ 170 PM_inverterDischargeMode "0 = Disabled, 1 = Enabled, 2 = Speed Check, 3 = Active, 4 = Complete
+";
+CM_ SG_ 170 PM_inverterCommandMode "0 = CAN Mode, 1 = VSM Mode
+";
+CM_ SG_ 170 PM_directionCommand "1 = Forward, 0 = 'Reverse' if inverter enabled & 'Stopped' if inverter is disabled
+";
+CM_ SG_ 170 PM_counterMsg170 "Counter Message 170
+";
+CM_ SG_ 170 PM_bmsTorqueLimiting "0 = Not Limiting, 1 = Limiting
+";
+CM_ SG_ 170 PM_bmsActive "0 = BMS Not Active, 1 = BMS Active
+";
+BA_DEF_  "MultiplexExtEnabled" ENUM  "No","Yes";
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "MultiplexExtEnabled" "No";
+BA_DEF_DEF_  "BusType" "CAN";
+

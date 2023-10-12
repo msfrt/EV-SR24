@@ -1,0 +1,272 @@
+%implements s57_b0_vg5tn_0_TLCInterface "C"
+
+%function getOutputAddr_7_0_0_0_0_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(289, 0, "")> %% rtb_raptor_digital_in
+
+%return "&/*@<2d9b9*//*@>2d9b1*/rtb_raptor_digital_in"
+%endfunction
+
+%function getOutput_7_0_0_0_0_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(289, 0, "")> %% rtb_raptor_digital_in
+
+%return "/*@>2d9ca*/rtb_raptor_digital_in"
+%endfunction
+
+%function getOutputAddr_7_1_0_0_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(283, 0, "")> %% rtb_raptor_delta_time
+
+%return "&/*@<2d9fe*//*@>2d9f6*/rtb_raptor_delta_time"
+%endfunction
+
+%function getOutput_7_1_0_0_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(283, 0, "")> %% rtb_raptor_delta_time
+
+%return "/*@>2da0f*/rtb_raptor_delta_time"
+%endfunction
+
+%function getDWorkAddr_7_1_0_0_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&/*@<2da32*//*@>2da28*/EVSR24_DWork./*@>2da38*/raptor_delta_time_DWORK1"
+%endfunction
+
+%function getDWork_7_1_0_0_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "/*@>2da48*/EVSR24_DWork./*@>2da59*/raptor_delta_time_DWORK1"
+%endfunction
+
+%function getOutputAddr_7_3_0_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(286, 0, "")> %% rtb_raptor_adjustment3
+
+%return "&/*@<2da82*//*@>2da7a*/rtb_raptor_adjustment3"
+%endfunction
+
+%function getOutput_7_3_0_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(286, 0, "")> %% rtb_raptor_adjustment3
+
+%return "/*@>2da93*/rtb_raptor_adjustment3"
+%endfunction
+
+%function getOutputAddr_7_4_0_0_3_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(287, 0, "")> %% rtb_raptor_adjustment4
+
+%return "&/*@<2dac7*//*@>2dabf*/rtb_raptor_adjustment4"
+%endfunction
+
+%function getOutput_7_4_0_0_3_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(287, 0, "")> %% rtb_raptor_adjustment4
+
+%return "/*@>2dad8*/rtb_raptor_adjustment4"
+%endfunction
+
+%function getOutputAddr_7_5_0_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(296, 0, "")> %% rtb_raptor_data_read1
+
+%return "&/*@<2db0c*//*@>2db04*/rtb_raptor_data_read1"
+%endfunction
+
+%function getOutput_7_5_0_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(296, 0, "")> %% rtb_raptor_data_read1
+
+%return "/*@>2db1d*/rtb_raptor_data_read1"
+%endfunction
+
+%function getOutputAddr_7_7_0_0_5_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(298, 0, "")> %% rtb_raptor_data_read
+
+%return "&/*@<2db51*//*@>2db49*/rtb_raptor_data_read"
+%endfunction
+
+%function getOutput_7_7_0_0_5_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(298, 0, "")> %% rtb_raptor_data_read
+
+%return "/*@>2db62*/rtb_raptor_data_read"
+%endfunction
+
+%function getOutputAddr_7_11_0_0_7_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(304, 0, "")> %% rtb_raptor_sfun_nv_status
+
+%return "&/*@<2dbab*//*@>2dba3*/rtb_raptor_sfun_nv_status"
+%endfunction
+
+%function getOutput_7_11_0_0_7_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(304, 0, "")> %% rtb_raptor_sfun_nv_status
+
+%return "/*@>2dbbc*/rtb_raptor_sfun_nv_status"
+%endfunction
+
+%function getOutputAddr_7_1_0_0_11_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(283, 0, "")> %% rtb_raptor_delta_time
+
+%return "&/*@<2dc2f*//*@>2dc27*/rtb_raptor_delta_time"
+%endfunction
+
+%function getOutput_7_1_0_0_11_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(283, 0, "")> %% rtb_raptor_delta_time
+
+%return "/*@>2dc40*/rtb_raptor_delta_time"
+%endfunction
+
+%function getDWorkAddr_7_1_0_0_11_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&/*@<2dc63*//*@>2dc59*/EVSR24_DWork./*@>2dc69*/raptor_delta_time_DWORK1"
+%endfunction
+
+%function getDWork_7_1_0_0_11_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "/*@>2dc79*/EVSR24_DWork./*@>2dc8a*/raptor_delta_time_DWORK1"
+%endfunction
+
+%function getInputAddr_2_0_0_0_12_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return SLibCGIR_PVAddr(588, 0, 7, 1, "", -1, ucv, sigIdx)
+%endfunction
+
+%function getInput_2_0_0_0_12_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return SLibCGIR_PV(588, 0, 7, 1, "", -1, ucv, sigIdx)
+%endfunction
+
+%function getOutputAddr_7_1_0_1_0_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(283, 0, "")> %% rtb_raptor_delta_time
+
+%return "&/*@<2dd1e*//*@>2dd16*/rtb_raptor_delta_time"
+%endfunction
+
+%function getOutput_7_1_0_1_0_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(283, 0, "")> %% rtb_raptor_delta_time
+
+%return "/*@>2dd2f*/rtb_raptor_delta_time"
+%endfunction
+
+%function getDWorkAddr_7_1_0_1_0_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&/*@<2dd52*//*@>2dd48*/EVSR24_DWork./*@>2dd58*/raptor_delta_time_DWORK1"
+%endfunction
+
+%function getDWork_7_1_0_1_0_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "/*@>2dd68*/EVSR24_DWork./*@>2dd79*/raptor_delta_time_DWORK1"
+%endfunction
+
+%function getOutputAddr_7_0_0_2_0_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(289, 0, "")> %% rtb_raptor_digital_in
+
+%return "&/*@<2dda2*//*@>2dd9a*/rtb_raptor_digital_in"
+%endfunction
+
+%function getOutput_7_0_0_2_0_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(289, 0, "")> %% rtb_raptor_digital_in
+
+%return "/*@>2ddb3*/rtb_raptor_digital_in"
+%endfunction
+
+%function getOutputAddr_7_1_0_2_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(283, 0, "")> %% rtb_raptor_delta_time
+
+%return "&/*@<2dde7*//*@>2dddf*/rtb_raptor_delta_time"
+%endfunction
+
+%function getOutput_7_1_0_2_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(283, 0, "")> %% rtb_raptor_delta_time
+
+%return "/*@>2ddf8*/rtb_raptor_delta_time"
+%endfunction
+
+%function getDWorkAddr_7_1_0_2_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&/*@<2de1b*//*@>2de11*/EVSR24_DWork./*@>2de21*/raptor_delta_time_DWORK1"
+%endfunction
+
+%function getDWork_7_1_0_2_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "/*@>2de31*/EVSR24_DWork./*@>2de42*/raptor_delta_time_DWORK1"
+%endfunction
+
+%function getOutputAddr_7_3_0_2_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(286, 0, "")> %% rtb_raptor_adjustment3
+
+%return "&/*@<2de6b*//*@>2de63*/rtb_raptor_adjustment3"
+%endfunction
+
+%function getOutput_7_3_0_2_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(286, 0, "")> %% rtb_raptor_adjustment3
+
+%return "/*@>2de7c*/rtb_raptor_adjustment3"
+%endfunction
+
+%function getOutputAddr_7_4_0_2_3_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(287, 0, "")> %% rtb_raptor_adjustment4
+
+%return "&/*@<2deb0*//*@>2dea8*/rtb_raptor_adjustment4"
+%endfunction
+
+%function getOutput_7_4_0_2_3_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(287, 0, "")> %% rtb_raptor_adjustment4
+
+%return "/*@>2dec1*/rtb_raptor_adjustment4"
+%endfunction
+
+%function getOutputAddr_7_5_0_2_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(296, 0, "")> %% rtb_raptor_data_read1
+
+%return "&/*@<2def5*//*@>2deed*/rtb_raptor_data_read1"
+%endfunction
+
+%function getOutput_7_5_0_2_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(296, 0, "")> %% rtb_raptor_data_read1
+
+%return "/*@>2df06*/rtb_raptor_data_read1"
+%endfunction
+
+%function getInputAddr_2_0_0_2_5_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return SLibCGIR_PVAddr(588, 0, 7, 1, "", -1, ucv, sigIdx)
+%endfunction
+
+%function getInput_2_0_0_2_5_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return SLibCGIR_PV(588, 0, 7, 1, "", -1, ucv, sigIdx)
+%endfunction
+
+%function getOutputAddr_7_7_0_2_8_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(298, 0, "")> %% rtb_raptor_data_read
+
+%return "&/*@<2df91*//*@>2df89*/rtb_raptor_data_read"
+%endfunction
+
+%function getOutput_7_7_0_2_8_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(298, 0, "")> %% rtb_raptor_data_read
+
+%return "/*@>2dfa2*/rtb_raptor_data_read"
+%endfunction
+
+%function getInputAddr_7_10_0_2_11_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&/*@<2e016*//*@>2e00e*/rtb_Logic"
+%endfunction
+
+%function getInput_7_10_0_2_11_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "/*@>2e027*/rtb_Logic"
+%endfunction
+
+%function getOutputAddr_7_11_0_2_12_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&/*@<2e05b*//*@>2e053*/rtb_raptor_sfun_nv_status"
+%endfunction
+
+%function getOutput_7_11_0_2_12_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "/*@>2e06c*/rtb_raptor_sfun_nv_status"
+%endfunction
+
+%function getInputAddr_7_12_0_2_13_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&/*@<2e0a0*//*@>2e098*/rtb_raptor_sfun_nv_status"
+%endfunction
+
+%function getInput_7_12_0_2_13_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "/*@>2e0b1*/rtb_raptor_sfun_nv_status"
+%endfunction
+

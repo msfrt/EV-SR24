@@ -11,7 +11,7 @@ addpath(mdlPath);
 addpath(genpath([mdlPath filesep 'CAN']));
 addpath(genpath([mdlPath filesep 'images']));
 addpath(genpath([mdlPath filesep 'libraries']));
-addpath(genpath([mdlPath filesep 'subsystems']));
+addpath(genpath([mdlPath filesep 'systems']));
 
 clear mdlPath;
 
