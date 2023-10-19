@@ -1,0 +1,1851 @@
+/*
+ **********************************************************************
+ *
+ * (C) All rights reserved by ROBERT BOSCH GMBH, STUTTGART
+ *
+ **********************************************************************
+ *
+ *    __   __   ___  ___
+ *   /_ / /  / /__  /    /__/
+ *  /__/ /__/ __ / /__  /  /
+ *
+ *  Linker command file for
+ *  - locating grouped sections in TriCore memory space
+ *  - create empty output sections as placeholder for SB/CB/TPROT
+ *  - defining linker symbols not related to output section of group.inv
+ *
+ *
+ *  special output sections of final link run:
+ *    .sbss  / .sdata       small data addressing mode unsing register A0.
+ *    .sbss2 / .sdata2      small data addressing mode unsing register A1.
+ *    .sbss3 / .sdata3      small data addressing mode unsing register A8.
+ *    .sbss4 / .sdata4      small data addressing mode unsing register A9.
+ *
+ *  Implementation hints:
+ *  - compiler default sections must not be used as input section, to ensure safety with
+ *    internal bypass and customer delivered code.
+ *  - Input sections for small data addressing must be .sbss.* / .sdata.*
+ *  - There should be no wildcards in section names.
+ *  - Wildcards should be handled in group.inv
+ *  - Linker may append jump islands to output section after the last expression.
+ *    So *_END labels may not be located at the end of a section containing code.
+ *
+ *  - It is required, that all start addresses and sizes of output sections are a multiple of 4
+ *
+ **********************************************************************
+ */
+
+#define LINK_RUN
+
+/* This number has to be changed, if there are memlay interface changes to be integrated */
+#define MEMLAY_LOCATE_VERSION 1300
+
+#include "machine.h"
+#include "sb_auto_conf.h"                   /* Configuration of SB   */
+#include "memlay_auto_conf.h"               /* public Memlay config  */
+#include "memlay_auto_confpriv.h"           /* private Memlay config */
+
+
+#define MEMLAY_ENVRAM_AREA              ram0
+#define MEMLAY_PROTRAM_AREA             ram0
+#define MEMLAY_PROTRAM_ABS_AREA         ram0
+#define MEMLAY_INITVAR_AREA             ram0
+#define MEMLAY_RELCONST_AREA            asw0_flash
+#define MEMLAY_CONST_AREA               asw0_flash
+#define MEMLAY_NONCACHED_CONST_AREA     asw0_flash  /* external flash is not allowed! */
+#define MEMLAY_LOADDATA_AREA            asw0_flash
+#define MEMLAY_MONCODE_AREA             asw0_flash  /* external flash is not allowed! */
+#define MEMLAY_NONCACHED_CODE_AREA      asw0_flash  /* external flash is not allowed! */
+
+/* Area for interrupt vector table. Possible values: asw0_flash, asw1_flash, abs0_flash or undefined for spram */
+/* External flash is not reccomended! */
+#define MEMLAY_INTVECT_AREA             asw0_flash
+
+/* Area for register A8 addressing. Possible values: ram0, ram1, undefined for spram */
+/* Undefined is only usefull in special cases */
+#define MEMLAY_SMALL_DATA3_AREA         ram1
+
+
+
+
+OUTPUT_FORMAT("elf32-tricore", "elf32-tricore", "elf32-tricore")
+OUTPUT_ARCH(tricore)
+
+/* start symbol for Debugger */
+start = MEMLAY_SB_START + 0x78;     /* Offset for infoblock neccessary */
+ENTRY(start)
+
+
+MEMORY
+{
+    /***********************************************************/
+    /*                                                         */
+    /*                        Memory areas                     */
+    /*                                                         */
+    /***********************************************************/
+    /* optional memory areas must be defined with a size of 0  */
+    /* in case when not defined (for security reasons)         */
+    /***********************************************************/
+
+    /* Flash0 18-bit absolute addressed constants              */
+    #ifdef MEMLAY_ABS0_START
+    abs0_flash            : org = MEMLAY_ABS0_START,
+                            len = MEMLAY_ABS0_END + 1 - MEMLAY_ABS0_START
+    #else
+    abs0_flash            : org = 0, len = 0
+    #endif
+
+    /* Flash0 ASW code                                         */
+    asw0_flash            : org = MEMLAY_ASW0_START,
+                            len = MEMLAY_ASW0_END + 1 - MEMLAY_ASW0_START
+
+    /* Flash1 ASW code                                         */
+    #ifdef MEMLAY_ASW1_START
+    asw1_flash            : org = MEMLAY_ASW1_START,
+                            len = MEMLAY_ASW1_END + 1 - MEMLAY_ASW1_START
+    #else
+    asw1_flash            : org = 0, len = 0
+    #endif
+
+    /* Flash2 ASW code                                         */
+    #ifdef MEMLAY_ASW2_START
+    asw2_flash            : org = MEMLAY_ASW2_START,
+                            len = MEMLAY_ASW2_END + 1 - MEMLAY_ASW2_START
+    #else
+    asw2_flash            : org = 0, len = 0
+    #endif
+
+    /* Flash0 data set                                         */
+    ds0_flash             : org = MEMLAY_DS0_START,
+                            len = MEMLAY_DS0_END  + 1 - MEMLAY_DS0_START
+
+    /* Flash1 data set                                         */
+    #ifdef MEMLAY_DS1_START
+    ds1_flash             : org = MEMLAY_DS1_START,
+                            len = MEMLAY_DS1_END  + 1 - MEMLAY_DS1_START
+    #else
+    ds1_flash             : org = 0, len = 0
+    #endif
+
+    /* Variant data set                                        */
+    #ifdef MEMLAY_VDS_START
+    vds_flash             : org = MEMLAY_VDS_START,
+                            len = MEMLAY_VDS_END + 1 - MEMLAY_VDS_START
+    #else
+    vds_flash             : org = 0, len = 0
+    #endif
+
+    /* Scratch pad RAM                                         */
+    spram                 : org = MEMLAY_SPRAM_START,
+                            len = MEMLAY_SPRAM_END + 1 - MEMLAY_SPRAM_START
+
+    /* Parameter RAM in PCP                                    */
+    #ifdef MEMLAY_PCP_PRAM_START
+    pcpdata_ram           : org = MEMLAY_PCP_PRAM_START,
+                            len = MEMLAY_PCP_PRAM_END + 1 - MEMLAY_PCP_PRAM_START
+    #else
+    pcpdata_ram           : org = 0, len = 0
+    #endif
+
+    /* Code RAM in PCP                                         */
+    #ifdef MEMLAY_PCP_PCODE_START
+    pcpcode_ram           : org = MEMLAY_PCP_PCODE_START,
+                            len = MEMLAY_PCP_PCODE_END + 1 - MEMLAY_PCP_PCODE_START
+    #else
+    pcpcode_ram           : org = 0, len = 0
+    #endif
+
+    /* RAM0 ASW variables                                      */
+    ram0                  : org = MEMLAY_RAM0_START,
+                            len = MEMLAY_RAM0_END + 1 - MEMLAY_RAM0_START
+
+    #ifdef MEMLAY_RAM1_START
+    /* RAM1 ASW variables                                      */
+    ram1                  : org = MEMLAY_RAM1_START,
+                            len = MEMLAY_RAM1_END + 1 - MEMLAY_RAM1_START
+    #else
+    ram1                  : org = 0, len = 0
+    #endif
+
+    #ifdef MEMLAY_RAM2_START
+    /* RAM2 ASW variables                                      */
+    ram2                  : org = MEMLAY_RAM2_START,
+                            len = MEMLAY_RAM2_END + 1 - MEMLAY_RAM2_START
+    #else
+    ram2                  : org = 0, len = 0
+    #endif
+
+    /* dual ported RAM (not anymore supported)                 */
+    dpram                 : org = 0, len = 0
+
+    /* Emulation Device RAM                                    */
+    #ifdef MEMLAY_EDRAM_START
+    edram                 : org = MEMLAY_EDRAM_START,
+                            len = MEMLAY_EDRAM_END + 1 - MEMLAY_EDRAM_START
+    #else
+    edram                 : org = 0, len = 0
+    #endif
+
+    /* external optional calibration RAM == ETK-T RAM area */
+    #ifdef MEMLAY_OCRAM_WRITE_START
+    /* Force noncached access to OCRAM_WRITE area (Segment A)       */
+    /* Attention: addresses in A2L are still in segment 8.          */
+    /* Patching of address list is specified in memlay_export.xml   */
+
+    #define MEMLAY_OCRAM_WRITE_NC_START (MEMLAY_OCRAM_WRITE_START | MEMLAY_OFFSET_NONCACHED)
+    #define MEMLAY_OCRAM_WRITE_NC_END   (MEMLAY_OCRAM_WRITE_END   | MEMLAY_OFFSET_NONCACHED)
+
+    ocram_write           : org = MEMLAY_OCRAM_WRITE_NC_START,
+                            len = MEMLAY_OCRAM_WRITE_NC_END + 1 - MEMLAY_OCRAM_WRITE_NC_START
+    #else
+    ocram_write           : org = 0, len = 0
+    #endif
+
+    /* PMU olda area == virtual write only memory */
+    #ifdef MEMLAY_PMU_OLDA_START
+    olda                  : org = MEMLAY_PMU_OLDA_START,
+                            len = MEMLAY_PMU_OLDA_END + 1 - MEMLAY_PMU_OLDA_START
+    #else
+    olda                  : org = 0, len = 0
+    #endif
+
+    /* Dummy area for unspecified input sections. Size 0      */
+    /* causes an linker error if there is an input section    */
+    /* not considered in linker command file.                 */
+    must_be_empty         : org = 0, len = 0
+}
+
+SECTIONS
+{
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*                Reserved memory                          */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+
+    /***********************************************************/
+    /* Placeholder for flash area of tuning protection         */
+    /***********************************************************/
+    #ifdef MEMLAY_TPROT_START
+    .tprot_code MEMLAY_TPROT_START (NOLOAD) :
+    {
+        . += MEMLAY_TPROT_END + 1 - MEMLAY_TPROT_START;
+    }
+    #endif
+
+    /***********************************************************/
+    /* Placeholder for flash area of startup block             */
+    /***********************************************************/
+    .sb_code MEMLAY_SB_START (NOLOAD) :
+    {
+        . += MEMLAY_SB_END + 1 - MEMLAY_SB_START;
+    }
+
+    /***********************************************************/
+    /* Placeholder for flash area of customer block            */
+    /***********************************************************/
+    #ifdef MEMLAY_CB_START
+    .cb_code MEMLAY_CB_START (NOLOAD) :
+    {
+        . += MEMLAY_CB_END + 1 - MEMLAY_CB_START;
+    }
+    #endif
+
+    /***********************************************************/
+    /* Placeholder for fix SB RAM area                         */
+    /***********************************************************/
+    .sb_ram_fix SB_RAM_FIX_START (NOLOAD) :
+    {
+        . += (SB_RAM_FIX_END + 1 - SB_RAM_FIX_START);
+    }
+
+#ifdef MEMLAY_TPROT_START
+    /***********************************************************/
+    /* Placeholder for fix TPROT RAM area                      */
+    /***********************************************************/
+    .tprot_ram_fix TPROT_RAM_FIX_START (NOLOAD) :
+    {
+        . += (TPROT_RAM_FIX_END + 1 - TPROT_RAM_FIX_START);
+    }
+#endif
+
+#ifdef MEMLAY_DCACHE_START
+    /***********************************************************/
+    /* Placeholder for data cache area                         */
+    /***********************************************************/
+    .dcache MEMLAY_DCACHE_START (NOLOAD) :
+    {
+        . += (MEMLAY_DCACHE_END + 1 - MEMLAY_DCACHE_START);
+    }
+#endif
+
+#ifdef MEMLAY_ICACHE_START
+    /***********************************************************/
+    /* Placeholder for instruction cache area                  */
+    /***********************************************************/
+    .icache MEMLAY_ICACHE_START (NOLOAD) :
+    {
+        . += (MEMLAY_ICACHE_END + 1 - MEMLAY_ICACHE_START);
+    }
+#endif
+
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*          Flash: prolog and fix sections                 */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+    #ifdef MEMLAY_ABS0_START
+    .abs0_prolog MEMLAY_ABS0_START :
+    {
+        *(.abs0_prolog)
+        *(.rodata.abs0_info)        /* block info data of abs0 (infotab, ...) */
+        . = ALIGN(4);
+    } > abs0_flash
+    .abs0_const :
+    {
+        *(.zrodata.default)         /* 18-bit absolute addressed constants */
+        . = ALIGN(4);
+    } > abs0_flash
+    #endif
+
+    .asw0_prolog MEMLAY_ASW0_START :
+    {
+   	__NE_CODE0_START = .;
+        *(.asw0_prolog)
+        *(.rodata.asw0_info)        /* block info data of asw0 (infotab, ...) */
+
+/* >>>>>>> Customer specific BEGIN (Powernet) <<<<<<*/
+        __BASUTIL_SECA_START = .;
+        *(.BasUtil_Seca)
+        __BASUTIL_SECA_END = .;         
+        . = ALIGN(256);     /* Ensure (1) the complete area is checksum checked (2) The Marker page is Page-aligned */
+        . += 256;           /* Add a complete empty Page for Invalidation Marker. Used in CB! Do not change without agreement of CB development*/
+        LONG(0xAFAFAFAF);   /* 4byte for Checksum */
+        __MEMLAY_ASW0_PROLOGPAGE_END = . -1; /* End of Prolog Page for consistency check during Startup. Used to ensure reliable flashprogramming */
+        *(.asw_version)
+/* >>>>>>> Customer specific END (Powernet)  <<<<<<*/
+
+        . = ALIGN(4);
+    } > asw0_flash
+
+    #ifdef MEMLAY_ASW1_START
+    .asw1_prolog MEMLAY_ASW1_START :
+    {
+   	__NE_CODE2_START = .;
+        *(.asw1_prolog)
+        *(.rodata.asw1_info)        /* block info data of asw1 (infotab, ...) */
+        . = ALIGN(4);
+    } > asw1_flash
+    #endif
+
+    #ifdef MEMLAY_ASW2_START
+    .asw2_prolog MEMLAY_ASW2_START :
+    {
+        *(.asw2_prolog)
+        *(.rodata.asw2_info)        /* block info data of asw2 (infotab, ...) */
+        . = ALIGN(4);
+    } > asw2_flash
+    #endif
+
+    .ds0_prolog MEMLAY_DS0_START :
+    {
+        *(.ds0_prolog)
+        *(.ds0_compref)
+        *(.rodata.ds0_info)         /* block info data of ds0 (infotab, ...) */
+        . = ALIGN(4);
+
+/* >>>>>>> Customer specific BEGIN (Powernet) <<<<<<*/
+        *(.ds_version)
+        . = ALIGN(4);
+/* >>>>>>> Customer specific END (Powernet)  <<<<<<*/
+
+    } > ds0_flash
+
+    #ifdef MEMLAY_DS1_START
+    .ds1_prolog MEMLAY_DS1_START :
+    {
+        *(.ds1_prolog)
+        *(.ds1_compref)
+        *(.rodata.ds1_info)         /* block info data of ds1 (infotab, ...) */
+        . = ALIGN(4);
+    } > ds1_flash
+    #endif
+
+    #ifdef MEMLAY_VDS_START
+    .vds_prolog MEMLAY_VDS_START :
+    {
+        *(.vds_prolog)
+        *(.rodata.vds_infoblock)    /* VDS infoblock for hexmod17 */
+        *(.rodata.vds_info)         /* block info data of vds (infotab, ...) */
+        . = ALIGN(4);
+    } > vds_flash
+    #endif
+
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*    RAM: non cleared and protected sections at start     */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+
+    .ram0_boot MEMLAY_DMI_RAM_START (NOLOAD) :
+    {
+        __UNIQUE_CHIP_ID = .;
+        . += 24;  /* size of unique chip ID is 24 bytes for TC1767 and newer */
+    } > ram0  /* .ram0_boot is part of ram0 area */
+
+    /* Size of protected RAM with absolute addressing is limited, when located in ram0. */
+    /* Reason: parts of ram0 are cleared on reset by SB. See Assert() at end of file */
+    .zbss.protram (NOLOAD) :
+    {
+        __ASW_PROTECTED_RAM2_START = . ;
+        *(.bbss.protram)
+        *(.zbss.protram)
+        . = ALIGN(8);
+        __ASW_PROTECTED_RAM2_END = . - 1;
+    } > MEMLAY_PROTRAM_ABS_AREA
+
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*        RAM: cleared and non protected sections          */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+
+    /***********************************************************/
+    /*            start of cleared (= non protected) RAM       */
+    /***********************************************************/
+    .ram0_start (NOLOAD) :
+    {
+        . = ALIGN(8);
+        __RAM0_START   = .;
+        __RAM0_USER_START   = .;
+    } > ram0
+
+    .ram1_start (NOLOAD) :
+    {
+        . = ALIGN(8);
+        __RAM1_START   = .;
+        __RAM1_USER_START   = .;
+    } > ram1
+    .ram2_start (NOLOAD) :
+    {
+        . = ALIGN(8);
+        __RAM2_START   = .;
+        __RAM2_USER_START   = .;
+    } > ram2
+
+    .dpram_start (NOLOAD) :
+    {
+        . = ALIGN(8);
+        __ASW_VAR_DPR_START = .;
+    } > dpram
+
+    /***********************************************************/
+    /* Bits and 18 bit absolute addressed Variables in RAM     */
+    /* Atention: address range is limited by hardware,         */
+    /*           16 kbyte from Start of Segment                */
+    /***********************************************************/
+
+    /* initialized variables: values loaded from FLASH */
+    .zdata.initvar0 :
+    {
+        __INITVAR0_START = .;
+        /* ReIni area must start at begin of section */
+        *(.zdata.ReIni0)
+        *(.bdata.ReIni0)
+        . = ALIGN(8);
+        __INITVAR0_REINI_END = . - 1;
+
+        *(.zdata.initvar0)
+        *(.bdata.initvar0)
+        . = ALIGN(8);
+    } > ram0 AT> MEMLAY_LOADDATA_AREA
+    __INITVAR0_SIZE = SIZEOF(.zdata.initvar0);
+    __INITVAR0_REINI_SIZE = __INITVAR0_REINI_END + 1 - __INITVAR0_START;
+
+    .initvar0_load LOADADDR(.zdata.initvar0) :
+    {
+        __INITVAR0_FLASH_START = .;
+        . += __INITVAR0_SIZE;
+    }
+
+    .zbss.ram0.ReIni (NOLOAD) :
+    {
+        __REINI_ZBSS_START = .;
+        *(.zbss.ReIni)
+        *(.bbss.ReIni)
+        . = ALIGN(8);
+        __REINI_ZBSS_END = . - 1;
+    } > ram0
+    __REINI_ZBSS_SIZE = __REINI_ZBSS_END + 1 - __REINI_ZBSS_START;
+
+    .zbss.ram0 (NOLOAD) :
+    {
+        *(.zbss.ram0)
+        *(.zbss.ram1)  /* if RAM1 not available for absolue adressing */
+        *(.bbss.ram0)
+        *(.bbss.ram1)  /* if RAM1 not available for absolue adressing */
+        . = ALIGN(8);
+    } > ram0
+   /* projectspecific for New Eagle projects (SW sharing) - start */
+
+    .zbss.ram0_OEM (NOLOAD) :
+    {
+        *(.zbss.ram0_OEM)        
+        . = ALIGN(8);
+    } > ram0
+    
+    /* projectspecific for OEM projects (SW sharing) - end */
+    /********************************************************************************/
+    /* Variables in PMI scratch pad RAM                                             */
+    /* ATTENTION: Absolute addressing is only possible on TC.1.3.1 and later        */
+    /*                                                                              */
+    /********************************************************************************/
+    .bss.spram_start (NOLOAD) :
+    {
+        __SPRAM_VAR_START = .;
+    } > spram
+
+    .zbss.spram (NOLOAD) :
+    {
+        *(.bbss.spram)
+        *(.zbss.spram)
+        . = ALIGN(8);
+    } > spram
+
+    /* register A8 is used for SPRAM small addressing: only usefull in special cases */
+    #ifndef MEMLAY_SMALL_DATA3_AREA
+    .sbss3 (NOLOAD) :
+    {
+        _SMALL_DATA3_ = . + 0x8000;
+        *(.sbss.spram)
+        . = ALIGN(8);
+    } > spram
+    #endif
+
+    .bss.spram (NOLOAD) :
+    {
+        *(.bss.spram)
+        . = ALIGN(8);
+        __SPRAM_VAR_END = . - 1;
+    } > spram
+    __SPRAM_VAR_SIZE = __SPRAM_VAR_END + 1 - __SPRAM_VAR_START;
+
+    /***********************************************************/
+    /* Code in PMI scratch pad RAM (load from FLASH)           */
+    /***********************************************************/
+    #ifndef MEMLAY_INTVECT_AREA
+    .code_spram_align :
+    {
+        /* Interrupt vector table must be aligned to its size      */
+        /* __SIZE_INTTAB must be 2^n. This is checked in group.inv */
+        . = ALIGN(__SIZE_INTTAB);
+    } > spram
+    #endif
+    .code_spram :
+    {
+        __SPRAM_FNC_START = .;
+        #ifndef MEMLAY_INTVECT_AREA
+        *(.inttab)          /* must be the first input section after ALIGN(__SIZE_INTTAB) */
+        #endif
+
+        *(.code_spram)
+        . = ALIGN(8);
+    } > spram AT> MEMLAY_LOADDATA_AREA
+    __SPRAM_FNC_SIZE = SIZEOF(.code_spram);
+    __SPRAM_FNC_END = __SPRAM_FNC_START + __SPRAM_FNC_SIZE - 1;
+
+    .code_spram_load LOADADDR(.code_spram):
+    {
+        __SPRAM_FNC_FLASH_START = .;
+        . += __SPRAM_FNC_SIZE;
+        __SPRAM_FNC_FLASH_END = . - 1;
+    }
+
+    /***********************************************************/
+    /* Fill PMI scratch pad RAM to prevent further usage       */
+    /***********************************************************/
+    .spram_free (NOLOAD) :
+    {
+        __SPRAM_FREE_START = .;
+        . += MEMLAY_PMI_SPRAM_END + 1 - ABSOLUTE(.);
+        __SPRAM_FREE_END = . - 1;
+    } > spram
+    __SPRAM_FREE_SIZE = __SPRAM_FREE_END + 1 -__SPRAM_FREE_START;
+
+    /***********************************************************/
+    /*          Peripheral Control Processor (PCP)             */
+    /***********************************************************/
+    /* Parameter RAM (PCP data, load from FLASH)               */
+    /***********************************************************/
+    .pcpdata0 :
+    {
+        __PDATA_DAT_START = . ;
+        PRAM_BASE = . ;
+        *(.pcpdata0)
+        . = ALIGN(8);
+        __PDATA_DAT_END = . - 1;
+    } > pcpdata_ram AT> MEMLAY_LOADDATA_AREA
+    __PDATA_DAT_SIZE = SIZEOF(.pcpdata0);
+    .pcpdata0_load LOADADDR(.pcpdata0) (NOLOAD):
+    {
+        __PDATA_DAT_FLASH_START = .;
+        . += __PDATA_DAT_SIZE;
+        __PDATA_DAT_FLASH_END = . - 1;
+    }
+    #ifdef MEMLAY_PCP_PRAM_START
+    .pcpdata0_free :
+    {
+        __PDATA_FREE_START = .;
+        . += MEMLAY_PCP_PRAM_END + 1 - ABSOLUTE(.);
+        __PDATA_FREE_END = . - 1;
+    } > pcpdata_ram
+    __PDATA_FREE_SIZE = __PDATA_FREE_END + 1 - __PDATA_FREE_START;
+    #endif
+
+    /***********************************************************/
+    /*          Peripheral Control Processor (PCP)             */
+    /***********************************************************/
+    /* Code RAM (PCP code, load from FLASH)                    */
+    /***********************************************************/
+    .pcpcode0 :
+    {
+        __PCODE_FNC_START = . ;
+        PCODE_BASE = . ;
+        *(.pcpcode0)
+    #ifdef MEMLAY_PCP_PCODE_START
+        . = ((. + 4 + 7) & (~ 7)) - 4;  /* ensure that end of 4 byte checksum is 8 byte aligned */
+        *(.asw0cs2_epilog)
+    #endif
+        . = ALIGN(8);
+        __PCODE_FNC_END = . - 1;
+    } > pcpcode_ram AT> MEMLAY_LOADDATA_AREA
+
+    __PCODE_FNC_SIZE = SIZEOF(.pcpcode0);
+    .pcpcode0_load LOADADDR(.pcpcode0):
+    {
+        __PCODE_FNC_FLASH_START = .;
+        . += __PCODE_FNC_SIZE;
+        __PCODE_FNC_FLASH_END = . - 1;
+    }
+    #ifdef MEMLAY_PCP_PCODE_START
+    .pcpcode0_free :
+    {
+        __PCODE_FREE_START = .;
+        . += MEMLAY_PCP_PCODE_END + 1 - ABSOLUTE(.);
+        __PCODE_FREE_END = . - 1;
+    } > pcpcode_ram
+    __PCODE_FREE_SIZE = __PCODE_FREE_END + 1 - __PCODE_FREE_START;
+    #endif
+
+    /***********************************************************/
+    /*                                                         */
+    /*                   Dual Ported RAM                       */
+    /*                                                         */
+    /* DPRAM is only available on TC1796 (METIS), else the     */
+    /* dpram area is mapped to ram0.                           */
+    /* DPRAM section must not cross 32kByte alignment borders, */
+    /* else uninteded wrap around may happen for non-circular  */
+    /* buffers. Checked by ASSERT at end of locate.inv.        */
+    /* On non-DPRAM CPUs .dpram sections should be located     */
+    /* right after the .zbss section in ram0 to ensure maximum */
+    /* size.                                                   */
+    /***********************************************************/
+    .dpram_align (NOLOAD) :
+    {
+        /* DPRAM can contain data, which needs up to 1024 byte alignment */
+        /* __DPRAM_ALIGN is calculated in group.inv. It is always 2^n.   */
+        . = ALIGN(__DPRAM_ALIGN);
+        __DPRAM_START = .;
+    } > MEMLAY_DPRAM_AREA
+    .dpram (NOLOAD) :
+    {
+        *(.bss.dpram)
+        . = ALIGN(8);
+    } > MEMLAY_DPRAM_AREA
+
+    /* initialized variables in dpram */
+    .data.dpram :
+    {
+        __INITVAR_DPR_START = .;
+        *(.data.dpram)
+        . = ALIGN(8);
+    } > MEMLAY_DPRAM_AREA AT> MEMLAY_LOADDATA_AREA
+    __INITVAR_DPR_SIZE  = SIZEOF(.data.dpram);
+    .data.dpram_load LOADADDR(.data.dpram) :
+    {
+        __INITVAR_DPR_FLASH_START = .;
+        . += __INITVAR_DPR_SIZE;
+    }
+
+    /***********************************************************/
+    /* 16 bit register A8 relative addressed Variables in RAM  */
+    /* Attention: address range is limited to 64kByte          */
+    /* Only available, if register A8 is not used for SPRAM    */
+    /* Can be located to ram0 (TC1797), ram1. Not to SPRAM!    */
+    /***********************************************************/
+    #ifdef MEMLAY_SMALL_DATA3_AREA
+    .sbss3 (NOLOAD) :
+    {
+        _SMALL_DATA3_ = . + 0x8000;
+        *(.sbss.var1)
+        *(.sbss.mpram)
+        . = ALIGN(8);
+    } > MEMLAY_SMALL_DATA3_AREA
+    #endif
+
+    /***********************************************************/
+    /* 16 bit register A0 relative addressed Variables in RAM  */
+    /* Attention: address range is limited to 64kByte          */
+    /***********************************************************/
+    .sbss (NOLOAD) :
+    {
+        _SMALL_DATA_ = . + 0x8000;
+        *(.sbss.var1)     /* if .sbss3 is not available */
+        *(.sbss.mpram)    /* if .sbss3 is not available */
+        *(.sbss.var0)
+        . = ALIGN(8);
+
+        __REINI_SBSS_START = .;
+        *(.sbss.ReIni)
+        . = ALIGN(8);
+        __REINI_SBSS_END = . - 1;
+
+    } > ram0
+    __REINI_SBSS_SIZE = __REINI_SBSS_END + 1 - __REINI_SBSS_START;
+
+
+    /* initialized variables: values loaded from FLASH */
+    .sdata :
+    {
+        __INITVAR1_START = .;
+        /* ReIni area must start at begin of section */
+        *(.sdata.ReIni1)
+        . = ALIGN(8);
+        __INITVAR1_REINI_END = . - 1;
+
+        *(.sdata.initvar1)
+        . = ALIGN(8);
+    } > ram0 AT> MEMLAY_LOADDATA_AREA
+    __INITVAR1_SIZE = SIZEOF(.sdata);
+    __INITVAR1_REINI_SIZE = __INITVAR1_REINI_END + 1 - __INITVAR1_START;
+    .initvar1_load LOADADDR(.sdata) :
+    {
+        __INITVAR1_FLASH_START = .;
+        . += __INITVAR1_SIZE;
+    }
+
+    /***********************************************************/
+    /* 32 bit absolute addressed Variables in RAM              */
+    /***********************************************************/
+    /* initialized variables: values loaded from FLASH */
+    .data.initvar2 :
+    {
+        __INITVAR2_START = .;
+        /* ReIni area must start at begin of section */
+        *(.data.ReIni2)
+        . = ALIGN(8);
+        __INITVAR2_REINI_END = . - 1;
+
+        *(.data.initvar2)
+        . = ALIGN(8);
+    } > MEMLAY_INITVAR_AREA AT> MEMLAY_LOADDATA_AREA
+    __INITVAR2_SIZE = SIZEOF(.data.initvar2);
+    __INITVAR2_REINI_SIZE = __INITVAR2_REINI_END + 1 - __INITVAR2_START;
+    .initvar2_load LOADADDR(.data.initvar2) :
+    {
+        __INITVAR2_FLASH_START = .;
+        . += __INITVAR2_SIZE;
+    }
+
+    /***********************************************************/
+    /* non initialised ASW variables:                          */
+    /* - monitored variables                                   */
+    /* - 32-bit absolute addressed variables                   */
+    /***********************************************************/
+    .ram0.ReIni (NOLOAD) :
+    {
+        __REINI_BSS_START = .;
+        *(.bss.ReIni)
+        . = ALIGN(8);
+        __REINI_BSS_END = . - 1;
+    } > ram0
+    __REINI_BSS_SIZE = __REINI_BSS_END + 1 - __REINI_BSS_START;
+	
+	.ram0_OEM (NOLOAD) :
+    {
+        *(.bss.ram0_OEM)
+        . = ALIGN(8);
+    } > ram0
+    .ram0 (NOLOAD) :
+    {
+        *(.bss.ram0)
+        . = ALIGN(8);
+    } > ram0
+
+    .ram1 (NOLOAD) :
+    {
+        *(.bss.ram1)
+        . = ALIGN(8);
+    } > MEMLAY_VAR1_AREA
+
+    .ram2 (NOLOAD) :
+    {
+        *(.bss.ram2)
+        . = ALIGN(8);
+    } > MEMLAY_VAR2_AREA
+
+    /***********************************************************/
+    /* RAM reserved for internal bypass                        */
+    /***********************************************************/
+    #ifdef MEMLAY_RESERVED_BYP_RAM
+    .ram0_byp (NOLOAD) :
+    {
+        __RAM_BYP_START = . ;
+        *(.bss.byp)
+        . = ALIGN(4);
+        __RAM_BYP_FREE_START = . ;
+        . = __RAM_BYP_START + MEMLAY_RESERVED_BYP_RAM;
+        . = ALIGN(8);
+        __RAM_BYP_END = . - 1;
+    } > ram0
+    #endif
+
+    /***********************************************************/
+    /*                                                         */
+    /*          writable part of optional calibration RAM      */
+    /*                                                         */
+    /***********************************************************/
+    #ifdef MEMLAY_OCRAM_WRITE_NC_START
+    .ocram_write (MEMLAY_OCRAM_WRITE_NC_START) (NOLOAD) :
+    {
+        #ifdef MEMLAY_ETK_TYPE_ETKT
+        /* Trigger must be aligned to 256 Bytes */
+        . = ALIGN(0x100);
+        *(.bss.distab_trigger)
+        *(.bss.distab_write)
+        #endif
+
+        *(.bss.ocram_write)
+        . = ALIGN(8);
+    } > ocram_write
+    #endif
+
+    /***********************************************************/
+    /*                                                         */
+    /*          Measurement Points                             */
+    /*                                                         */
+    /***********************************************************/
+    /* Write only section. Read access may cause a trap.       */
+    /* Can be located in: ram0, ram1, ram2, olda, ocram_write  */
+    /***********************************************************/
+    .mpram (NOLOAD) :
+    {
+        __MPRAM_START = .;
+        *(.bss.mpram)
+        *(.bss.mpdisplay)
+        . = ALIGN(8);
+        __MPRAM_END = . - 1;
+    } > MEMLAY_MPRAM_AREA
+    __MPRAM_SIZE = __MPRAM_END + 1 - __MPRAM_START;
+
+    /***********************************************************/
+    /* Fill OLDA area to prevent further usage                 */
+    /* Do not write to free area, as this may overwrite EDRAM  */
+    /***********************************************************/
+    #ifdef MEMLAY_PMU_OLDA_START
+    .olda_free (NOLOAD) :
+    {
+        __OLDA_FREE_START = . ;
+        . += MEMLAY_PMU_OLDA_END + 1 - ABSOLUTE(.);
+        __OLDA_FREE_END = . - 1;
+    } > olda
+    __OLDA_FREE_SIZE = __OLDA_FREE_END + 1 - __OLDA_FREE_START;
+    __OLDA_SIZE      = __OLDA_FREE_START - MEMLAY_PMU_OLDA_START;
+    #endif
+
+    /***********************************************************/
+    /*                                                         */
+    /*                   EMULATION DEVICE                      */
+    /*                                                         */
+    /***********************************************************/
+    /* Accessing this area on a non ED device causes a trap.   */
+    /***********************************************************/
+    #ifdef MEMLAY_EDRAM_START
+    .edram (MEMLAY_EDRAM_START) (NOLOAD) :
+    {
+        /* Memory is cleared on each reset by Dme_FirstInit() */
+        __EDRAM_CLEAR_START = .;
+        #ifdef MEMLAY_MPRAM_AREA_OLDA
+            /* Reserve memory for olda mapping. */
+            __OLDA_EDRAM_START = .;
+            . = 0;   /* This area must be located at EDRAM start to simplify overlay redirection. */
+            . = __OLDA_SIZE;
+        #endif
+        *(.bss.edram_clear)
+        . = ALIGN(0x4);
+        __EDRAM_CLEAR_END = . - 1;
+
+        /* Memory is cleared on poweron reset by Dme_FirstInit() */
+        __EDRAM_PROTECTED_START = .;
+        *(.bss.edram_protected)
+        . = ALIGN(0x4);
+        __EDRAM_PROTECTED_END = . - 1;
+
+        /* Memory is cleared on ED power fail by Dme_FirstInit() */
+        __EDRAM_STANDBY_START = .;
+        *(.bss.edram_standby)
+        . = ALIGN(0x4);
+        __EDRAM_STANDBY_END = . - 1;
+        *(.bss.edram_standby_cs)
+
+        /* Memory is never cleared or initialized */
+        *(.bss.edram_noclear)
+        . = ALIGN(0x4);
+
+        /* EDRAM_FIXVAR area */
+        #ifdef MEMLAY_EDRAM_FIXVAR_START
+            /* area of EDRAM_FIXVAR also contains all previous sections */
+            . += MIN(0, MEMLAY_EDRAM_FIXVAR_START - ABSOLUTE(.));
+            #ifdef MEMLAY_ETK_TYPE_ETKS
+                /* Area is initialized by EtkS_FirstInit on PowerFail when ETKS is present */
+                __ETKS_INITRAM_START = .;
+                *(.bss.etks_initram)
+                *(.data.distab_read)
+                *(.bss.distab_write)
+                . = ALIGN(4);
+                __ETKS_INITRAM_END = . - 1;
+            #endif
+            . += MEMLAY_EDRAM_FIXVAR_END + 1 - ABSOLUTE(.);
+        #endif
+
+        /* EDRAM_FIXCAL area */
+        #ifdef MEMLAY_EDRAM_FIXCAL_START
+            . += MEMLAY_EDRAM_FIXCAL_START - ABSOLUTE(.);
+            __EDRAM_CALVAR_START = .;
+            /* Area is initialized by EtkS_FirstInit on PowerFail when ETKS is present, */
+            /* or by Dme_FirstInit when ETKS is not present.                            */
+            #ifdef MEMLAY_ETK_TYPE_ETKS
+                *(.caldata_byptab)
+                *(.caldata_svbbetas)
+            #endif
+
+            . = ALIGN(0x4);
+            __EDRAM_CALVAR_END = . - 1;
+            *(.bss.edram_calvar_cs)
+            . += MEMLAY_EDRAM_FIXCAL_END + 1 - ABSOLUTE(.);
+        #endif
+
+        /* calibration memory in EDRAM */
+        . = ALIGN(4);
+        __EDRAM_DYN_START = .;
+
+        . += MEMLAY_EDRAM_END + 1 - ABSOLUTE(.);
+        __EDRAM_DYN_END   = . - 1;
+    } > edram
+
+    __EDRAM_CLEAR_SIZE      = __EDRAM_CLEAR_END     + 1 - __EDRAM_CLEAR_START;
+    __EDRAM_PROTECTED_SIZE  = __EDRAM_PROTECTED_END + 1 - __EDRAM_PROTECTED_START;
+    __EDRAM_STANDBY_SIZE    = __EDRAM_STANDBY_END   + 1 - __EDRAM_STANDBY_START;
+
+    #ifdef MEMLAY_ETK_TYPE_ETKS
+    __ETKS_INITRAM_SIZE = __ETKS_INITRAM_END + 1 - __ETKS_INITRAM_START;
+    #endif
+    #ifdef MEMLAY_EDRAM_FIXCAL_START
+    __EDRAM_CALVAR_SIZE = __EDRAM_CALVAR_END + 1 - __EDRAM_CALVAR_START;
+    #endif
+
+    /* endif MEMLAY_EDRAM_START */
+    #endif
+
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*          RAM: fix sections at end for monitoring        */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+    .asw_user_mon (NOLOAD) :
+    {
+        *(.bss.user_mon)
+        . = ALIGN(0x8);
+    } > ram0
+
+    .ram0_user_end (NOLOAD) :
+    {
+        . = ALIGN(0x8);
+        __RAM0_USER_END   = . - 1;
+    } > ram0
+    .ram1_user_end (NOLOAD) :
+    {
+        . = ALIGN(0x8);
+        __RAM1_USER_END   = . - 1;
+    } > ram1
+    .ram2_user_end (NOLOAD) :
+    {
+        . = ALIGN(0x8);
+        __RAM2_USER_END   = . - 1;
+    } > ram2
+
+    /***********************************************************/
+    /* ASW monitored data in RAM. For monitoring support,      */
+    /* it must be located directly before csa and stack.       */
+    /***********************************************************/
+    .asw_mon (NOLOAD) :
+    {
+        *(.bss.mon)
+        . = ALIGN(8);
+    } > ram0
+
+    /***********************************************************/
+    /* ASW CSA (context save area) in RAM                      */
+    /***********************************************************/
+    .asw_csa (NOLOAD) :
+    {
+        . = ALIGN(64);      /* CSA must be 64 byte aligned */
+        *(.asw_csa)
+        . = ALIGN(8);
+    } > ram0
+
+    /***********************************************************/
+    /* ASW user stack in RAM                                   */
+    /***********************************************************/
+    .asw_stack (NOLOAD) :
+    {
+        . = ALIGN(8);       /* stack must be 8 byte aligned */
+        *(.asw_stack)
+        . = ALIGN(8);
+    } > ram0
+
+
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*          RAM: protected and free sections at end        */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+
+    .ram0_end (NOLOAD) : {__RAM0_END = . - 1;} > ram0
+    .ram1_end (NOLOAD) : {__RAM1_END = . - 1;} > ram1
+    .ram2_free (NOLOAD) :
+    {
+        /* protected RAM labels are used for absolute addressed area */
+        /* ram2 is not defined to be usable for calibration or protram */
+        __RAM2_END = . - 1;
+        #ifdef MEMLAY_RAM2_END
+        . += MEMLAY_RAM2_END + 1 - ABSOLUTE(.);
+        #endif
+    } > ram2
+    .dpram_free (NOLOAD) :
+    {
+        /* dpram is not defined to be usable for calibration or protram */
+        __ASW_VAR_DPR_END = . - 1;
+        #ifdef MEMLAY_DPRAM_END
+        . += MEMLAY_DPRAM_END + 1 - ABSOLUTE(.);
+        #endif
+    } > dpram
+
+
+    /***********************************************************/
+    /* RAM for Reset, which is cleared in early boot stage     */
+    /***********************************************************/
+    .asw_earlycleared (NOLOAD) :
+    {
+        . = ALIGN(8);
+        __RAM_EARLY_CLEARED_START = . ;
+        *(.bss.earlycleared)
+        . = ALIGN(8);
+        __RAM_EARLY_CLEARED_END = . - 1 ;
+    } > ram0
+
+    /***********************************************************/
+    /* protected RAM: survives software reset, ram0/ram1 only  */
+    /* - ENVRAM (emulated non volatile RAM)                    */
+    /* - protected RAM                                         */
+    /***********************************************************/
+    .ram0_prot (NOLOAD) :
+    {
+        /* prevent SB_RAM_TEMP from overlapping with __ASW_PROTECTED_RAM0,  */
+        /* which has to be retained over reset.                             */
+        . = MAX(ABSOLUTE(.) , (SB_RAM_TEMP_END + 1)) - ABSOLUTE(.);
+        __ASW_PROTECTED_RAM0_START = . ;
+        *(.bss.protram0)
+        . = ALIGN(8);
+    } > ram0
+
+    .ram1_prot (NOLOAD) :
+    {
+        __ASW_PROTECTED_RAM1_START = . ;
+        *(.bss.protram1)
+        . = ALIGN(8);
+    } > ram1
+
+    .ram_prot (NOLOAD) :
+    {
+        *(.bss.protram)
+        . = ALIGN(8);
+    } > MEMLAY_PROTRAM_AREA
+
+    .ram_prot_envram (NOLOAD) :
+    {
+        __ENVRAM_START = . ;
+        *(.bss.envram)
+        . = ALIGN(8);
+    } > MEMLAY_ENVRAM_AREA
+    /* initialized variables: values loaded from FLASH */
+    .data.prot_envram :
+    {
+        __ENVRAM_INITVAR_START = .;
+        *(.data.envram)
+        . = ALIGN(8);
+        __ENVRAM_INITVAR_END = . - 1;
+        __ENVRAM_END = . - 1;
+    } > MEMLAY_ENVRAM_AREA AT> MEMLAY_LOADDATA_AREA
+    __ENVRAM_INITVAR_SIZE = SIZEOF(.data.prot_envram);
+    __ENVRAM_INITVAR_FLASH_START = LOADADDR(.data.prot_envram);
+    .initvar_prot_envram_load __ENVRAM_INITVAR_FLASH_START :
+    {
+        . += __ENVRAM_INITVAR_SIZE;
+    }
+    __ENVRAM_SIZE = __ENVRAM_END + 1 - __ENVRAM_START;
+
+    /***********************************************************/
+    /* free RAM: used for calibration, survives software reset */
+    /***********************************************************/
+    .ram0_free (NOLOAD) :
+    {
+        __ASW_RAM0_FREE_START = . ;
+        . += MEMLAY_RAM0_END + 1 - ABSOLUTE(.);
+        __ASW_RAM0_FREE_END = . - 1;
+        __ASW_PROTECTED_RAM0_END = . - 1;
+    } > ram0
+    .ram1_free (NOLOAD) :
+    {
+        __ASW_RAM1_FREE_START = . ;
+        #ifdef MEMLAY_RAM1_END
+        . += MEMLAY_RAM1_END + 1 - ABSOLUTE(.);
+        #endif
+        __ASW_RAM1_FREE_END = . - 1;
+        __ASW_PROTECTED_RAM1_END = . - 1;
+    } > ram1
+
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*          Flash: non fix sections                        */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+
+    /***********************************************************/
+    /* 16-bit register A1 relative addressed constants in Flash */
+    /***********************************************************/
+    .sdata2 :
+    {
+        _SMALL_DATA2_ = . + 0x8000;
+        *(.sdata.rodata.default)
+        . = ALIGN(8);
+    } > MEMLAY_RELCONST_AREA
+
+    /***********************************************************/
+    /* 32-bit absolute addressed constants in ASW Flash         */
+    /***********************************************************/
+    .asw_const :
+    {
+        *(.rodata.default)
+        . = ALIGN(8);
+    } > MEMLAY_CONST_AREA
+
+    .asw_const_noncached_start :
+    {
+        . = ALIGN(0x4);
+        ASW_CONST_NONCACHED_ALIAS_START = . ;
+    } > MEMLAY_NONCACHED_CONST_AREA
+    .asw_const_noncached (ASW_CONST_NONCACHED_ALIAS_START + MEMLAY_OFFSET_NONCACHED):
+                        AT (ASW_CONST_NONCACHED_ALIAS_START)
+    {
+        *(.rodata.noncached)
+        . = ALIGN(0x4);
+    }
+    .asw_const_noncached_alias :
+    {
+        . += SIZEOF(.asw_const_noncached);
+    } > MEMLAY_NONCACHED_CONST_AREA
+	
+	/* projectspecific for NewEagle projects (SW sharing) - start */
+    .asw_const_oem :
+    {
+        *(.rodata.oem_ConstData.default)
+        . = ALIGN(8);
+    } > MEMLAY_CONST_AREA
+
+    /* projectspecific for NewEagle projects (SW sharing) - end */
+    #ifdef MEMLAY_ASW2_START
+    .asw2_const :
+    {
+        *(.rodata.asw2)
+        . = ALIGN(8);
+    } > asw2_flash
+    #endif
+
+    #ifdef MEMLAY_ASW1_START
+    .asw1_const :
+    {
+        *(.rodata.asw1)
+        . = ALIGN(8);
+    } > asw1_flash
+    #endif
+
+    .asw0_const :
+    {
+        *(.rodata.asw2)  /* if ASW2 area not defined */
+        *(.rodata.asw1)  /* if ASW1 area not defined */
+        *(.rodata.asw0)
+        . = ALIGN(8);
+    } > asw0_flash
+
+    /***************************************************************/
+    /*                                                             */
+    /*                 Non Cached Code in ASW Flash                */
+    /*                                                             */
+    /***************************************************************/
+    /* Physical address (load address): Hex-File address           */
+    /* Logical address: Physical address + MEMLAY_OFFSET_NONCACHED */
+    /* No copying necesarry, as memory is visible in both          */
+    /* address ranges                                              */
+    /* - monitored code                                            */
+    /***************************************************************/
+    .code_mon_start :
+    {
+        . = ALIGN(0x4);
+        __CODE_MON_ALIAS_START = .;
+    } > MEMLAY_MONCODE_AREA
+    .code_mon_noncached (__CODE_MON_ALIAS_START + MEMLAY_OFFSET_NONCACHED): AT (__CODE_MON_ALIAS_START)
+    {
+        __MO_CODECYCLICCHECK_START          = . ;
+        __MO_CODECYCLICCHECK_FLASH_START    = . - MEMLAY_OFFSET_NONCACHED;
+        __MO_CHCCODE_START                  = . ;           /* DS monitoring (MoCMem >= 1.0.0) */
+        __MO_CHCROM_CODE_START              = . ;           /* DS monitoring (MoCMem < 1.0.0)  */
+        *(.text.Mo_CodeCyclicCheck)
+        *(.asw0cs1_epilog)
+        __MO_CODECYCLICCHECK_END            = . - 1;
+        __MO_CODECYCLICCHECK_FLASH_END      = . - 1 - MEMLAY_OFFSET_NONCACHED;
+        __MO_CHCCODE_END                    = . - 1;        /* DS monitoring (MoCMem >= 1.0.0) */
+        __MO_CHCROM_CODE_END                = . - 1;        /* DS monitoring (MoCMem < 1.0.0)  */
+
+        *(.text.Mo_CodeNoCyclicCheck)
+        . = ALIGN(0x4);
+    }
+    .code_mon_alias :
+    {
+        . += SIZEOF(.code_mon_noncached);
+    } > MEMLAY_MONCODE_AREA
+
+    /***********************************************************/
+    /*                                                         */
+    /* Flash interrupt vector table                            */
+    /*                                                         */
+    /***********************************************************/
+    /* Interrupt vector table is located in SPRAM if MEMLAY_INTVECT_AREA is not defined */
+    #ifdef MEMLAY_INTVECT_AREA
+    .asw_inttab_align :
+    {
+        /* Interrupt vector table must be aligned to its size      */
+        /* __SIZE_INTTAB must be 2^n. This is checked in group.inv */
+        . = ALIGN(__SIZE_INTTAB);
+    } > MEMLAY_INTVECT_AREA
+    .asw_inttab :
+    {
+        *(.inttab)          /* must be the first input section after ALIGN(__SIZE_INTTAB) */
+        . = ALIGN(0x4);
+    } > MEMLAY_INTVECT_AREA
+    #endif
+
+    /***********************************************************/
+    /* Code in ASW Flash                                       */
+    /***********************************************************/
+    .abs0_code_align :
+    {
+        /* 32 byte alignment to allow 32 byte alignment in .asw2_code without linker warning */
+        . = ALIGN(0x20);
+    } > abs0_flash
+    .abs0_code :
+    {
+        *(.abs0_code)
+        . = ALIGN(0x4);
+    } > abs0_flash
+
+    #ifdef MEMLAY_ASW2_START
+    .asw2_code_align :
+    {
+        /* 32 byte alignment to allow 32 byte alignment in .asw2_code without linker warning */
+        . = ALIGN(0x20);
+    } > asw2_flash
+    .asw2_code :
+    {
+        *(.asw2_code)
+        . = ALIGN(0x4);
+    } > asw2_flash
+    #endif
+
+    #ifdef MEMLAY_ASW1_START
+    .asw1_code_align :
+    {
+        /* 32 byte alignment to allow 32 byte alignment in .asw1_code without linker warning */
+        . = ALIGN(0x20);
+    } > asw1_flash
+    .asw1_code :
+    {
+        *(.asw1_code)
+        . = ALIGN(0x4);
+    } > asw1_flash
+    #endif
+
+    /* special section for initializing pcp pointers by cpu */
+    /* must be in last link run */
+    .pcp_c_ptr_init :
+    {
+        *(.pcp_c_ptr_init)
+        . = ALIGN(0x4);
+    } > asw0_flash
+
+    .asw0_code_align :
+    {
+        /* 32 byte alignment to allow 32 byte alignment in .asw0_code without linker warning */
+        . = ALIGN(0x20);
+    } > asw0_flash
+    .asw0_code :
+    {
+        *(.asw2_code)  /* if ASW2 area not defined */
+        *(.asw1_code)  /* if ASW1 area not defined */
+        *(.asw0_code)
+        __MEMLAY_MPRAM_READ_START = .;
+        *(.text.mpram_read)
+        . = ALIGN(0x4);
+        __MEMLAY_MPRAM_READ_END = . - 1;
+    } > asw0_flash
+	
+/* projectspecific for NewEagle projects (SW sharing) - start */
+    .asw0_oem_code_Task_align :
+    {
+        /* 32 byte alignment to allow 32 byte alignment in .asw0_code without linker warning */
+        . = ALIGN(0x20);
+    } > asw0_flash
+
+    .asw0_oem_code_Task :
+    {
+        *(.asw0_oem_code_Task)
+        . = ALIGN(0x4);
+    } > asw0_flash
+    /* projectspecific for NewEagle projects (SW sharing) - end */
+
+    .asw_code_noncached_start :
+    {
+        . = ALIGN(0x4);
+        ASW_CODE_NONCACHED_ALIAS_START = . ;
+    } > MEMLAY_NONCACHED_CODE_AREA
+    .asw_code_noncached (ASW_CODE_NONCACHED_ALIAS_START + MEMLAY_OFFSET_NONCACHED):
+                       AT (ASW_CODE_NONCACHED_ALIAS_START)
+    {
+        *(.asw_code_noncached)
+        . = ALIGN(0x4);
+    }
+    .asw_code_noncached_alias :
+    {
+        . += SIZEOF(.asw_code_noncached);
+    } > MEMLAY_NONCACHED_CODE_AREA
+
+
+    /***********************************************************/
+    /* DSERAP vector table in ASW Flash                        */
+    /* - register A9 relative addressed                        */
+    /* - last non bypass entry in asw, as table grows with     */
+    /*   internal bypass                                       */
+    /* - only two DSERAP areas are supported by DME driver     */
+    /***********************************************************/
+    .sdata4 :
+    {
+        . = ALIGN(4);
+        _SMALL_DATA4_ = .;
+        __PTA_STARTVECT = .;
+        *(.sdata.ptavect0)
+        *(SORT(.sdata.pta_vectbyp_*))                /* sort additional data from internal bypass */
+        #ifdef MEMLAY_DS1_START
+        LONG(__PTA_DATA0_END + 1)        /* additional vector for unused area between DS0 and DS1 */
+        *(.sdata.ptavect1)
+        #endif
+        . = ALIGN(0x4);
+        __PTA_ENDVECT = . ;
+        *(.pta_endvect)
+        . = ALIGN(0x4);
+    } > asw0_flash
+    __PTAVECT_SIZE = __PTA_ENDVECT - __PTA_STARTVECT;
+    __DME_VECTTAB_ELEMENTS = __PTAVECT_SIZE / 4 ;
+    .asw_byp :
+    {
+        *(.text.byp)
+        . = ALIGN(0x4);
+    } > asw0_flash
+
+    /***********************************************************/
+    /* DSERAP vector table in OCRAM                            */
+    /* Attention: __PTAVECT_SIZE must be calculated before     */
+    /***********************************************************/
+    #ifdef MEMLAY_DATASET_VECTOR_OFFSET
+    .ocram_pta (NOLOAD) :
+    {
+        /* generate variable at link time */
+        . = ALIGN(0x4);
+        Dme_adVectTabETK_au32 = . ;
+        . += __PTAVECT_SIZE;
+    } > ocram_write
+    #endif
+
+    /***********************************************************/
+    /* Distab in dataset 0: only used, if DS1 not available    */
+    /***********************************************************/
+    #ifndef MEMLAY_DS1_START
+    #ifdef MEMLAY_ETK_TYPE_ETKT
+    .ds0_distab_flash_start :
+    {
+        . = ALIGN(0x4);
+        /* Distab is excluded from dataset comparison! */
+        __DISTAB_RESERVED_START = .;
+    } > ds0_flash
+
+    .ds0_distab_const (__DISTAB_RESERVED_START + MEMLAY_DS0_OCRAM_OFFSET):
+                  AT (__DISTAB_RESERVED_START)
+    {
+        *(.data.distab_read)
+        . = ALIGN(0x4);
+    }
+
+    .ds0_distab_flash_alias :
+    {
+        . += SIZEOF(.ds0_distab_const);
+        /* Distab is excluded from dataset comparison! */
+        __DISTAB_RESERVED_END = . - 1;
+    } > ds0_flash
+    __DISTAB_RESERVED_SIZE = __DISTAB_RESERVED_END + 1 - __DISTAB_RESERVED_START;
+    #endif
+    #endif
+
+    /***********************************************************/
+    /* Flash dataset 0:                                        */
+    /***********************************************************/
+    .ds0_data_start :
+    {
+        . = ALIGN(0x4);
+        __DS0_DATA_FLASH_START = .;
+        __DS0_DATA_START = .;
+        /* non PTA calibration data */
+        *(.caldata_byptab)
+        *(.caldata0)
+
+        /* PTA/DSERAP calibration data */
+        . = ALIGN(0x4);
+        __PTA_DATA_START = .;
+    } > ds0_flash
+
+#ifdef MEMLAY_DCACHE_START
+    MEMLAY_DS_OFFSET_NONCACHED = MEMLAY_OFFSET_NONCACHED;
+#else
+    /* DCACHE is not configured: use segment 8 also for "noncached" data */
+    MEMLAY_DS_OFFSET_NONCACHED = 0;
+#endif
+    .ds0_ptadata_noncached_start :
+    {
+        . = ALIGN(0x4);
+        DS0_PTADATA_NONCACHED_ALIAS_START = . ;
+    } > ds0_flash
+    .ds0_ptadata_noncached (DS0_PTADATA_NONCACHED_ALIAS_START + MEMLAY_DS_OFFSET_NONCACHED):
+                        AT (DS0_PTADATA_NONCACHED_ALIAS_START)
+    {
+        *(.ptadata_noncached)
+        . = ALIGN(0x8);
+    }
+    .ds0_ptadata_noncached_alias :
+    {
+        . += SIZEOF(.ds0_ptadata_noncached);
+    } > ds0_flash
+    /* undo calculation of noncached offset for monitoring area */
+    __MO_DATACYCLICCHECK_FLASH_START = __MO_DATACYCLICCHECK_START - MEMLAY_DS_OFFSET_NONCACHED;
+    __MO_DATACYCLICCHECK_FLASH_END   = __MO_DATACYCLICCHECK_END   - MEMLAY_DS_OFFSET_NONCACHED;
+
+    .ds0_data_end :
+    {
+        *(.ptadata0)
+        *(SORT(.pta_databyp_*))                     /* sort additional data from internal bypass */
+        . = ALIGN(0x4);
+        __PTA_DATA0_END   = . - 1;
+        __PTA_DATA_END   = . - 1;
+
+        *(SORT(.caldatabyp*))                       /* sort additional data from internal bypass */
+        . = ALIGN(0x4);
+        __DS0_DATA_END = . - 1 ;
+        __DS0_DATA_FLASH_END = . - 1 ;
+    } > ds0_flash
+	
+/***********************************************************/
+    /* Flash dataset 1: Adress must be higher than DS0         */
+    /***********************************************************/
+	
+    /* projectspecific for NewEagle projects (SW sharing) - start */
+    /* NewEagle specific like Bosch "caldata0" */
+    .ds0_data_oem_flash_start :
+    {
+        . = ALIGN(0x4);
+        __DS0_DATA_OEM_FLASH_START = .;
+    } > ds0_flash
+
+    .ds0_data_oem_const (__DS0_DATA_OEM_FLASH_START + MEMLAY_DS0_LINK_OFFSET):
+                 AT (__DS0_DATA_OEM_FLASH_START)
+    {      
+        /* non PTA calibration data */
+        *(.caldata.OEM_userData)        
+        . = ALIGN(0x4);
+        __DS0_DATA_END = . - 1 ;    /* overwrites previous definition: DS0 and DS1 are handled as 1 block */
+    }
+
+    .ds0_data_oem_flash_alias :
+    {
+        . += SIZEOF(.ds0_data_oem_const);
+        __DS0_DATA_OEM_FLASH_END = . - 1 ;
+    } > ds0_flash 	
+    /* projectspecific for NewEagle projects (SW sharing) - end */
+    #ifdef MEMLAY_DS1_START
+    /***********************************************************/
+    /* Distab in dataset 1                                     */
+    /* address must be bigger than DS0                         */
+    /* must be located after DS0 in locate.inv,                */
+    /*  as linker labels of DS0 are are modified               */
+    /***********************************************************/
+    #ifdef MEMLAY_ETK_TYPE_ETKT
+    .ds1_distab_flash_start :
+    {
+        . = ALIGN(0x4);
+        /* Distab is excluded from dataset comparison! */
+        __DISTAB_RESERVED_START = .;
+    } > ds1_flash
+
+    .ds1_distab_const (__DISTAB_RESERVED_START + MEMLAY_DS1_OCRAM_OFFSET):
+                  AT (__DISTAB_RESERVED_START)
+    {
+        *(.data.distab_read)
+        . = ALIGN(0x4);
+    }
+
+    .ds1_distab_flash_alias :
+    {
+        . += SIZEOF(.ds1_distab_const);
+        /* Distab is excluded from dataset comparison! */
+        __DISTAB_RESERVED_END = . - 1;
+    } > ds1_flash
+    __DISTAB_RESERVED_SIZE = __DISTAB_RESERVED_END + 1 - __DISTAB_RESERVED_START;
+    #endif
+    /***********************************************************/
+    /* Flash dataset 1: Adress must be higher than DS0         */
+    /***********************************************************/
+    .ds1_data :
+    {
+        __DS1_DATA_FLASH_START = .;
+        /* PTA/DSERAP calibration data */
+        *(.ptadata1)
+        . = ALIGN(0x4);
+        __PTA_DATA_END   = . - 1;   /* overwrites previous definition: DS0 and DS1 are handled as 1 block */
+
+        /* non PTA calibration data */
+        *(.caldata1)
+
+        . = ALIGN(0x4);
+        __DS0_DATA_END = . - 1 ;    /* overwrites previous definition: DS0 and DS1 are handled as 1 block */
+        __DS1_DATA_FLASH_END = . - 1 ;
+    } > ds1_flash
+    #endif
+
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*          Flash: free and epilog sections                */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+
+    /***********************************************************/
+    /* Flash 0 absolute section:                               */
+    /***********************************************************/
+    .abs0_free :
+    {
+        __ABS0_FREE_START = . ;
+        #ifdef MEMLAY_ABS0_END
+        . += MEMLAY_ABS0_END + 1 - ABSOLUTE(.) - MEMLAY_SIZE_OF_EPILOG - 4;
+        #endif
+        __ABS0_FREE_END = . - 1;
+    } > abs0_flash
+    .abs0_epilog :
+    {
+        #ifdef MEMLAY_ABS0_END
+        LONG(ABSOLUTE(__ABS0_FREE_START)); /* store start of free section for tools */
+        #endif
+        *(.abs0_epilog)
+    } > abs0_flash
+
+    /***********************************************************/
+    /* Flash 0                                                 */
+    /***********************************************************/
+    .asw0_free :
+    {
+    __NE_CODE0_END = .;  
+        __ASW0_FREE_START = . ;
+/* Beginn EPK-Erweiterung */
+        . += MEMLAY_ASW0_END + 1 - ABSOLUTE(.) - MEMLAY_SIZE_OF_EPILOG - 100 - 4;
+/* Ende EPK-Erweiterung */
+        __ASW0_FREE_END = . - 1;
+    } > asw0_flash
+/* Beginn EPK-Erweiterung */
+    .asw0_epk_log :
+    {
+        *(.asw0_epk_log)
+    } > asw0_flash
+/* Ende EPK-Erweiterung */
+
+    .asw0_epilog :
+    {
+    __NE_CODE1_START = .;  
+        LONG(ABSOLUTE(__ASW0_FREE_START)); /* store start of free section for tools */
+        *(.asw0_epilog)
+		
+    __NE_CODE1_END = .;  
+    } > asw0_flash
+
+    /***********************************************************/
+    /* Flash 1                                                 */
+    /***********************************************************/
+    .asw1_free :
+    {
+    __NE_CODE2_END = .;  
+        __ASW1_FREE_START = . ;
+        #ifdef MEMLAY_ASW1_END
+        . += MEMLAY_ASW1_END + 1 - ABSOLUTE(.) - MEMLAY_SIZE_OF_EPILOG - 4;
+        #endif
+        __ASW1_FREE_END = . - 1;
+    } > asw1_flash
+    .asw1_epilog :
+    {
+    __NE_CODE3_START = .;  
+        #ifdef MEMLAY_ASW1_END
+        LONG(ABSOLUTE(__ASW1_FREE_START)); /* store start of free section for tools */
+        #endif
+        *(.asw1_epilog)
+    __NE_CODE3_END = .;  
+    } > asw1_flash
+
+    /***********************************************************/
+    /* Flash 2                                                 */
+    /***********************************************************/
+    .asw2_free :
+    {
+        __ASW2_FREE_START = . ;
+        #ifdef MEMLAY_ASW2_END
+        . += MEMLAY_ASW2_END + 1 - ABSOLUTE(.) - MEMLAY_SIZE_OF_EPILOG - 4;
+        #endif
+        __ASW2_FREE_END = . - 1;
+    } > asw2_flash
+    .asw2_epilog :
+    {
+        #ifdef MEMLAY_ASW2_END
+        LONG(ABSOLUTE(__ASW2_FREE_START)); /* store start of free section for tools */
+        #endif
+        *(.asw2_epilog)
+    } > asw2_flash
+
+    /***********************************************************/
+    /* Flash dataset 0:                                        */
+    /***********************************************************/
+    .ds0_free :
+    {
+        __DS0_FREE_START = . ;
+/* Beginn EPK-Erweiterung */
+        . += MEMLAY_DS0_END + 1 - ABSOLUTE(.) - MEMLAY_SIZE_OF_EPILOG - 100 - 4;
+/* Ende EPK-Erweiterung */
+        __DS0_FREE_END = . - 1;
+    } > ds0_flash
+/* Beginn EPK-Erweiterung */
+    .ds0_epk_log :
+    {
+        *(.ds0_epk_log)
+    } > ds0_flash
+/* Ende EPK-Erweiterung */
+    .ds0_epilog :
+    {
+        LONG(ABSOLUTE(__DS0_FREE_START)); /* store start of free section for tools */
+        *(.ds0_epilog)
+    } > ds0_flash
+
+    /***********************************************************/
+    /* Flash dataset 1:                                        */
+    /***********************************************************/
+    #ifdef MEMLAY_DS1_START
+    .ds1_free :
+    {
+        __DS1_FREE_START = . ;
+        . += MEMLAY_DS1_END + 1 - ABSOLUTE(.) - MEMLAY_SIZE_OF_EPILOG - 4;
+        __DS1_FREE_END = . - 1;
+    } > ds1_flash
+    .ds1_epilog :
+    {
+        LONG(ABSOLUTE(__DS1_FREE_START)); /* store start of free section for tools */
+        *(.ds1_epilog)
+    } > ds1_flash
+    #endif
+
+    /***********************************************************/
+    /* Flash variant dataset:                                  */
+    /***********************************************************/
+    .vds_free :
+    {
+        . = ALIGN(4);
+        __VDS_FREE_START = . ;
+        #ifdef MEMLAY_VDS_END
+        . += MEMLAY_VDS_END + 1 - ABSOLUTE(.) - MEMLAY_SIZE_OF_EPILOG - 4;
+        #endif
+        __VDS_FREE_END = . - 1;
+    } > vds_flash
+    .vds_epilog :
+    {
+        #ifdef MEMLAY_VDS_END
+        LONG(ABSOLUTE(__VDS_FREE_START)); /* store start of free section for tools */
+        #endif
+        *(.vds_epilog)
+    } > vds_flash
+
+    /***********************************************************/
+    /* OCRAM_WRITE (ETK-T):                                    */
+    /***********************************************************/
+    #ifdef MEMLAY_OCRAM_WRITE_NC_START
+    .ocram_write_free (NOLOAD) :
+    {
+        . = ALIGN(4);
+        __OCRAM_WRITE_FREE_START = . ;
+        . += MEMLAY_OCRAM_WRITE_NC_END + 1 - ABSOLUTE(.);
+        __OCRAM_WRITE_FREE_END = . - 1;
+    } > ocram_write
+    #endif
+
+
+    /***********************************************************/
+    /*                                                         */
+    /*                virtual sections without memory          */
+    /*                                                         */
+    /***********************************************************/
+
+    /* bit offset information for variables of type "_bit" */
+    .boffs          0 : { KEEP (*(.boffs)) }
+    /* checksum information for link-compatibility */
+    .filechecksum   0 : { KEEP (*(.filechecksum)) }
+
+    /* DWARF 1 */
+    .debug          0 : { *(.debug) }
+    .line           0 : { *(.line) }
+    /* GNU DWARF 1 extensions */
+    .debug_srcinfo  0 : { *(.debug_srcinfo) }
+    .debug_sfnames  0 : { *(.debug_sfnames) }
+    /* DWARF 1.1 and DWARF 2 */
+    .debug_aranges  0 : { *(.debug_aranges) }
+    .debug_pubnames 0 : { *(.debug_pubnames) }
+    .debug_macinfo  0 : { *(.debug_macinfo) }
+
+    .debug_abbrev   0 : { *(.debug_abbrev) }
+    .debug_info     0 : { *(.debug_info) }
+    .debug_info     0 : { *(.debug_info) *(.gnu.linkonce.wi.*) }
+    .debug_line     0 : { *(.debug_line) }
+
+    .debug_frame    0 : { *(.debug_frame) }
+    .debug_ranges   0 : { *(.debug_ranges) }
+    .debug_str      0 : { *(.debug_str) }
+
+
+    /* Debug section for Vared tool */
+    .VarEd_Info     0 : { *(.VarEd_Info) }
+
+    /* Version info provided by comiler */
+    .version_info   0 : { *(.version_info) }
+
+    /* Cause a linker error if there are input sections not    */
+    /* considered in linker command file                       */
+    .unspecified_sections : { *(*) } > must_be_empty
+
+    /* Dummy section to mark end of SECTION statement in map-  */
+    /* file (separate subsequent linker symbols)               */
+    .end : {}
+}
+
+/* provide symbols for a2l file generation */
+MemLay_CompIdDs0_u32  = MemLay_EpilogDs0_cs + 4;
+MemLay_CompRefDs0_u32 = MemLay_EpilogDs0_cs;
+MemLay_CompRefEtk_u32 = DEFINED(Dme_CompRefETK_u32) ? Dme_CompRefETK_u32 : 0 ;
+#ifdef MEMLAY_DS0_OCRAM_OFFSET
+MemLay_CompRefDs0Etk_u32 = MemLay_EpilogDs0_cs + MEMLAY_DS0_OCRAM_OFFSET;
+#else
+MemLay_CompRefDs0Etk_u32 = 0;
+#endif
+
+/* provide symbols, if no ETKT present */
+#ifndef MEMLAY_ETK_TYPE_ETKT
+__DISTAB_RESERVED_START = __DS0_DATA_FLASH_START;
+__DISTAB_RESERVED_END   = __DS0_DATA_FLASH_START - 1;
+__DISTAB_RESERVED_SIZE  = 0;
+#endif
+
+/* Symbols for initialisation of special RAM */
+#ifdef MEMLAY_PCP_PCODE_START
+__PCODE_SIZE      = MEMLAY_PCP_PCODE_END + 1 - MEMLAY_PCP_PCODE_START;
+#endif
+#ifdef MEMLAY_PCP_PRAM_START
+__PDATA_SIZE      = MEMLAY_PCP_PRAM_END + 1 - MEMLAY_PCP_PRAM_START;
+#endif
+__SPRAM_SIZE      = MEMLAY_PMI_SPRAM_END + 1 - MEMLAY_PMI_SPRAM_START;
+
+/* Symbols used for clearing RAM: */
+__RAM0_SIZE  = __RAM0_END + 1 - __RAM0_START;
+__RAM1_SIZE  = __RAM1_END + 1 - __RAM1_START;
+__RAM2_SIZE  = __RAM2_END + 1 - __RAM2_START;
+__SIZE_ASW_VAR_DPR = __ASW_VAR_DPR_END + 1 - __ASW_VAR_DPR_START;
+
+/* Symbols used for clearing protected RAM: */
+__ASW_PROTECTED_RAM0_SIZE   = __ASW_PROTECTED_RAM0_END   + 1 - __ASW_PROTECTED_RAM0_START;
+__ASW_PROTECTED_RAM1_SIZE   = __ASW_PROTECTED_RAM1_END   + 1 - __ASW_PROTECTED_RAM1_START;
+__ASW_PROTECTED_RAM2_SIZE   = __ASW_PROTECTED_RAM2_END   + 1 - __ASW_PROTECTED_RAM2_START;
+
+/* Symbols used by PCP */
+/* Offset is calculated automatically by linker. */
+/* Option --pcpmap is required! Available in DS Softwarebuild: SWB.3.2.0 */
+__OFFS_SPB_DMI = 0x0;
+
+/* labels used by DAMOS for ccp in a2l-file */
+#ifdef MEMLAY_DS1_START
+CCP_DATASET_SIZE  = MEMLAY_DS1_END + 1 - MEMLAY_DS0_START;
+#else
+CCP_DATASET_SIZE  = MEMLAY_DS0_END + 1 - MEMLAY_DS0_START;
+#endif
+CCP_DATASET_1_START = MEMLAY_DS0_START;
+CCP_DATASET_1_SIZE  = CCP_DATASET_SIZE;
+CCP_DATASET_2_START = MEMLAY_DS0_START + 0x80000000;
+CCP_DATASET_2_SIZE  = CCP_DATASET_SIZE;
+
+/* insert autogenerated epilog: do not edit */
+#include "memlay_linkepilog_auto_confpriv.h"
+
+/***********************************************************/
+/* Do some checks. Stop on error.                          */
+/***********************************************************/
+_. = ASSERT ((__RAM_EARLY_CLEARED_END + 1 - __RAM_EARLY_CLEARED_START) <= 104,
+             ".bss.earlycleared section has overflowed. Check map file for uninteded contents. Only for registered users.") ;
