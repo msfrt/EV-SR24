@@ -11,6 +11,7 @@
 #include "SPI.h"
 #define SPI0_DISP1
 
+
 #define READ_RESOLUTION_BITS 12
 
 // can bus decleration
