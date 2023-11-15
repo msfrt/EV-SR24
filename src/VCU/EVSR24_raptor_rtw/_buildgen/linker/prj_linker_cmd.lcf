@@ -1,0 +1,2931 @@
+/*
+
+ **********************************************************************
+
+ *
+
+ * (C) All rights reserved by ROBERT BOSCH GMBH, STUTTGART
+
+ *
+
+ **********************************************************************
+
+ *
+
+ *    __   __   ___  ___
+
+ *   /_ / /  / /__  /    /__/
+
+ *  /__/ /__/ __ / /__  /  /
+
+ *
+
+ *  Linker command file for
+
+ *  - locating grouped sections in TriCore memory space
+
+ *  - create empty output sections as placeholder for SB/CB/TPROT
+
+ *  - defining linker symbols not related to output section of group.inv
+
+ *
+
+ *
+
+ *  special output sections of final link run:
+
+ *    .sbss  / .sdata       small data addressing mode unsing register A0.
+
+ *    .sbss2 / .sdata2      small data addressing mode unsing register A1.
+
+ *    .sbss3 / .sdata3      small data addressing mode unsing register A8.
+
+ *    .sbss4 / .sdata4      small data addressing mode unsing register A9.
+
+ *
+
+ *  Implementation hints:
+
+ *  - compiler default sections must not be used as input section, to ensure safety with
+
+ *    internal bypass and customer delivered code.
+
+ *  - Input sections for small data addressing must be .sbss.* / .sdata.*
+
+ *  - There should be no wildcards in section names.
+
+ *  - Wildcards should be handled in group.inv
+
+ *  - Linker may append jump islands to output section after the last expression.
+
+ *    So *_END labels may not be located at the end of a section containing code.
+
+ *
+
+ *  - It is required, that all start addresses and sizes of output sections are a multiple of 4
+
+ *
+
+ **********************************************************************
+
+ */
+/* This number has to be changed, if there are memlay interface changes to be integrated */
+
+
+
+/*<RBHead>
+
+ ***************************************************************************************************
+
+ *
+
+ * (C) All rights reserved by ROBERT BOSCH GMBH, STUTTGART
+
+ *
+
+ ***************************************************************************************************
+
+ *
+
+ *    __   __   ___  ___
+
+ *   /_ / /  / /__  /    /__/
+
+ *  /__/ /__/ __ / /__  /  /
+
+ *
+
+ *
+
+ ***************************************************************************************************
+
+ * Administrative Information (automatically filled in)
+
+ * $Filename__:cpu_machine.ht$
+
+ * $Author____:NESTORADMINSDOM$
+
+ * $Function__:This version is created by migration tool$
+
+ * $Domain____:SDOM$
+
+ * $User______:KOI2KOR$
+
+ * $Date______:29.03.2012$
+
+ * $Class_____:CONFTPLHDR$
+
+ * $Name______:cpu_machine$
+
+ * $Variant___:1.13.0$
+
+ * $Revision__:0$
+
+ * $Type______:HT$
+
+ * $State_____:AVAILABLE$
+
+ * $FDEF______:$
+
+ *
+
+ * List of changes
+
+ * $History
+
+ * 
+
+ * 1.13.0; 0     29.03.2012 KOI2KOR
+
+ *   SHE module support for TC1793 controller
+
+ * 
+
+ * 1.12.0; 2     04.03.2011 AHT2FE
+
+ *   Fix for TC_1724
+
+ * 
+
+ * 1.12.0; 1     18.02.2011 AHT2FE
+
+ *   Fix cpu_machine.ht for TC_1724
+
+ * 
+
+ * 1.12.0; 0     11.02.2011 AHT2FE
+
+ *   Fix cpu_machine.ht for TC_1724
+
+ * 
+
+ * 1.11.0; 0     25.10.2010 AHT2FE
+
+ *   Improved 1793 support
+
+ * 
+
+ * 1.10.0; 2     31.05.2010 AHT2FE
+
+ *   Fixes for new TC_1793 spec
+
+ * 
+
+ * 1.10.0; 1     26.04.2010 AHT2FE
+
+ *   Added TC:_1793
+
+ * 
+
+ * 1.10.0; 0     16.03.2010 AHT2FE
+
+ *   Added support for TC_1793
+
+ * 
+
+ * 1.9.0; 0     24.11.2009 AWL2SI
+
+ *   B_CPU.9.0.0
+
+ * 
+
+ * $
+
+ ***************************************************************************************************
+
+ </RBHead>*/
+/**
+
+ ***************************************************************************************************
+
+ * \moduledescription
+
+ *           Header file which contains CPU dependent definitions
+
+ *
+
+ *           THIS FILE IS GENERATED AUTOMATICALLY - DO NOT EDIT!
+
+ *
+
+ *
+
+ * \scope    API
+
+ ***************************************************************************************************
+
+ */
+/*
+
+ ***************************************************************************************************
+
+ * Defines
+
+ ***************************************************************************************************
+
+ */
+/* if this header is used in C-context, add type suffix to constant values */
+/* in linker context, do not use suffixes                                  */
+
+
+
+
+
+
+
+/**
+
+ ***************************************************************************************************
+
+ *  Specification of the CPU type.
+
+ *
+
+ *  valid options are:
+
+ *
+
+ *  TC_1762    TC_1762 is not supported by CPU package only this define is created
+
+ *  TC_1796    Infineon TriCore 1.3 TC1796  (METIS)
+
+ *  TC_1766    Infineon TriCore 1.3 TC1766  (LedaLight)
+
+ *  TC_1767    Infineon TriCore V1.3.1 TC1767
+
+ *  TC_1797    Infineon TriCore V1.3.1 TC1797
+
+ *  TC_1782    Infineon TriCore V1.3.1 TC1782
+
+ *  TC_1793    Infineon TriCore V1.6 TC1793
+
+ *  TC_1724    Infineon TriCore V1.3.1 TC1724
+
+ *  TC_1792    Infineon TriCore 1.3 TC1792  (METIS with reduced featureset)
+
+ *  TC_1764    Infineon TriCore 1.3 TC1764  (LedaLight with reduced featureset)
+
+ *  TC_1736    Infineon TriCore V1.3.1 TC1736
+
+ *  TC_1736F40 Infineon TriCore V1.3.1 TC1736F40
+
+ *  TC_1387    TC_1387 is not supported by CPU package only this define is created
+
+ *
+
+ *
+
+ ***************************************************************************************************
+
+*/
+/* define current processor type */
+
+
+
+
+
+
+/**
+
+ ***************************************************************************************************
+
+ *  Define chip identification values of supported devices
+
+ *
+
+ *  These values can be used to determine the processor type during runtime.
+
+ *  The chip identification can be read by calling Reg_GetBitfield(SCU, CHIPID, CHIPID_CHID)
+
+ *
+
+ ***************************************************************************************************
+
+*/
+
+
+
+
+
+
+/**
+
+ ***************************************************************************************************
+
+ *  Define endianness of the CPU.
+
+ *
+
+ *  This define configures platform independent SW modules (e.g. service library) for the
+
+ *  TriCore target processors.
+
+ *
+
+ ***************************************************************************************************
+
+*/
+/**
+
+ ***************************************************************************************************
+
+ *  Defines for available modules.
+
+ *
+
+ *  Defines can be used to check if a module e.g. PCP is available on the microcontroller
+
+ ***************************************************************************************************
+
+*/
+/**
+
+ ***************************************************************************************************
+
+ *
+
+ *  Define the address mapping of memories and peripheral modules.
+
+ *
+
+ ***************************************************************************************************
+
+*/
+/* ****************** */
+/* * Internal Flash * */
+/* ****************** */
+
+/* Program flash  */
+
+
+
+
+
+
+
+/* Data flash  */
+
+
+
+
+
+
+
+  /*************************************/
+  /*                                   */
+  /*  TC 1793 register description     */
+  /*                                   */
+  /*************************************/
+  /* analog to digital converters */
+  ADC = 0xF0101000;
+  ADC0 = 0xF0101000;
+  ADC1 = 0xF0101400;
+  ADC2 = 0xF0101800;
+  /* async. serial interfaces (UART) */
+  ASC = 0xF0000A00;
+  ASC0 = 0xF0000A00;
+  ASC1 = 0xF0000B00;
+  /* Bus Monitoring Unit */
+  BMU = 0xF0323000;
+  /* MultiCAN controller */
+  CAN = 0xF0004000;
+  /* On-Chip Debug Support (Cerberus) */
+  CBS = 0xF0000464;
+
+  /* CPU slave interface registers */
+  CPS = 0xF7E0FFBC;
+  CPS_CPU_SRC0 = 0xF7E0FFFC; /* for ERCOSEK: SRN control register to be the scheduling interrupt */
+  /* DMA */
+  DMA = 0xF0003C00;
+  /* EBU Registers */
+  EBU = 0xF8000000;
+  /* Flexray Registers*/
+  ERAY = 0xF0010000;
+  /* FADC */
+  FADC = 0xF0100400;
+
+  /* FCE */
+  FCE = 0xF0320000;
+
+  /* Flash module */
+  FLASH = 0xF8002000;
+  FLASH0 = 0xF8002000;
+  FLASH1 = 0xF8004000;
+
+  /* general purpose timer array */
+  GPTA = 0xF0001800;
+  GPTA0 = 0xF0001800;
+  GPTA1 = 0xF0002008;
+
+  /* GPT12 Module */
+  GPT12 = 0xF0003400;
+  GPT120 = 0xF0003400;
+  GPT121 = 0xF0003500;
+
+  /* Local Memory Unit */
+  LMU = 0xF8700800;
+  /* Local timer cells array */
+  LTCA2 = 0xF0002808;
+  /* Memory checker */
+  MCHK = 0xF010C208;
+  /* MLI */
+  MLI = 0xF010C000;
+  MLI0 = 0xF010C000;
+  MLI1 = 0xF010C100;
+
+  /* MicroSecond Bus Controller */
+  MSC = 0xF0000800;
+  MSC0 = 0xF0000800;
+  MSC1 = 0xF0000900;
+  /* Overlay Control Unit (OVC) */
+  OVC = 0xF87FFB20;
+  /* GPIO ports */
+  P0 = 0xF0000C00;
+  P1 = 0xF0000D00;
+  P2 = 0xF0000E00;
+  P3 = 0xF0000F00;
+  P4 = 0xF0001000;
+  P5 = 0xF0001100;
+  P6 = 0xF0001200;
+  P7 = 0xF0001300;
+  P8 = 0xF0001400;
+  P9 = 0xF0001500;
+  P10 = 0xF0001600;
+  P11 = 0xF0001700;
+  P12 = 0xF0300000;
+  P13 = 0xF0300100;
+  P14 = 0xF0300200;
+  P15 = 0xF0300300;
+  P16 = 0xF0300400;
+  P17 = 0xF0300510;
+  /* peripheral control processor */
+  PCP = 0xF0043F00;
+  /* PMU */
+  PMU = 0xF8000508;
+  /* System bus control unit */
+  SBCU = 0xF0000108;
+  /* system control unit */
+  SCU = 0xF0000508;
+  SCU_WDT_ERCOSEK = 0xF00005F0 - 0x20; /* for ERCOSEK: WDT-control register adress to lock/unlock registers in Ercosek code*/
+                                       /* -0x20, because the ERCOSEK-Lib is compiled for TC1796 and adds the TC1796-Offset
+
+                                       of &SCU.WDT_CON0-&SCU (+0x20) */
+  /* SDMA */
+  SDMA = 0xF0003800;
+
+  /* SENT */
+  SENT = 0xF0321000;
+
+  /* SHE */
+  SHE = 0xF0320200;
+
+  /* synchronous serial interfaces (SPI) */
+  SSC = 0xF0310000;
+  SSC0 = 0xF0310000;
+  SSC1 = 0xF0310100;
+  SSC2 = 0xF0310200;
+  SSC3 = 0xF0310300;
+  /* system timer */
+  STM = 0xF0000200;
+  STM_TIM0 = 0xF0000210; /* for ERCOSEK: System Timer counter  */
+  STM_SRC1 = 0xF00002F8; /* for ERCOSEK: SRN control register to be the Alarm interrupt  */
+  STM_SRC0 = 0xF00002FC; /* for ERCOSEK: SRN control register to be the Timetable interrupt */
+  /* XBAR */
+  XBAR = 0xF8700004;
+
+  /* Symbols used by ERCOSEK */
+  SC_INT_ADR = CPS_CPU_SRC0;
+  SCU_BASE_ADR = SCU_WDT_ERCOSEK;
+  STM_BASE_ADR = STM;
+  ALARM_SRC_ADR = STM_SRC1;
+  TIMETABLE_SRC_ADR = STM_SRC0;
+  SYSTEM_TIME_REGISTER_TC = STM_TIM0;
+/* system ticks per us */
+
+
+
+/* system clock [MHz] */
+
+
+
+/* CPU clock [MHz] */
+
+
+
+/* The following errata workarounds are active */
+
+
+/* _MACHINE_H */
+
+
+/*<RBHead>
+
+ ***************************************************************************************************
+
+ *
+
+ * (C) All rights reserved by ROBERT BOSCH GMBH, STUTTGART
+
+ *
+
+ ***************************************************************************************************
+
+ *
+
+ *    __   __   ___  ___
+
+ *   /_ / /  / /__  /    /__/
+
+ *  /__/ /__/ __ / /__  /  /
+
+ *
+
+ *
+
+ ***************************************************************************************************
+
+ * Administrative Information (automatically filled in)
+
+ * $Filename__:$
+
+ * $Author____:$
+
+ * $Function__:$
+
+ * $Domain____:$
+
+ * $User______:$
+
+ * $Date______:$
+
+ * $Class_____:$
+
+ * $Name______:$
+
+ * $Variant___:$
+
+ * $Revision__:$
+
+ * $Type______:$
+
+ * $State_____:$
+
+ * $FDEF______:$
+
+ *
+
+ * List of changes
+
+ * $History___:$
+
+ ***************************************************************************************************
+
+ </RBHead>*/
+ /*!
+
+ *********************************************************************
+
+ * \moduldescription
+
+ *           automatically generated configuration file for SB.
+
+ *
+
+ * \scope  CONF
+
+ *********************************************************************
+
+ */
+/* Defines for boot type */
+
+
+
+/* Boot type of SB */
+
+
+/* Start address of SB fix ram area */
+
+
+/* End address of SB fix ram area (last byte)*/
+
+
+/* Start address of SB temp ram area */
+
+
+/* End address of SB temp ram area (last byte)*/
+
+
+
+
+/*
+
+ ***************************************************************************************************
+
+ *
+
+ * (C) All rights reserved by ROBERT BOSCH GMBH, STUTTGART
+
+ *
+
+ ***************************************************************************************************
+
+ *
+
+ *    __   __   ___  __
+
+ *   /_ / /  / /__  /    /__/
+
+ *  /__/ /__/ __ / /__  /  /
+
+ *
+
+ *  C O R E
+
+ *
+
+ ***************************************************************************************************
+
+ */
+/**
+
+ *********************************************************************
+
+ * \moduldescription
+
+ *           automatically generated configuration file for MemLay.
+
+ *
+
+ * \scope  CONF
+
+ *********************************************************************
+
+ */
+/*
+
+ *********************************************************************
+
+ * Includes
+
+ *********************************************************************
+
+ */
+/*<RBHead>
+
+ *************************************************************************
+
+ *                                                                       *
+
+ *                      ROBERT BOSCH GMBH                                *
+
+ *                          STUTTGART                                    *
+
+ *                                                                       *
+
+ *          Alle Rechte vorbehalten - All rights reserved                *
+
+ *                                                                       *
+
+ *************************************************************************
+
+
+
+ *************************************************************************
+
+ *    Administrative Information (automatically filled in by eASEE)      *
+
+ *************************************************************************
+
+ *
+
+ * $Filename__:memlay_pub.h$
+
+ *
+
+ * $Author____:NESTORADMINSDOM$
+
+ *
+
+ * $Function__:This version is created by migration tool$
+
+ *
+
+ *************************************************************************
+
+ * $Domain____:SDOM$
+
+ * $User______:JWI2SI$
+
+ * $Date______:12.10.2010$
+
+ * $Class_____:SWHDR$
+
+ * $Name______:memlay_pub$
+
+ * $Variant___:1.14.0$
+
+ * $Revision__:0$
+
+ * $Type______:H$
+
+ * $State_____:AVAILABLE$
+
+ * $Generated_:$
+
+ *************************************************************************
+
+ *
+
+ * $UniqueName:$
+
+ * $Component_:$
+
+ *
+
+ *
+
+ *************************************************************************
+
+ * List Of Changes
+
+ *
+
+ * $History
+
+ * 
+
+ * 1.14.0; 0     12.10.2010 JWI2SI
+
+ *   D-Cache for TC1793
+
+ * 
+
+ * 1.13.0; 2     12.07.2010 JWI2SI
+
+ *   bugfix in memlay_rtprptect.c
+
+ * 
+
+ * 1.13.0; 1     07.05.2010 JWI2SI
+
+ *   Support TC1724
+
+ * 
+
+ * 1.13.0; 0     27.01.2010 JWI2SI
+
+ *   I: remove warnings
+
+ * 
+
+ * 1.12.0; 0     23.11.2009 AWL2SI
+
+ *   B_MEMLAY.12.0.0
+
+ * 
+
+ * $
+
+ *
+
+ *************************************************************************
+
+ </RBHead>*/
+/*!
+
+ *********************************************************************
+
+ * \moduldescription
+
+ *          Header file for MemLay interface.
+
+ *          This is not a configuration file. Do not modify or branch this file for projects!
+
+ *
+
+ * \scope   API
+
+ *********************************************************************
+
+ */
+/*
+
+ *********************************************************************
+
+ * Includes
+
+ *********************************************************************
+
+ */
+/*
+
+ *********************************************************************
+
+ * Defines
+
+ *********************************************************************
+
+ */
+/* relocation offset for noncached access */
+/* _MEMLAY_PUB_H */
+
+
+/* if this header is used in C-context, add type suffix to constant values */
+/* in linker context, do not use suffixes                                  */
+
+
+
+
+
+
+
+  /* check versions of linker command files */
+/* Define for Enabling SB version check for Real Time protection from SB 13.0.0 onwards. */
+
+
+/* ib entry for module tprot*/
+
+
+/* Constant size of an epilog */
+
+
+/*  Defines for RealTime Protection interaction with MMO or RTMO */
+
+
+
+
+/*  RealTime Protection mode */
+/* MEMLAY_EDRAM_START is only defined, if EDRAM is available */
+
+
+
+/* Overlay register usage */
+
+
+
+
+
+/* Offset of access to Dataset. External Flash or ETK-T is visible there */
+
+
+/* Memlay layout configuration of CB */
+
+
+
+/* Memlay layout configuration of ASW0 */
+
+
+
+/* Memlay layout configuration of ASW1 */
+
+
+
+/* Memlay layout configuration of DS0 */
+
+
+
+
+/* Memlay layout configuration of TPROT */
+
+
+
+/* Memlay layout configuration of SB */
+
+
+
+/* User defined memory blocks */
+/* Memlay layout configuration of CB_RESERVED */
+
+
+
+/* Memlay layout configuration of CTPROT_RESERVED */
+
+
+
+/* Memlay layout configuration of PMU_OLDA */
+
+
+
+/* Memlay layout configuration of LMU_RAM */
+
+
+
+/* Memlay layout configuration of PMI_SPRAM */
+
+
+
+/* Memlay layout configuration of DMI_RAM */
+
+
+
+/* Memlay layout configuration of PCP_PRAM */
+
+
+
+/* Memlay layout configuration of PCP_PCODE */
+
+
+
+
+
+
+
+/* #define MEMLAY_MPRAM_AREA_... */
+/* _LIBRARYABILITY_H */
+
+/* _MEMLAY_AUTO_CONF_H */
+
+
+/*<RBHead>
+
+ ***************************************************************************************************
+
+ *
+
+ * (C) All rights reserved by ROBERT BOSCH GMBH, STUTTGART
+
+ *
+
+ ***************************************************************************************************
+
+ *
+
+ *    __   __   ___  ___
+
+ *   /_ / /  / /__  /    /__/
+
+ *  /__/ /__/ __ / /__  /  /
+
+ *
+
+ *
+
+ ***************************************************************************************************
+
+ * Administrative Information (automatically filled in)
+
+ * $Filename__:memlay_confpriv.ht$
+
+ * $Author____:KLMEYER$
+
+ * $Function__:This version is created by migration tool$
+
+ * $Domain____:SDOM$
+
+ * $User______:JWI2SI$
+
+ * $Date______:12.10.2010$
+
+ * $Class_____:CONFTPLHDR$
+
+ * $Name______:memlay_confpriv$
+
+ * $Variant___:1.14.0$
+
+ * $Revision__:0$
+
+ * $Type______:HT$
+
+ * $State_____:AVAILABLE$
+
+ * $FDEF______:$
+
+ *
+
+ * List of changes
+
+ * $History
+
+ * 
+
+ * 1.14.0; 0     12.10.2010 JWI2SI
+
+ *   D-Cache for TC1793
+
+ * 
+
+ * 1.13.0; 0     29.01.2010 JWI2SI
+
+ *   TC_1793
+
+ * 
+
+ * 1.12.0; 0     23.11.2009 AWL2SI
+
+ *   B_MEMLAY.12.0.0
+
+ * 
+
+ * $
+
+ ***************************************************************************************************
+
+ </RBHead>*/
+/**
+
+ ***************************************************************************************************
+
+ * \moduledescription
+
+ *              memlay_auto_confpriv.h: calibration software - private configuration header file
+
+ *
+
+ * \scope           CONF
+
+ ***************************************************************************************************
+
+ */
+/*
+
+ ***************************************************************************************************
+
+ * Includes
+
+ ***************************************************************************************************
+
+ */
+/* import Configuration of TPROT, if TPROT component available */
+
+/*<RBHead>
+
+ ***************************************************************************************************
+
+ *
+
+ * (C) All rights reserved by ROBERT BOSCH GMBH, STUTTGART
+
+ *
+
+ ***************************************************************************************************
+
+ *
+
+ *    __   __   ___  ___
+
+ *   /_ / /  / /__  /    /__/
+
+ *  /__/ /__/ __ / /__  /  /
+
+ *
+
+ *
+
+ ***************************************************************************************************
+
+ * Administrative Information (automatically filled in)
+
+ * $Filename__:$
+
+ * $Author____:$
+
+ * $Function__:$
+
+ * $Domain____:$
+
+ * $User______:$
+
+ * $Date______:$
+
+ * $Class_____:$
+
+ * $Name______:$
+
+ * $Variant___:$
+
+ * $Revision__:$
+
+ * $Type______:$
+
+ * $State_____:$
+
+ * $FDEF______:$
+
+ *
+
+ * List of changes
+
+ * $History___:$
+
+ ***************************************************************************************************
+
+ </RBHead>*/
+/*
+
+ ***************************************************************************************************
+
+ * Includes
+
+ ***************************************************************************************************
+
+ */
+/*
+
+ ***************************************************************************************************
+
+ * Defines
+
+ ***************************************************************************************************
+
+ */
+
+
+
+
+
+
+/*
+
+ ***************************************************************************************************
+
+ * Type definitions
+
+ ***************************************************************************************************
+
+ */
+/*
+
+ ***************************************************************************************************
+
+ * Extern Declarations
+
+ ***************************************************************************************************
+
+ */
+
+
+/*
+
+ *********************************************************************
+
+ * Defines
+
+ *********************************************************************
+
+ */
+/* Address translation of a memory block:                                   */
+/* All addresses are shifted by 16 bit. Lower 16 address bits are removed.  */
+/* Addresses are a multiple of 64kByte                                      */
+/* #define MEMLAY_REINI_RESET */
+
+
+
+
+
+/* Memlay_Accpr Defines */
+
+
+
+
+
+
+
+/*
+
+ *********************************************************************
+
+ * For linker command files only
+
+ *********************************************************************
+
+ */
+
+
+
+
+
+/*
+
+ *********************************************************************
+
+ * For locate.inv only
+
+ *********************************************************************
+
+ */
+    /* calculate RAM_FIX area */
+
+
+            /* SB_RAM_FIX is located before TPROT_RAM_FIX */
+    /* machine specific address mappings */
+
+        /* FIX Ram is located at start of SPRAM */
+    /* Automatic relocation depending on availability. Do not change. */
+/* Begin of MEMLAY_LINK_LOCATE_PROLOG */
+
+/* End of MEMLAY_LINK_LOCATE_PROLOG */
+
+/* MEMLAY_LOCATE_VERSION */
+
+
+/* LINK_RUN */
+
+
+/* _LIBRARYABILITY_H */
+
+/* _MEMLAY_AUTO_CONFPRIV_H */
+/* Area for interrupt vector table. Possible values: asw0_flash, asw1_flash, abs0_flash or undefined for spram */
+/* External flash is not reccomended! */
+
+
+/* Area for register A8 addressing. Possible values: ram0, ram1, undefined for spram */
+/* Undefined is only usefull in special cases */
+
+
+
+
+
+OUTPUT_FORMAT("elf32-tricore", "elf32-tricore", "elf32-tricore")
+OUTPUT_ARCH(tricore)
+
+/* start symbol for Debugger */
+start = 0x80018000 + 0x78; /* Offset for infoblock neccessary */
+ENTRY(start)
+
+
+MEMORY
+{
+    /***********************************************************/
+    /*                                                         */
+    /*                        Memory areas                     */
+    /*                                                         */
+    /***********************************************************/
+    /* optional memory areas must be defined with a size of 0  */
+    /* in case when not defined (for security reasons)         */
+    /***********************************************************/
+
+    /* Flash0 18-bit absolute addressed constants              */
+
+
+
+
+    abs0_flash : org = 0, len = 0
+
+
+    /* Flash0 ASW code                                         */
+    asw0_flash : org = 0x80020000,
+                            len = 0x801FFFFF + 1 - 0x80020000
+
+    /* Flash1 ASW code                                         */
+
+    asw1_flash : org = 0x80800000,
+                            len = 0x8097FFFF + 1 - 0x80800000
+
+
+
+
+    /* Flash2 ASW code                                         */
+
+
+
+
+    asw2_flash : org = 0, len = 0
+
+
+    /* Flash0 data set                                         */
+    ds0_flash : org = 0x80980000,
+                            len = 0x809FBFFF + 1 - 0x80980000
+
+    /* Flash1 data set                                         */
+
+
+
+
+    ds1_flash : org = 0, len = 0
+
+
+    /* Variant data set                                        */
+
+
+
+
+    vds_flash : org = 0, len = 0
+
+
+    /* Scratch pad RAM                                         */
+    spram : org = (0xC000019F + 1),
+                            len = 0xC0007FFF + 1 - (0xC000019F + 1)
+
+    /* Parameter RAM in PCP                                    */
+
+    pcpdata_ram : org = 0xF0050000,
+                            len = 0xF0053FFF + 1 - 0xF0050000
+
+
+
+
+    /* Code RAM in PCP                                         */
+
+    pcpcode_ram : org = 0xF0060000,
+                            len = 0xF0063FFF + 1 - 0xF0060000
+
+
+
+
+    /* RAM0 ASW variables                                      */
+    ram0 : org = 0xD0000000,
+                            len = 0xD001FFFF + 1 - 0xD0000000
+
+
+    /* RAM1 ASW variables                                      */
+    ram1 : org = 0xB0000000,
+                            len = 0xB001FFFF + 1 - 0xB0000000
+    ram2 : org = 0, len = 0
+
+
+    /* dual ported RAM (not anymore supported)                 */
+    dpram : org = 0, len = 0
+
+    /* Emulation Device RAM                                    */
+
+    edram : org = 0xBF000000,
+                            len = 0xBF0BFFFF + 1 - 0xBF000000
+
+
+
+
+    /* external optional calibration RAM == ETK-T RAM area */
+    ocram_write : org = 0, len = 0
+
+
+    /* PMU olda area == virtual write only memory */
+
+    olda : org = 0xAFE70000,
+                            len = 0xAFE77FFF + 1 - 0xAFE70000
+
+
+
+
+    /* Dummy area for unspecified input sections. Size 0      */
+    /* causes an linker error if there is an input section    */
+    /* not considered in linker command file.                 */
+    must_be_empty : org = 0, len = 0
+}
+
+SECTIONS
+{
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*                Reserved memory                          */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+
+    /***********************************************************/
+    /* Placeholder for flash area of tuning protection         */
+    /***********************************************************/
+
+    .tprot_code 0x80014000 (NOLOAD) :
+    {
+        . += 0x80017FFF + 1 - 0x80014000;
+    }
+
+
+    /***********************************************************/
+    /* Placeholder for flash area of startup block             */
+    /***********************************************************/
+    .sb_code 0x80018000 (NOLOAD) :
+    {
+        . += 0x8001FFFF + 1 - 0x80018000;
+    }
+
+    /***********************************************************/
+    /* Placeholder for flash area of customer block            */
+    /***********************************************************/
+
+    .cb_code 0x80000000 (NOLOAD) :
+    {
+        . += 0x8000FD03 + 1 - 0x80000000;
+    }
+
+
+    /***********************************************************/
+    /* Placeholder for fix SB RAM area                         */
+    /***********************************************************/
+    .sb_ram_fix 0xC0000000 (NOLOAD) :
+    {
+        . += (0xC000013F + 1 - 0xC0000000);
+    }
+
+
+    /***********************************************************/
+    /* Placeholder for fix TPROT RAM area                      */
+    /***********************************************************/
+    .tprot_ram_fix 0xC0000140 (NOLOAD) :
+    {
+        . += (0xC000019F + 1 - 0xC0000140);
+    }
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*          Flash: prolog and fix sections                 */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+    .asw0_prolog 0x80020000 :
+    {
+    __NE_CODE0_START = .;
+        *(.asw0_prolog)
+        *(.rodata.asw0_info) /* block info data of asw0 (infotab, ...) */
+
+/* >>>>>>> Customer specific BEGIN (Powernet) <<<<<<*/
+        __BASUTIL_SECA_START = .;
+        *(.BasUtil_Seca)
+        __BASUTIL_SECA_END = .;
+        . = ALIGN(256); /* Ensure (1) the complete area is checksum checked (2) The Marker page is Page-aligned */
+        . += 256; /* Add a complete empty Page for Invalidation Marker. Used in CB! Do not change without agreement of CB development*/
+        LONG(0xAFAFAFAF); /* 4byte for Checksum */
+        __MEMLAY_ASW0_PROLOGPAGE_END = . -1; /* End of Prolog Page for consistency check during Startup. Used to ensure reliable flashprogramming */
+        *(.asw_version)
+/* >>>>>>> Customer specific END (Powernet)  <<<<<<*/
+
+        . = ALIGN(4);
+    } > asw0_flash
+
+
+    .asw1_prolog 0x80800000 :
+    {
+    __NE_CODE2_START = .;
+        *(.asw1_prolog)
+        *(.rodata.asw1_info) /* block info data of asw1 (infotab, ...) */
+        . = ALIGN(4);
+    } > asw1_flash
+    .ds0_prolog 0x80980000 :
+    {
+        *(.ds0_prolog)
+        *(.ds0_compref)
+        *(.rodata.ds0_info) /* block info data of ds0 (infotab, ...) */
+        . = ALIGN(4);
+
+/* >>>>>>> Customer specific BEGIN (Powernet) <<<<<<*/
+        *(.ds_version)
+        . = ALIGN(4);
+/* >>>>>>> Customer specific END (Powernet)  <<<<<<*/
+
+    } > ds0_flash
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*    RAM: non cleared and protected sections at start     */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+
+    .ram0_boot 0xD0000000 (NOLOAD) :
+    {
+        __UNIQUE_CHIP_ID = .;
+        . += 24; /* size of unique chip ID is 24 bytes for TC1767 and newer */
+    } > ram0 /* .ram0_boot is part of ram0 area */
+
+    /* Size of protected RAM with absolute addressing is limited, when located in ram0. */
+    /* Reason: parts of ram0 are cleared on reset by SB. See Assert() at end of file */
+    .zbss.protram (NOLOAD) :
+    {
+        __ASW_PROTECTED_RAM2_START = . ;
+        *(.bbss.protram)
+        *(.zbss.protram)
+        . = ALIGN(8);
+        __ASW_PROTECTED_RAM2_END = . - 1;
+    } > ram0
+
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*        RAM: cleared and non protected sections          */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+
+    /***********************************************************/
+    /*            start of cleared (= non protected) RAM       */
+    /***********************************************************/
+    .ram0_start (NOLOAD) :
+    {
+        . = ALIGN(8);
+        __RAM0_START = .;
+        __RAM0_USER_START = .;
+    } > ram0
+
+    .ram1_start (NOLOAD) :
+    {
+        . = ALIGN(8);
+        __RAM1_START = .;
+        __RAM1_USER_START = .;
+    } > ram1
+    .ram2_start (NOLOAD) :
+    {
+        . = ALIGN(8);
+        __RAM2_START = .;
+        __RAM2_USER_START = .;
+    } > ram2
+
+    .dpram_start (NOLOAD) :
+    {
+        . = ALIGN(8);
+        __ASW_VAR_DPR_START = .;
+    } > dpram
+
+    /***********************************************************/
+    /* Bits and 18 bit absolute addressed Variables in RAM     */
+    /* Atention: address range is limited by hardware,         */
+    /*           16 kbyte from Start of Segment                */
+    /***********************************************************/
+
+    /* initialized variables: values loaded from FLASH */
+    .zdata.initvar0 :
+    {
+        __INITVAR0_START = .;
+        /* ReIni area must start at begin of section */
+        *(.zdata.ReIni0)
+        *(.bdata.ReIni0)
+        . = ALIGN(8);
+        __INITVAR0_REINI_END = . - 1;
+
+        *(.zdata.initvar0)
+        *(.bdata.initvar0)
+        . = ALIGN(8);
+    } > ram0 AT> asw0_flash
+    __INITVAR0_SIZE = SIZEOF(.zdata.initvar0);
+    __INITVAR0_REINI_SIZE = __INITVAR0_REINI_END + 1 - __INITVAR0_START;
+
+    .initvar0_load LOADADDR(.zdata.initvar0) :
+    {
+        __INITVAR0_FLASH_START = .;
+        . += __INITVAR0_SIZE;
+    }
+
+    .zbss.ram0.ReIni (NOLOAD) :
+    {
+        __REINI_ZBSS_START = .;
+        *(.zbss.ReIni)
+        *(.bbss.ReIni)
+        . = ALIGN(8);
+        __REINI_ZBSS_END = . - 1;
+    } > ram0
+    __REINI_ZBSS_SIZE = __REINI_ZBSS_END + 1 - __REINI_ZBSS_START;
+
+    .zbss.ram0 (NOLOAD) :
+    {
+        *(.zbss.ram0)
+        *(.zbss.ram1) /* if RAM1 not available for absolue adressing */
+        *(.bbss.ram0)
+        *(.bbss.ram1) /* if RAM1 not available for absolue adressing */
+        . = ALIGN(8);
+    } > ram0
+   /* projectspecific for New Eagle projects (SW sharing) - start */
+
+    .zbss.ram0_OEM (NOLOAD) :
+    {
+        *(.zbss.ram0_OEM)
+        . = ALIGN(8);
+    } > ram0
+
+    /* projectspecific for OEM projects (SW sharing) - end */
+    /********************************************************************************/
+    /* Variables in PMI scratch pad RAM                                             */
+    /* ATTENTION: Absolute addressing is only possible on TC.1.3.1 and later        */
+    /*                                                                              */
+    /********************************************************************************/
+    .bss.spram_start (NOLOAD) :
+    {
+        __SPRAM_VAR_START = .;
+    } > spram
+
+    .zbss.spram (NOLOAD) :
+    {
+        *(.bbss.spram)
+        *(.zbss.spram)
+        . = ALIGN(8);
+    } > spram
+
+    /* register A8 is used for SPRAM small addressing: only usefull in special cases */
+    .bss.spram (NOLOAD) :
+    {
+        *(.bss.spram)
+        . = ALIGN(8);
+        __SPRAM_VAR_END = . - 1;
+    } > spram
+    __SPRAM_VAR_SIZE = __SPRAM_VAR_END + 1 - __SPRAM_VAR_START;
+
+    /***********************************************************/
+    /* Code in PMI scratch pad RAM (load from FLASH)           */
+    /***********************************************************/
+    .code_spram :
+    {
+        __SPRAM_FNC_START = .;
+
+
+
+
+        *(.code_spram)
+        . = ALIGN(8);
+    } > spram AT> asw0_flash
+    __SPRAM_FNC_SIZE = SIZEOF(.code_spram);
+    __SPRAM_FNC_END = __SPRAM_FNC_START + __SPRAM_FNC_SIZE - 1;
+
+    .code_spram_load LOADADDR(.code_spram):
+    {
+        __SPRAM_FNC_FLASH_START = .;
+        . += __SPRAM_FNC_SIZE;
+        __SPRAM_FNC_FLASH_END = . - 1;
+    }
+
+    /***********************************************************/
+    /* Fill PMI scratch pad RAM to prevent further usage       */
+    /***********************************************************/
+    .spram_free (NOLOAD) :
+    {
+        __SPRAM_FREE_START = .;
+        . += 0xC0007FFF + 1 - ABSOLUTE(.);
+        __SPRAM_FREE_END = . - 1;
+    } > spram
+    __SPRAM_FREE_SIZE = __SPRAM_FREE_END + 1 -__SPRAM_FREE_START;
+
+    /***********************************************************/
+    /*          Peripheral Control Processor (PCP)             */
+    /***********************************************************/
+    /* Parameter RAM (PCP data, load from FLASH)               */
+    /***********************************************************/
+    .pcpdata0 :
+    {
+        __PDATA_DAT_START = . ;
+        PRAM_BASE = . ;
+        *(.pcpdata0)
+        . = ALIGN(8);
+        __PDATA_DAT_END = . - 1;
+    } > pcpdata_ram AT> asw0_flash
+    __PDATA_DAT_SIZE = SIZEOF(.pcpdata0);
+    .pcpdata0_load LOADADDR(.pcpdata0) (NOLOAD):
+    {
+        __PDATA_DAT_FLASH_START = .;
+        . += __PDATA_DAT_SIZE;
+        __PDATA_DAT_FLASH_END = . - 1;
+    }
+
+    .pcpdata0_free :
+    {
+        __PDATA_FREE_START = .;
+        . += 0xF0053FFF + 1 - ABSOLUTE(.);
+        __PDATA_FREE_END = . - 1;
+    } > pcpdata_ram
+    __PDATA_FREE_SIZE = __PDATA_FREE_END + 1 - __PDATA_FREE_START;
+
+
+    /***********************************************************/
+    /*          Peripheral Control Processor (PCP)             */
+    /***********************************************************/
+    /* Code RAM (PCP code, load from FLASH)                    */
+    /***********************************************************/
+    .pcpcode0 :
+    {
+        __PCODE_FNC_START = . ;
+        PCODE_BASE = . ;
+        *(.pcpcode0)
+
+        . = ((. + 4 + 7) & (~ 7)) - 4; /* ensure that end of 4 byte checksum is 8 byte aligned */
+        *(.asw0cs2_epilog)
+
+        . = ALIGN(8);
+        __PCODE_FNC_END = . - 1;
+    } > pcpcode_ram AT> asw0_flash
+
+    __PCODE_FNC_SIZE = SIZEOF(.pcpcode0);
+    .pcpcode0_load LOADADDR(.pcpcode0):
+    {
+        __PCODE_FNC_FLASH_START = .;
+        . += __PCODE_FNC_SIZE;
+        __PCODE_FNC_FLASH_END = . - 1;
+    }
+
+    .pcpcode0_free :
+    {
+        __PCODE_FREE_START = .;
+        . += 0xF0063FFF + 1 - ABSOLUTE(.);
+        __PCODE_FREE_END = . - 1;
+    } > pcpcode_ram
+    __PCODE_FREE_SIZE = __PCODE_FREE_END + 1 - __PCODE_FREE_START;
+
+
+    /***********************************************************/
+    /*                                                         */
+    /*                   Dual Ported RAM                       */
+    /*                                                         */
+    /* DPRAM is only available on TC1796 (METIS), else the     */
+    /* dpram area is mapped to ram0.                           */
+    /* DPRAM section must not cross 32kByte alignment borders, */
+    /* else uninteded wrap around may happen for non-circular  */
+    /* buffers. Checked by ASSERT at end of locate.inv.        */
+    /* On non-DPRAM CPUs .dpram sections should be located     */
+    /* right after the .zbss section in ram0 to ensure maximum */
+    /* size.                                                   */
+    /***********************************************************/
+    .dpram_align (NOLOAD) :
+    {
+        /* DPRAM can contain data, which needs up to 1024 byte alignment */
+        /* __DPRAM_ALIGN is calculated in group.inv. It is always 2^n.   */
+        . = ALIGN(__DPRAM_ALIGN);
+        __DPRAM_START = .;
+    } > ram0
+    .dpram (NOLOAD) :
+    {
+        *(.bss.dpram)
+        . = ALIGN(8);
+    } > ram0
+
+    /* initialized variables in dpram */
+    .data.dpram :
+    {
+        __INITVAR_DPR_START = .;
+        *(.data.dpram)
+        . = ALIGN(8);
+    } > ram0 AT> asw0_flash
+    __INITVAR_DPR_SIZE = SIZEOF(.data.dpram);
+    .data.dpram_load LOADADDR(.data.dpram) :
+    {
+        __INITVAR_DPR_FLASH_START = .;
+        . += __INITVAR_DPR_SIZE;
+    }
+
+    /***********************************************************/
+    /* 16 bit register A8 relative addressed Variables in RAM  */
+    /* Attention: address range is limited to 64kByte          */
+    /* Only available, if register A8 is not used for SPRAM    */
+    /* Can be located to ram0 (TC1797), ram1. Not to SPRAM!    */
+    /***********************************************************/
+
+    .sbss3 (NOLOAD) :
+    {
+        _SMALL_DATA3_ = . + 0x8000;
+        *(.sbss.var1)
+        *(.sbss.mpram)
+        . = ALIGN(8);
+    } > ram1
+
+
+    /***********************************************************/
+    /* 16 bit register A0 relative addressed Variables in RAM  */
+    /* Attention: address range is limited to 64kByte          */
+    /***********************************************************/
+    .sbss (NOLOAD) :
+    {
+        _SMALL_DATA_ = . + 0x8000;
+        *(.sbss.var1) /* if .sbss3 is not available */
+        *(.sbss.mpram) /* if .sbss3 is not available */
+        *(.sbss.var0)
+        . = ALIGN(8);
+
+        __REINI_SBSS_START = .;
+        *(.sbss.ReIni)
+        . = ALIGN(8);
+        __REINI_SBSS_END = . - 1;
+
+    } > ram0
+    __REINI_SBSS_SIZE = __REINI_SBSS_END + 1 - __REINI_SBSS_START;
+
+
+    /* initialized variables: values loaded from FLASH */
+    .sdata :
+    {
+        __INITVAR1_START = .;
+        /* ReIni area must start at begin of section */
+        *(.sdata.ReIni1)
+        . = ALIGN(8);
+        __INITVAR1_REINI_END = . - 1;
+
+        *(.sdata.initvar1)
+        . = ALIGN(8);
+    } > ram0 AT> asw0_flash
+    __INITVAR1_SIZE = SIZEOF(.sdata);
+    __INITVAR1_REINI_SIZE = __INITVAR1_REINI_END + 1 - __INITVAR1_START;
+    .initvar1_load LOADADDR(.sdata) :
+    {
+        __INITVAR1_FLASH_START = .;
+        . += __INITVAR1_SIZE;
+    }
+
+    /***********************************************************/
+    /* 32 bit absolute addressed Variables in RAM              */
+    /***********************************************************/
+    /* initialized variables: values loaded from FLASH */
+    .data.initvar2 :
+    {
+        __INITVAR2_START = .;
+        /* ReIni area must start at begin of section */
+        *(.data.ReIni2)
+        . = ALIGN(8);
+        __INITVAR2_REINI_END = . - 1;
+
+        *(.data.initvar2)
+        . = ALIGN(8);
+    } > ram0 AT> asw0_flash
+    __INITVAR2_SIZE = SIZEOF(.data.initvar2);
+    __INITVAR2_REINI_SIZE = __INITVAR2_REINI_END + 1 - __INITVAR2_START;
+    .initvar2_load LOADADDR(.data.initvar2) :
+    {
+        __INITVAR2_FLASH_START = .;
+        . += __INITVAR2_SIZE;
+    }
+
+    /***********************************************************/
+    /* non initialised ASW variables:                          */
+    /* - monitored variables                                   */
+    /* - 32-bit absolute addressed variables                   */
+    /***********************************************************/
+    .ram0.ReIni (NOLOAD) :
+    {
+        __REINI_BSS_START = .;
+        *(.bss.ReIni)
+        . = ALIGN(8);
+        __REINI_BSS_END = . - 1;
+    } > ram0
+    __REINI_BSS_SIZE = __REINI_BSS_END + 1 - __REINI_BSS_START;
+
+ .ram0_OEM (NOLOAD) :
+    {
+        *(.bss.ram0_OEM)
+        . = ALIGN(8);
+    } > ram0
+    .ram0 (NOLOAD) :
+    {
+        *(.bss.ram0)
+        . = ALIGN(8);
+    } > ram0
+
+    .ram1 (NOLOAD) :
+    {
+        *(.bss.ram1)
+        . = ALIGN(8);
+    } > ram1
+
+    .ram2 (NOLOAD) :
+    {
+        *(.bss.ram2)
+        . = ALIGN(8);
+    } > ram1
+
+    /***********************************************************/
+    /* RAM reserved for internal bypass                        */
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*          writable part of optional calibration RAM      */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*          Measurement Points                             */
+    /*                                                         */
+    /***********************************************************/
+    /* Write only section. Read access may cause a trap.       */
+    /* Can be located in: ram0, ram1, ram2, olda, ocram_write  */
+    /***********************************************************/
+    .mpram (NOLOAD) :
+    {
+        __MPRAM_START = .;
+        *(.bss.mpram)
+        *(.bss.mpdisplay)
+        . = ALIGN(8);
+        __MPRAM_END = . - 1;
+    } > ram0
+    __MPRAM_SIZE = __MPRAM_END + 1 - __MPRAM_START;
+
+    /***********************************************************/
+    /* Fill OLDA area to prevent further usage                 */
+    /* Do not write to free area, as this may overwrite EDRAM  */
+    /***********************************************************/
+
+    .olda_free (NOLOAD) :
+    {
+        __OLDA_FREE_START = . ;
+        . += 0xAFE77FFF + 1 - ABSOLUTE(.);
+        __OLDA_FREE_END = . - 1;
+    } > olda
+    __OLDA_FREE_SIZE = __OLDA_FREE_END + 1 - __OLDA_FREE_START;
+    __OLDA_SIZE = __OLDA_FREE_START - 0xAFE70000;
+
+
+    /***********************************************************/
+    /*                                                         */
+    /*                   EMULATION DEVICE                      */
+    /*                                                         */
+    /***********************************************************/
+    /* Accessing this area on a non ED device causes a trap.   */
+    /***********************************************************/
+
+    .edram (0xBF000000) (NOLOAD) :
+    {
+        /* Memory is cleared on each reset by Dme_FirstInit() */
+        __EDRAM_CLEAR_START = .;
+
+
+
+
+
+
+        *(.bss.edram_clear)
+        . = ALIGN(0x4);
+        __EDRAM_CLEAR_END = . - 1;
+
+        /* Memory is cleared on poweron reset by Dme_FirstInit() */
+        __EDRAM_PROTECTED_START = .;
+        *(.bss.edram_protected)
+        . = ALIGN(0x4);
+        __EDRAM_PROTECTED_END = . - 1;
+
+        /* Memory is cleared on ED power fail by Dme_FirstInit() */
+        __EDRAM_STANDBY_START = .;
+        *(.bss.edram_standby)
+        . = ALIGN(0x4);
+        __EDRAM_STANDBY_END = . - 1;
+        *(.bss.edram_standby_cs)
+
+        /* Memory is never cleared or initialized */
+        *(.bss.edram_noclear)
+        . = ALIGN(0x4);
+
+        /* EDRAM_FIXVAR area */
+        /* EDRAM_FIXCAL area */
+        /* calibration memory in EDRAM */
+        . = ALIGN(4);
+        __EDRAM_DYN_START = .;
+
+        . += 0xBF0BFFFF + 1 - ABSOLUTE(.);
+        __EDRAM_DYN_END = . - 1;
+    } > edram
+
+    __EDRAM_CLEAR_SIZE = __EDRAM_CLEAR_END + 1 - __EDRAM_CLEAR_START;
+    __EDRAM_PROTECTED_SIZE = __EDRAM_PROTECTED_END + 1 - __EDRAM_PROTECTED_START;
+    __EDRAM_STANDBY_SIZE = __EDRAM_STANDBY_END + 1 - __EDRAM_STANDBY_START;
+    /* endif MEMLAY_EDRAM_START */
+
+
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*          RAM: fix sections at end for monitoring        */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+    .asw_user_mon (NOLOAD) :
+    {
+        *(.bss.user_mon)
+        . = ALIGN(0x8);
+    } > ram0
+
+    .ram0_user_end (NOLOAD) :
+    {
+        . = ALIGN(0x8);
+        __RAM0_USER_END = . - 1;
+    } > ram0
+    .ram1_user_end (NOLOAD) :
+    {
+        . = ALIGN(0x8);
+        __RAM1_USER_END = . - 1;
+    } > ram1
+    .ram2_user_end (NOLOAD) :
+    {
+        . = ALIGN(0x8);
+        __RAM2_USER_END = . - 1;
+    } > ram2
+
+    /***********************************************************/
+    /* ASW monitored data in RAM. For monitoring support,      */
+    /* it must be located directly before csa and stack.       */
+    /***********************************************************/
+    .asw_mon (NOLOAD) :
+    {
+        *(.bss.mon)
+        . = ALIGN(8);
+    } > ram0
+
+    /***********************************************************/
+    /* ASW CSA (context save area) in RAM                      */
+    /***********************************************************/
+    .asw_csa (NOLOAD) :
+    {
+        . = ALIGN(64); /* CSA must be 64 byte aligned */
+        *(.asw_csa)
+        . = ALIGN(8);
+    } > ram0
+
+    /***********************************************************/
+    /* ASW user stack in RAM                                   */
+    /***********************************************************/
+    .asw_stack (NOLOAD) :
+    {
+        . = ALIGN(8); /* stack must be 8 byte aligned */
+        *(.asw_stack)
+        . = ALIGN(8);
+    } > ram0
+
+
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*          RAM: protected and free sections at end        */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+
+    .ram0_end (NOLOAD) : {__RAM0_END = . - 1;} > ram0
+    .ram1_end (NOLOAD) : {__RAM1_END = . - 1;} > ram1
+    .ram2_free (NOLOAD) :
+    {
+        /* protected RAM labels are used for absolute addressed area */
+        /* ram2 is not defined to be usable for calibration or protram */
+        __RAM2_END = . - 1;
+
+
+
+    } > ram2
+    .dpram_free (NOLOAD) :
+    {
+        /* dpram is not defined to be usable for calibration or protram */
+        __ASW_VAR_DPR_END = . - 1;
+
+
+
+    } > dpram
+
+
+    /***********************************************************/
+    /* RAM for Reset, which is cleared in early boot stage     */
+    /***********************************************************/
+    .asw_earlycleared (NOLOAD) :
+    {
+        . = ALIGN(8);
+        __RAM_EARLY_CLEARED_START = . ;
+        *(.bss.earlycleared)
+        . = ALIGN(8);
+        __RAM_EARLY_CLEARED_END = . - 1 ;
+    } > ram0
+
+    /***********************************************************/
+    /* protected RAM: survives software reset, ram0/ram1 only  */
+    /* - ENVRAM (emulated non volatile RAM)                    */
+    /* - protected RAM                                         */
+    /***********************************************************/
+    .ram0_prot (NOLOAD) :
+    {
+        /* prevent SB_RAM_TEMP from overlapping with __ASW_PROTECTED_RAM0,  */
+        /* which has to be retained over reset.                             */
+        . = MAX(ABSOLUTE(.) , (0xD00047FF + 1)) - ABSOLUTE(.);
+        __ASW_PROTECTED_RAM0_START = . ;
+        *(.bss.protram0)
+        . = ALIGN(8);
+    } > ram0
+
+    .ram1_prot (NOLOAD) :
+    {
+        __ASW_PROTECTED_RAM1_START = . ;
+        *(.bss.protram1)
+        . = ALIGN(8);
+    } > ram1
+
+    .ram_prot (NOLOAD) :
+    {
+        *(.bss.protram)
+        . = ALIGN(8);
+    } > ram0
+
+    .ram_prot_envram (NOLOAD) :
+    {
+        __ENVRAM_START = . ;
+        *(.bss.envram)
+        . = ALIGN(8);
+    } > ram0
+    /* initialized variables: values loaded from FLASH */
+    .data.prot_envram :
+    {
+        __ENVRAM_INITVAR_START = .;
+        *(.data.envram)
+        . = ALIGN(8);
+        __ENVRAM_INITVAR_END = . - 1;
+        __ENVRAM_END = . - 1;
+    } > ram0 AT> asw0_flash
+    __ENVRAM_INITVAR_SIZE = SIZEOF(.data.prot_envram);
+    __ENVRAM_INITVAR_FLASH_START = LOADADDR(.data.prot_envram);
+    .initvar_prot_envram_load __ENVRAM_INITVAR_FLASH_START :
+    {
+        . += __ENVRAM_INITVAR_SIZE;
+    }
+    __ENVRAM_SIZE = __ENVRAM_END + 1 - __ENVRAM_START;
+
+    /***********************************************************/
+    /* free RAM: used for calibration, survives software reset */
+    /***********************************************************/
+    .ram0_free (NOLOAD) :
+    {
+        __ASW_RAM0_FREE_START = . ;
+        . += 0xD001FFFF + 1 - ABSOLUTE(.);
+        __ASW_RAM0_FREE_END = . - 1;
+        __ASW_PROTECTED_RAM0_END = . - 1;
+    } > ram0
+    .ram1_free (NOLOAD) :
+    {
+        __ASW_RAM1_FREE_START = . ;
+
+        . += 0xB001FFFF + 1 - ABSOLUTE(.);
+
+        __ASW_RAM1_FREE_END = . - 1;
+        __ASW_PROTECTED_RAM1_END = . - 1;
+    } > ram1
+
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*          Flash: non fix sections                        */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+
+    /***********************************************************/
+    /* 16-bit register A1 relative addressed constants in Flash */
+    /***********************************************************/
+    .sdata2 :
+    {
+        _SMALL_DATA2_ = . + 0x8000;
+        *(.sdata.rodata.default)
+        . = ALIGN(8);
+    } > asw0_flash
+
+    /***********************************************************/
+    /* 32-bit absolute addressed constants in ASW Flash         */
+    /***********************************************************/
+    .asw_const :
+    {
+        *(.rodata.default)
+        . = ALIGN(8);
+    } > asw0_flash
+
+    .asw_const_noncached_start :
+    {
+        . = ALIGN(0x4);
+        ASW_CONST_NONCACHED_ALIAS_START = . ;
+    } > asw0_flash
+    .asw_const_noncached (ASW_CONST_NONCACHED_ALIAS_START + 0x20000000):
+                        AT (ASW_CONST_NONCACHED_ALIAS_START)
+    {
+        *(.rodata.noncached)
+        . = ALIGN(0x4);
+    }
+    .asw_const_noncached_alias :
+    {
+        . += SIZEOF(.asw_const_noncached);
+    } > asw0_flash
+
+ /* projectspecific for NewEagle projects (SW sharing) - start */
+    .asw_const_oem :
+    {
+        *(.rodata.oem_ConstData.default)
+        . = ALIGN(8);
+    } > asw0_flash
+
+    /* projectspecific for NewEagle projects (SW sharing) - end */
+    .asw1_const :
+    {
+        *(.rodata.asw1)
+        . = ALIGN(8);
+    } > asw1_flash
+
+
+    .asw0_const :
+    {
+        *(.rodata.asw2) /* if ASW2 area not defined */
+        *(.rodata.asw1) /* if ASW1 area not defined */
+        *(.rodata.asw0)
+        . = ALIGN(8);
+    } > asw0_flash
+
+    /***************************************************************/
+    /*                                                             */
+    /*                 Non Cached Code in ASW Flash                */
+    /*                                                             */
+    /***************************************************************/
+    /* Physical address (load address): Hex-File address           */
+    /* Logical address: Physical address + MEMLAY_OFFSET_NONCACHED */
+    /* No copying necesarry, as memory is visible in both          */
+    /* address ranges                                              */
+    /* - monitored code                                            */
+    /***************************************************************/
+    .code_mon_start :
+    {
+        . = ALIGN(0x4);
+        __CODE_MON_ALIAS_START = .;
+    } > asw0_flash
+    .code_mon_noncached (__CODE_MON_ALIAS_START + 0x20000000): AT (__CODE_MON_ALIAS_START)
+    {
+        __MO_CODECYCLICCHECK_START = . ;
+        __MO_CODECYCLICCHECK_FLASH_START = . - 0x20000000;
+        __MO_CHCCODE_START = . ; /* DS monitoring (MoCMem >= 1.0.0) */
+        __MO_CHCROM_CODE_START = . ; /* DS monitoring (MoCMem < 1.0.0)  */
+        *(.text.Mo_CodeCyclicCheck)
+        *(.asw0cs1_epilog)
+        __MO_CODECYCLICCHECK_END = . - 1;
+        __MO_CODECYCLICCHECK_FLASH_END = . - 1 - 0x20000000;
+        __MO_CHCCODE_END = . - 1; /* DS monitoring (MoCMem >= 1.0.0) */
+        __MO_CHCROM_CODE_END = . - 1; /* DS monitoring (MoCMem < 1.0.0)  */
+
+        *(.text.Mo_CodeNoCyclicCheck)
+        . = ALIGN(0x4);
+    }
+    .code_mon_alias :
+    {
+        . += SIZEOF(.code_mon_noncached);
+    } > asw0_flash
+
+    /***********************************************************/
+    /*                                                         */
+    /* Flash interrupt vector table                            */
+    /*                                                         */
+    /***********************************************************/
+    /* Interrupt vector table is located in SPRAM if MEMLAY_INTVECT_AREA is not defined */
+
+    .asw_inttab_align :
+    {
+        /* Interrupt vector table must be aligned to its size      */
+        /* __SIZE_INTTAB must be 2^n. This is checked in group.inv */
+        . = ALIGN(__SIZE_INTTAB);
+    } > asw0_flash
+    .asw_inttab :
+    {
+        *(.inttab) /* must be the first input section after ALIGN(__SIZE_INTTAB) */
+        . = ALIGN(0x4);
+    } > asw0_flash
+
+
+    /***********************************************************/
+    /* Code in ASW Flash                                       */
+    /***********************************************************/
+    .abs0_code_align :
+    {
+        /* 32 byte alignment to allow 32 byte alignment in .asw2_code without linker warning */
+        . = ALIGN(0x20);
+    } > abs0_flash
+    .abs0_code :
+    {
+        *(.abs0_code)
+        . = ALIGN(0x4);
+    } > abs0_flash
+    .asw1_code_align :
+    {
+        /* 32 byte alignment to allow 32 byte alignment in .asw1_code without linker warning */
+        . = ALIGN(0x20);
+    } > asw1_flash
+    .asw1_code :
+    {
+        *(.asw1_code)
+        . = ALIGN(0x4);
+    } > asw1_flash
+
+
+    /* special section for initializing pcp pointers by cpu */
+    /* must be in last link run */
+    .pcp_c_ptr_init :
+    {
+        *(.pcp_c_ptr_init)
+        . = ALIGN(0x4);
+    } > asw0_flash
+
+    .asw0_code_align :
+    {
+        /* 32 byte alignment to allow 32 byte alignment in .asw0_code without linker warning */
+        . = ALIGN(0x20);
+    } > asw0_flash
+    .asw0_code :
+    {
+        *(.asw2_code) /* if ASW2 area not defined */
+        *(.asw1_code) /* if ASW1 area not defined */
+        *(.asw0_code)
+        __MEMLAY_MPRAM_READ_START = .;
+        *(.text.mpram_read)
+        . = ALIGN(0x4);
+        __MEMLAY_MPRAM_READ_END = . - 1;
+    } > asw0_flash
+
+/* projectspecific for NewEagle projects (SW sharing) - start */
+    .asw0_oem_code_Task_align :
+    {
+        /* 32 byte alignment to allow 32 byte alignment in .asw0_code without linker warning */
+        . = ALIGN(0x20);
+    } > asw0_flash
+
+    .asw0_oem_code_Task :
+    {
+        *(.asw0_oem_code_Task)
+        . = ALIGN(0x4);
+    } > asw0_flash
+    /* projectspecific for NewEagle projects (SW sharing) - end */
+
+    .asw_code_noncached_start :
+    {
+        . = ALIGN(0x4);
+        ASW_CODE_NONCACHED_ALIAS_START = . ;
+    } > asw0_flash
+    .asw_code_noncached (ASW_CODE_NONCACHED_ALIAS_START + 0x20000000):
+                       AT (ASW_CODE_NONCACHED_ALIAS_START)
+    {
+        *(.asw_code_noncached)
+        . = ALIGN(0x4);
+    }
+    .asw_code_noncached_alias :
+    {
+        . += SIZEOF(.asw_code_noncached);
+    } > asw0_flash
+
+
+    /***********************************************************/
+    /* DSERAP vector table in ASW Flash                        */
+    /* - register A9 relative addressed                        */
+    /* - last non bypass entry in asw, as table grows with     */
+    /*   internal bypass                                       */
+    /* - only two DSERAP areas are supported by DME driver     */
+    /***********************************************************/
+    .sdata4 :
+    {
+        . = ALIGN(4);
+        _SMALL_DATA4_ = .;
+        __PTA_STARTVECT = .;
+        *(.sdata.ptavect0)
+        *(SORT(.sdata.pta_vectbyp_*)) /* sort additional data from internal bypass */
+
+
+
+
+        . = ALIGN(0x4);
+        __PTA_ENDVECT = . ;
+        *(.pta_endvect)
+        . = ALIGN(0x4);
+    } > asw0_flash
+    __PTAVECT_SIZE = __PTA_ENDVECT - __PTA_STARTVECT;
+    __DME_VECTTAB_ELEMENTS = __PTAVECT_SIZE / 4 ;
+    .asw_byp :
+    {
+        *(.text.byp)
+        . = ALIGN(0x4);
+    } > asw0_flash
+
+    /***********************************************************/
+    /* DSERAP vector table in OCRAM                            */
+    /* Attention: __PTAVECT_SIZE must be calculated before     */
+    /***********************************************************/
+    /***********************************************************/
+    /* Distab in dataset 0: only used, if DS1 not available    */
+    /***********************************************************/
+    /***********************************************************/
+    /* Flash dataset 0:                                        */
+    /***********************************************************/
+    .ds0_data_start :
+    {
+        . = ALIGN(0x4);
+        __DS0_DATA_FLASH_START = .;
+        __DS0_DATA_START = .;
+        /* non PTA calibration data */
+        *(.caldata_byptab)
+        *(.caldata0)
+
+        /* PTA/DSERAP calibration data */
+        . = ALIGN(0x4);
+        __PTA_DATA_START = .;
+    } > ds0_flash
+
+
+
+
+    /* DCACHE is not configured: use segment 8 also for "noncached" data */
+    MEMLAY_DS_OFFSET_NONCACHED = 0;
+
+    .ds0_ptadata_noncached_start :
+    {
+        . = ALIGN(0x4);
+        DS0_PTADATA_NONCACHED_ALIAS_START = . ;
+    } > ds0_flash
+    .ds0_ptadata_noncached (DS0_PTADATA_NONCACHED_ALIAS_START + MEMLAY_DS_OFFSET_NONCACHED):
+                        AT (DS0_PTADATA_NONCACHED_ALIAS_START)
+    {
+        *(.ptadata_noncached)
+        . = ALIGN(0x8);
+    }
+    .ds0_ptadata_noncached_alias :
+    {
+        . += SIZEOF(.ds0_ptadata_noncached);
+    } > ds0_flash
+    /* undo calculation of noncached offset for monitoring area */
+    __MO_DATACYCLICCHECK_FLASH_START = __MO_DATACYCLICCHECK_START - MEMLAY_DS_OFFSET_NONCACHED;
+    __MO_DATACYCLICCHECK_FLASH_END = __MO_DATACYCLICCHECK_END - MEMLAY_DS_OFFSET_NONCACHED;
+
+    .ds0_data_end :
+    {
+        *(.ptadata0)
+        *(SORT(.pta_databyp_*)) /* sort additional data from internal bypass */
+        . = ALIGN(0x4);
+        __PTA_DATA0_END = . - 1;
+        __PTA_DATA_END = . - 1;
+
+        *(SORT(.caldatabyp*)) /* sort additional data from internal bypass */
+        . = ALIGN(0x4);
+        __DS0_DATA_END = . - 1 ;
+        __DS0_DATA_FLASH_END = . - 1 ;
+    } > ds0_flash
+
+/***********************************************************/
+    /* Flash dataset 1: Adress must be higher than DS0         */
+    /***********************************************************/
+
+    /* projectspecific for NewEagle projects (SW sharing) - start */
+    /* NewEagle specific like Bosch "caldata0" */
+    .ds0_data_oem_flash_start :
+    {
+        . = ALIGN(0x4);
+        __DS0_DATA_OEM_FLASH_START = .;
+    } > ds0_flash
+
+    .ds0_data_oem_const (__DS0_DATA_OEM_FLASH_START + 0x0):
+                 AT (__DS0_DATA_OEM_FLASH_START)
+    {
+        /* non PTA calibration data */
+        *(.caldata.OEM_userData)
+        . = ALIGN(0x4);
+        __DS0_DATA_END = . - 1 ; /* overwrites previous definition: DS0 and DS1 are handled as 1 block */
+    }
+
+    .ds0_data_oem_flash_alias :
+    {
+        . += SIZEOF(.ds0_data_oem_const);
+        __DS0_DATA_OEM_FLASH_END = . - 1 ;
+    } > ds0_flash
+    /* projectspecific for NewEagle projects (SW sharing) - end */
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*          Flash: free and epilog sections                */
+    /*                                                         */
+    /***********************************************************/
+    /***********************************************************/
+
+    /***********************************************************/
+    /* Flash 0 absolute section:                               */
+    /***********************************************************/
+    .abs0_free :
+    {
+        __ABS0_FREE_START = . ;
+
+
+
+        __ABS0_FREE_END = . - 1;
+    } > abs0_flash
+    .abs0_epilog :
+    {
+
+
+
+        *(.abs0_epilog)
+    } > abs0_flash
+
+    /***********************************************************/
+    /* Flash 0                                                 */
+    /***********************************************************/
+    .asw0_free :
+    {
+    __NE_CODE0_END = .;
+        __ASW0_FREE_START = . ;
+/* Beginn EPK-Erweiterung */
+        . += 0x801FFFFF + 1 - ABSOLUTE(.) - 0x90 - 100 - 4;
+/* Ende EPK-Erweiterung */
+        __ASW0_FREE_END = . - 1;
+    } > asw0_flash
+/* Beginn EPK-Erweiterung */
+    .asw0_epk_log :
+    {
+        *(.asw0_epk_log)
+    } > asw0_flash
+/* Ende EPK-Erweiterung */
+
+    .asw0_epilog :
+    {
+    __NE_CODE1_START = .;
+        LONG(ABSOLUTE(__ASW0_FREE_START)); /* store start of free section for tools */
+        *(.asw0_epilog)
+
+    __NE_CODE1_END = .;
+    } > asw0_flash
+
+    /***********************************************************/
+    /* Flash 1                                                 */
+    /***********************************************************/
+    .asw1_free :
+    {
+    __NE_CODE2_END = .;
+        __ASW1_FREE_START = . ;
+
+        . += 0x8097FFFF + 1 - ABSOLUTE(.) - 0x90 - 4;
+
+        __ASW1_FREE_END = . - 1;
+    } > asw1_flash
+    .asw1_epilog :
+    {
+    __NE_CODE3_START = .;
+
+        LONG(ABSOLUTE(__ASW1_FREE_START)); /* store start of free section for tools */
+
+        *(.asw1_epilog)
+    __NE_CODE3_END = .;
+    } > asw1_flash
+
+    /***********************************************************/
+    /* Flash 2                                                 */
+    /***********************************************************/
+    .asw2_free :
+    {
+        __ASW2_FREE_START = . ;
+
+
+
+        __ASW2_FREE_END = . - 1;
+    } > asw2_flash
+    .asw2_epilog :
+    {
+
+
+
+        *(.asw2_epilog)
+    } > asw2_flash
+
+    /***********************************************************/
+    /* Flash dataset 0:                                        */
+    /***********************************************************/
+    .ds0_free :
+    {
+        __DS0_FREE_START = . ;
+/* Beginn EPK-Erweiterung */
+        . += 0x809FBFFF + 1 - ABSOLUTE(.) - 0x90 - 100 - 4;
+/* Ende EPK-Erweiterung */
+        __DS0_FREE_END = . - 1;
+    } > ds0_flash
+/* Beginn EPK-Erweiterung */
+    .ds0_epk_log :
+    {
+        *(.ds0_epk_log)
+    } > ds0_flash
+/* Ende EPK-Erweiterung */
+    .ds0_epilog :
+    {
+        LONG(ABSOLUTE(__DS0_FREE_START)); /* store start of free section for tools */
+        *(.ds0_epilog)
+    } > ds0_flash
+
+    /***********************************************************/
+    /* Flash dataset 1:                                        */
+    /***********************************************************/
+    /***********************************************************/
+    /* Flash variant dataset:                                  */
+    /***********************************************************/
+    .vds_free :
+    {
+        . = ALIGN(4);
+        __VDS_FREE_START = . ;
+
+
+
+        __VDS_FREE_END = . - 1;
+    } > vds_flash
+    .vds_epilog :
+    {
+
+
+
+        *(.vds_epilog)
+    } > vds_flash
+
+    /***********************************************************/
+    /* OCRAM_WRITE (ETK-T):                                    */
+    /***********************************************************/
+    /***********************************************************/
+    /*                                                         */
+    /*                virtual sections without memory          */
+    /*                                                         */
+    /***********************************************************/
+
+    /* bit offset information for variables of type "_bit" */
+    .boffs 0 : { KEEP (*(.boffs)) }
+    /* checksum information for link-compatibility */
+    .filechecksum 0 : { KEEP (*(.filechecksum)) }
+
+    /* DWARF 1 */
+    .debug 0 : { *(.debug) }
+    .line 0 : { *(.line) }
+    /* GNU DWARF 1 extensions */
+    .debug_srcinfo 0 : { *(.debug_srcinfo) }
+    .debug_sfnames 0 : { *(.debug_sfnames) }
+    /* DWARF 1.1 and DWARF 2 */
+    .debug_aranges 0 : { *(.debug_aranges) }
+    .debug_pubnames 0 : { *(.debug_pubnames) }
+    .debug_macinfo 0 : { *(.debug_macinfo) }
+
+    .debug_abbrev 0 : { *(.debug_abbrev) }
+    .debug_info 0 : { *(.debug_info) }
+    .debug_info 0 : { *(.debug_info) *(.gnu.linkonce.wi.*) }
+    .debug_line 0 : { *(.debug_line) }
+
+    .debug_frame 0 : { *(.debug_frame) }
+    .debug_ranges 0 : { *(.debug_ranges) }
+    .debug_str 0 : { *(.debug_str) }
+
+
+    /* Debug section for Vared tool */
+    .VarEd_Info 0 : { *(.VarEd_Info) }
+
+    /* Version info provided by comiler */
+    .version_info 0 : { *(.version_info) }
+
+    /* Cause a linker error if there are input sections not    */
+    /* considered in linker command file                       */
+    .unspecified_sections : { *(*) } > must_be_empty
+
+    /* Dummy section to mark end of SECTION statement in map-  */
+    /* file (separate subsequent linker symbols)               */
+    .end : {}
+}
+
+/* provide symbols for a2l file generation */
+MemLay_CompIdDs0_u32 = MemLay_EpilogDs0_cs + 4;
+MemLay_CompRefDs0_u32 = MemLay_EpilogDs0_cs;
+MemLay_CompRefEtk_u32 = DEFINED(Dme_CompRefETK_u32) ? Dme_CompRefETK_u32 : 0 ;
+
+
+
+MemLay_CompRefDs0Etk_u32 = 0;
+
+
+/* provide symbols, if no ETKT present */
+
+__DISTAB_RESERVED_START = __DS0_DATA_FLASH_START;
+__DISTAB_RESERVED_END = __DS0_DATA_FLASH_START - 1;
+__DISTAB_RESERVED_SIZE = 0;
+
+
+/* Symbols for initialisation of special RAM */
+
+__PCODE_SIZE = 0xF0063FFF + 1 - 0xF0060000;
+
+
+__PDATA_SIZE = 0xF0053FFF + 1 - 0xF0050000;
+
+__SPRAM_SIZE = 0xC0007FFF + 1 - 0xC0000000;
+
+/* Symbols used for clearing RAM: */
+__RAM0_SIZE = __RAM0_END + 1 - __RAM0_START;
+__RAM1_SIZE = __RAM1_END + 1 - __RAM1_START;
+__RAM2_SIZE = __RAM2_END + 1 - __RAM2_START;
+__SIZE_ASW_VAR_DPR = __ASW_VAR_DPR_END + 1 - __ASW_VAR_DPR_START;
+
+/* Symbols used for clearing protected RAM: */
+__ASW_PROTECTED_RAM0_SIZE = __ASW_PROTECTED_RAM0_END + 1 - __ASW_PROTECTED_RAM0_START;
+__ASW_PROTECTED_RAM1_SIZE = __ASW_PROTECTED_RAM1_END + 1 - __ASW_PROTECTED_RAM1_START;
+__ASW_PROTECTED_RAM2_SIZE = __ASW_PROTECTED_RAM2_END + 1 - __ASW_PROTECTED_RAM2_START;
+
+/* Symbols used by PCP */
+/* Offset is calculated automatically by linker. */
+/* Option --pcpmap is required! Available in DS Softwarebuild: SWB.3.2.0 */
+__OFFS_SPB_DMI = 0x0;
+
+/* labels used by DAMOS for ccp in a2l-file */
+
+
+
+CCP_DATASET_SIZE = 0x809FBFFF + 1 - 0x80980000;
+
+CCP_DATASET_1_START = 0x80980000;
+CCP_DATASET_1_SIZE = CCP_DATASET_SIZE;
+CCP_DATASET_2_START = 0x80980000 + 0x80000000;
+CCP_DATASET_2_SIZE = CCP_DATASET_SIZE;
+
+/* insert autogenerated epilog: do not edit */
+
+/*<RBHead>
+
+ ***************************************************************************************************
+
+ *
+
+ * (C) All rights reserved by ROBERT BOSCH GMBH, STUTTGART
+
+ *
+
+ ***************************************************************************************************
+
+ *
+
+ *    __   __   ___  ___
+
+ *   /_ / /  / /__  /    /__/
+
+ *  /__/ /__/ __ / /__  /  /
+
+ *
+
+ *
+
+ ***************************************************************************************************
+
+ * Administrative Information (automatically filled in)
+
+ * $Filename__:memlay_linkepilog_confpriv.ht$
+
+ * $Author____:KLMEYER$
+
+ * $Function__:This version is created by migration tool$
+
+ * $Domain____:SDOM$
+
+ * $User______:JWI2SI$
+
+ * $Date______:21.06.2010$
+
+ * $Class_____:CONFTPLHDR$
+
+ * $Name______:memlay_linkepilog_confpriv$
+
+ * $Variant___:1.13.0$
+
+ * $Revision__:0$
+
+ * $Type______:HT$
+
+ * $State_____:AVAILABLE$
+
+ * $FDEF______:$
+
+ *
+
+ * List of changes
+
+ * $History
+
+ * 
+
+ * 1.13.0; 0     21.06.2010 JWI2SI
+
+ *   d-cache
+
+ * 
+
+ * 1.12.0; 0     23.11.2009 AWL2SI
+
+ *   B_MEMLAY.12.0.0
+
+ * 
+
+ * $
+
+ ***************************************************************************************************
+
+ </RBHead>*/
+/**
+
+ ***************************************************************************************************
+
+ * \moduledescription
+
+ *              memlay_linkepilog_auto_confpriv.h: calibration software - private configuration header file
+
+ *              only to be included at end of locate.inv and group.inv
+
+ *
+
+ * \scope           CONF
+
+ ***************************************************************************************************
+
+ */
+/* Common rule for usable RAM on TC1736/67/82/97 */
+
+
+
+
+
+
+/*
+
+ *********************************************************************
+
+ * For locate.inv only
+
+ *********************************************************************
+
+ */
+/* Begin of MEMLAY_CHECKLOC_LIST */
+
+/* End of MEMLAY_CHECKLOC_LIST */
+
+/* Begin of MEMLAY_LINK_LOCATE_EPILOG */
+
+/* End of MEMLAY_LINK_LOCATE_EPILOG */
+
+/***********************************************************/
+/* Do some fix checks. Stop on error.                      */
+/***********************************************************/
+
+
+
+
+
+_. = ASSERT ((__SIZE_INTTAB & (__SIZE_INTTAB - 1)) == 0,
+             "Interrupt vector table incomplete. Must be 2^n. Check OS!") ;
+
+_. = ASSERT ((__INT_TABLE & (__SIZE_INTTAB - 1)) == 0,
+             "Interrupt vector table missaligned. Must be aligned to its size. Check locate.inv!") ;
+
+_. = ASSERT (__ASW_STACK_SIZE != 0,
+             "Stacksize is ZERO, check your os_conf.c") ;
+
+
+
+
+
+
+_. = ASSERT ((__ASW_PROTECTED_RAM2_END + 1) <= 0xD0000800,
+             ".zbss.protram in DMI-RAM has overflowed, reduce PROTECTED_RAM2") ;
+/* hint: check does not take effect, if PROTECTED_RAM2 is in DMU-RAM or unused. */
+
+/* Ensure that absolute addressed protected ram (.zbss.protram) is in DMI-RAM. */
+/* PMU-OVRAM must not be used for absolute addressing, as bit access is not allowed on PMU.   */
+_. = ASSERT ((__ASW_PROTECTED_RAM2_START - 0xD0000000) <= 0x4000,
+             ".zbss.protram must be located in the first 16 kBytes of DMI-RAM") ;
+
+_. = ASSERT (0x20000000 == 0x20000000,
+             "MEMLAY_OFFSET_NONCACHED must be 0x20000000. Do not overwrite this in locate.inv!") ;
+
+__REINI_SIZE = __INITVAR0_REINI_SIZE +
+               __INITVAR1_REINI_SIZE +
+               __INITVAR2_REINI_SIZE +
+               __REINI_ZBSS_SIZE +
+               __REINI_SBSS_SIZE +
+               __REINI_BSS_SIZE;
+
+
+
+
+
+
+/* Only if ENVRAM_INITVAR is supported by the EEP driver, the section .data.envram can be used */
+_. = ASSERT ((DEFINED(__EEP_ENVRAM_INITVAR_SUPPORTED) ? __EEP_ENVRAM_INITVAR_SUPPORTED : 0) || (__ENVRAM_INITVAR_SIZE == 0),
+             "ENVRAM_INITVAR is not supported by the current EEP driver: the section .data.envram must be empty.") ;
+
+/* Check size of manually aligned DPRAM sections: */
+/* As the compiler/linker cannot guarantee proper alignment, each section must only contain */
+/* symbols with the same size as the specified alignment. */
+_. = ASSERT (((__DPRAM_A512_START - __DPRAM_A1024_START) & (1024 - 1)) == 0,
+             "Size of section bss.dpram_a1024 is not a multiple of 1024!") ;
+_. = ASSERT (((__DPRAM_A256_START - __DPRAM_A512_START) & (512 - 1)) == 0,
+             "Size of section bss.dpram_a512 is not a multiple of 512!") ;
+_. = ASSERT (((__DPRAM_A128_START - __DPRAM_A256_START) & (256 - 1)) == 0,
+             "Size of section bss.dpram_a256 is not a multiple of 256!") ;
+_. = ASSERT (((__DPRAM_A64_START - __DPRAM_A128_START) & (128 - 1)) == 0,
+             "Size of section bss.dpram_a128 is not a multiple of 128!") ;
+_. = ASSERT (((__DPRAM_A32_START - __DPRAM_A64_START) & (64 - 1)) == 0,
+             "Size of section bss.dpram_a64 is not a multiple of 64!") ;
+_. = ASSERT (((__DPRAM_A16_START - __DPRAM_A32_START) & (32 - 1)) == 0,
+             "Size of section bss.dpram_a32 is not a multiple of 32!") ;
+_. = ASSERT (((__DPRAM_A8_START - __DPRAM_A16_START) & (16 - 1)) == 0,
+             "Size of section bss.dpram_a16 is not a multiple of 16!") ;
+
+/* Check alignment of dpram data. __DPRAM_ALIGN is calculated in group.inv. It is always 2^n. */
+_. = ASSERT (((__DPRAM_A1024_START) & (__DPRAM_ALIGN - 1)) == 0,
+             "Start of dpram data is not aligned properly. This is most possibly caused by a editing error in locate.inv.") ;
+
+/* DPRAM section must not cross 32kByte alignment borders, else unninteded wrap around may happen */
+/* for non-circular buffers.  */
+_. = ASSERT (((ADDR(.dpram) & ~ 0x7FFF) == ((ADDR(.dpram) + SIZEOF(.dpram) - 1) & ~ 0x7FFF)),
+             ".dpram section must not cross 32kByte alignment borders: reduce DPRAM") ;
+_. = ASSERT (((ADDR(.data.dpram) & ~ 0x7FFF) == ((ADDR(.data.dpram) + SIZEOF(.data.dpram) - 1) & ~ 0x7FFF)),
+             ".data.dpram section must not cross 32kByte alignment borders: reduce initialised DPRAM") ;
+
+/* Noncached sections must not be located in external flash. See Errata EBU_TC.H005 */
+_. = ASSERT ((ADDR(.asw_const_noncached) > (0x80000000 + 0x20000000)) &&
+             (ADDR(.asw_const_noncached) <= (0x809FFFFF + 0x20000000)),
+             "Section .asw_const_noncached must be located in internal flash.") ;
+_. = ASSERT ((ADDR(.code_mon_noncached) > (0x80000000 + 0x20000000)) &&
+             (ADDR(.code_mon_noncached) <= (0x809FFFFF + 0x20000000)),
+             "Section .code_mon_noncached must be located in internal flash.") ;
+_. = ASSERT ((ADDR(.asw_code_noncached) > (0x80000000 + 0x20000000)) &&
+             (ADDR(.asw_code_noncached) <= (0x809FFFFF + 0x20000000)),
+             "Section .asw_code_noncached must be located in internal flash.") ;
+/* finally export a required system symbol just to be sure, that the checks before are executed */
+__MEMLAY_SB_START = 0x80018000;
+
+/* MEMLAY_LOCATE_VERSION */
+
+/* LINK_RUN */
+
+/* _LIBRARYABILITY_H */
+
+/* _MEMLAY_LINKEPILOG_AUTO_CONFPRIV_H */
+
+
+/***********************************************************/
+/* Do some checks. Stop on error.                          */
+/***********************************************************/
+_. = ASSERT ((__RAM_EARLY_CLEARED_END + 1 - __RAM_EARLY_CLEARED_START) <= 104,
+             ".bss.earlycleared section has overflowed. Check map file for uninteded contents. Only for registered users.") ;
