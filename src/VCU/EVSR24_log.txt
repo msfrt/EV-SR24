@@ -5,132 +5,17 @@
 ########################################
  
 ### Performing model update...
-Warning: 'Output Port 1' of 'EVSR24/Foreground/ControlsAlgorithms/controls/waterCoolingDuty/IN_canInputs_bus' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/ControlsAlgorithms/controls/waterCoolingDuty/fanDutyLeft' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/ControlsAlgorithms/controls/waterCoolingDuty/fanDutyRight' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/ControlsAlgorithms/controls/waterCoolingDuty/wpDuty' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 7' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 8' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 7' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 8' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/OUT_canOutputs_bus' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/inverterOut' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg' is not connected.
-Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
-Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
-Warning: 'Input Port 5' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 5' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 6' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 7' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
 Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/CTRL_digitalInputs_bus' is not connected.
 Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/CTRL_canInputs_bus' is not connected.
 Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/SM_digitalFault_bus' is not connected.
 Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/SM_canFault_bus' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/contactorState' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/contactorState' is not connected.
-Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/contactorState' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/contactorState' is not connected.
-Warning: 'Input Port 5' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/contactorState' is not connected.
-Warning: 'Input Port 6' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/contactorState' is not connected.
+Warning: 'Output Port 1 (Right:1)' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/bspcAppsFault' is not connected.
+Warning: 'Input Port 2 (Left:4)' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/contactorState' is not connected.
+Warning: 'Input Port 4 (Left:5)' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/contactorState' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/ddIn/raptor_can_rxmsg2' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/ddIn/raptor_can_rxmsg2' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/ddIn/raptor_can_rxmsg2' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/ddIn/raptor_can_rxmsg2' is not connected.
 Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg' is not connected.
 Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg' is not connected.
 Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg' is not connected.
@@ -146,15 +31,6 @@ Warning: 'Input Port 5' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_
 Warning: 'Input Port 6' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg2' is not connected.
 Warning: 'Input Port 7' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg2' is not connected.
 Warning: 'Input Port 8' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator1' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator2' is not connected.
-Warning: 'Input Port 3' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator2' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator2' is not connected.
-Warning: 'Input Port 5' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator2' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/ddIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/ddIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/ddIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/ddIn/raptor_can_rxmsg2' is not connected.
 Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg1' is not connected.
 Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg1' is not connected.
 Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg1' is not connected.
@@ -271,6 +147,115 @@ Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/rapto
 Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg9' is not connected.
 Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg9' is not connected.
 Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg9' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/ControlsAlgorithms/controls/waterCoolingDuty/IN_canInputs_bus' is not connected.
+Warning: 'Input Port 4' of 'EVSR24/Foreground/ControlsAlgorithms/controls/waterCoolingDuty/fanDutyLeft' is not connected.
+Warning: 'Input Port 4' of 'EVSR24/Foreground/ControlsAlgorithms/controls/waterCoolingDuty/fanDutyRight' is not connected.
+Warning: 'Input Port 4' of 'EVSR24/Foreground/ControlsAlgorithms/controls/waterCoolingDuty/wpDuty' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/OUT_canOutputs_bus' is not connected.
+Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/inverterOut' is not connected.
+Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/inverterOut/raptor_can_txmsg' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/analogOutputs/OUT_analogOutputs_bus' is not connected.
+Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/stateMachine/Bus Creator' is not connected.
+Warning: 'Input Port 2' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator1' is not connected.
+Warning: 'Input Port 1' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator2' is not connected.
+Warning: 'Input Port 3' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator2' is not connected.
+Warning: 'Input Port 4' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator2' is not connected.
+Warning: 'Input Port 5' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator2' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
+Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
+Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
+Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
+Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
+Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
+Warning: 'Output Port 7' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
+Warning: 'Output Port 8' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
+Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
+Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
+Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
+Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
+Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
+Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
+Warning: 'Output Port 7' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
+Warning: 'Output Port 8' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
 Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg1' is not connected.
 Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg1' is not connected.
 Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg1' is not connected.
@@ -349,20 +334,24 @@ Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/Bus Selector' is not conn
 Warning: 'Output Port 2' of 'EVSR24/Foreground/Outputs/Bus Selector' is not connected.
 Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/analogOutputs' is not connected.
 Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/analogOutputs/OUT_analogOutputs_bus' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/inverterOut/raptor_can_txmsg' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/stateMachine/Bus Creator' is not connected.
+Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg' is not connected.
+Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg' is not connected.
+Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg' is not connected.
+Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
+Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
+Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
+Warning: 'Input Port 4' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
+Warning: 'Input Port 5' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
+Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
+Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
+Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
+Warning: 'Input Port 4' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
+Warning: 'Input Port 5' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
+Warning: 'Input Port 6' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
+Warning: 'Input Port 7' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
 Warning: Unconnected input line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates' (input port: 7)
 Warning: Unconnected input line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates' (input port: 6)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/Bus Selector1' (output port: 2)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/Bus Selector8' (output port: 1)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/Bus Selector' (output port: 2)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/Bus Selector' (output port: 1)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/OR' (output port: 1)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/OR' (output port: 1)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/Bus Selector5' (output port: 1)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/Bus Selector4' (output port: 1)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/Bus Selector7' (output port: 1)
+Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/canStates/OR8' (output port: 1)
 Warning: Using find_system without the 'Variants' argument skips inactive Variant Subsystem blocks in the search. This behavior will change in a future release to look at all choices of the Variant Subsystem. To find blocks that are active in simulation or code generation, compile the model and use the built-in variant filters with the 'MatchFilter' option. To find all blocks use filter '@Simulink.match.allVariants' with the 'MatchFilter' option.
 Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedFL/Gain'.  The original value of the parameter, 0.016666666666666666, cannot be represented exactly using the run-time data type single. The value is quantized to 0.01666666753590107. Quantization error occurred with an absolute difference of 8.692344032057431e-10 and a relative difference of 5.21540641923446e-06%. 
 Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedFL/Gain1'.  The original value of the parameter, 6.283185307179586, cannot be represented exactly using the run-time data type single. The value is quantized to 6.2831854820251465. Quantization error occurred with an absolute difference of 1.7484556025237907e-7 and a relative difference of 2.7827535191838e-06%. 
@@ -377,659 +366,3 @@ Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inpu
 Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedRR/Gain1'.  The original value of the parameter, 6.283185307179586, cannot be represented exactly using the run-time data type single. The value is quantized to 6.2831854820251465. Quantization error occurred with an absolute difference of 1.7484556025237907e-7 and a relative difference of 2.7827535191838e-06%. 
 Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedRR/metersPerMinToMilesPerHour'.  The original value of the parameter, 0.03728, cannot be represented exactly using the run-time data type single. The value is quantized to 0.03728000074625015. Quantization error occurred with an absolute difference of 7.462501519506226e-10 and a relative difference of 2.00174396982463e-06%. 
 [Warning: Transmit Queue (16) in CAN Definition block should be greater than Max Lists per DAQ (20) in XCP Definition block for CAN1]
-### Model update completed... (21.8 seconds) 
-### Building with Raptor_2023a_2.0.15039...
-### Building with MATLAB 9.13.0.2320565 (R2022b) Update 6...
-### Current Time: Oct 17, 2023 21:05:40
-### Raptor Evaluation License Expires: October 15, 2024
-### Raptor IO Customization for Target: GCM-1793-196-1503...
-Processing with raptor_rlc... 
-Processing : raptor_gen_datastores.rlc... 
-Processing : raptor_settings.rlc... 
-Processing : raptor_tlc_crc.rlc... 
-Processing : raptor_sfun_target_def.rlc... 
-Processing : raptor_sfun_appmonitor.rlc... 
-Processing : raptor_sfun_appmonitor_measurement.rlc... 
-Processing : raptor_sfun_reboot.rlc... 
-Processing : raptor_sfun_taskmonitor.rlc... 
-Processing : raptor_sfun_taskmonitor_measurement.rlc... 
-Processing : raptor_sfun_canfd_def.rlc... 
-Processing : raptor_sfun_can_def.rlc... 
-Processing : raptor_sfun_can_get_baud_rate.rlc... 
-Processing : raptor_sfun_can_hw_mailbox.rlc... 
-Processing : raptor_sfun_can_partial_networking.rlc... 
-Processing : raptor_sfun_can_queue_info.rlc... 
-Processing : raptor_sfun_can_state.rlc... 
-Processing : raptor_sfun_calc_checksum.rlc... 
-Processing : raptor_sfun_datalog_erase.rlc... 
-Processing : raptor_sfun_datalog_read.rlc... 
-Processing : raptor_sfun_datalog_write.rlc... 
-Processing : raptor_sfun_fileIO_close.rlc... 
-Processing : raptor_sfun_fileIO_eof.rlc... 
-Processing : raptor_sfun_fileIO_exists.rlc... 
-Processing : raptor_sfun_fileIO_getFreeSpace.rlc... 
-Processing : raptor_sfun_fileIO_open.rlc... 
-Processing : raptor_sfun_fileIO_position.rlc... 
-Processing : raptor_sfun_fileIO_read.rlc... 
-Processing : raptor_sfun_fileIO_remove.rlc... 
-Processing : raptor_sfun_fileIO_seek.rlc... 
-Processing : raptor_sfun_fileIO_size.rlc... 
-Processing : raptor_sfun_fileIO_sync.rlc... 
-Processing : raptor_sfun_fileIO_write.rlc... 
-Processing : raptor_sfun_angle_time.rlc... 
-Processing : raptor_sfun_cam_info.rlc... 
-Processing : raptor_sfun_encoder_def.rlc... 
-Processing : raptor_sfun_injector_out.rlc... 
-Processing : raptor_sfun_knock_calc.rlc... 
-Processing : raptor_sfun_knock_in.rlc... 
-Processing : raptor_sfun_spark_out.rlc... 
-Processing : raptor_sfun_wideband_o2_in.rlc... 
-Processing : raptor_sfun_ethernet_def.rlc... 
-Processing : raptor_sfun_ethernet_get_mac_addr.rlc... 
-Processing : raptor_sfun_ethernet_get_vlan.rlc... 
-Processing : raptor_sfun_ethernet_set_vlan.rlc... 
-Processing : raptor_sfun_ethernet_socket.rlc... 
-Processing : raptor_sfun_ethernet_socket_state.rlc... 
-Processing : raptor_sfun_ethernet_tcp_socket.rlc... 
-Processing : raptor_sfun_ethernet_udp_socket.rlc... 
-Processing : raptor_sfun_analog_in.rlc... 
-Processing : raptor_sfun_analog_in_ref.rlc... 
-Processing : raptor_sfun_analog_out.rlc... 
-Processing : raptor_sfun_digital_in.rlc... 
-Processing : raptor_sfun_digital_out.rlc... 
-Processing : raptor_sfun_freq_in.rlc... 
-Processing : raptor_sfun_hbridge_out.rlc... 
-Processing : raptor_sfun_imu_calibrate.rlc... 
-Processing : raptor_sfun_imu_output.rlc... 
-Processing : raptor_sfun_input_capture_defn.rlc... 
-Processing : raptor_sfun_input_capture_get.rlc... 
-Processing : raptor_sfun_input_status.rlc... 
-Processing : raptor_sfun_internal_measurement.rlc... 
-Processing : raptor_sfun_output_status.rlc... 
-Processing : raptor_sfun_pwm_out.rlc... 
-Processing : raptor_sfun_quadrature_in.rlc... 
-Processing : raptor_sfun_set_hardware_option.rlc... 
-Processing : raptor_sfun_set_input_option.rlc... 
-Processing : raptor_sfun_temp_measurement.rlc... 
-Processing : raptor_j1939_tp.rlc... 
-Processing : raptor_sfun_lin_def.rlc... 
-Processing : raptor_sfun_lin_get_schedule.rlc... 
-Processing : raptor_sfun_lin_set_schedule.rlc... 
-Processing : raptor_sfun_lin_slave_def.rlc... 
-Processing : raptor_sfun_lin_state.rlc... 
-Processing : raptor_gen_modbus.rlc... 
-Processing : raptor_sfun_sent_rx_def.rlc... 
-Processing : raptor_sfun_sent_rx_state.rlc... 
-Processing : raptor_sfun_serial_def.rlc... 
-Processing : raptor_sfun_string_printf.rlc... 
-Processing : raptor_sfun_rtc_convert.rlc... 
-Processing : raptor_sfun_rtc_convert_out.rlc... 
-Processing : raptor_sfun_rtc_display.rlc... 
-Processing : raptor_sfun_rtc_read.rlc... 
-Processing : raptor_sfun_rtc_set.rlc... 
-Processing : raptor_sfun_delta_time.rlc... 
-Processing : raptor_sfun_dist_action_defn.rlc... 
-Processing : raptor_sfun_time.rlc... 
-Processing : raptor_sfun_timed_trigger_config.rlc... 
-Processing : raptor_uds_set_buffer_storage.rlc... 
-Processing : raptor_uds_tp.rlc... 
-Processing : raptor_gen_xcp.rlc... 
-Processing : raptor_sfun_xcp.rlc... 
-Processing : ECU-1793-196-1503_ertTemplate.rlc... 
-
-### Starting build procedure for model: EVSR24
-
-### Entering code generation...
-### Generating code and artifacts to 'Model specific' folder structure
-### Generating code into build folder: C:\eagle_EVSR24\EVSR24_raptor_rtw
-Warning: 'Output Port 1' of 'EVSR24/Foreground/ControlsAlgorithms/controls/waterCoolingDuty/IN_canInputs_bus' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/ControlsAlgorithms/controls/waterCoolingDuty/fanDutyLeft' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/ControlsAlgorithms/controls/waterCoolingDuty/fanDutyRight' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/ControlsAlgorithms/controls/waterCoolingDuty/wpDuty' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 7' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 8' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 7' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 8' of 'EVSR24/Foreground/Inputs/canInputs/bmsIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/OUT_canOutputs_bus' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/inverterOut' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg' is not connected.
-Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
-Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
-Warning: 'Input Port 5' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg1' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 5' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 6' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 7' of 'EVSR24/Foreground/Outputs/canOutputs/pdmOut/raptor_can_txmsg2' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/CTRL_digitalInputs_bus' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/CTRL_canInputs_bus' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/SM_digitalFault_bus' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/SM_canFault_bus' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/contactorState' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/contactorState' is not connected.
-Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/contactorState' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/contactorState' is not connected.
-Warning: 'Input Port 5' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/contactorState' is not connected.
-Warning: 'Input Port 6' of 'EVSR24/Foreground/Outputs/stateMachine/controlStates/contactorState' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg' is not connected.
-Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg1' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg1' is not connected.
-Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg1' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 3' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 5' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 6' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 7' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 8' of 'EVSR24/Foreground/Outputs/canOutputs/cmd/raptor_can_txmsg2' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator1' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator2' is not connected.
-Warning: 'Input Port 3' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator2' is not connected.
-Warning: 'Input Port 4' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator2' is not connected.
-Warning: 'Input Port 5' of 'EVSR24/Foreground/Inputs/canInputs/Bus Creator2' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/ddIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/ddIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/ddIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/ddIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg16' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg17' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg18' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg18' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg18' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg18' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 7' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 8' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 9' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 10' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 11' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 12' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 13' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 14' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 15' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 16' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 17' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 18' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 19' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 20' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 21' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 22' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg19' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 7' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 7' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 8' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 9' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/inverterIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg1' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg10' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg11' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg12' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg13' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg14' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg15' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 6' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg2' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg3' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg4' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg5' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg6' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg7' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg8' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 3' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 4' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 5' of 'EVSR24/Foreground/Inputs/canInputs/pdmIn/raptor_can_rxmsg9' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/Bus Selector' is not connected.
-Warning: 'Output Port 2' of 'EVSR24/Foreground/Outputs/Bus Selector' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/analogOutputs' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/canOutputs' is not connected.
-Warning: 'Output Port 1' of 'EVSR24/Foreground/Outputs/analogOutputs/OUT_analogOutputs_bus' is not connected.
-Warning: 'Input Port 2' of 'EVSR24/Foreground/Outputs/canOutputs/inverterOut/raptor_can_txmsg' is not connected.
-Warning: 'Input Port 1' of 'EVSR24/Foreground/Outputs/stateMachine/Bus Creator' is not connected.
-Warning: Unconnected input line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates' (input port: 7)
-Warning: Unconnected input line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates' (input port: 6)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/Bus Selector1' (output port: 2)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/Bus Selector8' (output port: 1)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/Bus Selector' (output port: 2)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/Bus Selector' (output port: 1)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/OR' (output port: 1)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/OR' (output port: 1)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/Bus Selector5' (output port: 1)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/Bus Selector4' (output port: 1)
-Warning: Unconnected output line found on 'EVSR24/Foreground/Outputs/stateMachine/controlStates/Bus Selector7' (output port: 1)
-Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedFL/Gain'.  The original value of the parameter, 0.016666666666666666, cannot be represented exactly using the run-time data type single. The value is quantized to 0.01666666753590107. Quantization error occurred with an absolute difference of 8.692344032057431e-10 and a relative difference of 5.21540641923446e-06%. 
-Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedFL/Gain1'.  The original value of the parameter, 6.283185307179586, cannot be represented exactly using the run-time data type single. The value is quantized to 6.2831854820251465. Quantization error occurred with an absolute difference of 1.7484556025237907e-7 and a relative difference of 2.7827535191838e-06%. 
-Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedFL/metersPerMinToMilesPerHour'.  The original value of the parameter, 0.03728, cannot be represented exactly using the run-time data type single. The value is quantized to 0.03728000074625015. Quantization error occurred with an absolute difference of 7.462501519506226e-10 and a relative difference of 2.00174396982463e-06%. 
-Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedFR/Gain'.  The original value of the parameter, 0.016666666666666666, cannot be represented exactly using the run-time data type single. The value is quantized to 0.01666666753590107. Quantization error occurred with an absolute difference of 8.692344032057431e-10 and a relative difference of 5.21540641923446e-06%. 
-Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedFR/Gain1'.  The original value of the parameter, 6.283185307179586, cannot be represented exactly using the run-time data type single. The value is quantized to 6.2831854820251465. Quantization error occurred with an absolute difference of 1.7484556025237907e-7 and a relative difference of 2.7827535191838e-06%. 
-Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedFR/metersPerMinToMilesPerHour'.  The original value of the parameter, 0.03728, cannot be represented exactly using the run-time data type single. The value is quantized to 0.03728000074625015. Quantization error occurred with an absolute difference of 7.462501519506226e-10 and a relative difference of 2.00174396982463e-06%. 
-Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedRL/Gain'.  The original value of the parameter, 0.016666666666666666, cannot be represented exactly using the run-time data type single. The value is quantized to 0.01666666753590107. Quantization error occurred with an absolute difference of 8.692344032057431e-10 and a relative difference of 5.21540641923446e-06%. 
-Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedRL/Gain1'.  The original value of the parameter, 6.283185307179586, cannot be represented exactly using the run-time data type single. The value is quantized to 6.2831854820251465. Quantization error occurred with an absolute difference of 1.7484556025237907e-7 and a relative difference of 2.7827535191838e-06%. 
-Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedRL/metersPerMinToMilesPerHour'.  The original value of the parameter, 0.03728, cannot be represented exactly using the run-time data type single. The value is quantized to 0.03728000074625015. Quantization error occurred with an absolute difference of 7.462501519506226e-10 and a relative difference of 2.00174396982463e-06%. 
-Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedRR/Gain'.  The original value of the parameter, 0.016666666666666666, cannot be represented exactly using the run-time data type single. The value is quantized to 0.01666666753590107. Quantization error occurred with an absolute difference of 8.692344032057431e-10 and a relative difference of 5.21540641923446e-06%. 
-Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedRR/Gain1'.  The original value of the parameter, 6.283185307179586, cannot be represented exactly using the run-time data type single. The value is quantized to 6.2831854820251465. Quantization error occurred with an absolute difference of 1.7484556025237907e-7 and a relative difference of 2.7827535191838e-06%. 
-Warning: Parameter precision loss occurred for 'Gain' of 'EVSR24/Foreground/Inputs/analogInputs/wheelSpeed/wheelSpeedRR/metersPerMinToMilesPerHour'.  The original value of the parameter, 0.03728, cannot be represented exactly using the run-time data type single. The value is quantized to 0.03728000074625015. Quantization error occurred with an absolute difference of 7.462501519506226e-10 and a relative difference of 2.00174396982463e-06%. 
-
-### Beginning target language compiler...
-### Checking for I/O Conflicts
-### Invoking Target Language Compiler on EVSR24.rtw
-### Using System Target File: C:\Program Files (x86)\NewEagle\Raptor\2023a_2.0.15039\build\raptor.tlc
-### Loading TLC function libraries
-...........
-### Generating TLC interface API for custom data
-......
-### Initial pass through model to cache user defined code
-...............................................................................
-...............................................................................
-...............................................................................
-...............................................................................
-............................
-### Caching model source code
-...............................................................................
-...............................................................................
-...............................................................................
-...............................................................................
-...............................................................................
-...............................................................................
-...............................................................................
-...............................................................................
-...............................................................................
-...............................................................................
-...............................................................................
-...............................................................................
-...............................................................................
-...............................................................................
-...............................................................................
-...............................................................................
-...........................................................
-### Writing header file EVSR24_types.h
-### Writing source file EVSR24.c
-### Writing header file EVSR24_private.h
-### Writing header file EVSR24.h
-### Writing header file rtwtypes.h
-.
-### Writing header file zero_crossing_types.h
-### Writing header file rt_nonfinite.h
-### Writing source file rt_nonfinite.c
-### Writing header file rtGetInf.h
-.
-### Writing source file rtGetInf.c
-### Writing header file rtGetNaN.h
-### Writing source file rtGetNaN.c
-### Writing source file EVSR24_data.c
-.
-### TLC code generation complete (took 31.147s).
-..............
-### Found Timed Triggers
-UpdateAbsTime, Interval : Second
-Timer_ooqlV, Interval : Foreground
-Timer_BGND_G6Wyo, Interval : Background
-Timed_Trigger_XCP, Interval : Foreground
-appmonitor_Thread, Interval : Foreground
-can_process_rx_queue_CAN1, Interval : Foreground
-EVSR24_step, Interval : 
-### Including : GCM-1793-196-1503_genfiles.tlc
-### Copying files into build directory
-...............................................................................
-..........................................................................
-### Finished target language compiler...
-### Saving binary information cache.
-.
-### Processing Template Makefile: C:\Program Files (x86)\NewEagle\Raptor\2023a_2.0.15039\build\raptor.tmf
-### Created makefile C:\eagle_EVSR24\EVSR24_raptor_rtw\EVSR24.mk
-
-### Exiting code generation...
-
-### Building source files...
-### Beginning Build for EVSR24_004 ... 
-        1 file(s) copied. 
-#-------------------------------------------- 
-# Compiling... 
-# Compiling source file : appmonitor1.c 
-# Compiling source file : can_can1.c 
-# Compiling source file : can_can2.c 
-# Compiling source file : can_general.c 
-# Compiling source file : data.c 
-# Compiling source file : evsr24.c 
-# Compiling source file : faultmanager.c 
-# Compiling source file : evsr24_data.c 
-# Compiling source file : raptorcrc.c 
-# Compiling source file : hw_user.c 
-# Compiling source file : raptor_time.c 
-# Compiling source file : rtgetinf.c 
-# Compiling source file : rtgetnan.c 
-# Compiling source file : rt_nonfinite.c 
-# Compiling source file : table_functions.c 
-# Compiling source file : time.c 
-# Compiling source file : xcp_app_xcp1.c 
-# Compiling source file : xcp_protocol.c 
-#-------------------------------------------- 
-# Linking... 
-# Linking relocatable ELF file... 
-# Linking absolute ELF file... 
-# Generating hex file... 
- 
-# Merging hex files... 
-        1 file(s) copied. 
-        1 file(s) copied. 
- 
-# Build Tool Chain Completed 
-        1 file(s) copied. 
-        1 file(s) copied. 
-Generating ASAP2 file... 
-A2L:  Build Dir: C:\eagle_EVSR24\EVSR24_raptor_rtw 
-A2L: Model Name: EVSR24 
-A2L:    SwIDTxt: EVSR24_004 
-A2L:     Target: GCM-1793-196-1503 
-Address Mode: SYM 
-Preparing to generate ASAP2 file... 
-Creating ASAP2 file for access level 1... 
-Creating ASAP2 file for access level RPG... 
-Created ASAP2 file : C:\ECU\a2l\EVSR24_004.a2l
-Created ASAP2 file : C:\ECU\a2l\EVSR24_004_RPG.a2l
-settings = 
-  struct with fields:
-               Target: 'GCM-1793-196-1503'
-            genVISION: 0
-      ProgrammingBaud: '500k'
-    GlobalAccessLevel: 1
-             LiteMode: 1
-           ProjectDir: 'C:\eagle_EVSR24'
-            ModelName: 'EVSR24'
-            StackSize: 2048
-             HeapSize: 4096
-               calLoc: 'NonVolatile (EEPROM)'
-              EcuAddr: 11
-             compiler: 'HighTec v3.4.5.11'
-        UDSServerAddr: 1536
-        UDSClientAddr: 1616
-         BuildDirPath: 'C:\eagle_EVSR24\EVSR24_raptor_rtw'
-            RaptorDir: 'C:\Program Files (x86)\NewEagle\Raptor\2023a_2.0.15039'
-          AddBuildNum: 1
-          SetFileName: 0
-             BuildUID: 'A__Kv6KfdEe4w4m4A8_oz'
-             BuildNum: 4
-        buildLocation: 'Raptor Default'
-              SwIdTxt: 'EVSR24_004'
-             CalIdTxt: 'EVSR24_004_000'
-         HardwareType: '2954298118'
-           IdTableRev: '3'
-       ProgramFileExt: 'hex'
-            DateStamp: '17-Oct-2023 21:07:41'
-         OutputHexA2L: 1
-          exeLocation: 'C:\ECU\hex'
-          a2lLocation: 'C:\ECU\a2l'
-          rpgLocation: 'C:\ECU\rpg'
-        MatlabVersion: '9.13.0.2320565 (R2022b) Update 6'
-        RaptorVersion: '2023a_2.0.15039_7682'
-### Calculating Memory Usage
-Memory Usage Summary:
- 
-   FLASH APP0                          :  543511  of 1966079 Bytes ( 27.6 %)
-   FLASH APP1                          :     232  of 1572863 Bytes (  0.0 %)
-   FLASH DATA                          :   15254  of  507903 Bytes (  3.0 %)
-   FIXEDEE                             :       0  of    2160 Bytes (  0.0 %)
-   EEPROM                              :   12176  of   70800 Bytes ( 17.2 %)
-   INTERNAL RAM1                       :   15883  of  131072 Bytes ( 12.1 %)
-                 EEVariables_RAMShadow :   12176             Bytes (  9.3 %)
-                          RAMVariables :    1488             Bytes (  1.1 %)
-                      RAMEditVariables :     212             Bytes (  0.2 %)
-   INTERNAL RAM2                       :   65989  of  131072 Bytes ( 50.3 %)
-                              EVSR24_B :     248             Bytes (  0.2 %)
-                          EVSR24_DWork :     360             Bytes (  0.3 %)
- 
-NewEagle.RILPackager v0.0.19.17555
-RPG written to: C:\ECU\rpg\EVSR24_004.rpg
-RILPackager: Finished
- 
-Build Number: 4
-Build Time: 205.4 seconds.
- 
-########################################
-#####   Successful Raptor Build    #####
-#####       Show in Folder         #####
-########################################
- 

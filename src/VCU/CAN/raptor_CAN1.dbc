@@ -33,8 +33,16 @@ NS_ :
 
 BS_:
 
-BU_: VCU PM MM5 CMD BMS
+BU_: LWS VCU PM MM5 CMD BMS
 
+
+BO_ 1984 LWS_1984: 8 LWS
+ SG_ LWS_config : 0|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 688 LWS_688: 8 LWS
+ SG_ LWS_trimCalOk : 24|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ LWS_speed : 16|8@1+ (4,0) [0|1016] "deg/s" Vector__XXX
+ SG_ LWS_angle : 0|16@1- (0.1,0) [-780|780] "deg" Vector__XXX
 
 BO_ 252 CMD_252: 8 Vector__XXX
  SG_ CMD_driverMessageChar7 : 56|8@1+ (1,0) [0|255] "" Vector__XXX
@@ -131,6 +139,14 @@ BO_ 170 PM_170: 8 PM
 
 
 
+CM_ SG_ 1984 LWS_config "Config messages for the SWA sensor
+";
+CM_ SG_ 688 LWS_trimCalOk "Signal Overview
+";
+CM_ SG_ 688 LWS_speed "Angular Speed
+";
+CM_ SG_ 688 LWS_angle "Steering Wheel Angle
+";
 CM_ SG_ 195 VCU_counterMsg195 "Counter Message 195
 ";
 CM_ SG_ 195 VCU_accFan6Pct "Accumulator fan 6 percent
