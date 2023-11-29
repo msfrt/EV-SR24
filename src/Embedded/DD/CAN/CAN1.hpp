@@ -124,7 +124,10 @@ StateSignal M400_driveSpeed(16, true, 10, 0.0, -3276, 3276, 0.0, 0, 100);
 StateSignal M400_la1ShortTermTrim(16, true, 100, 0.0, -327, 327, 0.0, 0, 100);
 StateSignal M400_fuelOverallTrim(16, true, 10, 0.0, -3276, 3276, 0.0, 0, 100);
 StateSignal M400_gearDet(16, true, 1, 0.0, -32768, 32767, 0.0, 0, 100);
+
+// Should point to SoC
 StateSignal M400_rpm(16, true, 1, 0.0, -32768, 32767, 0.0, 0, 100);
+
 StateSignal M400_tcSlipAimValue(16, true, 10, 0.0, -3276, 3276, 0.0, 0, 100);
 StateSignal M400_tcLaunchAimRPM(16, true, 1, 0.0, -32768, 32767, 0.0, 0, 100);
 StateSignal M400_groundSpeedLeft(16, true, 10, 0.0, -3276, 3276, 0.0, 0, 100);
