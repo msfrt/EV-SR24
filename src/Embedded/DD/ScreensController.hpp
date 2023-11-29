@@ -22,10 +22,11 @@ class ScreensController {
   /// the different states that the screens can be in. Please note that states
   /// should include transitionary states, such as ScreenBegin before Screen or
   /// whatever
-  enum ScreenStates { /*StartupLeft, StartupRight,*/ GearInfo,
+  enum ScreenStates { /*StartupLeft, StartupRight,*/ 
                       InfoScreen1,
                       InfoScreen2,
                       InfoScreen3,
+                      InfoScreen4,
                       Notification,
                       LapTime,
                       Titan };
@@ -80,9 +81,11 @@ class ScreensController {
   ScreenInfo *info_screen_3_left_ = nullptr;
   ScreenInfo *info_screen_3_right_ = nullptr;
 
+  ScreenInfo *info_screen_4_left_ = nullptr;
+  ScreenInfo *info_screen_4_right_ = nullptr;
+
   ScreenMessage *message_screen_ = nullptr;
 
-  ScreenNumber *gear_screen_ = nullptr;
 
   ScreenLapTime *lap_time_screen_ = nullptr;
 };
@@ -94,21 +97,19 @@ class ScreensController {
  */
 ScreensController::ScreensController(ILI9341_t3n &left, ILI9341_t3n &right)
     : display_left_(left), display_right_(right) {
-  /* gear screen */
-  gear_screen_ = new ScreenNumber(display_left_, M400_gear, "GEAR:");
-
+  
   /* Info screen 1 */
   info_screen_1_left_ = new ScreenInfo(display_left_);
   info_screen_1_left_->SetSignal(1, &M400_groundSpeed, "SPD:", "%4.1f");
   info_screen_1_left_->SetSignal(2, &PDM_pdmVoltAvg, "BAT:", "%4.1f");
-  info_screen_1_left_->SetSignal(3, &ATCCF_brakeBias, "BIAS:", "%2.0f%%");
+  info_screen_1_left_->SetSignal(3, &ATCCF_brakeBias, "BIAS:", "%2.0f");
   info_screen_1_left_->SetSignal(4, &PDM_fanLeftDutyCycle, "FANS:", "%3.0f");
 
   info_screen_1_right_ = new ScreenInfo(display_right_);
-  info_screen_1_right_->SetSignal(1, &M400_rpm, "RPM:", "%5.1f", 1000);
-  info_screen_1_right_->SetSignal(2, &M400_oilPressure, "OILP:", "%4.1f");
-  info_screen_1_right_->SetSignal(3, &M400_oilTemp, "OILT:", "%4.0f");
-  info_screen_1_right_->SetSignal(4, &C50_tcSet, "TCSET:", "%3.0f");
+  info_screen_1_right_->SetSignal(1, &MOTORRPMPH, "RPM:", "%5.1f",1000);
+  info_screen_1_right_->SetSignal(2, &ACCUMAVGPH, "ACCT:", "%4.0f");
+  info_screen_1_right_->SetSignal(3, &MOTORTEMPPH, "MOTT:", "%4.0f");
+  info_screen_1_right_->SetSignal(4, &TRACTIVESYSTEMSTATUSPH, "STAT:","%1f");
 
   /* Info screen 2 */
   info_screen_2_left_ = new ScreenInfo(display_left_);
@@ -125,9 +126,17 @@ ScreensController::ScreensController(ILI9341_t3n &left, ILI9341_t3n &right)
   info_screen_3_left_->SetSignal(3, &M400_inletAirTemp, "INT:", "%5.0f");
   info_screen_3_left_->SetSignal(4, &M400_lambda1, "LAMB:", "%3.2f");
   
+  /* Info screen 4 */
+  info_screen_4_left_ = new ScreenInfo(display_left_);
+  info_screen_4_left_->SetSignal(1, &ACCUMULATORVOLTAGEPH, "VOLT:", "%4.2f");
+  info_screen_4_left_->SetSignal(2, &CURRENTDRAWPH, "CDRA:", "%3.1f");
+  info_screen_4_left_->SetSignal(3, &POWERDRAWPH, "PDRA:", "%4.1f");
+  info_screen_4_left_->SetSignal(4, &BATTERYLIFEPH, "LIFE:", "%3.0f");
+
   // keep the same screen on the right side
   info_screen_2_right_ = info_screen_1_right_;
   info_screen_3_right_ = info_screen_1_right_;
+  info_screen_4_right_ = info_screen_1_right_;
 
   /* message screen */
   message_screen_ = new ScreenMessage(display_left_);
@@ -142,8 +151,6 @@ ScreensController::ScreensController(ILI9341_t3n &left, ILI9341_t3n &right)
  * Destructs all dynamically allocated things
  */
 ScreensController::~ScreensController() {
-  /* gear */
-  delete gear_screen_;
 
   /* Screen 1 */
   delete info_screen_1_left_;
@@ -154,6 +161,9 @@ ScreensController::~ScreensController() {
 
   /* Screen 3 */
   delete info_screen_3_left_;
+
+  /* Screen 4*/
+  delete info_screen_4_left_;
 
   /* message display */
   delete message_screen_;
@@ -191,10 +201,7 @@ void ScreensController::Update(unsigned long &elapsed) {
     //         SetState(InfoScreen1);
     //     }
     //     break;
-    case GearInfo:
-      gear_screen_->Update(elapsed);
-      info_screen_1_right_->Update(elapsed);
-      break;
+
 
     case InfoScreen1:
       info_screen_1_left_->Update(elapsed);
@@ -211,13 +218,18 @@ void ScreensController::Update(unsigned long &elapsed) {
       info_screen_3_right_->Update(elapsed);
       break;
 
+    case InfoScreen4:
+      info_screen_4_left_->Update(elapsed);
+      info_screen_4_right_->Update(elapsed);
+      break;
+
+
     case Notification:
       message_screen_->Update(elapsed);
 
       // update the last state's right screen, too!
       switch (state_prev_) {
-        case InfoScreen1:  // fall through
-        case GearInfo:
+        case InfoScreen1:  
           info_screen_1_right_->Update(elapsed);
           break;
         case InfoScreen2:
@@ -225,6 +237,9 @@ void ScreensController::Update(unsigned long &elapsed) {
           break;
         case InfoScreen3:
           info_screen_3_right_->Update(elapsed);
+          break;
+        case InfoScreen4:
+          info_screen_4_right_->Update(elapsed);
           break;
         case Notification:
           break;
@@ -246,7 +261,6 @@ void ScreensController::Update(unsigned long &elapsed) {
       // update the last state's right screen, too!
       switch (state_prev_) {
         case InfoScreen1:  // fall through
-        case GearInfo:
           info_screen_1_right_->Update(elapsed);
           break;
         case InfoScreen2:
@@ -254,6 +268,9 @@ void ScreensController::Update(unsigned long &elapsed) {
           break;
         case InfoScreen3:
           info_screen_3_right_->Update(elapsed);
+          break;
+        case InfoScreen4:
+          info_screen_4_right_->Update(elapsed);
           break;
         case Notification:
           break;
@@ -289,17 +306,18 @@ void ScreensController::SetState(ScreenStates state) {
     //     break;
     // case StartupRight:
     //     break;
-    case GearInfo:
-      break;
     case InfoScreen1:
       break;
     case InfoScreen2:
       break;
     case InfoScreen3:
       break;
+    case InfoScreen4:
+      break;
     case LapTime:  // fall through
     case Notification:
       // in order to prevent getting stuck in the Notification state,
+   
       // set the state to the previous state. That way, it's like
       // the notifaction state never existed, since after the next 10ish lines
       // of code, the previous state will be two states ago, and the current
@@ -327,10 +345,6 @@ void ScreensController::SetState(ScreenStates state) {
     // case StartupRight:
     //     startup_screen_right_->Initialize();
     //     break;
-    case GearInfo:
-      gear_screen_->Initialize();
-      info_screen_1_right_->Initialize();
-      break;
     case InfoScreen1:
       info_screen_1_left_->Initialize();
       info_screen_1_right_->Initialize();
@@ -342,6 +356,10 @@ void ScreensController::SetState(ScreenStates state) {
     case InfoScreen3:
       info_screen_3_left_->Initialize();
       info_screen_3_right_->Initialize();
+      break;
+    case InfoScreen4:
+      info_screen_4_left_->Initialize();
+      info_screen_4_right_->Initialize();
       break;
     case Notification:
       message_screen_->Initialize();
@@ -367,9 +385,7 @@ void ScreensController::OnButtonPressUp() {
     // case StartupRight:
     //     SetState(InfoScreen1);
     //     break;
-    case GearInfo:
-      SetState(InfoScreen1);
-      break;
+    
     case InfoScreen1:
       SetState(InfoScreen2);
       break;
@@ -377,7 +393,10 @@ void ScreensController::OnButtonPressUp() {
       SetState(InfoScreen3);
       break;
     case InfoScreen3:
-      SetState(GearInfo);
+      SetState(InfoScreen4);
+      break;
+    case InfoScreen4:
+      SetState(InfoScreen1);
       break;
     case Notification:  // fal through
     case LapTime:
@@ -396,11 +415,8 @@ void ScreensController::OnButtonPressDown() {
     // case StartupRight:
     //     SetState(InfoScreen1);
     //     break;
-    case GearInfo:
-      SetState(InfoScreen3);
-      break;
     case InfoScreen1:
-      SetState(GearInfo);
+      SetState(InfoScreen4);
       break;
     case InfoScreen2:
       SetState(InfoScreen1);
@@ -408,7 +424,10 @@ void ScreensController::OnButtonPressDown() {
     case InfoScreen3:
       SetState(InfoScreen2);
       break;
-    case Notification:  // fal through
+    case InfoScreen4:
+      SetState(InfoScreen3);
+      break;
+    case Notification:  // fall through
     case LapTime:
       SetState(state_prev_);
       break;
