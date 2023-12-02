@@ -11,16 +11,20 @@
 
 class LightBarSOC : public LightBar {
     private:
-    StateSignal &soc_signal_;  ///< The SOC signal
+    //float soc_signal_;  ///< The SOC signal
     int min_;  ///< The minimum bound for the RPM bar to start lighting up
     int max_;  ///< The maximum bound for the rpm bar light up before signalling
              ///< an upshift
 
     protected:
     public:
+    unsigned long start = 0;
+    int count_1 = 0;
+    int count_2 = 0;
+    float soc_signal_;
     /** Constructor */
     LightBarSOC(Adafruit_NeoPixel &lights, int first_index, int num_leds,
-              StateSignal &soc_signal, int min_soc, int max_soc);
+              float soc_signal, int min_soc, int max_soc);
 
     /** Destructor */
     virtual ~LightBarSOC(){};
@@ -32,10 +36,13 @@ class LightBarSOC : public LightBar {
 
     virtual void Initialize() override;
     virtual void Update(unsigned long &elapased) override;
+
+    //Getters
+    //float soc() {return soc_signal_;}
 };
 
 LightBarSOC::LightBarSOC(Adafruit_NeoPixel &lights, int first_index, int num_leds,
-              StateSignal &soc_signal, int min_soc, int max_soc) 
+              float soc_signal, int min_soc, int max_soc) 
               
         : LightBar(lights, first_index, num_leds),
         soc_signal_(soc_signal),
@@ -52,15 +59,34 @@ void LightBarSOC::Initialize() { LightBar::Initialize();}
 void LightBarSOC::Update(unsigned long & elapsed) {
 
     //Color implementation goes here
-    float soc = 0.20;
-    int no_of_leds = soc * GetLastLEDIndex();
+    // if(elapsed && soc_signal_ <= 1) {
+    //     soc_signal_ += 0.001;
+    //     //start = elapsed;
+    //     Serial.println(soc_signal_);
+    //     if(elapsed == 2) {
+    //         count_2 += 1;
+    //     } else {
+    //         count_1 += 1;
+    //     }
+    //     Serial.println(count_1);
+    //     Serial.println(count_2);
+    // }
+    if(elapsed == 2) {
+        count_2 += 1;
+    }
+    if(count_2 % 100 == 0 && soc_signal_ <= 1) {
+        soc_signal_ += 0.01;
+        //start = elapsed;
+        Serial.println(soc_signal_);
+    }
+    int no_of_leds = soc_signal_ * GetLastLEDIndex();
     for (int led = GetFirstLEDIndex(); led <= GetLastLEDIndex(); led++) {
-        if(soc >= 0.80) {
+        if(soc_signal_ >= 0.80) {
             //green
             if(led <= no_of_leds) {
                 lights_.setPixelColor(led, 0, 255, 0);
             }
-        } else if(soc < 0.80 && soc >= 0.21) {
+        } else if(soc_signal_ < 0.80 && soc_signal_ >= 0.21) {
             //orange
             if(led <= no_of_leds) {
                 lights_.setPixelColor(led, 255, 165, 0);

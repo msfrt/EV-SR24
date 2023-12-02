@@ -202,7 +202,6 @@ void setup() {
 void loop() {
   unsigned long elapsed = millis() - previousUpdateTime;
   previousUpdateTime = millis();
-
   // checks page up button. If not in a notification state, advance.
   // However, if in a notification state, only advance that to get
   // rid of the notification
