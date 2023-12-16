@@ -11,6 +11,7 @@
 #include "CAN/CAN2.hpp"
 
 
+/* 
 // rows: temp in degrees C
 // cols: battery voltage V
 const int fanl_table_rows = 12;
@@ -190,10 +191,11 @@ int wp_table[wp_table_rows][wp_table_cols] =
   { 1500, 100, 100,   0,   0, 100,   100,   100},
 };
 
-
-
+*/
 
 // left fan definition & partial initialization
+int signal = 75;
+
 int fanl_pin = 8;
 int fanl_min_pwm = 0;
 int fanl_max_pwm = 255;
@@ -201,9 +203,7 @@ int fanl_ss_dur = 5000; // duration of soft start in millis
 int fanl_update_freq = 10;
 int fanl_pwm_freq_norm = 40; // normal pwm frequency in Hz
 int fanl_pwm_freq_ss = 420; // soft start pwm frequency in Hz
-PWMDevice fan_left(fanl_pin, fanl_table_rows, fanl_table_cols,
-                   fanl_table_row_scalar, fanl_table_col_scalar,
-                   M400_engineTemp, M400_batteryVoltage, CMD_fanLeftOverride, fanl_min_pwm, fanl_max_pwm,
+PWMDevice fan_left(fanl_pin, signal, fanl_min_pwm, fanl_max_pwm,
                    fanl_ss_dur, fanl_update_freq, fanl_pwm_freq_norm, fanl_pwm_freq_ss);
 
 // right fan definition & partial initialization
@@ -214,9 +214,8 @@ int fanr_ss_dur = 5000; // duration of soft start in millis
 int fanr_update_freq = 10;
 int fanr_pwm_freq_norm = 40; // normal pwm frequency in Hz
 int fanr_pwm_freq_ss = 420; // soft start pwm frequency in Hz
-PWMDevice fan_right(fanr_pin, fanr_table_rows, fanr_table_cols,
-                    fanr_table_row_scalar, fanr_table_col_scalar,
-                    M400_engineTemp, M400_batteryVoltage, CMD_fanRightOverride, fanr_min_pwm, fanr_max_pwm,
+PWMDevice fan_right(fanr_pin, 
+                    signal, fanr_min_pwm, fanr_max_pwm,
                     fanr_ss_dur, fanr_update_freq, fanr_pwm_freq_norm, fanr_pwm_freq_ss);
 
 // water pump definition & partial initialization
@@ -227,9 +226,8 @@ int wp_ss_dur = 5000; // duration of soft start in millis
 int wp_update_freq = 10;
 int wp_pwm_freq_norm = 40; // normal pwm frequency in Hz
 int wp_pwm_freq_ss = 420; // soft start pwm frequency in Hz
-PWMDevice water_pump(wp_pin, wp_table_rows, wp_table_cols,
-                     wp_table_row_scalar, wp_table_col_scalar,
-                     M400_engineTemp, M400_rpm, CMD_waterPumpOverride, wp_min_pwm, wp_max_pwm,
+PWMDevice water_pump(wp_pin,
+                     signal, wp_min_pwm, wp_max_pwm,
                      wp_ss_dur, wp_update_freq, wp_pwm_freq_norm, wp_pwm_freq_ss);
 
 

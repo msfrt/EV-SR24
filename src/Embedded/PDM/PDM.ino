@@ -27,31 +27,17 @@ static CAN_message_t rxmsg;
 
 
 // global variable definition
-int GLO_engine_state = 0; // engine state (no need to change this variable)
 const int GLO_read_resolution_bits = 12; // bits for Teensy-based read resolution
 const int GLO_max_analog_write_pwm = 255; // maximum PWN value
 
-// minimum voltage for the engine to be in "cranking" mode
-const int GLO_cranking_starter_volt_threshold = 5;
-// max rpm for the engine to still be in "cranking" mode
-const int GLO_cranking_rpm_threshold = 2000;
-// engine running min rpm threshold
-const int GLO_engine_on_rpm_threshold = 900;
-// engine cooldown state duration in milliseconds
-const int GLO_engine_cooldown_duration = 5000;
 
-const int GLO_brakelight_min_pressure_F = 150; // minimum pressure required to activate the brakelight (PSI)
-const int GLO_brakelight_min_pressure_R = 125;
 const int GLO_brakelight_teensy_pin = 4;
+const int VCU_brakelight = 0;
 
 const int GLO_data_circuit_teensy_pin = 5;
 
 const int GLO_NeoPixel_teensy_pin = 2;
       int GLO_NeoPixel_brightness_percent = 10; // 0 - 100 %
-
-// boolean used in the C50 to determine if we should be logging
-bool GLO_data_log_bool = 0;
-const unsigned long data_log_timeout_ms = 5000; // time to log after engine and cooldown mode has stopped
 
 Adafruit_NeoPixel GLO_obd_neopixel(1, GLO_NeoPixel_teensy_pin, NEO_GRB + NEO_KHZ800);
 
@@ -70,10 +56,6 @@ EasyTimer engine_time_update_timer(1);
 // odemeter update frequency. Should probably keep this pretty low, because if it updates too fast, the calculations
 // will be so small that mileage may actually never be incremented because of poor floating-point math
 EasyTimer odometer_update_timer(2);
-
-//sets override percentage for fans
-const int override_percent = 80;
-const int wp_override_percent = 50;
 
 // eeprom-saved signals
 #include "EEPROM_sigs.hpp"
@@ -102,16 +84,6 @@ const int wp_override_percent = 50;
 EasyTimer debug(2);
 const bool GLO_debug = false;
 
-#define cool_down_pin 19
-//Previous reading of cool down switch
-int lastButtonState = HIGH;
-int buttonState;
-int coolDownState = LOW; 
-
-  
-unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
-unsigned long debounceDelay = 50;    // the debounce time; increase if the output flickers
-
 void setup() { //high 18 low 26
 
   analogReadResolution(GLO_read_resolution_bits);
@@ -132,18 +104,6 @@ void setup() { //high 18 low 26
   can2.begin();
   can2.setBaudRate(1000000);
   set_mailboxes();
-
-  // populate left fan table
-  int *fanl_table_ptr = fan_left_table[0]; // create a temp ptr to populate PWM device
-  fan_left.fill_table(fanl_table_ptr); // populate the PWMDevice table
-
-  // populate right fan table
-  int *fanr_table_ptr = fan_right_table[0];
-  fan_right.fill_table(fanr_table_ptr);
-
-  // populate water pump table
-  int *wp_table_ptr = wp_table[0];
-  water_pump.fill_table(wp_table_ptr);
 
   // initialize the ADC sensors
   initialize_ADCs();
@@ -177,9 +137,6 @@ void setup() { //high 18 low 26
   //CMD_fanLeftOverride = 0;
   //CMD_fanRightOverride = 0;
 
-  //sets cool mode pin
-  pinMode(cool_down_pin, INPUT);
-
 }
 
 
@@ -197,18 +154,9 @@ void loop() {
   // run the brakelight
   brakelight_run();
   
-
-  // determine engine state and control PWM outputs
-  determine_engine_state(GLO_engine_state);
-  fan_left.set_pwm(GLO_engine_state);
-  fan_right.set_pwm(GLO_engine_state);
-  water_pump.set_pwm(GLO_engine_state);
-
-  // determine if we need to log right now
-  GLO_data_log_bool = determine_logging_state(GLO_engine_state, GLO_engine_cooldown_duration);
-
-  // continously run OBD (individual timers are included)
-  obd_main();
+  fan_left.set_pwm();
+  fan_right.set_pwm();
+  water_pump.set_pwm();
 
   // engine timer update
   // if (engine_time_update_timer.isup()){
@@ -228,67 +176,7 @@ void loop() {
     // Serial.println(eeprom_engine_hours.value());
     // Serial.println(eeprom_engine_minutes.value());
     Serial.print("FanR duty cycle %: "); Serial.println(PDM_fanRightDutyCycle.value());
-
-    M400_batteryVoltage = 14;
-    M400_rpm = 5000;
-
-    if (millis() > 5000){
-
-      M400_engineTemp = 100;
-
-    }
   }
-  
-  //Reads cool down switch and set override accordingly
-  int reading = digitalRead(cool_down_pin);
-
-  if(reading != lastButtonState){
-    lastDebounceTime = millis();
-  }
-
-  if((millis() - lastDebounceTime) > debounceDelay){
-    if(reading != buttonState){
-      buttonState = reading;
-
-      if(buttonState == LOW){
-        coolDownState = !coolDownState;
-      }
-    }
-  }
-
-  if(coolDownState == HIGH){ // temporary fix after FTT
-    CMD_fanLeftOverride = override_percent;
-    CMD_fanRightOverride = override_percent;
-    CMD_waterPumpOverride = wp_override_percent;
-  } 
-  
-  else if(coolDownState == LOW){ // check to see if the below is efficient
-    // populate left fan table
-    int* fanl_table_ptr = fan_left_table[0]; // create a temp ptr to populate PWM device
-    fan_left.fill_table(fanl_table_ptr); // populate the PWMDevice table
-
-    // populate right fan table
-    int* fanr_table_ptr = fan_right_table[0];
-    fan_right.fill_table(fanr_table_ptr);
-
-    // populate water pump table
-    int *wp_table_ptr = wp_table[0];
-    water_pump.fill_table(wp_table_ptr);
-
-  }
-  
-  lastButtonState = reading; 
-  
-  /*
-    if(reading == LOW){
-      CMD_fanLeftOverride = override_percent;
-      CMD_fanRightOverride = override_percent;
-    }
-    else if(reading == HIGH){
-      CMD_fanLeftOverride = 0;
-      CMD_fanRightOverride = 0;
-    }
-*/
     
 }
 
