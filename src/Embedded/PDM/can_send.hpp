@@ -25,14 +25,15 @@ void send_PDM_09(){
   msg.id = 259;
   msg.len = 8;
 
-  msg.buf[0] = OBDFLAG_oil_pressure;
-  msg.buf[1] = OBDFLAG_oil_temp;
-  msg.buf[2] = OBDFLAG_fuel_pressure;
+  msg.buf[0] = 0;
+  msg.buf[1] = 0;
+  msg.buf[2] = 0;
   msg.buf[3] = 0;
   msg.buf[4] = 0;
   msg.buf[5] = 0;
   msg.buf[6] = 0;
-  msg.buf[7] = GLO_engine_state & 0b11111111;
+  msg.buf[7] = 0;
+  //msg.buf[7] = GLO_engine_state & 0b11111111;
 
   can2.write(msg);
 }
@@ -55,7 +56,8 @@ void send_PDM_10(){
   PDM_pdmCurrentMin = pdm_current_sens.min();
 
   // load up the message buffer
-  msg.buf[0] = ctr.value() | GLO_data_log_bool << 7;
+  //msg.buf[0] = ctr.value() | GLO_data_log_bool << 7;
+  msg.buf[0] = ctr.value();
   msg.buf[1] = 0;
   msg.buf[2] = PDM_pdmCurrentAvg.can_value();
   msg.buf[3] = PDM_pdmCurrentAvg.can_value() >> 8;
