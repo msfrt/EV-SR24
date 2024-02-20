@@ -33,16 +33,25 @@ NS_ :
 
 BS_:
 
-BU_: LWS VCU PM MM5 CMD BMS
+BU_: LWS VCU PM CMD BMS
 
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ MM5_az : 0|16@1+ (-0.0001274,4.1745795) [-100|100] "" Vector__XXX
+ SG_ MM5_rollRate : 0|16@1+ (-0.005,163.9) [-100|100] "" Vector__XXX
+ SG_ MM5_ax : 0|16@1+ (-0.0001274,4.1745795) [-100|100] "" Vector__XXX
+ SG_ MM5_yawRate : 0|16@1+ (0.005,-163.9) [-100|100] "" Vector__XXX
+ SG_ MM5_ay : 0|16@1+ (-0.0001274,4.1745795) [-100|100] "" Vector__XXX
 
 BO_ 1984 LWS_1984: 8 LWS
- SG_ LWS_config : 0|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ LWS_ccw : 2|1@1+ (1,0) [0|1] "" Vector__XXX
 
 BO_ 688 LWS_688: 8 LWS
- SG_ LWS_trimCalOk : 24|16@1+ (1,0) [0|0] "" Vector__XXX
- SG_ LWS_speed : 16|8@1+ (4,0) [0|1016] "deg/s" Vector__XXX
- SG_ LWS_angle : 0|16@1- (0.1,0) [-780|780] "deg" Vector__XXX
+ SG_ LWS_trim : 26|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ LWS_cal : 25|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ LWS_ok : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ LWS_speed : 16|8@1+ (4,0) [0|1020] "deg/s" Vector__XXX
+ SG_ LWS_angle : 0|16@1- (0.1,0) [-3276.8|3276.7] "deg" Vector__XXX
 
 BO_ 252 CMD_252: 8 Vector__XXX
  SG_ CMD_driverMessageChar7 : 56|8@1+ (1,0) [0|255] "" Vector__XXX
@@ -96,17 +105,6 @@ BO_ 192 VCU_192: 8 VCU
  SG_ VCU_inverterDischarge : 41|1@1+ (1,0) [0|1] "" Vector__XXX
  SG_ VCU_directionCommand : 32|1@1+ (1,0) [0|1] "" Vector__XXX
 
-BO_ 380 MM5_380: 8 MM5
- SG_ MM5_az : 32|16@1+ (-0.0001274,4.1745795) [-100|100] "" Vector__XXX
-
-BO_ 376 MM5_376: 8 MM5
- SG_ MM5_rollRate : 0|16@1+ (-0.005,163.9) [-100|100] "" Vector__XXX
- SG_ MM5_ax : 32|16@1+ (-0.0001274,4.1745795) [-100|100] "" Vector__XXX
-
-BO_ 372 MM5_372: 8 MM5
- SG_ MM5_yawRate : 0|16@1+ (0.005,-163.9) [-100|100] "" Vector__XXX
- SG_ MM5_ay : 32|16@1+ (-0.0001274,4.1745795) [-100|100] "" Vector__XXX
-
 BO_ 216 BMS_216: 8 BMS
  SG_ BMS_rollingCounter216 : 0|8@1+ (1,0) [0|255] "" Vector__XXX
  SG_ BMS_j1772PlugState : 8|8@1+ (1,0) [0|4] "" Vector__XXX
@@ -139,9 +137,24 @@ BO_ 170 PM_170: 8 PM
 
 
 
-CM_ SG_ 1984 LWS_config "Config messages for the SWA sensor
+CM_ BO_ 3221225472 "This is a message for not used signals, created by Vector CANdb++ DBC OLE DB Provider.";
+CM_ SG_ 3221225472 MM5_az "Acceleration Z Axis
 ";
-CM_ SG_ 688 LWS_trimCalOk "Signal Overview
+CM_ SG_ 3221225472 MM5_rollRate "Roll Rate
+";
+CM_ SG_ 3221225472 MM5_ax "Acceleration X Axis
+";
+CM_ SG_ 3221225472 MM5_yawRate "Yaw Rate
+";
+CM_ SG_ 3221225472 MM5_ay "Acceleration Y Axis
+";
+CM_ SG_ 1984 LWS_ccw "Config signal for the SWA sensor: 3h sets the signal LWS_angle to 0 deg, 5h resets the calibration status of the angle
+";
+CM_ SG_ 688 LWS_trim "Consult truth table
+";
+CM_ SG_ 688 LWS_cal "Consult truth table
+";
+CM_ SG_ 688 LWS_ok "Consult truth table
 ";
 CM_ SG_ 688 LWS_speed "Angular Speed
 ";
@@ -192,16 +205,6 @@ CM_ SG_ 192 VCU_inverterEnable "0 = Inverter OFF, 1 = Inverter ON
 CM_ SG_ 192 VCU_inverterDischarge "0 = Discharge Disable, 1 = Discharge Enable
 ";
 CM_ SG_ 192 VCU_directionCommand "0 = CW, 1 = CCW, viewed from the shaft end of the motor
-";
-CM_ SG_ 380 MM5_az "Acceleration Z Axis
-";
-CM_ SG_ 376 MM5_rollRate "Roll Rate
-";
-CM_ SG_ 376 MM5_ax "Acceleration X Axis
-";
-CM_ SG_ 372 MM5_yawRate "Yaw Rate
-";
-CM_ SG_ 372 MM5_ay "Acceleration Y Axis
 ";
 CM_ SG_ 216 BMS_rollingCounter216 "Increments once every 100ms (max value is 255 and rolls over). Can be used to ensure data is updating
 ";

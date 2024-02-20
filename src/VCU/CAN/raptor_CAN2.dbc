@@ -33,8 +33,19 @@ NS_ :
 
 BS_:
 
-BU_: STMM DD PDM BMS PM VCU
+BU_: MM5 STMM DD PDM BMS PM VCU
 
+
+BO_ 380 MM5_380: 8 Vector__XXX
+ SG_ MM5_az : 32|16@1+ (-0.0001274,4.1745795) [-4.1745795|4.1745795] "g" Vector__XXX
+
+BO_ 376 MM5_376: 8 Vector__XXX
+ SG_ MM5_rollRate : 0|16@1+ (-0.005,163.9) [-163.775|163.9] "deg/s" Vector__XXX
+ SG_ MM5_ax : 32|16@1+ (-0.0001274,4.1745795) [-4.1745795|4.1745795] "g" Vector__XXX
+
+BO_ 372 MM5_372: 8 Vector__XXX
+ SG_ MM5_yawRate : 0|16@1+ (0.005,-163.9) [-163.9|163.775] "deg/s" Vector__XXX
+ SG_ MM5_ay : 32|16@1+ (-0.0001274,4.1745795) [-4.1745795|4.1745795] "g" Vector__XXX
 
 BO_ 2553934720 STMM_1839F380: 8 STMM
  SG_ STMM_thermModNum : 0|8@1+ (1,0) [0|255] "" Vector__XXX
@@ -644,6 +655,16 @@ BO_ 100 VCU_100: 8 VCU
 
 
 
+CM_ SG_ 380 MM5_az "Acceleration Z Axis
+";
+CM_ SG_ 376 MM5_rollRate "Roll Rate
+";
+CM_ SG_ 376 MM5_ax "Acceleration X Axis
+";
+CM_ SG_ 372 MM5_yawRate "Yaw Rate
+";
+CM_ SG_ 372 MM5_ay "Acceleration Y Axis
+";
 CM_ SG_ 2553934720 STMM_thermModNum "Thermistor module number (keep value at 1 to emulate the expansion module)
 ";
 CM_ SG_ 2553934720 STMM_numThermsEnabled "Number of thermistors enabled
