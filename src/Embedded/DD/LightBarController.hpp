@@ -5,7 +5,7 @@
 #include "CAN/CAN2.hpp"
 #include "LightBarBlink.hpp"
 #include "LightBarBlinkSinusoidal.hpp"
-#include "LightBarRPM.hpp"
+#include "LightBarSOC.hpp"
 
 class LightBarController {
  public:
@@ -57,12 +57,14 @@ class LightBarController {
   int notification_blink_frequency_ =
       10;  ///< The frequency of blinking for notifications
 
-  LightBarRPM *rpm_signal_bar_gear_N_ = nullptr;
-  LightBarRPM *rpm_signal_bar_gear_1_ = nullptr;
-  LightBarRPM *rpm_signal_bar_gear_2_ = nullptr;
-  LightBarRPM *rpm_signal_bar_gear_3_ = nullptr;
-  LightBarRPM *rpm_signal_bar_gear_4_ = nullptr;
-  LightBarRPM *rpm_signal_bar_gear_5_ = nullptr;
+  // LightBarRPM *rpm_signal_bar_gear_N_ = nullptr;
+  // LightBarRPM *rpm_signal_bar_gear_1_ = nullptr;
+  // LightBarRPM *rpm_signal_bar_gear_2_ = nullptr;
+  // LightBarRPM *rpm_signal_bar_gear_3_ = nullptr;
+  // LightBarRPM *rpm_signal_bar_gear_4_ = nullptr;
+  // LightBarRPM *rpm_signal_bar_gear_5_ = nullptr;
+  LightBarSOC *soc = nullptr;
+
   LightBarBlink *tc_bar_left_ = nullptr;
   LightBarBlink *tc_bar_right_ = nullptr;
 
@@ -83,6 +85,8 @@ LightBarController::LightBarController(Adafruit_NeoPixel &left,
                                        Adafruit_NeoPixel &right)
     : left_leds_(left), top_leds_(top), right_leds_(right) {
   /* Normal Operation */
+  
+  /*
   int max_rpm = 13000;
   int min_rpm = 3000;
   int downshift_rpm = -1;
@@ -124,6 +128,12 @@ LightBarController::LightBarController(Adafruit_NeoPixel &left,
   rpm_signal_bar_gear_5_ =
       new LightBarRPM(top_leds_, 0, top_leds_.numPixels(), M400_rpm, min_rpm,
                       max_rpm, downshift_rpm);
+   */
+  int max_soc = 1;
+  int min_soc = 0;
+  float soc_value = 0.00;
+
+  soc = new LightBarSOC(top_leds_, 0, top_leds_.numPixels(), soc_value, min_soc, max_soc);
 
   cooling_light_left_ = new LightBarBlinkSinusoidal(left_leds_, 0, 1);
   cooling_light_left_->AttachSignal(&PDM_coolingOverrideActive, 1);
@@ -156,12 +166,13 @@ LightBarController::LightBarController(Adafruit_NeoPixel &left,
  * Destructs all dynamically allocated things
  */
 LightBarController::~LightBarController() {
-  delete rpm_signal_bar_gear_N_;
-  delete rpm_signal_bar_gear_1_;
-  delete rpm_signal_bar_gear_2_;
-  delete rpm_signal_bar_gear_3_;
-  delete rpm_signal_bar_gear_4_;
-  delete rpm_signal_bar_gear_5_;
+  // delete rpm_signal_bar_gear_N_;
+  // delete rpm_signal_bar_gear_1_;
+  // delete rpm_signal_bar_gear_2_;
+  // delete rpm_signal_bar_gear_3_;
+  // delete rpm_signal_bar_gear_4_;
+  // delete rpm_signal_bar_gear_5_;
+  delete soc;
   delete tc_bar_left_;
   delete tc_bar_right_;
   delete cooling_light_left_;
@@ -192,10 +203,14 @@ void LightBarController::Update(unsigned long &elapsed) {
       tc_bar_right_->Update(elapsed);
       cooling_light_left_->Update(elapsed);
       cooling_light_right_->Update(elapsed);
-      rpm_signal_bar_gear_N_->Update(elapsed);
+      //rpm_signal_bar_gear_N_->Update(elapsed);
+
+      soc->Update(elapsed);
       break;
     case Notification:
-      rpm_signal_bar_gear_N_->Update(elapsed);  // keep updating RPM bar
+      // Gear N?
+      //rpm_signal_bar_gear_N_->Update(elapsed);  // keep updating RPM bar
+      soc->Update(elapsed);
       notification_bar_left_->Update(elapsed);
       notification_bar_right_->Update(elapsed);
 
@@ -243,7 +258,8 @@ void LightBarController::SetState(LEDStates state) {
       tc_bar_right_->Initialize();
       cooling_light_left_->Initialize();
       cooling_light_right_->Initialize();
-      rpm_signal_bar_gear_N_->Initialize();
+      //rpm_signal_bar_gear_N_->Initialize();
+      soc->Initialize();
       break;
     case Notification:
       notification_bar_left_->Initialize();

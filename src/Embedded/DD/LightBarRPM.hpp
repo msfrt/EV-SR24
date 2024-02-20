@@ -159,6 +159,7 @@ void LightBarRPM::Update(unsigned long &elapsed) {
       int bar_pwms =
           map(rpm_signal_.value(), min_, max_, 0, bar_pwm_positions_);
 
+      // COLOR STUFF
       for (int led = GetFirstLEDIndex(); led <= GetLastLEDIndex(); led++) {
         // green
         if (led < GetNumLEDs() - num_yellow_ - num_red_) {
