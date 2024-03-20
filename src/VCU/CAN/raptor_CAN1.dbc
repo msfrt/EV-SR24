@@ -33,7 +33,7 @@ NS_ :
 
 BS_:
 
-BU_: LWS VCU PM CMD BMS
+BU_: C50 ATCC LWS VCU PM CMD BMS
 
 
 BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
@@ -42,6 +42,46 @@ BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
  SG_ MM5_ax : 0|16@1+ (-0.0001274,4.1745795) [-100|100] "" Vector__XXX
  SG_ MM5_yawRate : 0|16@1+ (0.005,-163.9) [-100|100] "" Vector__XXX
  SG_ MM5_ay : 0|16@1+ (-0.0001274,4.1745795) [-100|100] "" Vector__XXX
+
+BO_ 454 C50_454: 8 C50
+ SG_ C50_gpsSigIndicator : 0|32@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 453 C50_453: 8 C50
+ SG_ C50_gpsSec : 32|32@1+ (1,0) [0|59] "sec" Vector__XXX
+ SG_ C50_gpsHsec : 0|32@1+ (1,0) [0|99] "hsec" Vector__XXX
+
+BO_ 452 C50_452: 8 C50
+ SG_ C50_gpsFix : 32|32@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ C50_gpsElevation : 0|32@1- (1,0) [-5000|5000] "m" Vector__XXX
+
+BO_ 451 C50_451: 8 C50
+ SG_ C50_gpsSpeed : 0|32@1- (1,0) [0|0] "kph" Vector__XXX
+ SG_ C50_gpsDirection : 32|32@1- (1,0) [-360|360] "degrees" Vector__XXX
+
+BO_ 450 C50_450: 8 C50
+ SG_ C50_gpsLong : 32|32@1- (1,0) [-180|180] "NDEG" Vector__XXX
+ SG_ C50_gpsLat : 0|32@1- (1,0) [-90|90] "NDEG" Vector__XXX
+
+BO_ 303 ATCC_303: 8 ATCC
+ SG_ ATCC_counterMsg303 : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ ATCC_coolantTempMotorIn : 16|16@1- (0.1,0) [0|120] "degC" Vector__XXX
+ SG_ ATCC_coolantTempInverterOut : 48|16@1- (0.1,0) [0|120] "degC" Vector__XXX
+ SG_ ATCC_coolantTempInverterIn : 32|16@1- (0.1,0) [0|120] "degC" Vector__XXX
+
+BO_ 302 ATCC_302: 8 ATCC
+ SG_ ATCC_counterMsg302 : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ ATCC_angularWheelSpeedRR : 32|16@1- (0.1,0) [0|2200] "rpm" Vector__XXX
+ SG_ ATCC_angularWheelSpeedRL : 16|16@1- (0.1,0) [0|2200] "rpm" Vector__XXX
+
+BO_ 301 ATCC_301: 8 ATCC
+ SG_ ATCC_counterMsg301 : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ ATCC_angularWheelSpeedFR : 32|16@1- (0.1,0) [0|2200] "rpm" Vector__XXX
+ SG_ ATCC_angularWheelSpeedFL : 16|16@1- (0.1,0) [0|2200] "rpm" Vector__XXX
+
+BO_ 300 ATCC_300: 8 ATCC
+ SG_ ATCC_teensyTemp : 32|16@1- (0.1,0) [0|150] "degC" Vector__XXX
+ SG_ ATCC_counterMsg300 : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ ATCC_boardTemp : 16|16@1- (0.1,0) [0|150] "degC" Vector__XXX
 
 BO_ 1984 LWS_1984: 8 LWS
  SG_ LWS_ccw : 2|1@1+ (1,0) [0|1] "" Vector__XXX
@@ -147,6 +187,50 @@ CM_ SG_ 3221225472 MM5_ax "Acceleration X Axis
 CM_ SG_ 3221225472 MM5_yawRate "Yaw Rate
 ";
 CM_ SG_ 3221225472 MM5_ay "Acceleration Y Axis
+";
+CM_ SG_ 454 C50_gpsSigIndicator "GPS quality indicator (0 = Invalid; 1 = Fix; 2 = Differential; 3 = Sensitive)
+";
+CM_ SG_ 453 C50_gpsSec "Seconds after the minute
+";
+CM_ SG_ 453 C50_gpsHsec "Hundredth part of a second
+";
+CM_ SG_ 452 C50_gpsFix "Operating mode, used for navigation (1 = Fix not available; 2 = 2D; 3 = 3D)
+";
+CM_ SG_ 452 C50_gpsElevation "Antenna altitude above/below mean sea level (geoid) in meters
+";
+CM_ SG_ 451 C50_gpsSpeed "Speed over the ground in kph
+";
+CM_ SG_ 451 C50_gpsDirection "Track angle in degrees
+";
+CM_ SG_ 450 C50_gpsLong "Longitude in NDEG: +/-[degree][min].[sec/60]
+";
+CM_ SG_ 450 C50_gpsLat "Latitude in NDEG: +/-[degree][min].[sec/60]
+";
+CM_ SG_ 303 ATCC_counterMsg303 "Counter Message 303
+";
+CM_ SG_ 303 ATCC_coolantTempMotorIn "Motor In Coolant Temperature 
+";
+CM_ SG_ 303 ATCC_coolantTempInverterOut "Inverter Out Coolant Temperature 
+";
+CM_ SG_ 303 ATCC_coolantTempInverterIn "Inverter In Coolant Temperature 
+";
+CM_ SG_ 302 ATCC_counterMsg302 "Counter Message 302
+";
+CM_ SG_ 302 ATCC_angularWheelSpeedRR "RR Angular Wheel Speed
+";
+CM_ SG_ 302 ATCC_angularWheelSpeedRL "RL Angular Wheel Speed
+";
+CM_ SG_ 301 ATCC_counterMsg301 "Counter Message 301
+";
+CM_ SG_ 301 ATCC_angularWheelSpeedFR "FR Angular Wheel Speed
+";
+CM_ SG_ 301 ATCC_angularWheelSpeedFL "FL Angular Wheel Speed
+";
+CM_ SG_ 300 ATCC_teensyTemp "Teensy Board Temp
+";
+CM_ SG_ 300 ATCC_counterMsg300 "Counter Message 300
+";
+CM_ SG_ 300 ATCC_boardTemp "Board Temp
 ";
 CM_ SG_ 1984 LWS_ccw "Config signal for the SWA sensor: 3h sets the signal LWS_angle to 0 deg, 5h resets the calibration status of the angle
 ";

@@ -14,15 +14,15 @@
       IsTestPoint  0\
     }\
     ChartData {\
-      Name         "is_c3_steeringWheel_lib"\
-      Description  "StateActiveChild"\
+      Name         "is_active_c3_steeringWheel_lib"\
+      Description  "StateIsActive"\
       SFName       ""\
       Path         ""\
       SrcLocation  ""\
     }\
     ChartData {\
-      Name         "is_active_c3_steeringWheel_lib"\
-      Description  "StateIsActive"\
+      Name         "is_c3_steeringWheel_lib"\
+      Description  "StateActiveChild"\
       SFName       ""\
       Path         ""\
       SrcLocation  ""\
